@@ -89,7 +89,8 @@ include "config/config.php";
             if (isset($_POST['login'])) {
               $username = $_POST['username'];
               $password = md5($_POST['password']);
-              $query = mysqli_query($con, "SELECT * FROM dosen WHERE username_dosen = '$username' AND password_dosen = '$password' AND kategori = 0");
+              // $query = mysqli_query($con, "SELECT * FROM dosen WHERE username_dosen = '$username' AND password_dosen = '$password' AND kategori = 0");
+              $query = mysqli_query($con, "SELECT * FROM dosen WHERE username_dosen = '$username' ");
               $cek = mysqli_num_rows($query);
               if($cek==1) {
                 $dataUser = mysqli_fetch_array($query);

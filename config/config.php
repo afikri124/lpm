@@ -1,5 +1,5 @@
 <?php
-$con = mysqli_connect("localhost",'root',"itkj@1122sql",'kinerja_dosen');
+$con = mysqli_connect("localhost",'root',"",'kinerja_dosen');
 
 // Check connection
 if (mysqli_connect_errno()) {
