@@ -18,6 +18,7 @@ class CreateUserRolesTable extends Migration
             $table->foreignId('user_id')->constrained('Users')->onDelete('cascade');
             $table->uuid('role_id');
             $table->foreign('role_id')->references('id')->on('Roles')->onUpdate('cascade')->onDelete('cascade');
+            $table->unique(['user_id','role_id']);
         });
     }
 

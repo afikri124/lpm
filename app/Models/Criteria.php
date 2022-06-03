@@ -12,4 +12,9 @@ class Criteria extends Model
     protected $fillable = [
         'id', 'title', 'weight', 'criteria_category_id',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Criteria_category::class, 'criteria_category_id');
+    }
 }

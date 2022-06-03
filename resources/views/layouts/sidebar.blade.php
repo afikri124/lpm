@@ -8,7 +8,7 @@
             <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i></div>
         </div>
         <div class="logo-icon-wrapper"><a href="{{ url('/') }}"><img class="img-fluid" style="height: 30px;"
-                    src="{{asset('assets/images/dent4u_favicon.png')}}" alt=""></a></div>
+                    src="{{asset('assets/images/logo/logo-icon.png')}}" alt=""></a></div>
         <nav class="sidebar-main">
             <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
             <div id="sidebar-menu">
@@ -25,19 +25,64 @@
                         </div>
                     </li>
                     <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='index' ? 'active' : '' }} "
-                            href="{{route('index')}}">
+                        <a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='dashboard' ? 'active' : '' }} "
+                            href="{{route('dashboard')}}">
                             <i data-feather="home"> </i><span>Dashboard</span>
                         </a>
                     </li>
+                    @if(Auth::user()->hasRole('AD'))
+                    <li class="sidebar-list">
+                    <label class="badge badge-warning" id="notif_schedules"></label>
+                        <a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='activity' ? 'active' : '' }} "
+                            href="{{route('home')}}">
+                            <i data-feather="calendar"> </i><span>Schedules</span>
+                        </a>
+                    </li>
+                    @endif
+                    @if(Auth::user()->hasRole('AU'))
                     <li class="sidebar-list">
                     <label class="badge badge-warning" id="notif_activity"></label>
                         <a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='activity' ? 'active' : '' }} "
-                            href="{{route('activity')}}">
-                            <i data-feather="activity"> </i><span>Activity</span>
+                            href="{{route('home')}}">
+                            <i data-feather="clipboard"> </i><span>Observations</span>
                         </a>
                     </li>
-                    
+                    @endif
+                    @if(Auth::user()->hasRole('DE'))
+                    <li class="sidebar-list">
+                    <label class="badge badge-warning" id="notif_activity"></label>
+                        <a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='activity' ? 'active' : '' }} "
+                            href="{{route('home')}}">
+                            <i data-feather="user-check"> </i><span>Follow-Up</span>
+                        </a>
+                    </li>
+                    @endif
+                    @if(Auth::user()->hasRole('AD'))
+                    <li class="sidebar-list">
+                    <label class="badge badge-warning" id="notif_activity"></label>
+                        <a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='activity' ? 'active' : '' }} "
+                            href="{{route('home')}}">
+                            <i data-feather="pie-chart"> </i><span>Result recap</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title {{request()->route()->getPrefix() == '/settings' ? 'active' : '' }}"
+                            href="#"><i data-feather="settings"></i><span class="lan-3">settings</span>
+                            <div class="according-menu"><i
+                                    class="fa fa-angle-{{request()->route()->getPrefix() == '/settings' ? 'down' : 'right' }}"></i>
+                            </div>
+                        </a>
+                        <ul class="sidebar-submenu"
+                            style="display: {{ request()->route()->getPrefix() == '/settings' ? 'block;' : 'none;' }}">
+                            <li><a class="lan-4 {{ Route::currentRouteName()=='settings.users' ? 'active' : '' }}"
+                                    href="{{route('settings.users')}}">Manage Users</a></li>
+                            <li><a class="lan-4 {{ Route::currentRouteName()=='settings.categories' ? 'active' : '' }}"
+                                    href="{{route('settings.categories')}}">Manage Category</a></li>
+                            <li><a class="lan-4 {{ Route::currentRouteName()=='settings.criterias' ? 'active' : '' }}"
+                                    href="{{route('settings.criterias')}}">Manage Criteria</a></li>
+                        </ul>
+                    </li>
+                    @endif
                 </ul>
             </div>
             <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>

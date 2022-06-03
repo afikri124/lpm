@@ -9,8 +9,8 @@
 -----------------------------------------------------------------------------------
  */
 :root {
-    --theme-deafult: #7366ff;
-    --theme-secondary: #f73164
+    --theme-deafult: #ed2024;
+    --theme-secondary: #292929;
 }
 
 .font-roboto {
@@ -22330,6 +22330,10 @@ footer.blockquote-footer {
     padding: 5px
 }
 
+.is-invalid .select2-container .select2-selection--single {
+    border-color: #dc3545;
+}
+
 .job-pagination {
     margin-bottom: 30px
 }
@@ -34861,7 +34865,7 @@ body[class*='dark-'] .for-light {
 }
 
 .selection .select2-selection .select2-search__field {
-    margin-top: 0;
+    margin-top: 1px;
     padding: 3px
 }
 
@@ -34897,7 +34901,7 @@ body[class*='dark-'] .for-light {
 
 .select2-container--default .select2-selection--multiple .select2-selection__choice {
     padding: 2px 6px !important;
-    margin-top: 0 !important;
+    /* margin-top: 0 !important; */
     background-color: var(--theme-deafult) !important;
     border-color: #43f !important;
     color: #fff;

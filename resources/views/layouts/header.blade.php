@@ -32,7 +32,7 @@
                 <li class="maximize"><a class="text-dark" href="#!"><i data-feather="maximize"></i></a></li>
                 <li class="profile-nav onhover-dropdown p-0 me-0">
                     <div class="media profile-media">
-                        <img class="b-r-10" src="{{asset('assets/images/user/user.png')}}" style="width: 40px;" alt="">
+                        <img class="b-r-10" src="{{Auth::user()->user_avatar}}" style="width: 40px;" alt="">
                         <div class="media-body">
                             <span>{{ strtoupper(Auth::user()->name) }}</span>
                             <p class="mb-0 font-roboto">{{ ucfirst(Auth::user()->level) }} <i

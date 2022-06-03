@@ -13,4 +13,9 @@ class Criteria_category extends Model
     protected $fillable = [
         'id', 'title', 'description',
     ];
+
+    public function Criterias()
+    {
+        return $this->hasMany(Criteria::class);
+    }
 }

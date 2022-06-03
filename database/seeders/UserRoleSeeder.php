@@ -17,6 +17,10 @@ class UserRoleSeeder extends Seeder
         //
         $data = [
             ["user_id" => "1", "role_id" => "AD"],
+            ["user_id" => "1", "role_id" => "AU"],
+            ["user_id" => "1", "role_id" => "DE"],
+            ["user_id" => "1", "role_id" => "LE"],
+            ["user_id" => "1", "role_id" => "ST"],
         ];
 
         foreach ($data as $x) {
