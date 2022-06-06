@@ -33,8 +33,8 @@
                     @if(Auth::user()->hasRole('AD'))
                     <li class="sidebar-list">
                     <label class="badge badge-warning" id="notif_schedules"></label>
-                        <a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='activity' ? 'active' : '' }} "
-                            href="{{route('home')}}">
+                        <a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='schedules' ? 'active' : '' }} "
+                            href="{{route('schedules')}}">
                             <i data-feather="calendar"> </i><span>Schedules</span>
                         </a>
                     </li>

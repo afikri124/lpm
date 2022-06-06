@@ -46,9 +46,18 @@ Route::group(['prefix' => 'settings', 'middleware' => ['auth', 'role:AD']], func
     Route::delete('criteria/delete', [App\Http\Controllers\SettingController::class, 'criteria_delete'])->name('settings.criteria_delete');
 });
 
+Route::group(['prefix' => 'schedules', 'middleware' => ['auth', 'role:AD']], function() {
+    Route::get('/', [App\Http\Controllers\ScheduleController::class, 'index'])->name('schedules');
+    Route::delete('delete', [App\Http\Controllers\ScheduleController::class, 'delete'])->name('schedules.delete');
+    Route::any('add', [App\Http\Controllers\ScheduleController::class, 'add'])->name('schedules.add');
+    Route::any('edit/{id}', [App\Http\Controllers\ScheduleController::class, 'edit'])->name('schedules.edit');
+});
+
 Route::group(['prefix' => 'api', 'middleware' => ['auth']], function() {
     //API
+    Route::get('tes', [App\Http\Controllers\ApiController::class, 'tes'])->name('api.tes');
     Route::get('users', [App\Http\Controllers\ApiController::class, 'users'])->name('api.users');
     Route::get('categories', [App\Http\Controllers\ApiController::class, 'categories'])->name('api.categories');
     Route::get('criterias', [App\Http\Controllers\ApiController::class, 'criterias'])->name('api.criterias');
+    Route::get('schedules', [App\Http\Controllers\ApiController::class, 'schedules'])->name('api.schedules');
 });

@@ -15,4 +15,9 @@ class Observation extends Model
         'remark',
         'image_path',
     ];
+
+    public function auditor()
+    {
+        return $this->belongsTo(User::class, 'auditor_id');
+    }
 }

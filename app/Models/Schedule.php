@@ -18,4 +18,18 @@ class Schedule extends Model
         'remark',
         'created_by',
     ];
+    public function status()
+    {
+        return $this->belongsTo(Status::class, 'status_id');
+    }
+
+    public function lecturer()
+    {
+        return $this->belongsTo(User::class, 'lecturer_id');
+    }
+
+    public function observations()
+    {
+        return $this->hasMany(Observation::class);
+    }
 }

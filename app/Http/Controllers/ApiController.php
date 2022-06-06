@@ -9,6 +9,7 @@ use Auth;
 use App\Models\User;
 use App\Models\Criteria_category;
 use App\Models\Criteria;
+use App\Models\Schedule;
 use App\Models\Role;
 use App\Models\User_role;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
@@ -80,6 +81,42 @@ class ApiController extends Controller
                         }
                     })
                     ->make(true);
+    }
+
+    public function schedules(Request $request)
+    {
+        $data = Schedule::with('observations')
+        ->with('status')->with('lecturer')->with('observations.auditor')->select('*');
+            return Datatables::of($data)
+                    ->filter(function ($instance) use ($request) {
+                        if (!empty($request->get('lecturer_id'))) {
+                            $instance->where('lecturer_id', $request->get('lecturer_id'));
+                        }
+                        if (!empty($request->get('status_id'))) {
+                            $instance->where('status_id', $request->get('status_id'));
+                        }
+                        if (!empty($request->get('search'))) {
+                             $instance->where(function($w) use($request){
+                                $search = $request->get('search');
+                                    $w->orWhere('remark', 'LIKE', "%$search%");
+                            });
+                        }
+                    })
+                    ->make(true);
+    }
+
+
+
+
+
+
+
+    public function tes(Request $request)
+    {
+        $data = User::select('id','name')->whereHas('roles', function($q){
+                    $q->where('role_id', "LE");
+                })->get();
+        return Datatables::of($data)->make(true);
     }
 
 }
