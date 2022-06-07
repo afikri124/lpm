@@ -9,14 +9,17 @@
 
 ## Cara install Sistem ini
 
+Pertama harus sudah terinstall XAMPP, git dan composer..
+setelah semua terinstall buka forder tempat menyimpan kode dan lakukan perintah dibawah ini melalui terminal
+
 Buka CMD atau Termianal pada Visual Studio Code:
-- Cloning laravel @git: $ git clone [https://github.com/afikri124/cardiac_diary.git](https://github.com/afikri124/cardiac_diary.git).
-- Install depedensi: composer install (atau composer update).
-- membuat file .env: cp .env.example .env
+- Cloning laravel @git: $ <code>git clone [https://github.com/afikri124/peer-observation.git](https://github.com/afikri124/peer-observation.git)</code>
+- Install depedensi: <code>composer install</code> (atau composer update).
+- membuat file .env: <code>cp .env.example .env</code>
 - kemudian edit konfigurasi didalam file env (bisa di edit menggunakan perintah nano .env dll):
     - APP_NAME dan seterusnya
     - DB_CONNECTION dan seterusnya
     - MAIL_MAILER dan seterusnya
-- Jika error ketikkan perintah: php artisan key:generate
-- Membuat tabel dan seeder database: php artisan migrate --seed
-- Jalankan sistem (kalau di localhost): php artisan serve
+- Jika error ketikkan perintah: <code>php artisan key:generate</code>
+- Membuat tabel dan seeder database: <code>php artisan migrate --seed</code>
+- Jalankan sistem (kalau di localhost): <code>php artisan serve</code>
