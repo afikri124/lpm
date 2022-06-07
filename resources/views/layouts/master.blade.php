@@ -23,7 +23,6 @@
         .page-wrapper.compact-wrapper .nav-right .nav-menus {
             margin-right: 0px;
         }
-
     </style>
 </head>
 

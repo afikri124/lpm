@@ -281,7 +281,6 @@
 
     function AddObserver() {
         $('#modalAddObserver').modal('hide');
-        // alert(document.getElementById("auditor_id").value);
         $.ajax({
             url: "{{ route('observations.add') }}",
             type: "Post",
