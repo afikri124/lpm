@@ -65,7 +65,7 @@
                     </div>
                     <div class="col-md-6 d-flex justify-content-center justify-content-md-end">
                         <a class="btn btn-primary btn-block btn-mail" title="Add new" href="{{ route('schedules.add')}}">
-                            <i data-feather="user-plus"></i>New
+                            <i data-feather="plus"></i>New
                         </a>
                     </div>
                 </div>

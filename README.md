@@ -14,6 +14,7 @@ setelah semua terinstall buka forder tempat menyimpan kode dan lakukan perintah 
 
 Buka CMD atau Termianal pada Visual Studio Code:
 - Cloning laravel @git: $ <code>git clone [https://github.com/afikri124/peer-observation.git](https://github.com/afikri124/peer-observation.git)</code>
+- masuk ke folder koding sistem ini: <code>cd peer-observation</code>
 - Install depedensi: <code>composer install</code> (atau composer update).
 - membuat file .env: <code>cp .env.example .env</code>
 - kemudian edit konfigurasi didalam file env (bisa di edit menggunakan perintah nano .env dll):

@@ -58,7 +58,7 @@
                     <div class="col-md-9 d-flex justify-content-center justify-content-md-end">
                         <a class="btn btn-primary btn-block btn-mail" title="Add new"
                             href="{{ route('settings.criteria_add')}}">
-                            <i data-feather="user-plus"></i>New
+                            <i data-feather="plus"></i>New
                         </a>
                     </div>
                 </div>

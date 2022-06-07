@@ -65,18 +65,21 @@ class ScheduleController extends Controller
 
     public function edit($id, Request $request) {
         if ($request->isMethod('post')) {
-            $this->validate($request, [ 
-                'criteria_category_id'=> ['required'],
-                'title'=> ['required', 'string', 'max:255'],
-                'weight'=> ['required', 'numeric'],
-            ]);
-            $data = Criteria::find($id)->update(request()->all());
-            return redirect()->route('settings.criterias');
+            // $this->validate($request, [ 
+            //     'criteria_category_id'=> ['required'],
+            //     'title'=> ['required', 'string', 'max:255'],
+            //     'weight'=> ['required', 'numeric'],
+            // ]);
+            // $data = Schedule::find($id)->update(request()->all());
+            // return redirect()->route('settings.criterias');
         }
         $data = Schedule::with('lecturer')->with('status')->find($id);
         if($data == null){
             abort(403, "Cannot access to restricted page");
         }
-        return view('schedules.edit', compact('data'));
+        $auditors = User::select('id','email','name')->whereHas('roles', function($q){
+                        $q->where('role_id', "AU");
+                    })->get();
+        return view('schedules.edit', compact('data','auditors'));
     }
 }

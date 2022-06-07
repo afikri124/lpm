@@ -9,6 +9,7 @@ use Auth;
 use App\Models\User;
 use App\Models\Criteria_category;
 use App\Models\Criteria;
+use App\Models\Observation;
 use App\Models\Schedule;
 use App\Models\Role;
 use App\Models\User_role;
@@ -105,6 +106,21 @@ class ApiController extends Controller
                     ->make(true);
     }
 
+    public function observations_by_schedule_id(Request $request)
+    {
+        $data = Observation::with('auditor')->where('schedule_id', $request->get('schedule_id'))->select('*');
+            return Datatables::of($data)
+                    ->filter(function ($instance) use ($request) {
+                        if (!empty($request->get('search'))) {
+                             $instance->where(function($w) use($request){
+                                $search = $request->get('search');
+                                    $w->orWhere('remark', 'LIKE', "%$search%");
+                            });
+                        }
+                    })
+                    ->make(true);
+    }
+
 
 
 
@@ -113,9 +129,9 @@ class ApiController extends Controller
 
     public function tes(Request $request)
     {
-        $data = User::select('id','name')->whereHas('roles', function($q){
-                    $q->where('role_id', "LE");
-                })->get();
+        $data = User::select('id','email','name')->whereHas('roles', function($q){
+            $q->where('role_id', "AU");
+        })->get();
         return Datatables::of($data)->make(true);
     }
 
