@@ -24,25 +24,25 @@ Buka CMD atau Termianal pada Visual Studio Code:
             APP_URL=http://localhost (jika dilocal gunakan localhost, jika di server gunakan domain server)
             FORCE_HTTPS=false (jika dilocal gunakan false, jika server support ssl gunakan true)
         </code>
-    - DB_CONNECTION dan seterusnya (Jangan lupa buatkan database dulu)
+    - DB_CONNECTION dan seterusnya (Jangan lupa buatkan database dulu)<br>
         <code>
-            DB_CONNECTION=mysql
-            DB_HOST=127.0.0.1
-            DB_PORT=3306
-            DB_DATABASE=lpm     (isikan nama database)
-            DB_USERNAME=root    (isikan user database)
-            DB_PASSWORD=        (isikan password database)
+            DB_CONNECTION=mysql <br>
+            DB_HOST=127.0.0.1 <br>
+            DB_PORT=3306 <br>
+            DB_DATABASE=lpm     (isikan nama database)<br>
+            DB_USERNAME=root    (isikan user database)<br>
+            DB_PASSWORD=        (isikan password database)<br>
         </code>
-    - MAIL_MAILER dan seterusnya
+    - MAIL_MAILER dan seterusnya<br>
         <code>
-            MAIL_MAILER=smtp
-            MAIL_HOST=smtp.mailtrap.io  (isikan host email)
-            MAIL_PORT=2525              (isikan port email)
-            MAIL_USERNAME=              (isikan user email)
-            MAIL_PASSWORD=              (isikan password email)
-            MAIL_ENCRYPTION=tls
-            MAIL_FROM_ADDRESS=no-replay@gmail.com (isikan email pengirim)
-            MAIL_FROM_NAME="${APP_NAME}"
+            MAIL_MAILER=smtp<br>
+            MAIL_HOST=smtp.mailtrap.io  (isikan host email)<br>
+            MAIL_PORT=2525              (isikan port email)<br>
+            MAIL_USERNAME=              (isikan user email)<br>
+            MAIL_PASSWORD=              (isikan password email)<br>
+            MAIL_ENCRYPTION=tls<br>
+            MAIL_FROM_ADDRESS=no-replay@gmail.com (isikan email pengirim)<br>
+            MAIL_FROM_NAME="${APP_NAME}"<br>
         </code>
 - Jika error ketikkan perintah: <code>php artisan key:generate</code>
 - Membuat tabel dan seeder database: <code>php artisan migrate --seed</code>
