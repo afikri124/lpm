@@ -19,31 +19,27 @@ Buka CMD atau Termianal pada Visual Studio Code:
 - membuat file .env: <code>cp .env.example .env</code>
 - kemudian edit konfigurasi didalam file env (bisa di edit menggunakan perintah nano .env dll):
     - APP_NAME dan seterusnya
-        <code>
-            APP_NAME=LPM
-            APP_URL=http://localhost (jika dilocal gunakan localhost, jika di server gunakan domain server)
-            FORCE_HTTPS=false (jika dilocal gunakan false, jika server support ssl gunakan true)
-        </code>
+        <code>APP_NAME=LPM</code>
+        <code>APP_URL=http://localhost</code>(jika dilocal gunakan localhost, jika di server gunakan domain server)
+        <code>FORCE_HTTPS=false</code>(jika dilocal gunakan false, jika server support ssl gunakan true)
     - DB_CONNECTION dan seterusnya (Jangan lupa buatkan database dulu)<br>
-        <code>
-            DB_CONNECTION=mysql <br>
-            DB_HOST=127.0.0.1 <br>
-            DB_PORT=3306 <br>
-            DB_DATABASE=lpm     (isikan nama database)<br>
-            DB_USERNAME=root    (isikan user database)<br>
-            DB_PASSWORD=        (isikan password database)<br>
-        </code>
+        <code>DB_CONNECTION=mysql</code>
+        <code>DB_HOST=127.0.0.1</code>
+        <code>DB_PORT=3306</code>
+        <code>DB_DATABASE=lpm</code>(isikan nama database)
+        <code>DB_USERNAME=root</code>(isikan user database)
+        <code>DB_PASSWORD=</code>(isikan password database)
     - MAIL_MAILER dan seterusnya<br>
-        <code>
-            MAIL_MAILER=smtp<br>
-            MAIL_HOST=smtp.mailtrap.io  (isikan host email)<br>
-            MAIL_PORT=2525              (isikan port email)<br>
-            MAIL_USERNAME=              (isikan user email)<br>
-            MAIL_PASSWORD=              (isikan password email)<br>
-            MAIL_ENCRYPTION=tls<br>
-            MAIL_FROM_ADDRESS=no-replay@gmail.com (isikan email pengirim)<br>
-            MAIL_FROM_NAME="${APP_NAME}"<br>
-        </code>
+        <code>MAIL_MAILER=smtp</code>
+        <code>MAIL_HOST=smtp.mailtrap.io</code> (isikan host email)
+        <code>MAIL_PORT=2525</code> (isikan port email)
+        <code>MAIL_USERNAME=</code> (isikan user email)
+        <code>MAIL_PASSWORD=</code> (isikan password email)
+        <code>MAIL_ENCRYPTION=tls</code>
+        <code>MAIL_FROM_ADDRESS=no-replay@gmail.com</code> (isikan email pengirim)
+        <code>MAIL_FROM_NAME="${APP_NAME}"</code>
 - Jika error ketikkan perintah: <code>php artisan key:generate</code>
 - Membuat tabel dan seeder database: <code>php artisan migrate --seed</code>
 - Jalankan sistem (kalau di localhost): <code>php artisan serve</code>
+
+- Jika ada pertanyaan hubungi [https://alifikri.com](https://alifikri.com)
