@@ -40,18 +40,6 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-12 col-md-12">
-                            <div class="form-group mb-2">
-                                <label class="col-form-label">Criteria Title<i class="text-danger">*</i></label>
-                                <textarea class="form-control @error('title') is-invalid @enderror" rows="2"
-                                    name="title">{{ old('title') }}</textarea>
-                                @error('title')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
                         <div class="col-lg-6 col-md-12">
                             <div class="form-group">
                                 <label class="col-form-label">Category<i class="text-danger">*</i></label>
@@ -85,6 +73,18 @@
                             </div>
                         </div>
 
+                        <div class="col-lg-12 col-md-12">
+                            <div class="form-group mb-2">
+                                <label class="col-form-label">Criteria Title<i class="text-danger">*</i></label>
+                                <textarea class="form-control @error('title') is-invalid @enderror" rows="2"
+                                    name="title">{{ old('title') }}</textarea>
+                                @error('title')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="card-footer text-end">

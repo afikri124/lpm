@@ -75,11 +75,11 @@
                         <ul class="sidebar-submenu"
                             style="display: {{ request()->route()->getPrefix() == '/settings' ? 'block;' : 'none;' }}">
                             <li><a class="lan-4 {{ Route::currentRouteName()=='settings.users' ? 'active' : '' }}"
-                                    href="{{route('settings.users')}}">Manage Users</a></li>
+                                    href="{{route('settings.users')}}">Users</a></li>
                             <li><a class="lan-4 {{ Route::currentRouteName()=='settings.categories' ? 'active' : '' }}"
-                                    href="{{route('settings.categories')}}">Manage Category</a></li>
+                                    href="{{route('settings.categories')}}">Question Categories</a></li>
                             <li><a class="lan-4 {{ Route::currentRouteName()=='settings.criterias' ? 'active' : '' }}"
-                                    href="{{route('settings.criterias')}}">Manage Criteria</a></li>
+                                    href="{{route('settings.criterias')}}">Criteria</a></li>
                         </ul>
                     </li>
                     @endif

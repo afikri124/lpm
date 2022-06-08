@@ -20,7 +20,7 @@ class ScheduleController extends Controller
         $status = Status::get();
         $lecturer = User::select('id','name')->whereHas('roles', function($q){
                         $q->where('role_id', "LE");
-                    })->get();
+                    })->where('username','!=', 'admin')->get();
         return view('schedules.index', compact('status','lecturer'));
     }
 
@@ -61,7 +61,7 @@ class ScheduleController extends Controller
         } 
         $lecturer = User::select('id','email','name')->whereHas('roles', function($q){
                         $q->where('role_id', "LE");
-                    })->get();
+                    })->where('username','!=', 'admin')->get();
         return view('schedules.add', compact('lecturer'));
     }
 
@@ -76,7 +76,7 @@ class ScheduleController extends Controller
                 'date_start'=> $request->date_start,
                 'date_end'=> $request->date_end]);
             
-            //TODO : SEND EMAIL TO AUDITOR
+            //TODO : SEND EMAIL RESCHEDULE TO AUDITOR
 
             return redirect()->route('schedules.edit', $id);
         }
@@ -86,7 +86,7 @@ class ScheduleController extends Controller
         }
         $auditors = User::select('id','email','name')->whereHas('roles', function($q){
                         $q->where('role_id', "AU");
-                    })->get();
+                    })->where('username','!=', 'admin')->where('id','!=', $data->lecturer_id)->get();
         return view('schedules.edit', compact('data','auditors'));
     }
 }

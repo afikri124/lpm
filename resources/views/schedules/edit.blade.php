@@ -79,7 +79,7 @@
                             <span class="btn btn-primary  btn-block btn-mail"><i data-feather="plus"></i>Add
                                 Observer</span>
                         </a>
-                        @if($data->status_id == "S00" || $data->status_id == "S01" || $data->status_id == "S02")
+                        @if($data->status_id == "S00" || $data->status_id == "S01")
                         <a type="button" data-bs-toggle="modal" data-bs-target="#modalReschedule">
                             <span class="btn btn-info btn-block btn-mail">Reschedule</span>
                         </a>
@@ -156,13 +156,12 @@
                                 </div>
                             </div>
                             <span class="invalid-feedback d-block" role="alert">
-                                <i>Note: Schedule changes will be notified to each auditor via email, and this change
-                                    can only be made for schedules whose status is not yet Audited 2</i>
+                                <i>Note: Schedule changes will be notified to each auditor via email, and this change can only be made for schedules whose status has not been audited.</i>
                             </span>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-success" type="submit">Update</button>
+                        <button class="btn btn-info" type="submit">Update</button>
                     </div>
                 </form>
             </div>
