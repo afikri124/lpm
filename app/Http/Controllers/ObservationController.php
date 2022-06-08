@@ -44,6 +44,9 @@ class ObservationController extends Controller
                 'created_at' => Carbon::now(),
             ]);
             if($data){
+                
+                //TODO : SEND EMAIL TO AUDITOR
+
                 return response()->json([
                     'success' => true,
                     'message' => 'Observer added successfully!'

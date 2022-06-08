@@ -55,6 +55,8 @@ class ScheduleController extends Controller
                 'status_id' => "S00",
                 'created_by' => Auth::user()->id
             ]);
+
+            //TODO : SEND EMAIL TO LECTURER
             return redirect()->route('schedules.edit', $schedule);
         } 
         $lecturer = User::select('id','email','name')->whereHas('roles', function($q){
@@ -65,13 +67,18 @@ class ScheduleController extends Controller
 
     public function edit($id, Request $request) {
         if ($request->isMethod('post')) {
-            // $this->validate($request, [ 
-            //     'criteria_category_id'=> ['required'],
-            //     'title'=> ['required', 'string', 'max:255'],
-            //     'weight'=> ['required', 'numeric'],
-            // ]);
-            // $data = Schedule::find($id)->update(request()->all());
-            // return redirect()->route('settings.criterias');
+            $this->validate($request, [ 
+                'date_start' => ['required', 'date'],
+                'date_end' => ['required', 'date'],
+            ]);
+            $data = Schedule::find($id)
+            ->update([ 'name'=> $request->name,
+                'date_start'=> $request->date_start,
+                'date_end'=> $request->date_end]);
+            
+            //TODO : SEND EMAIL TO AUDITOR
+
+            return redirect()->route('schedules.edit', $id);
         }
         $data = Schedule::with('lecturer')->with('status')->find($id);
         if($data == null){

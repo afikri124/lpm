@@ -34,14 +34,14 @@ function checkTime(i) {
 // currently sale
 var options = {
     series: [{
-        name: 'series1',
+        name: 'Online',
         data: [6, 20, 15, 40, 18, 20, 18, 23, 18, 35, 30, 55, 0]
     }, {
-        name: 'series2',
+        name: 'Store',
         data: [2, 22, 35, 32, 40, 25, 50, 38, 42, 28, 20, 45, 0]
     }],
     chart: {
-        height: 240,
+        height: 254,
         type: 'area',
         toolbar: {
             show: false

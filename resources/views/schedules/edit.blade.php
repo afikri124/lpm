@@ -19,7 +19,7 @@
 @endsection
 
 @section('breadcrumb-title')
-<!-- <h3>User Profile</h3> -->
+<!-- <h3>Schedules</h3> -->
 @endsection
 
 @section('breadcrumb-items')
@@ -34,6 +34,12 @@
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
+                    @foreach ($errors->all() as $error)
+                    <div class="alert alert-light alert-dismissible fade show text-danger" role="alert">
+                        <p><i class="fa fa-exclamation-triangle"></i> {{ $error }}</p>
+                        <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    @endforeach
                     <div class="row">
                         <div class="col-lg-6 col-md-12">
                             <div class="form-group mb-2">
@@ -73,6 +79,11 @@
                             <span class="btn btn-primary  btn-block btn-mail"><i data-feather="plus"></i>Add
                                 Observer</span>
                         </a>
+                        @if($data->status_id == "S00" || $data->status_id == "S01" || $data->status_id == "S02")
+                        <a type="button" data-bs-toggle="modal" data-bs-target="#modalReschedule">
+                            <span class="btn btn-info btn-block btn-mail">Reschedule</span>
+                        </a>
+                        @endif
                         <a href="{{ route('schedules') }}">
                             <span class="btn btn-secondary  btn-block btn-mail">Back</span>
                         </a>
@@ -113,6 +124,47 @@
                 <div class="modal-footer">
                     <span class="btn btn-primary" onclick="AddObserver()">Submit</span>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalReschedule" tabindex="-1" role="dialog" aria-labelledby="modalReschedule"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel1">Reschedule Observation</h5>
+                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="POST" action="">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <div class="col-md-12">
+                                <div class="form-group mb-2">
+                                    <label class="col-form-label">Start<i class="text-danger">*</i></label>
+                                    <input class="form-control digits" autocomplete="off" type="datetime-local"
+                                        id="date_start" name="date_start"
+                                        value="{{ date('Y-m-d\TH:i', strtotime($data->date_start)) }}">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group mb-2">
+                                    <label class="col-form-label">End<i class="text-danger">*</i></label>
+                                    <input class="form-control digits" autocomplete="off" type="datetime-local"
+                                        id="date_end" name="date_end"
+                                        value="{{ date('Y-m-d\TH:i', strtotime($data->date_end)) }}">
+                                </div>
+                            </div>
+                            <span class="invalid-feedback d-block" role="alert">
+                                <i>Note: Schedule changes will be notified to each auditor via email, and this change
+                                    can only be made for schedules whose status is not yet Audited 2</i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success" type="submit">Update</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -303,7 +355,7 @@
                 }
             }
         })
-        
+
     }
 
 </script>
