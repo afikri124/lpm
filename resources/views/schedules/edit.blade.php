@@ -75,9 +75,8 @@
             <div class="card">
                 <div class="row">
                     <div class="col-md-12 d-flex justify-content-center justify-content-md-end">
-                        <a type="button" data-bs-toggle="modal" data-bs-target="#modalAddObserver">
-                            <span class="btn btn-primary  btn-block btn-mail"><i data-feather="plus"></i>Add
-                                Observer</span>
+                        <a type="button" data-bs-toggle="modal" data-bs-target="#modalAddObserver" title="Add Observer">
+                            <span class="btn btn-primary btn-block btn-mail"><i data-feather="plus"></i>Add</span>
                         </a>
                         @if($data->status_id == "S00" || $data->status_id == "S01")
                         <a type="button" data-bs-toggle="modal" data-bs-target="#modalReschedule">
@@ -155,8 +154,16 @@
                                         value="{{ date('Y-m-d\TH:i', strtotime($data->date_end)) }}">
                                 </div>
                             </div>
+                            <div class="col-md-12">
+                                <div class="form-group mb-2">
+                                    <label class="col-form-label">Reason for rescheduling<i class="text-danger">*</i></label>
+                                    <textarea class="form-control" rows="2"
+                                    name="reschedule_reason"></textarea>
+                                </div>
+                            </div>
                             <span class="invalid-feedback d-block" role="alert">
-                                <i>Note: Schedule changes will be notified to each auditor via email, and this change can only be made for schedules whose status has not been audited.</i>
+                                <i>Note: Schedule changes will be notified to each auditor via email, and this change
+                                    can only be made for schedules whose status has not been audited.</i>
                             </span>
                         </div>
                     </div>
@@ -170,8 +177,23 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="card">
-                <div class="card-body">
-                    <div class="">
+                <ul class="nav nav-tabs nav-right" id="icon-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="tab-observer-tab" data-bs-toggle="tab"
+                            href="#tab-observer" role="tab" aria-controls="tab-observer" aria-selected="true">
+                            <i class="icofont icofont-man-in-glasses"></i>Observer
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tab-histories-tab" data-bs-toggle="tab"
+                            href="#tab-histories" role="tab" aria-controls="tab-histories" aria-selected="false">
+                            <i class="icofont icofont-history"></i>Timeline Histories
+                        </a>
+                    </li>
+                </ul>
+                <div class="card-body pt-3 tab-content">
+                    <div class="tab-pane fade show active" id="tab-observer" role="tabpanel"
+                        aria-labelledby="tab-observer-tab">
                         <table class="table table-hover table-sm" id="datatable" width="100%">
                             <thead>
                                 <tr>
@@ -185,6 +207,36 @@
                                 </tr>
                             </thead>
                         </table>
+                    </div>
+                    <div class="tab-pane fade" id="tab-histories" role="tabpanel" aria-labelledby="tab-histories-tab">
+                        <div class="activity-timeline">
+                            <div class="media">
+                                <div class="activity-dot-primary"></div>
+                                <div class="media-body">
+                                    <span>The observation schedule is made by 
+                                        <strong>{{ $data->created_user->name }}</strong>.
+                                        <i class="fa fa-circle circle-dot-warning pull-right" data-toggle="tooltip" title="Please refresh page for latest history" onClick="window.location.reload();"></i>
+                                    </span>
+                                    <p class="font-roboto">All schedule, status, and auditor changes will be recorded in
+                                        this timeline.</p>
+                                </div>
+                            </div>
+                            @foreach($data->histories as $p)
+                            <div class="media">
+                                <div class="activity-line"></div>
+                                <div class="activity-dot-primary"></div>
+                                <div class="media-body">
+                                    <span>{!! $p->description !!}</span>
+                                    @if($p->remark != null)
+                                    <blockquote><i>{{ $p->remark }}</i></blockquote>
+                                    @endif
+                                    <p class="font-roboto"><i class="icofont icofont-clock-time"></i>
+                                        {{ date('d M Y H:i', strtotime($p->created_at)) }}
+                                    </p>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>

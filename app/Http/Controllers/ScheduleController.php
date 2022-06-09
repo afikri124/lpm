@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Status;
 use App\Models\Schedule;
+use App\Models\Schedule_history;
 use Auth;
+use Carbon\Carbon;
 
 class ScheduleController extends Controller
 {
@@ -70,17 +72,28 @@ class ScheduleController extends Controller
             $this->validate($request, [ 
                 'date_start' => ['required', 'date'],
                 'date_end' => ['required', 'date'],
+                'reschedule_reason' => ['required'],
             ]);
             $data = Schedule::find($id)
-            ->update([ 'name'=> $request->name,
+            ->update([ 
                 'date_start'=> $request->date_start,
-                'date_end'=> $request->date_end]);
+                'date_end'=> $request->date_end
+            ]);
+            if($data){
+                $x = Schedule_history::insert([
+                    'schedule_id' => $id,
+                    'description' => "The observation schedule has been rescheduled by <b>".Auth::user()->name."</b>.",
+                    'remark' => $request->reschedule_reason,
+                    'created_by' => Auth::user()->id,
+                    'created_at' => Carbon::now(),
+                ]);
             
             //TODO : SEND EMAIL RESCHEDULE TO AUDITOR
 
+            }
             return redirect()->route('schedules.edit', $id);
         }
-        $data = Schedule::with('lecturer')->with('status')->find($id);
+        $data = Schedule::with('lecturer')->with('status')->with('created_user')->with('histories')->find($id);
         if($data == null){
             abort(403, "Cannot access to restricted page");
         }

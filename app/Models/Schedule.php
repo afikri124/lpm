@@ -32,4 +32,14 @@ class Schedule extends Model
     {
         return $this->hasMany(Observation::class);
     }
+
+    public function created_user()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function histories()
+    {
+        return $this->hasMany(Schedule_history::class);
+    }
 }
