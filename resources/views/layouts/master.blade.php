@@ -23,10 +23,11 @@
         .page-wrapper.compact-wrapper .nav-right .nav-menus {
             margin-right: 0px;
         }
+
     </style>
 </head>
 
-<body >
+<body>
     <div class="loader-wrapper">
         <div class="loader-index"><span></span></div>
         <svg>
@@ -124,7 +125,40 @@
             }
         });
 
+        function notifications(i) {
+            $.ajax({
+                type: "GET",
+                url: "{{ route('api.notifications') }}",
+                success: function (data) {
+                    // console.log(data);
+                    if (data['schedules'] != null) {
+                        if (data['schedules'].notif != 0) document.getElementById("notif_schedules")
+                            .innerHTML = data['schedules'].notif;
+                    } else {
+                        document.getElementById("notif_schedules").innerHTML = "";
+                    }
+
+                    if (data['observations'] != null) {
+                        if (data['observations'].notif != 0) document.getElementById(
+                            "notif_observations").innerHTML = data['observations'].notif;
+                    } else {
+                        document.getElementById("notif_observations").innerHTML = "";
+                    }
+
+                    if (data['follow_ups'] != null) {
+                        if (data['follow_ups'] != 0) document.getElementById(
+                            "notif_follow_ups").innerHTML = data['follow_ups'].notif;
+                    } else {
+                        document.getElementById("notif_follow_ups").innerHTML = "";
+                    }
+                }
+            });
+            var t = setTimeout(notifications, 60*1000);
+        }
+        notifications();
+
     </script>
 
 </body>
+
 </html>

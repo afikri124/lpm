@@ -13,4 +13,27 @@ class Status extends Model
     protected $fillable = [
         'id', 'title',
     ];
+    protected $appends = ['color'];
+
+    public function getColorAttribute(){
+        $x = "";
+        if($this->id == "S00"){
+            $x = "muted";
+        } else if($this->id == "S01"){
+            $x = "dark";
+        } else if($this->id == "S02"){
+            $x = "warning mark";
+        } else if($this->id == "S03"){
+            $x = "warning";
+        } else if($this->id == "S04"){
+            $x = "danger";
+        } else if($this->id == "S05"){
+            $x = "info";
+        }else if($this->id == "S06"){
+            $x = "success";
+        } else {
+            $x = "secondary";
+        }
+        return $x;
+    }
 }

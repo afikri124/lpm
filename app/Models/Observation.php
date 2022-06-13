@@ -20,4 +20,19 @@ class Observation extends Model
     {
         return $this->belongsTo(User::class, 'auditor_id');
     }
+
+    public function schedule()
+    {
+        return $this->belongsTo(Schedule::class, 'schedule_id');
+    }
+
+    protected $appends = ['color'];
+
+    public function getColorAttribute(){
+        if($this->attendance == true){
+            return "success";
+        } else {
+            return "danger";
+        }
+    }
 }

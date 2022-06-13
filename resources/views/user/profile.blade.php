@@ -94,6 +94,14 @@
                             <span>{{ $data->job }}</span>
                         </div>
                     </div>
+                    <div class="mb-1 row">
+                        <label class="col-sm-6">
+                            <h6 class="form-label">Gender</h6>
+                        </label>
+                        <div class="col-sm-6">
+                            <span>{{ $data->gender }}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

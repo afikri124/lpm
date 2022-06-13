@@ -90,7 +90,16 @@
                                 <input class="form-control" type="number" name="phone" value="{{ $data->phone }}">
                             </div>
                         </div>
-
+                        <div class="col-sm-6 col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Gender<i class="text-danger">*</i></label>
+                                <select class="select2 col-sm-12" name="gender" id="gender" >
+                                    <option value="" {{ $data->gender == null ? 'selected' : '' }} disabled>Select Gender</option>
+                                    <option value="M" {{ $data->gender == "M" ? 'selected' : '' }} >Male</option>
+                                    <option value="F" {{ $data->gender == "F" ? 'selected' : '' }}>Female</option>
+                                </select>
+                            </div>
+                        </div>
                         <div class="col-sm-6 col-md-6">
                             <div class="mb-3">
                                 <label class="form-label">Roles<i class="text-danger">*</i></label>

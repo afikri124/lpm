@@ -9,6 +9,7 @@ use App\Models\Schedule;
 use App\Models\Schedule_history;
 use Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Crypt;
 
 class ScheduleController extends Controller
 {
@@ -68,7 +69,8 @@ class ScheduleController extends Controller
     }
 
     public function edit($id, Request $request) {
-        if ($request->isMethod('post')) {
+        $id = Crypt::decrypt($id);
+          if ($request->isMethod('post')) {
             $this->validate($request, [ 
                 'date_start' => ['required', 'date'],
                 'date_end' => ['required', 'date'],
@@ -93,10 +95,7 @@ class ScheduleController extends Controller
             }
             return redirect()->route('schedules.edit', $id);
         }
-        $data = Schedule::with('lecturer')->with('status')->with('created_user')->with('histories')->find($id);
-        if($data == null){
-            abort(403, "Cannot access to restricted page");
-        }
+        $data = Schedule::with('lecturer')->with('status')->with('created_user')->with('histories')->findOrFail($id);
         $auditors = User::select('id','email','name')->whereHas('roles', function($q){
                         $q->where('role_id', "AU");
                     })->where('username','!=', 'admin')->where('id','!=', $data->lecturer_id)->get();

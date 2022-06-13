@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Observation;
+use App\Models\Status;
 use App\Models\Schedule_history;
 use Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Crypt;
 
 class ObservationController extends Controller
 {
@@ -15,6 +17,13 @@ class ObservationController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    public function index(Request $request) {
+           $lecturer = User::select('id','name')->whereHas('roles', function($q){
+                        $q->where('role_id', "LE");
+                    })->where('username','!=', 'admin')->get();
+        return view('observations.index', compact('lecturer'));
     }
     
     public function delete(Request $request) {
@@ -76,4 +85,10 @@ class ObservationController extends Controller
             }
         }
     }
+
+    public function view($id, Request $request){
+        return $data = Crypt::decrypt($id);
+    }
+
+
 }

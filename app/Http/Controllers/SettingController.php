@@ -36,6 +36,7 @@ class SettingController extends Controller
             'username'=> ['required', 'string', 'max:255', Rule::unique('users')],
             'nidn'=> ['nullable', 'max:255', Rule::unique('users')],
             'password' => ['required', 'string', 'min:8','same:password_confirmation'],
+            'gender'=> ['required'],
             'roles'=> ['required'],
             ]);
             if(isset($request->nidn))
@@ -54,6 +55,7 @@ class SettingController extends Controller
                 'study_program' => $request->study_program,
                 'phone' => $request->phone,
                 'job' => $request->job,
+                'gender' => $request->gender,
                 'password'=> Hash::make($request->password),
                 'email_verified_at' => Carbon::now(),
                 'created_at' => Carbon::now()
@@ -77,6 +79,7 @@ class SettingController extends Controller
             'username'=> ['required', 'string', 'max:255', Rule::unique('users')->ignore($id, 'id')],
             'nidn'=> ['nullable', 'max:255', Rule::unique('users')->ignore($id, 'id')],
             'roles'=> ['required'],
+            'gender'=> ['required'],
             ]);
             if(isset($request->nidn))
             {

@@ -156,9 +156,9 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group mb-2">
-                                    <label class="col-form-label">Reason for rescheduling<i class="text-danger">*</i></label>
-                                    <textarea class="form-control" rows="2"
-                                    name="reschedule_reason"></textarea>
+                                    <label class="col-form-label">Reason for rescheduling<i
+                                            class="text-danger">*</i></label>
+                                    <textarea class="form-control" rows="2" name="reschedule_reason"></textarea>
                                 </div>
                             </div>
                             <span class="invalid-feedback d-block" role="alert">
@@ -179,14 +179,14 @@
             <div class="card">
                 <ul class="nav nav-tabs nav-right" id="icon-tab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="tab-observer-tab" data-bs-toggle="tab"
-                            href="#tab-observer" role="tab" aria-controls="tab-observer" aria-selected="true">
+                        <a class="nav-link active" id="tab-observer-tab" data-bs-toggle="tab" href="#tab-observer"
+                            role="tab" aria-controls="tab-observer" aria-selected="true">
                             <i class="icofont icofont-man-in-glasses"></i>Observer
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="tab-histories-tab" data-bs-toggle="tab"
-                            href="#tab-histories" role="tab" aria-controls="tab-histories" aria-selected="false">
+                        <a class="nav-link" id="tab-histories-tab" data-bs-toggle="tab" href="#tab-histories" role="tab"
+                            aria-controls="tab-histories" aria-selected="false">
                             <i class="icofont icofont-history"></i>Timeline Histories
                         </a>
                     </li>
@@ -213,9 +213,11 @@
                             <div class="media">
                                 <div class="activity-dot-primary"></div>
                                 <div class="media-body">
-                                    <span>The observation schedule is made by 
+                                    <span>The observation schedule is made by
                                         <strong>{{ $data->created_user->name }}</strong>.
-                                        <i class="fa fa-circle circle-dot-warning pull-right" data-toggle="tooltip" title="Please refresh page for latest history" onClick="window.location.reload();"></i>
+                                        <abbr class="fa fa-circle circle-dot-warning pull-right" data-toggle="tooltip"
+                                            title="Please refresh page for latest history"
+                                            onClick="window.location.reload();"></abbr>
                                     </span>
                                     <p class="font-roboto">All schedule, status, and auditor changes will be recorded in
                                         this timeline.</p>
@@ -297,9 +299,9 @@
                     render: function (data, type, row, meta) {
                         var x = "";
                         if (row.attendance == true) {
-                            x = '<span class="badge badge-success">attend</span>';
+                            x = '<span class="badge badge-' + row.color + '">attend</span>';
                         } else {
-                            x = '<span class="badge badge-secondary">not yet</span>';
+                            x = '<span class="badge badge-' + row.color + '">not yet</span>';
                         }
                         return x;
                     },
@@ -406,7 +408,6 @@
                 }
             }
         })
-
     }
 
 </script>
