@@ -39,12 +39,16 @@ class DashboardController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:100', Rule::unique('users')->ignore(auth()->user()->id, 'id')],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore(auth()->user()->id, 'id')],
+            'nidn' => ['nullable', 'max:255', Rule::unique('users')->ignore(auth()->user()->id, 'id')],
         ]);
 
         User::where('id', Auth::user()->id)->update([
             'name' => $data->name,
             'username' => $data->username,
             'email' => $data->email,
+            'nidn' => $data->nidn,
+            'phone' => $data->phone,
+            'job' => $data->job,
             'updated_at' => Carbon::now()
         ]);
 	    return redirect()->route('my_profile');

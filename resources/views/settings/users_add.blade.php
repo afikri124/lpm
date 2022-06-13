@@ -79,7 +79,7 @@
                             <div class="form-group">
                                 <label class="col-form-label">Username<i class="text-danger">*</i></label>
                                 <input class="form-control @error('username') is-invalid @enderror" type="text"
-                                    id="username" name="username" value="{{ old('username') }}" >
+                                    id="username" name="username" value="{{ old('username') }}">
                                 @error('username')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -89,7 +89,7 @@
                             <div class="form-group">
                                 <label class="col-form-label">Email<i class="text-danger">*</i></label>
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                    name="email" value="{{ old('email') }}"  autocomplete="email">
+                                    name="email" value="{{ old('email') }}" autocomplete="email">
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -100,7 +100,7 @@
                                 <label class="col-form-label">Password<i class="text-danger">*</i></label>
                                 <input id="password" type="password"
                                     class="form-control @error('password') is-invalid @enderror" name="password"
-                                     autocomplete="new-password">
+                                    autocomplete="new-password">
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -113,9 +113,22 @@
                                     name="password_confirmation" autocomplete="new-password">
                             </div>
                             <div class="form-group">
+                                <label class="col-form-label">Gender<i class="text-danger">*</i></label>
+                                <select class="select2 col-sm-12" name="gender" id="gender" placeholder="Select Gender">
+                                    <option value="" selected disabled>Select Gender</option>
+                                    <option value="M">Male</option>
+                                    <option value="F">Female</option>
+                                </select>
+                                @error('gender')
+                                <span class="invalid-feedback d-block" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
                                 <label class="col-form-label">Roles<i class="text-danger">*</i></label>
                                 <select class="js-example-placeholder-multiple col-sm-12" multiple="multiple"
-                                    name="roles[]" id="roles" >
+                                    name="roles[]" id="roles">
                                     @foreach($roles as $role)
                                     <option value="{{$role['id']}}">{{$role['title']}}</option>
                                     @endforeach

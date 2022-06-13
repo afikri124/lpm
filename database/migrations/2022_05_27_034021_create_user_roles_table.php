@@ -15,7 +15,9 @@ class CreateUserRolesTable extends Migration
     {
         Schema::create('user_roles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('Users')->onDelete('cascade');
+            // $table->foreignId('user_id')->constrained('Users')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('Users')->onDelete('cascade');
             $table->uuid('role_id');
             $table->foreign('role_id')->references('id')->on('Roles')->onUpdate('cascade')->onDelete('cascade');
             $table->unique(['user_id','role_id']);

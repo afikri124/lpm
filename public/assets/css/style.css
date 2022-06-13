@@ -22898,7 +22898,7 @@ footer {
     position: relative;
     background-position: right top;
     background-size: cover;
-    background: linear-gradient(90deg, #f1f0ff 21px, transparent 1%) center, linear-gradient(#eae7ff 21px, transparent 1%) center, rgba(115, 102, 255, 0.34902);
+    background: linear-gradient(90deg, #f1f0ff 21px, transparent 1%) center, linear-gradient(#eae7ff 21px, transparent 1%) center, rgb(255 102 102 / 35%);
     background-size: 23px 23px
 }
 

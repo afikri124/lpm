@@ -22,7 +22,7 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title mb-0"><img class="img-70 rounded-circle" alt=""
-                                    src="{{Auth::user()->user_avatar}}"> My Profile</h4>
+                            src="{{Auth::user()->user_avatar}}"> My Profile</h4>
                     <div class="card-options"><a class="card-options-collapse" href="#"
                             data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a
                             class="card-options-remove" href="#" data-bs-toggle="card-remove"><i
@@ -56,18 +56,18 @@
                     </div>
                     <div class="mb-1 row">
                         <label class="col-sm-6">
-                            <h6 class="form-label">NIDN</h6>
-                        </label>
-                        <div class="col-sm-6">
-                            <span>{{ $data->nidn }}</span>
-                        </div>
-                    </div>
-                    <div class="mb-1 row">
-                        <label class="col-sm-6">
                             <h6 class="form-label">Phone</h6>
                         </label>
                         <div class="col-sm-6">
                             <span>{{ $data->phone }}</span>
+                        </div>
+                    </div>
+                    <div class="mb-1 row">
+                        <label class="col-sm-6">
+                            <h6 class="form-label">NIDN</h6>
+                        </label>
+                        <div class="col-sm-6">
+                            <span>{{ $data->nidn }}</span>
                         </div>
                     </div>
                     <div class="mb-1 row">
@@ -92,6 +92,14 @@
                         </label>
                         <div class="col-sm-6">
                             <span>{{ $data->job }}</span>
+                        </div>
+                    </div>
+                    <div class="mb-1 row">
+                        <label class="col-sm-6">
+                            <h6 class="form-label">Gender</h6>
+                        </label>
+                        <div class="col-sm-6">
+                            <span>{{ $data->gender }}</span>
                         </div>
                     </div>
                 </div>
@@ -131,13 +139,6 @@
                         </div>
                         <div class="col-sm-12">
                             <div class="mb-3">
-                                <label class="form-label">NIDN</label>
-                                <input class="form-control" type="text" name="nidn" value="{{ $data->nidn }}"
-                                    required>
-                            </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="mb-3">
                                 <label class="form-label">Phone</label>
                                 <input class="form-control" type="number" name="phone" value="{{ $data->phone }}"
                                     required>
@@ -145,9 +146,14 @@
                         </div>
                         <div class="col-sm-12">
                             <div class="mb-3">
+                                <label class="form-label">NIDN</label>
+                                <input class="form-control" type="text" name="nidn" value="{{ $data->nidn }}" >
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="mb-3">
                                 <label class="form-label">Job</label>
-                                <input class="form-control" type="text" name="job" value="{{ $data->job }}"
-                                    required>
+                                <input class="form-control" type="text" name="job" value="{{ $data->job }}" required>
                             </div>
                         </div>
                         @foreach ($errors->all() as $error)

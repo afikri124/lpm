@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Schedules')
+@section('title', 'Observations')
 
 @section('css')
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/select2.css')}}">
@@ -16,11 +16,14 @@
     }
 
     table.dataTable td:nth-child(2) {
-        max-width: 120px;
+        max-width: 100px;
     }
 
     table.dataTable td:nth-child(3) {
-        max-width: 100px;
+        max-width: 170px;
+    }
+    table.dataTable td:nth-child(7) {
+        max-width: 50px;
     }
 
     table.dataTable td {
@@ -37,7 +40,6 @@
 @endsection
 
 @section('breadcrumb-items')
-<!-- <li class="breadcrumb-item">Settings</li> -->
 <li class="breadcrumb-item active">@yield('title')</li>
 @endsection
 
@@ -56,17 +58,14 @@
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <select id="Select_2" class="form-control input-sm select2" data-placeholder="Status">
-                            <option value="">Status</option>
-                            @foreach($status as $d)
-                            <option value="{{ $d->id }}">{{ $d->title }}</option>
-                            @endforeach
+                        <select id="Select_2" class="form-control input-sm select2" data-placeholder="Attendance Status">
+                            <option value="">Attendance Status</option>
+                            <option value=0>Not Yet</option>
+                            <option value=1>Attend</option>
                         </select>
                     </div>
                     <div class="col-md-6 d-flex justify-content-center justify-content-md-end">
-                        <a class="btn btn-primary btn-block btn-mail" title="Add new" href="{{ route('schedules.add')}}">
-                            <i data-feather="plus"></i>New
-                        </a>
+
                     </div>
                 </div>
             </div>
@@ -79,11 +78,11 @@
                             <thead>
                                 <tr>
                                     <th scope="col" width="20px">No</th>
-                                    <th scope="col">Lecturer Name</th>
-                                    <th scope="col">Date Start</th>
-                                    <th scope="col">Date End</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Auditor</th>
+                                    <th scope="col">Lecturer</th>
+                                    <th scope="col">Schedule</th>
+                                    <th scope="col">Attendance</th>
+                                    <th scope="col">Doc.</th>
+                                    <th scope="col">Remark</th>
                                     <th scope="col" width="65px">Action</th>
                                 </tr>
                             </thead>
@@ -129,10 +128,10 @@
                 lengthMenu: '<span>Show:</span> _MENU_',
             },
             ajax: {
-                url: "{{ route('api.schedules') }}",
+                url: "{{ route('api.observations_by_auditor_id') }}",
                 data: function (d) {
                     d.lecturer_id = $('#Select_1').val(),
-                        d.status_id = $('#Select_2').val(),
+                        d.attendance = $('#Select_2').val(),
                         d.search = $('input[type="search"]').val()
                 },
             },
@@ -147,44 +146,54 @@
                 },
                 {
                     render: function (data, type, row, meta) {
-                        var x = row.lecturer['name'];
+                        var x = row.schedule.lecturer['name'];
                         return x;
                     },
                 },
                 {
                     render: function (data, type, row, meta) {
-                        return moment(row.date_start).format("DD MMM YYYY HH:mm");
-                    },
-                },
-                {
-                    render: function (data, type, row, meta) {
-                        return moment(row.date_end).format("DD MMM YYYY HH:mm");
-                    },
-                },
-                {
-                    render: function (data, type, row, meta) {
-                        var x = '<span class="text-' + row.status['color'] + '">' + row.status['title'] + '</span>';
+                        var x = moment(row.schedule.date_start).format("DD-MMM-YY HH:mm") + " to ";
+                        if(moment(row.schedule.date_start).format("DD/MM/YY") == moment(row.schedule.date_end).format("DD/MM/YY")){
+                            x += moment(row.schedule.date_end).format("HH:mm");
+                        } else {
+                            x += moment(row.schedule.date_end).format("DD-MMM-YY HH:mm");
+                        }
                         return x;
                     },
                 },
                 {
                     render: function (data, type, row, meta) {
                         var x = "";
-                        // x = row.observations;
-                        row.observations.forEach((e) => {
-                            x += '<i class="badge rounded-pill badge-' + e.color +
-                                '">' + e.auditor['name'] + '</i><br>';
-                        });
+                        if (row.attendance == true) {
+                            x = '<span class="badge badge-' + row.color + '">attend</span>';
+                        } else {
+                            x = '<span class="badge badge-' + row.color + '">not yet</span>';
+                        }
                         return x;
                     },
                 },
                 {
                     render: function (data, type, row, meta) {
-                        var x = row.id;
-                        var html =
-                            `<a class="btn btn-success btn-sm px-2" title="Edit" href="{{ url('schedules/edit/` +
-                            row.link + `') }}"><i class="fa fa-pencil-square-o"></i></a> <a class="btn btn-danger btn-sm px-2" title="Delete" onclick="DeleteId(` + x + `)" ><i class="fa fa-trash"></i></a>`;
-                            return html;
+                        var x = "";
+                        if (row.image_path != null) {
+                            x =
+                                '<a target="_blank" href="' +
+                                row.image_path +
+                                '"><img class="rounded-circle float-start chat-user-img img-30" src="' +
+                                row.image_path + '"></a>';
+                        }
+                        return x;
+                    },
+                },
+                
+                {
+                    render: function (data, type, row, meta) {
+                        return row.remark;
+                    },
+                },
+                {
+                    render: function (data, type, row, meta) {
+                        return  `<a class="btn btn-info btn-sm px-2" href="{{ url('observations/` + row.link + `') }}"><i class="fa fa-eye"></i></a>`;
                     },
                     orderable: false,
                     className: "text-end"
@@ -198,41 +207,6 @@
             table.draw();
         });
     });
-
-    function DeleteId(id) {
-        swal({
-                title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this!",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-            .then((willDelete) => {
-                if (willDelete) {
-                    $.ajax({
-                        url: "{{ route('schedules.delete') }}",
-                        type: "DELETE",
-                        data: {
-                            "id": id,
-                            "_token": $("meta[name='csrf-token']").attr("content"),
-                        },
-                        success: function (data) {
-                            if (data['success']) {
-                                swal(data['message'], {
-                                    icon: "success",
-                                });
-                                $('#datatable').DataTable().ajax.reload();
-                            } else {
-                                swal(data['message'], {
-                                    icon: "error",
-                                });
-                            }
-                        }
-                    })
-
-                }
-            })
-    }
 
 </script>
 @endsection

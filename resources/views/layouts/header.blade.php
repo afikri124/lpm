@@ -34,8 +34,11 @@
                     <div class="media profile-media">
                         <img class="b-r-10" src="{{Auth::user()->user_avatar}}" style="width: 40px;" alt="">
                         <div class="media-body">
-                            <span>{{ strtoupper(Auth::user()->name) }}</span>
-                            <p class="mb-0 font-roboto">{{ ucfirst(Auth::user()->level) }} <i
+                        @php
+                         $first_name = explode(" ", ucfirst(Auth::user()->name));
+                        @endphp
+                            <span>{{ $first_name[0] }}</span>
+                            <p class="mb-0 font-roboto">{{ Auth::user()->username }} <i
                                     class="middle fa fa-angle-down"></i></p>
                         </div>
                     </div>
