@@ -27,6 +27,7 @@
         .dropdown-basic .dropdown .dropdown-content a {
             padding: 16px 16px;
         }
+
         .landing-home .content {
             text-align: left;
             margin-left: 20px;
@@ -130,11 +131,12 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-xl-7 col-lg-6">
-                        <div class="wow fadeIn"><img class="screen1"
-                                src="{{asset('assets/images/landing/screen1.jpg')}}" alt=""></div>
-                        <div class="wow fadeIn"><img class="screen2"
-                                src="{{asset('assets/images/landing/screen2.jpg')}}" alt=""></div>
+                        <!-- <div class="wow fadeIn"><img class="screen1"
+                                src="{{asset('assets/images/landing/UGJ.jpeg')}}" alt=""></div> -->
+                        <div class="wow fadeIn"><img class="screen2" src="{{asset('assets/images/landing/jgu.jpg')}}"
+                                alt="" height="480" width="800"></div>
                     </div>
                 </div>
                 <!-- BATAS AKHIR HALAMAN HOME PALING ATAS -->
@@ -160,17 +162,68 @@
                 </div>
         </section>
 
-        <section class="section-space cuba-demo-section bg-Widget pb-0 bg-primary" id="vision-and-mission">
+        <section class="section-space bg-Widget pb-0 bg-primary pb-5" id="vision-and-mission">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12 wow pulse">
                         <div class="cuba-demo-content mt50">
-                            <div class="couting">
+                            <div class="couting text-secondary">
                                 <h2>Vision & Mission</h2>
                             </div>
-                            <p>So many unique cards</p>
+                        </div>
+                        <div class="card-body new-update pt-0">
+                            <div class="activity-timeline">
+                                <div class="media">
+                                    <div class="media-body"><span>Pada tahun 2045 Menjadi Perguruan Tinggi yang
+                                            unggul
+                                            di bidang teknologi dan
+                                            kesehatan,relevan dengan kebutuhan industri, memenuhi harapan global
+                                            melalui
+                                            pendidikan holistik,penelitian dan pengabdian masyarakat yang
+                                            berkesinambungan untuk masa depan
+                                            yang lebih baik.</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <div class="text-left">
+                        <h3>Mission</h3>
+                        <div class="media">
+                            <div class="activity-dot-primary"></div>
+                            <div class="media"><span>Menyediakan lingkungan pendidikan yang kondusif dan
+                                    terjangkau bagi
+                                    masyarakat serta memfasilitasi pertukaran pengetahuan secara
+                                    berkesinambungan.</span>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <div class="activity-dot-primary"></div>
+                            <div class="media"><span>Meningkatkan pengetahuan dan penelitian yang selaras dengan
+                                    kebutuhan industri.</span>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <div class="activity-dot-primary"></div>
+                            <div class="media"><span>Melaksanakan Penelitian dan pengabdian masyarakat yang sesuai
+                                    dengan tantangan
+                                    nasional
+                                    dan global.</span>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <div class="activity-dot-primary"></div>
+                            <div class="media"><span>Menghasilkan lulusan bernilai moral tinggi, bermartabat,
+                                    berjiwa kepemimpinan,
+                                    bersikap
+                                    professional, memiliki integritas, memiliki jiwa sosial yang tinggi,</span>
+                            </div>
+
+                        </div>
+                        <div class="media"><span>dan mampu bersaing secara global.</span>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <div class="container-fluid o-hidden">
@@ -213,11 +266,10 @@
                         <p>Accreditation Instruments</p>
                     </div>
                     <div class="footer-content">
-                        <h1>The Cuba Bootstrap Admin Theme Trusted By Many Developers World Wide.</h1>
-                        <p>If You like Our Theme So Please Rate Us.</p><a
-                            class="btn mrl5 btn-lg btn-primary default-view" target="_blank" href="index.html">Check
-                            Now</a><a class="btn mrl5 btn-lg btn-secondary btn-md-res" target="_blank"
-                            href="https://1.envato.market/3GVzd">Buy Now </a>
+                        <h1>For Universities/Study Programs Who Want to Download Accreditation Instruments,</h1>
+                        <h1> please click the following link: </h1>
+                        <a class="btn mrl5 btn-lg btn-secondary default-view" target="_blank"
+                            href=" https://bit.ly/instrumenakreditasi9"> https://bit.ly/instrumenakreditasi9</a>
                     </div>
                 </div>
             </div>
