@@ -23,6 +23,10 @@
         max-width: 100px;
     }
 
+    table.dataTable td:nth-child(6) {
+        max-width: 75px;
+    }
+
     table.dataTable td {
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -163,7 +167,7 @@
                 },
                 {
                     render: function (data, type, row, meta) {
-                        var x = '<span class="text-' + row.status['color'] + '">' + row.status['title'] + '</span>';
+                        var x = '<span title="' + row.remark + '" class="text-' + row.status['color'] + '">' + row.status['title'] + '</span>';
                         return x;
                     },
                 },

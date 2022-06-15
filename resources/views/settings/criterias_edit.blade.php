@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', ucfirst($data->id))
+@section('title', "Edit Criteria")
 
 @section('css')
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/select2.css')}}">
@@ -24,7 +24,7 @@
             <form class="card" method="POST" action="">
                 @csrf
                 <div class="card-header">
-                    <h4 class="card-title mb-0">Edit Criteria</h4>
+                    <h4 class="card-title mb-0">@yield('title')</h4>
                     <div class="card-options"><a class="card-options-collapse" href="#"
                             data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a
                             class="card-options-remove" href="#" data-bs-toggle="card-remove"><i

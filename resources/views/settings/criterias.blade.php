@@ -157,7 +157,7 @@
                         var x = row.id;
                         var html =
                             `<a class="btn btn-success btn-sm px-2" title="Edit" href="{{ url('settings/criteria/edit/` +
-                            x +
+                            row.link +
                             `') }}"><i class="fa fa-pencil-square-o"></i></a> <a class="btn btn-danger btn-sm px-2" title="Delete" onclick="DeleteId(` +
                             x + `)" ><i class="fa fa-trash"></i></a>`;
                         return html;

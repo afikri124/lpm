@@ -33,7 +33,7 @@ class ObservationController extends Controller
             $auditor = User::find($data->auditor_id);
                 $x = Schedule_history::insert([
                     'schedule_id' => $data->schedule_id,
-                    'description' => "<b>".$auditor->name."</b> has been canceled as an auditor on this schedule by ".Auth::user()->name.".",
+                    'description' => "<b>".$auditor->name."</b> has been <u>canceled</u> as an auditor on this schedule by ".Auth::user()->name.".",
                     'remark' => null,
                     'created_by' => Auth::user()->id,
                     'created_at' => Carbon::now(),
@@ -66,7 +66,7 @@ class ObservationController extends Controller
                 $auditor = User::find($request->auditor_id);
                 $x = Schedule_history::insert([
                     'schedule_id' => $request->schedule_id,
-                    'description' => Auth::user()->name." has added <b>".$auditor->name."</b> as an auditor.",
+                    'description' => Auth::user()->name." has <u>added</u> <b>".$auditor->name."</b> as an auditor.",
                     'remark' => null,
                     'created_by' => Auth::user()->id,
                     'created_at' => Carbon::now(),

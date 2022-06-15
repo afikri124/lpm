@@ -56,10 +56,10 @@
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <select id="Select_2" class="form-control input-sm select2" data-placeholder="Department">
-                            <option value="">Department</option>
-                            @foreach($department as $d)
-                            <option value="{{ $d->department }}">{{ $d->department }}</option>
+                        <select id="Select_2" class="form-control input-sm select2" data-placeholder="Study Program">
+                            <option value="">Study Program</option>
+                            @foreach($study_program as $d)
+                            <option value="{{ $d->study_program }}">{{ $d->study_program }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -84,7 +84,7 @@
                                     <th scope="col" width="100px" class="text-center">Username</th>
                                     <th scope="col">Name / NIDN</th>
                                     <th scope="col">Contact</th>
-                                    <th scope="col">Dep.</th>
+                                    <th scope="col">Prog.</th>
                                     <th scope="col">Job</th>
                                     <th scope="col" >Roles</th>
                                     <th scope="col" width="65px">Action</th>
@@ -135,7 +135,7 @@
                 url: "{{ route('api.users') }}",
                 data: function (d) {
                     d.role = $('#Select_1').val(),
-                        d.department = $('#Select_2').val(),
+                        d.study_program = $('#Select_2').val(),
                         d.search = $('input[type="search"]').val()
                 },
             },
@@ -167,8 +167,8 @@
                 },
 
                 {
-                    data: 'department',
-                    name: 'department'
+                    data: 'study_program',
+                    name: 'study_program'
                 },
                 {
                     data: 'job',
@@ -189,7 +189,7 @@
                         var x = row.id;
                         var html =
                             `<a class="btn btn-success btn-sm px-2" title="Edit" href="{{ url('settings/user/edit/` +
-                            x + `') }}"><i class="fa fa-pencil-square-o"></i></a> <a class="btn btn-danger btn-sm px-2" title="Delete" onclick="DeleteId(` + x + `)" ><i class="fa fa-trash"></i></a>`;
+                            row.link + `') }}"><i class="fa fa-pencil-square-o"></i></a> <a class="btn btn-danger btn-sm px-2" title="Delete" onclick="DeleteId(` + x + `)" ><i class="fa fa-trash"></i></a>`;
                         if (x != 1) {
                             return html;
                         } else {

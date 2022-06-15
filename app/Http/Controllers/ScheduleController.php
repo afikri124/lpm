@@ -68,8 +68,8 @@ class ScheduleController extends Controller
         return view('schedules.add', compact('lecturer'));
     }
 
-    public function edit($id, Request $request) {
-        $id = Crypt::decrypt($id);
+    public function edit($idd, Request $request) {
+        $id = Crypt::decrypt($idd);
           if ($request->isMethod('post')) {
             $this->validate($request, [ 
                 'date_start' => ['required', 'date'],
@@ -84,7 +84,7 @@ class ScheduleController extends Controller
             if($data){
                 $x = Schedule_history::insert([
                     'schedule_id' => $id,
-                    'description' => "The observation schedule has been rescheduled by <b>".Auth::user()->name."</b>.",
+                    'description' => "The observation schedule has been <u>rescheduled</u> by <b>".Auth::user()->name."</b>.",
                     'remark' => $request->reschedule_reason,
                     'created_by' => Auth::user()->id,
                     'created_at' => Carbon::now(),
@@ -93,7 +93,7 @@ class ScheduleController extends Controller
             //TODO : SEND EMAIL RESCHEDULE TO AUDITOR
 
             }
-            return redirect()->route('schedules.edit', $id);
+            return redirect()->route('schedules.edit', Crypt::encrypt($id));
         }
         $data = Schedule::with('lecturer')->with('status')->with('created_user')->with('histories')->findOrFail($id);
         $auditors = User::select('id','email','name')->whereHas('roles', function($q){
