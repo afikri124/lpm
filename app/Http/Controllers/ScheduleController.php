@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Status;
 use App\Models\Schedule;
+use App\Models\Schedule_history;
 use Auth;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Crypt;
 
 class ScheduleController extends Controller
 {
@@ -20,7 +23,7 @@ class ScheduleController extends Controller
         $status = Status::get();
         $lecturer = User::select('id','name')->whereHas('roles', function($q){
                         $q->where('role_id', "LE");
-                    })->get();
+                    })->where('username','!=', 'admin')->get();
         return view('schedules.index', compact('status','lecturer'));
     }
 
@@ -55,31 +58,47 @@ class ScheduleController extends Controller
                 'status_id' => "S00",
                 'created_by' => Auth::user()->id
             ]);
+
+            //TODO : SEND EMAIL TO LECTURER
             return redirect()->route('schedules.edit', $schedule);
         } 
         $lecturer = User::select('id','email','name')->whereHas('roles', function($q){
                         $q->where('role_id', "LE");
-                    })->get();
+                    })->where('username','!=', 'admin')->get();
         return view('schedules.add', compact('lecturer'));
     }
 
-    public function edit($id, Request $request) {
-        if ($request->isMethod('post')) {
-            // $this->validate($request, [ 
-            //     'criteria_category_id'=> ['required'],
-            //     'title'=> ['required', 'string', 'max:255'],
-            //     'weight'=> ['required', 'numeric'],
-            // ]);
-            // $data = Schedule::find($id)->update(request()->all());
-            // return redirect()->route('settings.criterias');
+    public function edit($idd, Request $request) {
+        $id = Crypt::decrypt($idd);
+          if ($request->isMethod('post')) {
+            $this->validate($request, [ 
+                'date_start' => ['required', 'date'],
+                'date_end' => ['required', 'date'],
+                'reschedule_reason' => ['required'],
+            ]);
+            $data = Schedule::find($id)
+            ->update([ 
+                'date_start'=> $request->date_start,
+                'date_end'=> $request->date_end
+            ]);
+            if($data){
+                $x = Schedule_history::insert([
+                    'schedule_id' => $id,
+                    'description' => "The observation schedule has been <u>rescheduled</u> by <b>".Auth::user()->name."</b>.",
+                    'remark' => $request->reschedule_reason,
+                    'created_by' => Auth::user()->id,
+                    'created_at' => Carbon::now(),
+                ]);
+            
+            //TODO : SEND EMAIL RESCHEDULE TO AUDITOR
+
+            }
+            return redirect()->route('schedules.edit', Crypt::encrypt($id));
         }
-        $data = Schedule::with('lecturer')->with('status')->find($id);
-        if($data == null){
-            abort(403, "Cannot access to restricted page");
-        }
+        $data = Schedule::with('lecturer')->with('status')->with('created_user')->with('histories')->findOrFail($id);
         $auditors = User::select('id','email','name')->whereHas('roles', function($q){
                         $q->where('role_id', "AU");
-                    })->get();
+                    })->where('username','!=', 'admin')->where('id','!=', $data->lecturer_id)->get();
         return view('schedules.edit', compact('data','auditors'));
     }
 }

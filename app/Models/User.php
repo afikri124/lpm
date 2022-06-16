@@ -27,6 +27,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'study_program',
         'phone',
         'job',
+        'gender',
     ];
 
     protected $appends = ['user_avatar'];
@@ -52,24 +53,24 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getUserAvatarAttribute()
     { 
-      $hash = md5(strtolower(trim($this->email)));
-      $has_valid_avatar = false;
-      $uri = "https://www.gravatar.com/avatar/$hash".'?d=404';
-      $headers = @get_headers($uri);
-      if($headers != false){
-        if (preg_match("|200|", $headers[0])) {
-          $has_valid_avatar = true;
-        }
-      }
-      if($has_valid_avatar){
-        return $uri;
-      } else {
+      // $hash = md5(strtolower(trim($this->email)));
+      // $has_valid_avatar = false;
+      // $uri = "https://www.gravatar.com/avatar/$hash".'?d=404';
+      // $headers = @get_headers($uri);
+      // if($headers != false){
+      //   if (preg_match("|200|", $headers[0])) {
+      //     $has_valid_avatar = true;
+      //   }
+      // }
+      // if($has_valid_avatar){
+      //   return $uri;
+      // } else {
         if($this->gender == 'F'){
           return asset('assets/images/user/user-f.png');
         } else {
           return asset('assets/images/user/user.png');
         }
-      }
+      // }
     }
 
     public function roles()

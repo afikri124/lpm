@@ -32,7 +32,7 @@
                     </li>
                     @if(Auth::user()->hasRole('AD'))
                     <li class="sidebar-list">
-                    <label class="badge badge-warning" id="notif_schedules"></label>
+                    <label class="badge rounded-pill badge-primary" id="notif_schedules"></label>
                         <a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='schedules' ? 'active' : '' }} "
                             href="{{route('schedules')}}">
                             <i data-feather="calendar"> </i><span>Schedules</span>
@@ -41,27 +41,26 @@
                     @endif
                     @if(Auth::user()->hasRole('AU'))
                     <li class="sidebar-list">
-                    <label class="badge badge-warning" id="notif_activity"></label>
-                        <a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='activity' ? 'active' : '' }} "
-                            href="{{route('home')}}">
+                    <label class="badge rounded-pill badge-primary" id="notif_observations"></label>
+                        <a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='observations' ? 'active' : '' }} "
+                            href="{{route('observations')}}">
                             <i data-feather="clipboard"> </i><span>Observations</span>
                         </a>
                     </li>
                     @endif
                     @if(Auth::user()->hasRole('DE'))
                     <li class="sidebar-list">
-                    <label class="badge badge-warning" id="notif_activity"></label>
-                        <a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='activity' ? 'active' : '' }} "
-                            href="{{route('home')}}">
+                    <label class="badge rounded-pill badge-primary" id="notif_follow_ups"></label>
+                        <a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='follow_ups' ? 'active' : '' }} "
+                            href="{{route('follow_ups')}}">
                             <i data-feather="user-check"> </i><span>Follow-Up</span>
                         </a>
                     </li>
                     @endif
                     @if(Auth::user()->hasRole('AD'))
                     <li class="sidebar-list">
-                    <label class="badge badge-warning" id="notif_activity"></label>
-                        <a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='activity' ? 'active' : '' }} "
-                            href="{{route('home')}}">
+                        <a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='recap' ? 'active' : '' }} "
+                            href="{{route('recap')}}">
                             <i data-feather="pie-chart"> </i><span>Result recap</span>
                         </a>
                     </li>
@@ -77,9 +76,9 @@
                             <li><a class="lan-4 {{ Route::currentRouteName()=='settings.users' ? 'active' : '' }}"
                                     href="{{route('settings.users')}}">Manage Users</a></li>
                             <li><a class="lan-4 {{ Route::currentRouteName()=='settings.categories' ? 'active' : '' }}"
-                                    href="{{route('settings.categories')}}">Manage Category</a></li>
+                                    href="{{route('settings.categories')}}">Question Categories</a></li>
                             <li><a class="lan-4 {{ Route::currentRouteName()=='settings.criterias' ? 'active' : '' }}"
-                                    href="{{route('settings.criterias')}}">Manage Criteria</a></li>
+                                    href="{{route('settings.criterias')}}">Criteria</a></li>
                         </ul>
                     </li>
                     @endif

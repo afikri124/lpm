@@ -19,13 +19,13 @@
 @endsection
 
 @section('breadcrumb-title')
-<!-- <h3>User Profile</h3> -->
+<!-- <h3>Schedules</h3> -->
 @endsection
 
 @section('breadcrumb-items')
 <li class="breadcrumb-item">Schedules</li>
 <li class="breadcrumb-item">Edit</li>
-<li class="breadcrumb-item active">#{{ $data->id }} </li>
+<li class="breadcrumb-item active">#{{ $data->lecturer->name }} </li>
 @endsection
 
 @section('content')
@@ -34,6 +34,12 @@
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
+                    @foreach ($errors->all() as $error)
+                    <div class="alert alert-light alert-dismissible fade show text-danger" role="alert">
+                        <p><i class="fa fa-exclamation-triangle"></i> {{ $error }}</p>
+                        <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    @endforeach
                     <div class="row">
                         <div class="col-lg-6 col-md-12">
                             <div class="form-group mb-2">
@@ -69,10 +75,14 @@
             <div class="card">
                 <div class="row">
                     <div class="col-md-12 d-flex justify-content-center justify-content-md-end">
-                        <a type="button" data-bs-toggle="modal" data-bs-target="#modalAddObserver">
-                            <span class="btn btn-primary  btn-block btn-mail"><i data-feather="plus"></i>Add
-                                Observer</span>
+                        <a type="button" data-bs-toggle="modal" data-bs-target="#modalAddObserver" title="Add Observer">
+                            <span class="btn btn-primary btn-block btn-mail"><i data-feather="plus"></i>Add</span>
                         </a>
+                        @if($data->status_id == "S00" || $data->status_id == "S01")
+                        <a type="button" data-bs-toggle="modal" data-bs-target="#modalReschedule">
+                            <span class="btn btn-info btn-block btn-mail">Reschedule</span>
+                        </a>
+                        @endif
                         <a href="{{ route('schedules') }}">
                             <span class="btn btn-secondary  btn-block btn-mail">Back</span>
                         </a>
@@ -116,11 +126,74 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="modalReschedule" tabindex="-1" role="dialog" aria-labelledby="modalReschedule"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel1">Reschedule Observation</h5>
+                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="POST" action="">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <div class="col-md-12">
+                                <div class="form-group mb-2">
+                                    <label class="col-form-label">Start<i class="text-danger">*</i></label>
+                                    <input class="form-control digits" autocomplete="off" type="datetime-local"
+                                        id="date_start" name="date_start"
+                                        value="{{ date('Y-m-d\TH:i', strtotime($data->date_start)) }}">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group mb-2">
+                                    <label class="col-form-label">End<i class="text-danger">*</i></label>
+                                    <input class="form-control digits" autocomplete="off" type="datetime-local"
+                                        id="date_end" name="date_end"
+                                        value="{{ date('Y-m-d\TH:i', strtotime($data->date_end)) }}">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group mb-2">
+                                    <label class="col-form-label">Reason for rescheduling<i
+                                            class="text-danger">*</i></label>
+                                    <textarea class="form-control" rows="2" name="reschedule_reason"></textarea>
+                                </div>
+                            </div>
+                            <span class="invalid-feedback d-block" role="alert">
+                                <i>Note: Schedule changes will be notified to each auditor via email, and this change
+                                    can only be made for schedules whose status has not been audited.</i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-info" type="submit">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-sm-12">
             <div class="card">
-                <div class="card-body">
-                    <div class="">
+                <ul class="nav nav-tabs nav-right" id="icon-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="tab-observer-tab" data-bs-toggle="tab" href="#tab-observer"
+                            role="tab" aria-controls="tab-observer" aria-selected="true">
+                            <i class="icofont icofont-man-in-glasses"></i>Observer
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tab-histories-tab" data-bs-toggle="tab" href="#tab-histories" role="tab"
+                            aria-controls="tab-histories" aria-selected="false">
+                            <i class="icofont icofont-history"></i>Timeline Histories
+                        </a>
+                    </li>
+                </ul>
+                <div class="card-body pt-3 tab-content">
+                    <div class="tab-pane fade show active" id="tab-observer" role="tabpanel"
+                        aria-labelledby="tab-observer-tab">
                         <table class="table table-hover table-sm" id="datatable" width="100%">
                             <thead>
                                 <tr>
@@ -134,6 +207,38 @@
                                 </tr>
                             </thead>
                         </table>
+                    </div>
+                    <div class="tab-pane fade" id="tab-histories" role="tabpanel" aria-labelledby="tab-histories-tab">
+                        <div class="activity-timeline">
+                            <div class="media">
+                                <div class="activity-dot-primary"></div>
+                                <div class="media-body">
+                                    <span>The observation schedule is made by
+                                        <strong>{{ $data->created_user->name }}</strong>.
+                                        <abbr class="fa fa-circle circle-dot-warning pull-right" data-toggle="tooltip"
+                                            title="Please refresh page for latest history"
+                                            onClick="window.location.reload();"></abbr>
+                                    </span>
+                                    <p class="font-roboto">All schedule, status, and auditor changes will be recorded in
+                                        this timeline.</p>
+                                </div>
+                            </div>
+                            @foreach($data->histories as $p)
+                            <div class="media">
+                                <div class="activity-line"></div>
+                                <div class="activity-dot-primary"></div>
+                                <div class="media-body">
+                                    <span>{!! $p->description !!}</span>
+                                    @if($p->remark != null)
+                                    <blockquote><i>{{ $p->remark }}</i></blockquote>
+                                    @endif
+                                    <p class="font-roboto"><i class="icofont icofont-clock-time"></i>
+                                        {{ date('d M Y H:i', strtotime($p->created_at)) }}
+                                    </p>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
@@ -194,9 +299,9 @@
                     render: function (data, type, row, meta) {
                         var x = "";
                         if (row.attendance == true) {
-                            x = '<span class="badge badge-success">attend</span>';
+                            x = '<span class="badge badge-' + row.color + '">attend</span>';
                         } else {
-                            x = '<span class="badge badge-secondary">not yet</span>';
+                            x = '<span class="badge badge-' + row.color + '">not yet</span>';
                         }
                         return x;
                     },
@@ -303,7 +408,6 @@
                 }
             }
         })
-        
     }
 
 </script>

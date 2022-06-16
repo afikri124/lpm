@@ -9,12 +9,14 @@ use Auth;
 use App\Models\User;
 use App\Models\Criteria_category;
 use App\Models\Criteria;
+use App\Models\Follow_up;
 use App\Models\Observation;
 use App\Models\Schedule;
 use App\Models\Role;
 use App\Models\User_role;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Crypt;
 
 class ApiController extends Controller
 {
@@ -31,8 +33,8 @@ class ApiController extends Controller
                                 $q->where('role_id', $request->get('role'));
                             });
                         }
-                        if (!empty($request->get('department'))) {
-                            $instance->where('department', $request->get('department'));
+                        if (!empty($request->get('study_program'))) {
+                            $instance->where('study_program', $request->get('study_program'));
                         }
                         if (!empty($request->get('search'))) {
                              $instance->where(function($w) use($request){
@@ -46,6 +48,10 @@ class ApiController extends Controller
                             });
                         }
                     })
+                    ->addColumn('link', function($x){
+                        return Crypt::encrypt($x['id']);
+                      })
+                    ->rawColumns(['link'])
                     ->make(true);
     }
 
@@ -81,6 +87,10 @@ class ApiController extends Controller
                             });
                         }
                     })
+                    ->addColumn('link', function($x){
+                        return Crypt::encrypt($x['id']);
+                      })
+                    ->rawColumns(['link'])
                     ->make(true);
     }
 
@@ -103,6 +113,10 @@ class ApiController extends Controller
                             });
                         }
                     })
+                    ->addColumn('link', function($x){
+                        return Crypt::encrypt($x['id']);
+                      })
+                    ->rawColumns(['link'])
                     ->make(true);
     }
 
@@ -118,8 +132,63 @@ class ApiController extends Controller
                             });
                         }
                     })
+                    ->addColumn('link', function($x){
+                        return Crypt::encrypt($x['id']);
+                      })
+                    ->rawColumns(['link'])
                     ->make(true);
     }
+
+    public function observations_by_auditor_id(Request $request)
+    {
+        $data = Observation::with('schedule')->with('schedule.lecturer')->where('auditor_id', Auth::user()->id)->select('*');
+            return Datatables::of($data)
+                    ->filter(function ($instance) use ($request) {
+                        if (!empty($request->get('lecturer_id'))) {
+                            $instance->whereHas('schedule', function($q) use($request){
+                                $q->where('lecturer_id', $request->get('lecturer_id'));
+                            });
+                        }
+                        if (!empty($request->get('attendance'))) {
+                            $instance->where('attendance', $request->get('attendance'));
+                        }
+                        if (!empty($request->get('search'))) {
+                             $instance->where(function($w) use($request){
+                                $search = $request->get('search');
+                                    $w->orWhere('remark', 'LIKE', "%$search%");
+                            });
+                        }
+                    })
+                    ->addColumn('link', function($x){
+                        return Crypt::encrypt($x['id']);
+                      })
+                    ->rawColumns(['link'])
+                    ->make(true);
+    }
+
+    public function notifications(Request $request)
+    {
+        if(Auth::user()->hasRole('AD')){
+            $data['schedules'] = Schedule::where("status_id", "S03")
+                ->select('status_id',DB::raw('COUNT(status_id) as notif'))
+                ->groupBy('status_id')
+                ->first();
+        }
+        if(Auth::user()->hasRole('AU')){
+            $data['observations'] = Observation::where("auditor_id", Auth::user()->id)->where("attendance", false)
+            ->select('attendance',DB::raw('COUNT(attendance) as notif'))
+            ->groupBy('attendance')
+            ->first();
+        }
+        if(Auth::user()->hasRole('DE')){
+            $data['follow_ups'] = Follow_up::where("dean_id", Auth::user()->id)->where("remark", null)
+            ->select(DB::raw('COUNT(dean_id) as notif'))
+            ->groupBy('dean_id')
+            ->first();
+        }
+        return response()->json($data);
+    }
+
 
 
 

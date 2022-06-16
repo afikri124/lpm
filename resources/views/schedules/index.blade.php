@@ -23,6 +23,10 @@
         max-width: 100px;
     }
 
+    table.dataTable td:nth-child(6) {
+        max-width: 75px;
+    }
+
     table.dataTable td {
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -163,7 +167,7 @@
                 },
                 {
                     render: function (data, type, row, meta) {
-                        var x = row.status['title'];
+                        var x = '<span title="' + row.remark + '" class="text-' + row.status['color'] + '">' + row.status['title'] + '</span>';
                         return x;
                     },
                 },
@@ -172,14 +176,8 @@
                         var x = "";
                         // x = row.observations;
                         row.observations.forEach((e) => {
-                            if(e.attendance){
-                                x += '<i class="badge badge-success">' + e.auditor['name'] +
-                                '</i><br>';
-                            } else {
-                                x += '<i class="badge badge-secondary">' + e.auditor['name'] +
-                                '</i><br>';
-                            }
-                            
+                            x += '<i class="badge rounded-pill badge-' + e.color +
+                                '">' + e.auditor['name'] + '</i><br>';
                         });
                         return x;
                     },
@@ -189,7 +187,7 @@
                         var x = row.id;
                         var html =
                             `<a class="btn btn-success btn-sm px-2" title="Edit" href="{{ url('schedules/edit/` +
-                            x + `') }}"><i class="fa fa-pencil-square-o"></i></a> <a class="btn btn-danger btn-sm px-2" title="Delete" onclick="DeleteId(` + x + `)" ><i class="fa fa-trash"></i></a>`;
+                            row.link + `') }}"><i class="fa fa-pencil-square-o"></i></a> <a class="btn btn-danger btn-sm px-2" title="Delete" onclick="DeleteId(` + x + `)" ><i class="fa fa-trash"></i></a>`;
                             return html;
                     },
                     orderable: false,

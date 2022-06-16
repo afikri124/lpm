@@ -23,7 +23,7 @@
     @yield('style')
 </head>
 
-<body onload="startTime()">
+<body>
     <div class="loader-wrapper">
         <div class="loader-index"><span></span></div>
         <svg>

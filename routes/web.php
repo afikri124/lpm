@@ -22,8 +22,7 @@ Route::get('/', function () {
 Route::get('/',[App\Http\Controllers\HomeController::class, 'index'])->name('index');
 Route::get('/',[App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'dashboard'])->name('dashboard'); //blank dashboard
-
+Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'dashboard'])->name('dashboard'); 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('profile', [App\Http\Controllers\DashboardController::class, 'my_profile'])->name('my_profile');
     Route::post('update-profile', [App\Http\Controllers\DashboardController::class, 'update_profile'])->name('update_profile');
@@ -60,14 +59,27 @@ Route::group(['prefix' => 'observations', 'middleware' => ['auth', 'role:AD']], 
 
 Route::group(['prefix' => 'observations', 'middleware' => ['auth', 'role:AU']], function() {
     Route::get('/', [App\Http\Controllers\ObservationController::class, 'index'])->name('observations');
+    Route::get('/{id}', [App\Http\Controllers\ObservationController::class, 'view'])->name('observations.view');
 });
+
+Route::group(['prefix' => 'follow_ups', 'middleware' => ['auth', 'role:DE']], function() {
+    Route::get('/', [App\Http\Controllers\FollowUpController::class, 'index'])->name('follow_ups');
+});
+
+Route::group(['prefix' => 'recap', 'middleware' => ['auth', 'role:AD']], function() {
+    Route::get('/', [App\Http\Controllers\ScheduleController::class, 'recap'])->name('recap');
+});
+
+
 
 Route::group(['prefix' => 'api', 'middleware' => ['auth']], function() {
     //API
-    Route::get('tes', [App\Http\Controllers\ApiController::class, 'tes'])->name('api.tes');
-    Route::get('users', [App\Http\Controllers\ApiController::class, 'users'])->name('api.users');
+    Route::get('tes', [App\Http\Controllers\ApiController::class, 'tes'])->name('api.tes')->middleware('role:AD');
+    Route::get('users', [App\Http\Controllers\ApiController::class, 'users'])->name('api.users')->middleware('role:AD');
+    Route::get('notifications', [App\Http\Controllers\ApiController::class, 'notifications'])->name('api.notifications');
     Route::get('categories', [App\Http\Controllers\ApiController::class, 'categories'])->name('api.categories');
     Route::get('criterias', [App\Http\Controllers\ApiController::class, 'criterias'])->name('api.criterias');
     Route::get('schedules', [App\Http\Controllers\ApiController::class, 'schedules'])->name('api.schedules');
     Route::get('observations_by_schedule_id', [App\Http\Controllers\ApiController::class, 'observations_by_schedule_id'])->name('api.observations_by_schedule_id');
+    Route::get('observations_by_auditor_id', [App\Http\Controllers\ApiController::class, 'observations_by_auditor_id'])->name('api.observations_by_auditor_id');
 });

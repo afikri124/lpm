@@ -16293,8 +16293,8 @@ p.data-attributes svg {
 }
 
 .activity-dot-primary {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
     background-color: #fff;
     border-radius: 100%;
     border: 3px solid var(--theme-deafult);
@@ -22898,7 +22898,7 @@ footer {
     position: relative;
     background-position: right top;
     background-size: cover;
-    background: linear-gradient(90deg, #f1f0ff 21px, transparent 1%) center, linear-gradient(#eae7ff 21px, transparent 1%) center, rgba(115, 102, 255, 0.34902);
+    background: linear-gradient(90deg, #f1f0ff 21px, transparent 1%) center, linear-gradient(#eae7ff 21px, transparent 1%) center, rgb(255 102 102 / 35%);
     background-size: 23px 23px
 }
 
@@ -23014,13 +23014,11 @@ footer {
 
 .landing-home .screen2 {
     position: absolute;
-    left: 70px;
-    top: 270px;
+    left: 0px;
+    top: 125px;
     -webkit-box-shadow: 0 0 47px 10px rgba(115, 102, 255, 0.1);
     box-shadow: 0 0 47px 10px rgba(115, 102, 255, 0.1);
     border-radius: 10px;
-    -webkit-animation: animationtop 30s infinite;
-    animation: animationtop 30s infinite;
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease
 }
@@ -23387,6 +23385,9 @@ footer {
 
 .page-wrapper .bg-Widget .cuba-demo-content .couting h2 {
     -webkit-text-fill-color: #fff !important
+}
+.page-wrapper .bg-Widget .cuba-demo-content .couting h6 {
+    -webkit-text-fill-color: #000    !important
 }
 
 .layout {
