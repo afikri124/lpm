@@ -130,7 +130,7 @@
                             <div>
                                 <h1 class="wow fadeIn">Lembaga </h1>
                                 <h1 class="wow fadeIn">Penjamin Mutu (LPM)</h1>
-                                <h2 class="txt-secondary wow fadeIn">Quality Assurance Agency</h2>
+                                <h2 class="txt-secondary wow fadeIn">Quality Assurance & Control</h2>
                                 <p class="mt-3 wow fadeIn">Jakarta Global University
                                 </p>
                             </div>
