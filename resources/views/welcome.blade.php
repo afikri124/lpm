@@ -161,8 +161,45 @@
                         <div class="cuba-demo-content">
                             <div class="couting">
                                 <h2>About Us</h2>
+<<<<<<< HEAD
                                 <p>Admin unique layouts</p>
                                 <li></li>
+=======
+                            </div>
+                            <div class="media-body">
+                                <h2>TUJUAN</h2>
+                                <div class="media">
+                                    <div class="activity-dot-primary"></div>
+                                    <div class="media"><strong><span> Menyusun, menerapkan, dan melakukan perbaikan
+                                                secara
+                                                berkelanjutan terhadap Sistem Penjaminan Mutu Internal
+                                                (SPMI).</span></strong>
+                                    </div>
+                                </div>
+    </br>
+                                <div class="media">
+                                    <div class="activity-dot-primary"></div>
+                                    <div class="media"><Strong><span> Membangun dan mengembangkan pelayanan dan pelatihan
+                                                sistem
+                                                penjaminan mutu interal dan eksternal pada semua unit di lingkungan
+                                                ITKJ.</strong></span>
+                                    </div>
+                                </div>
+                                </br>
+                                <div class="media">
+                                    <div class="activity-dot-primary"></div>
+                                    <div class="media"><Strong><span> Terbentuknya budaya mutu bagi civitas akademika dan
+                                                tenaga kependidikan di lingkungan ITKJ.</strong></span>
+                                    </div>
+                                </div>
+                                </br>
+                                <div class="media">
+                                    <div class="activity-dot-primary"></div>
+                                    <div class="media"><Strong><span> Mempermudah akses data perguruan tinggi yang
+                                                terintegrasi bagi semua unit di lingkungan ITKJ.</strong></span>
+                                    </div>
+                                </div>
+>>>>>>> d2a1707dcb9c5812bcf85303b2a7805bcd0546f9
                             </div>
                         </div>
                     </div>
@@ -186,14 +223,10 @@
                         <div class="card-body new-update pt-0">
                             <div class="activity-timeline">
                                 <div class="media">
-                                    <div class="media-body"><span>Pada tahun 2045 Menjadi Perguruan Tinggi yang
-                                            unggul
-                                            di bidang teknologi dan
-                                            kesehatan,relevan dengan kebutuhan industri, memenuhi harapan global
-                                            melalui
-                                            pendidikan holistik,penelitian dan pengabdian masyarakat yang
-                                            berkesinambungan untuk masa depan
-                                            yang lebih baik.</span>
+                                    <div class="media-body"><span>Menjadikan Lembaga Penjaminan Mutu ITKJ sebagai
+                                            pelopor dalam menerapkan sistem dan budaya mutu tridharma perguruan tinggi
+                                            yang dapat mengantarkan ITKJ menjadi institusi unggul dalam bidang teknologi
+                                            dan Kesehatan.</span>
                                     </div>
                                 </div>
                             </div>
@@ -203,37 +236,30 @@
                         <h3>Mission</h3>
                         <div class="media">
                             <div class="activity-dot-primary"></div>
-                            <div class="media"><span>Menyediakan lingkungan pendidikan yang kondusif dan
-                                    terjangkau bagi
-                                    masyarakat serta memfasilitasi pertukaran pengetahuan secara
-                                    berkesinambungan.</span>
+                            <div class="media"><span>Menyusun, menerapkan, dan melakukan perbaikan secara
+                                    berkelanjutan terhadap Sistem Penjaminan Mutu Internal (SPMI).</span>
                             </div>
                         </div>
                         <div class="media">
                             <div class="activity-dot-primary"></div>
-                            <div class="media"><span>Meningkatkan pengetahuan dan penelitian yang selaras dengan
-                                    kebutuhan industri.</span>
+                            <div class="media"><span>Membangun dan mengembangkan pelayanan dan pelatihan sistem
+                                    penjaminan mutu internal dan eksternal pada semua unit di lingkungan ITKJ.</span>
                             </div>
                         </div>
                         <div class="media">
                             <div class="activity-dot-primary"></div>
-                            <div class="media"><span>Melaksanakan Penelitian dan pengabdian masyarakat yang sesuai
-                                    dengan tantangan
-                                    nasional
-                                    dan global.</span>
+                            <div class="media"><span>Mendorong terbentuknya budaya mutu tridharma perguruan tinggi
+                                    bagi civitas akademika dan tenaga kependidikan di lingkungan ITKJ.</span>
                             </div>
                         </div>
                         <div class="media">
                             <div class="activity-dot-primary"></div>
-                            <div class="media"><span>Menghasilkan lulusan bernilai moral tinggi, bermartabat,
-                                    berjiwa kepemimpinan,
-                                    bersikap
-                                    professional, memiliki integritas, memiliki jiwa sosial yang tinggi,</span>
+                            <div class="media"><span>Membangun pangkalan data perguruan tinggi ITKJ yang terintegrasi
+                                    untuk semua unit di lingkungan ITKJ.</span>
                             </div>
 
                         </div>
-                        <div class="media"><span>dan mampu bersaing secara global.</span>
-                        </div>
+
                     </div>
 
                 </div>
@@ -254,18 +280,17 @@
                                 <h2>Structure</h2>
                                 <p>Organizational structure</p>
                                 <ul class="landing-ul">
-                                    <li>Basic template</li>
-                                    <li>Basic With Header template</li>
-                                    <li>Ecommerce template</li>
-                                    <li>Ecommerce-2 template</li>
-                                    <li>Ecommerce-3 template</li>
-                                    <li>Order Success template</li>
+                                    <li>Rektor</li>
+                                    <li>Kepala Lembaga</li>
+                                    <li>Ketua Bidang Penjamin Mutu Internal</li>
+                                    <li>Ketua Bidang Pengembangan Dan Dokumentasi Mutu</li>
+                                    <li>Ketua Bidang Penjamin Mutu Ekstrnal</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-8 wow pulse"><a href=""><img class="img-fluid email-img"
-                                src="../assets/images/landing/email_section_img.png" alt=""></a></div>
+                                src="../assets/images/dashboard/structure-removebg.png" alt=""></a></div>
                 </div>
             </div>
         </section>
