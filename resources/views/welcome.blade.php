@@ -9,8 +9,8 @@
     <meta name="keywords" content="">
     <meta name="author" content="pixelstrap">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" href="{{asset('assets/images/favicon.png')}}" type="image/x-icon">
-    <link rel="shortcut icon" href="{{asset('assets/images/favicon.png')}}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
     <title>{{ config('app.name') }} - Lembaga Penjamin Mutu</title>
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap"
@@ -41,8 +41,10 @@
     <div class="page-wrapper landing-page">
         <div class="landing-home">
             <ul class="decoration">
-                <li class="one"><img class="img-fluid" src="../assets/images/landing/decore/1.png" alt=""></li>
-                <li class="two"><img class="img-fluid" src="../assets/images/landing/decore/2.png" alt=""></li>
+                <li class="one"><img class="img-fluid" src="../assets/images/landing/decore/1.png" alt="">
+                </li>
+                <li class="two"><img class="img-fluid" src="../assets/images/landing/decore/2.png" alt="">
+                </li>
                 <li class="three"><img class="img-fluid" src="../assets/images/landing/decore/4.png" alt=""></li>
                 <li class="four"><img class="img-fluid" src="../assets/images/landing/decore/3.png" alt=""></li>
                 <li class="five"><img class="img-fluid" src="../assets/images/landing/2.png" alt=""></li>
@@ -54,7 +56,7 @@
                     <header>
                         <nav class="navbar navbar-b navbar-trans navbar-expand-xl fixed-top nav-padding"
                             id="sidebar-menu"><a class="navbar-brand p-0" href="{{ route('home') }}"><img
-                                    class="img-fluid" src="{{asset('assets/images/logo.png')}}" alt=""></a>
+                                    class="img-fluid" src="{{ asset('assets/images/logo.png') }}" alt=""></a>
                             <button class="navbar-toggler navabr_btn-set custom_nav" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#navbarDefault" aria-controls="navbarDefault"
                                 aria-expanded="false"
@@ -125,7 +127,7 @@
                             <div>
                                 <h1 class="wow fadeIn">Lembaga </h1>
                                 <h1 class="wow fadeIn">Penjamin Mutu (LPM)</h1>
-                                <h2 class="txt-secondary wow fadeIn">Quality Assurance Agency</h2>
+                                <h2 class="txt-secondary wow fadeIn">Quality Assurance & Control</h2>
                                 <p class="mt-3 wow fadeIn">Jakarta Global University
                                 </p>
                             </div>
@@ -133,8 +135,8 @@
                     </div>
 
                     <div class="col-xl-7 col-lg-6">
-                        <div class="wow fadeIn"><img class="screen1"
-                                src="{{asset('assets/images/landing/jgu.jpg')}}" alt=""></div>
+                        <div class="wow fadeIn"><img class="screen1" src="{{asset('assets/images/landing/jgu.jpg')}}"
+                                alt=""></div>
                         <div class="wow fadeIn"><img class="screen2" src="{{asset('assets/images/landing/jgu.jpg')}}"
                                 alt="" height="480" width="800"></div>
                     </div>
@@ -150,7 +152,42 @@
                         <div class="cuba-demo-content">
                             <div class="couting">
                                 <h2>About Us</h2>
-                                <p>Admin unique layouts</p>
+                            </div>
+                            <div class="media-body">
+                                <h2>TUJUAN</h2>
+                                <div class="media">
+                                    <div class="activity-dot-primary"></div>
+                                    <div class="media"><strong><span> Menyusun, menerapkan, dan melakukan perbaikan
+                                                secara
+                                                berkelanjutan terhadap Sistem Penjaminan Mutu Internal
+                                                (SPMI).</span></strong>
+                                    </div>
+                                </div>
+                                </br>
+                                <div class="media">
+                                    <div class="activity-dot-primary"></div>
+                                    <div class="media"><Strong><span> Membangun dan mengembangkan pelayanan dan
+                                                pelatihan
+                                                sistem
+                                                penjaminan mutu interal dan eksternal pada semua unit di lingkungan
+                                                ITKJ.</strong></span>
+                                    </div>
+                                </div>
+                                </br>
+                                <div class="media">
+                                    <div class="activity-dot-primary"></div>
+                                    <div class="media"><Strong><span> Terbentuknya budaya mutu bagi civitas akademika
+                                                dan
+                                                tenaga kependidikan di lingkungan ITKJ.</strong></span>
+                                    </div>
+                                </div>
+                                </br>
+                                <div class="media">
+                                    <div class="activity-dot-primary"></div>
+                                    <div class="media"><Strong><span> Mempermudah akses data perguruan tinggi yang
+                                                terintegrasi bagi semua unit di lingkungan ITKJ.</strong></span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -174,14 +211,10 @@
                         <div class="card-body new-update pt-0">
                             <div class="activity-timeline">
                                 <div class="media">
-                                    <div class="media-body"><span>Pada tahun 2045 Menjadi Perguruan Tinggi yang
-                                            unggul
-                                            di bidang teknologi dan
-                                            kesehatan,relevan dengan kebutuhan industri, memenuhi harapan global
-                                            melalui
-                                            pendidikan holistik,penelitian dan pengabdian masyarakat yang
-                                            berkesinambungan untuk masa depan
-                                            yang lebih baik.</span>
+                                    <div class="media-body"><span>Menjadikan Lembaga Penjaminan Mutu ITKJ sebagai
+                                            pelopor dalam menerapkan sistem dan budaya mutu tridharma perguruan tinggi
+                                            yang dapat mengantarkan ITKJ menjadi institusi unggul dalam bidang teknologi
+                                            dan Kesehatan.</span>
                                     </div>
                                 </div>
                             </div>
@@ -191,37 +224,30 @@
                         <h3>Mission</h3>
                         <div class="media">
                             <div class="activity-dot-primary"></div>
-                            <div class="media"><span>Menyediakan lingkungan pendidikan yang kondusif dan
-                                    terjangkau bagi
-                                    masyarakat serta memfasilitasi pertukaran pengetahuan secara
-                                    berkesinambungan.</span>
+                            <div class="media"><span>Menyusun, menerapkan, dan melakukan perbaikan secara
+                                    berkelanjutan terhadap Sistem Penjaminan Mutu Internal (SPMI).</span>
                             </div>
                         </div>
                         <div class="media">
                             <div class="activity-dot-primary"></div>
-                            <div class="media"><span>Meningkatkan pengetahuan dan penelitian yang selaras dengan
-                                    kebutuhan industri.</span>
+                            <div class="media"><span>Membangun dan mengembangkan pelayanan dan pelatihan sistem
+                                    penjaminan mutu internal dan eksternal pada semua unit di lingkungan ITKJ.</span>
                             </div>
                         </div>
                         <div class="media">
                             <div class="activity-dot-primary"></div>
-                            <div class="media"><span>Melaksanakan Penelitian dan pengabdian masyarakat yang sesuai
-                                    dengan tantangan
-                                    nasional
-                                    dan global.</span>
+                            <div class="media"><span>Mendorong terbentuknya budaya mutu tridharma perguruan tinggi
+                                    bagi civitas akademika dan tenaga kependidikan di lingkungan ITKJ.</span>
                             </div>
                         </div>
                         <div class="media">
                             <div class="activity-dot-primary"></div>
-                            <div class="media"><span>Menghasilkan lulusan bernilai moral tinggi, bermartabat,
-                                    berjiwa kepemimpinan,
-                                    bersikap
-                                    professional, memiliki integritas, memiliki jiwa sosial yang tinggi,</span>
+                            <div class="media"><span>Membangun pangkalan data perguruan tinggi ITKJ yang terintegrasi
+                                    untuk semua unit di lingkungan ITKJ.</span>
                             </div>
 
                         </div>
-                        <div class="media"><span>dan mampu bersaing secara global.</span>
-                        </div>
+
                     </div>
 
                 </div>
@@ -242,18 +268,17 @@
                                 <h2>Structure</h2>
                                 <p>Organizational structure</p>
                                 <ul class="landing-ul">
-                                    <li>Basic template</li>
-                                    <li>Basic With Header template</li>
-                                    <li>Ecommerce template</li>
-                                    <li>Ecommerce-2 template</li>
-                                    <li>Ecommerce-3 template</li>
-                                    <li>Order Success template</li>
+                                    <li>Rektor</li>
+                                    <li>Kepala Lembaga</li>
+                                    <li>Ketua Bidang Penjamin Mutu Internal</li>
+                                    <li>Ketua Bidang Pengembangan Dan Dokumentasi Mutu</li>
+                                    <li>Ketua Bidang Penjamin Mutu Ekstrnal</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-8 wow pulse"><a href=""><img class="img-fluid email-img"
-                                src="../assets/images/landing/email_section_img.png" alt=""></a></div>
+                                src="../assets/images/dashboard/structure-removebg.png" alt=""></a></div>
                 </div>
             </div>
         </section>
@@ -363,7 +388,32 @@
                             <div class="couting">
                                 <h2>Contact</h2>
                             </div>
-                            <p>So many unique cards</p>
+                            <div class="footer_bottom-item footer_social-media penci-col-3">
+                                <div class="block-title"><span>Follow us</span></div>
+                                <a class="social-media-item socail_media_facebook mx-3" target="_blank"
+                                    href="https://www.facebook.com/jakartaglobaluniversity" title="Facebook"
+                                    rel="noopener"><span class="socail-media-itemcontent"><i
+                                            class="fa fa-facebook"></i><span class="social_title screen-reader-text">
+                                            Facebook</span></span></a>
+                                <a class="social-media-item socail_mediainstagram mx-3" target="_blank"
+                                    href="https://www.instagram.com/jg_university/" title="Instagram"
+                                    rel="noopener"><span class="socail-media-itemcontent"><i
+                                            class="fa fa-instagram"></i><span class="social_title screen-reader-text">
+                                            Instagram</span></span>
+                                </a>
+                                <a class="social-media-item socail_mediayoutube mx-3" target="_blank"
+                                    href="https://www.youtube.com/channel/UCoU56BRZyVCaDJiSI2TpR0g" title="Youtube"
+                                    rel="noopener"><span class="socail-media-itemcontent"><i
+                                            class="fa fa-youtube-play"></i><span
+                                            class="social_title screen-reader-text"> Youtube</span></span>
+                                </a>
+                                <a class="social-media-item socail_mediatwitter mx-3" target="_blank"
+                                    href="https://twitter.com/jg_university" title="Twitter" rel="noopener"><span
+                                        class="socail-media-itemcontent"><i class="fa fa-twitter"></i><span
+                                            class="social_title screen-reader-text"> Twitter</span></span>
+                                </a>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -378,14 +428,14 @@
     <!-- @if (Route::has('login'))
         <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
             @auth
-            <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
-            @else
-            <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
+                        <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
+@else
+    <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
 
-            @if (Route::has('register'))
-            <a href="{{ route('register') }}"
-                class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
-            @endif
+                        @if (Route::has('register'))
+    <a href="{{ route('register') }}"
+                            class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
+    @endif
             @endauth
         </div>
         @endif -->
