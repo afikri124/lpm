@@ -32,6 +32,7 @@
             text-align: left;
             margin-left: 20px;
         }
+
     </style>
 </head>
 
@@ -44,13 +45,10 @@
                 </li>
                 <li class="two"><img class="img-fluid" src="../assets/images/landing/decore/2.png" alt="">
                 </li>
-                <li class="three"><img class="img-fluid" src="../assets/images/landing/decore/4.png"
-                        alt=""></li>
-                <li class="four"><img class="img-fluid" src="../assets/images/landing/decore/3.png"
-                        alt=""></li>
+                <li class="three"><img class="img-fluid" src="../assets/images/landing/decore/4.png" alt=""></li>
+                <li class="four"><img class="img-fluid" src="../assets/images/landing/decore/3.png" alt=""></li>
                 <li class="five"><img class="img-fluid" src="../assets/images/landing/2.png" alt=""></li>
-                <li class="six"><img class="img-fluid" src="../assets/images/landing/decore/cloud.png"
-                        alt=""></li>
+                <li class="six"><img class="img-fluid" src="../assets/images/landing/decore/cloud.png" alt=""></li>
                 <li class="seven"><img class="img-fluid" src="../assets/images/landing/2.png" alt=""></li>
             </ul>
             <div class="container-fluid">
@@ -83,8 +81,7 @@
                                     <li class="nav-item">
                                         <div class=" dropup dropdown-basic">
                                             <div class="dropup dropdown">
-                                                <a class="nav-link px-3" href="#"><i
-                                                        class="icofont icofont-trophy"></i>
+                                                <a class="nav-link px-3" href="#"><i class="icofont icofont-trophy"></i>
                                                     Accreditation</a>
                                                 <div class="dropup-content dropdown-content">
                                                     <a href="#instruments">Instruments</a>
@@ -102,15 +99,15 @@
                                                         class="fa fa-th"></i> Application</a>
                                                 <div class="dropup-content dropdown-content">
                                                     @if (Route::has('login'))
-                                                        @auth
-                                                            <a href="{{ url('/dashboard') }}"
-                                                                class="text-sm text-gray-700 dark:text-gray-500 underline">Peer
-                                                                Observation</a>
-                                                        @else
-                                                            <a href="{{ route('login') }}"
-                                                                class="text-sm text-gray-700 dark:text-gray-500 underline">Peer
-                                                                Observation</a>
-                                                        @endauth
+                                                    @auth
+                                                    <a href="{{ url('/dashboard') }}"
+                                                        class="text-sm text-gray-700 dark:text-gray-500 underline">Peer
+                                                        Observation</a>
+                                                    @else
+                                                    <a href="{{ route('login') }}"
+                                                        class="text-sm text-gray-700 dark:text-gray-500 underline">Peer
+                                                        Observation</a>
+                                                    @endauth
                                                     @endif
                                                     <a href="#">Coming soon system..</a>
                                                 </div>
@@ -138,16 +135,10 @@
                     </div>
 
                     <div class="col-xl-7 col-lg-6">
-                        <div class="wow fadeIn"><img class="screen1"
-<<<<<<< HEAD
-                                src="{{ asset('assets/images/landing/screen1.jpg') }}" alt=""></div>
-                        <div class="wow fadeIn"><img class="screen2"
-                                src="{{ asset('assets/images/landing/screen2.jpg') }}" alt=""></div>
-=======
-                                src="{{asset('assets/images/landing/jgu.jpg')}}" alt=""></div>
+                        <div class="wow fadeIn"><img class="screen1" src="{{asset('assets/images/landing/jgu.jpg')}}"
+                                alt=""></div>
                         <div class="wow fadeIn"><img class="screen2" src="{{asset('assets/images/landing/jgu.jpg')}}"
                                 alt="" height="480" width="800"></div>
->>>>>>> d29ead6f786a7a9ce3626998bd89a2cd94cde2a1
                     </div>
                 </div>
                 <!-- BATAS AKHIR HALAMAN HOME PALING ATAS -->
@@ -161,10 +152,6 @@
                         <div class="cuba-demo-content">
                             <div class="couting">
                                 <h2>About Us</h2>
-<<<<<<< HEAD
-                                <p>Admin unique layouts</p>
-                                <li></li>
-=======
                             </div>
                             <div class="media-body">
                                 <h2>TUJUAN</h2>
@@ -176,10 +163,11 @@
                                                 (SPMI).</span></strong>
                                     </div>
                                 </div>
-    </br>
+                                </br>
                                 <div class="media">
                                     <div class="activity-dot-primary"></div>
-                                    <div class="media"><Strong><span> Membangun dan mengembangkan pelayanan dan pelatihan
+                                    <div class="media"><Strong><span> Membangun dan mengembangkan pelayanan dan
+                                                pelatihan
                                                 sistem
                                                 penjaminan mutu interal dan eksternal pada semua unit di lingkungan
                                                 ITKJ.</strong></span>
@@ -188,7 +176,8 @@
                                 </br>
                                 <div class="media">
                                     <div class="activity-dot-primary"></div>
-                                    <div class="media"><Strong><span> Terbentuknya budaya mutu bagi civitas akademika dan
+                                    <div class="media"><Strong><span> Terbentuknya budaya mutu bagi civitas akademika
+                                                dan
                                                 tenaga kependidikan di lingkungan ITKJ.</strong></span>
                                     </div>
                                 </div>
@@ -199,7 +188,6 @@
                                                 terintegrasi bagi semua unit di lingkungan ITKJ.</strong></span>
                                     </div>
                                 </div>
->>>>>>> d2a1707dcb9c5812bcf85303b2a7805bcd0546f9
                             </div>
                         </div>
                     </div>
@@ -405,29 +393,25 @@
                                 <a class="social-media-item socail_media_facebook mx-3" target="_blank"
                                     href="https://www.facebook.com/jakartaglobaluniversity" title="Facebook"
                                     rel="noopener"><span class="socail-media-itemcontent"><i
-                                            class="fa fa-facebook"></i><span
-                                            class="social_title screen-reader-text"> Facebook</span></span></a> 
-                                            <a
-                                    class="social-media-item socail_mediainstagram mx-3" target="_blank"
+                                            class="fa fa-facebook"></i><span class="social_title screen-reader-text">
+                                            Facebook</span></span></a>
+                                <a class="social-media-item socail_mediainstagram mx-3" target="_blank"
                                     href="https://www.instagram.com/jg_university/" title="Instagram"
                                     rel="noopener"><span class="socail-media-itemcontent"><i
-                                            class="fa fa-instagram"></i><span
-                                            class="social_title screen-reader-text"> Instagram</span></span>
-                                        </a>
-                                            <a
-                                    class="social-media-item socail_mediayoutube mx-3" target="_blank"
+                                            class="fa fa-instagram"></i><span class="social_title screen-reader-text">
+                                            Instagram</span></span>
+                                </a>
+                                <a class="social-media-item socail_mediayoutube mx-3" target="_blank"
                                     href="https://www.youtube.com/channel/UCoU56BRZyVCaDJiSI2TpR0g" title="Youtube"
                                     rel="noopener"><span class="socail-media-itemcontent"><i
                                             class="fa fa-youtube-play"></i><span
                                             class="social_title screen-reader-text"> Youtube</span></span>
-                                        </a>
-                                        <a
-                                    class="social-media-item socail_mediatwitter mx-3" target="_blank"
-                                    href="https://twitter.com/jg_university" title="Twitter"
-                                    rel="noopener"><span class="socail-media-itemcontent"><i
-                                            class="fa fa-twitter"></i><span
+                                </a>
+                                <a class="social-media-item socail_mediatwitter mx-3" target="_blank"
+                                    href="https://twitter.com/jg_university" title="Twitter" rel="noopener"><span
+                                        class="socail-media-itemcontent"><i class="fa fa-twitter"></i><span
                                             class="social_title screen-reader-text"> Twitter</span></span>
-                                        </a>
+                                </a>
                             </div>
 
                         </div>
