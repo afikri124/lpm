@@ -14,6 +14,7 @@ use App\Models\Criteria_category;
 use App\Models\Criteria;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Crypt;
 
 class SettingController extends Controller
 {
@@ -25,8 +26,8 @@ class SettingController extends Controller
     
     public function users(Request $request) {
         $roles = Role::get();
-        $department = User::select('department')->groupBy('department')->get();
-        return view('settings.users', ['roles'=> $roles, 'department' => $department]);
+        $study_program = User::select('study_program')->groupBy('study_program')->get();
+        return view('settings.users', ['roles'=> $roles, 'study_program' => $study_program]);
     }
 
     public function user_add(Request $request) {
@@ -73,6 +74,7 @@ class SettingController extends Controller
     }
 
     public function user_edit($id, Request $request) {
+        $id = Crypt::decrypt($id);
         if ($request->isMethod('post')) {
             $this->validate($request, [ 'name'=> ['required', 'string', 'max:255'],
             'email'=> ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($id, 'id')],
@@ -191,6 +193,7 @@ class SettingController extends Controller
     }
 
     public function criteria_edit($id, Request $request) {
+        $id = Crypt::decrypt($id);
         if ($request->isMethod('post')) {
             $this->validate($request, [ 
                 'criteria_category_id'=> ['required'],

@@ -133,8 +133,8 @@
                     </div>
 
                     <div class="col-xl-7 col-lg-6">
-                        <!-- <div class="wow fadeIn"><img class="screen1"
-                                src="{{asset('assets/images/landing/UGJ.jpeg')}}" alt=""></div> -->
+                        <div class="wow fadeIn"><img class="screen1"
+                                src="{{asset('assets/images/landing/jgu.jpg')}}" alt=""></div>
                         <div class="wow fadeIn"><img class="screen2" src="{{asset('assets/images/landing/jgu.jpg')}}"
                                 alt="" height="480" width="800"></div>
                     </div>

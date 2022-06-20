@@ -22,8 +22,7 @@ Route::get('/', function () {
 Route::get('/',[App\Http\Controllers\HomeController::class, 'index'])->name('index');
 Route::get('/',[App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'dashboard'])->name('dashboard'); //blank dashboard
-
+Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'dashboard'])->name('dashboard'); 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('profile', [App\Http\Controllers\DashboardController::class, 'my_profile'])->name('my_profile');
     Route::post('update-profile', [App\Http\Controllers\DashboardController::class, 'update_profile'])->name('update_profile');
@@ -75,9 +74,9 @@ Route::group(['prefix' => 'recap', 'middleware' => ['auth', 'role:AD']], functio
 
 Route::group(['prefix' => 'api', 'middleware' => ['auth']], function() {
     //API
-    Route::get('tes', [App\Http\Controllers\ApiController::class, 'tes'])->name('api.tes');
+    Route::get('tes', [App\Http\Controllers\ApiController::class, 'tes'])->name('api.tes')->middleware('role:AD');
+    Route::get('users', [App\Http\Controllers\ApiController::class, 'users'])->name('api.users')->middleware('role:AD');
     Route::get('notifications', [App\Http\Controllers\ApiController::class, 'notifications'])->name('api.notifications');
-    Route::get('users', [App\Http\Controllers\ApiController::class, 'users'])->name('api.users');
     Route::get('categories', [App\Http\Controllers\ApiController::class, 'categories'])->name('api.categories');
     Route::get('criterias', [App\Http\Controllers\ApiController::class, 'criterias'])->name('api.criterias');
     Route::get('schedules', [App\Http\Controllers\ApiController::class, 'schedules'])->name('api.schedules');

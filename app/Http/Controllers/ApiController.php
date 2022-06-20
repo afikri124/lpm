@@ -33,8 +33,8 @@ class ApiController extends Controller
                                 $q->where('role_id', $request->get('role'));
                             });
                         }
-                        if (!empty($request->get('department'))) {
-                            $instance->where('department', $request->get('department'));
+                        if (!empty($request->get('study_program'))) {
+                            $instance->where('study_program', $request->get('study_program'));
                         }
                         if (!empty($request->get('search'))) {
                              $instance->where(function($w) use($request){
@@ -48,6 +48,10 @@ class ApiController extends Controller
                             });
                         }
                     })
+                    ->addColumn('link', function($x){
+                        return Crypt::encrypt($x['id']);
+                      })
+                    ->rawColumns(['link'])
                     ->make(true);
     }
 
@@ -83,6 +87,10 @@ class ApiController extends Controller
                             });
                         }
                     })
+                    ->addColumn('link', function($x){
+                        return Crypt::encrypt($x['id']);
+                      })
+                    ->rawColumns(['link'])
                     ->make(true);
     }
 
