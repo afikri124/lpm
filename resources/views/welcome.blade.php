@@ -32,6 +32,7 @@
             text-align: left;
             margin-left: 20px;
         }
+
     </style>
 </head>
 
@@ -44,13 +45,10 @@
                 </li>
                 <li class="two"><img class="img-fluid" src="../assets/images/landing/decore/2.png" alt="">
                 </li>
-                <li class="three"><img class="img-fluid" src="../assets/images/landing/decore/4.png" alt="">
-                </li>
-                <li class="four"><img class="img-fluid" src="../assets/images/landing/decore/3.png" alt="">
-                </li>
+                <li class="three"><img class="img-fluid" src="../assets/images/landing/decore/4.png" alt=""></li>
+                <li class="four"><img class="img-fluid" src="../assets/images/landing/decore/3.png" alt=""></li>
                 <li class="five"><img class="img-fluid" src="../assets/images/landing/2.png" alt=""></li>
-                <li class="six"><img class="img-fluid" src="../assets/images/landing/decore/cloud.png"
-                        alt=""></li>
+                <li class="six"><img class="img-fluid" src="../assets/images/landing/decore/cloud.png" alt=""></li>
                 <li class="seven"><img class="img-fluid" src="../assets/images/landing/2.png" alt=""></li>
             </ul>
             <div class="container-fluid">
@@ -83,8 +81,7 @@
                                     <li class="nav-item">
                                         <div class=" dropup dropdown-basic">
                                             <div class="dropup dropdown">
-                                                <a class="nav-link px-3" href="#"><i
-                                                        class="icofont icofont-trophy"></i>
+                                                <a class="nav-link px-3" href="#"><i class="icofont icofont-trophy"></i>
                                                     Accreditation</a>
                                                 <div class="dropup-content dropdown-content">
                                                     <a href="#instruments">Instruments</a>
@@ -102,15 +99,15 @@
                                                         class="fa fa-th"></i> Application</a>
                                                 <div class="dropup-content dropdown-content">
                                                     @if (Route::has('login'))
-                                                        @auth
-                                                            <a href="{{ url('/dashboard') }}"
-                                                                class="text-sm text-gray-700 dark:text-gray-500 underline">Peer
-                                                                Observation</a>
-                                                        @else
-                                                            <a href="{{ route('login') }}"
-                                                                class="text-sm text-gray-700 dark:text-gray-500 underline">Peer
-                                                                Observation</a>
-                                                        @endauth
+                                                    @auth
+                                                    <a href="{{ url('/dashboard') }}"
+                                                        class="text-sm text-gray-700 dark:text-gray-500 underline">Peer
+                                                        Observation</a>
+                                                    @else
+                                                    <a href="{{ route('login') }}"
+                                                        class="text-sm text-gray-700 dark:text-gray-500 underline">Peer
+                                                        Observation</a>
+                                                    @endauth
                                                     @endif
                                                     <a href="#">Coming soon system..</a>
                                                 </div>
@@ -138,8 +135,10 @@
                     </div>
 
                     <div class="col-xl-7 col-lg-6">
-                        <div class="wow fadeIn"><img class="screen1"
-                                src="{{ asset('assets/images/landing/jgu.jpg') }}" alt=""></div>
+                        <div class="wow fadeIn"><img class="screen1" src="{{asset('assets/images/landing/jgu.jpg')}}"
+                                alt=""></div>
+                        <div class="wow fadeIn"><img class="screen2" src="{{asset('assets/images/landing/jgu.jpg')}}"
+                                alt="" height="480" width="800"></div>
                     </div>
                 </div>
                 <!-- BATAS AKHIR HALAMAN HOME PALING ATAS -->

@@ -151,7 +151,7 @@
                 },
                 {
                     render: function (data, type, row, meta) {
-                        var x = row.lecturer['name'];
+                        var x = "<span title='"+ row.lecturer['name'] + "'>"+ row.lecturer['name'] + "</span>";
                         return x;
                     },
                 },
