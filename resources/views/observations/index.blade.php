@@ -146,7 +146,7 @@
                 },
                 {
                     render: function (data, type, row, meta) {
-                        var x = row.schedule.lecturer['name'];
+                        var x = "<span title='"+ row.schedule.lecturer['name'] + "'>"+ row.schedule.lecturer['name'] + "</span>";
                         return x;
                     },
                 },
