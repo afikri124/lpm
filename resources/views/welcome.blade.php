@@ -318,62 +318,74 @@
             <div class="container container-modify">
                 <div class="row component_responsive">
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/1.png" alt="">
+                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/1.png"
+                                alt="">
                             <h6 class="m-0 Pt-4">SweetAlert2</h6>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/2.png" alt="">
+                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/2.png"
+                                alt="">
                             <h6 class="m-0">Avatar</h6>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/3.png" alt="">
+                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/3.png"
+                                alt="">
                             <h6 class="m-0">Scrollable</h6>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/4.png" alt="">
+                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/4.png"
+                                alt="">
                             <h6 class="m-0">Tree view</h6>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/5.png" alt="">
+                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/5.png"
+                                alt="">
                             <h6 class="m-0">Bootstrap notify</h6>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/6.png" alt="">
+                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/6.png"
+                                alt="">
                             <h6 class="m-0">Rating </h6>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/7.png" alt="">
+                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/7.png"
+                                alt="">
                             <h6 class="m-0">Dropzone</h6>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/8.png" alt="">
+                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/8.png"
+                                alt="">
                             <h6 class="m-0">Tour</h6>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/9.png" alt="">
+                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/9.png"
+                                alt="">
                             <h6 class="m-0">Animated modal</h6>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/10.png" alt="">
+                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/10.png"
+                                alt="">
                             <h6 class="m-0">Owl Carousel</h6>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/11.png" alt="">
+                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/11.png"
+                                alt="">
                             <h6 class="m-0">Ribbons </h6>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/12.png" alt="">
+                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/12.png"
+                                alt="">
                             <h6 class="m-0">Pagination </h6>
                         </div>
                     </div>
@@ -415,6 +427,39 @@
                                             class="social_title screen-reader-text"> Twitter</span></span>
                                 </a>
                             </div>
+                            <div class="footer-inner">
+                                <p style="font-size: 14px; text-align: justify">
+                                    <b>Mengubah Hidup,</b>
+                                    <br>
+                                    <b>Memperkaya Masa Depan</b>
+                                </p>
+                                <br>
+                                <p style="font-size: 10px; text-align: justify">
+                                    <b>Kampus C (Utama)</b>
+                                    <br>
+                                    Grand Depok City, Jl. Boulevard Raya No.2 Kota Depok
+                                    16412, Jawa Barat Indonesia
+                                    <br>
+                                    <br>
+                                    <b>Kampus A</b>
+                                    <br>
+                                    Jl. Jatiwaringin Raya No. 278 Pondok Gede 17411, Jakarta
+                                    <br>
+                                    Telp: 021-846-1155 <br> Fax: 021-846-3692
+                                    <br>
+                                    <br>
+                                    <b>Kampus B</b>
+                                    <br>
+                                    Jl. Inspeksi Kalimalang No.204-205, Cibuntu, Kec. Cibitung,
+                                    Bekasi, Jawa Barat 17520
+                                    <br> 
+                                    Telp : 021-8837-5585 
+                                    <br> 
+                                    Fax : 021-8837-5587
+                                    <br>
+                                    <br>
+                                </p>
+                            </div>
 
                         </div>
                     </div>
@@ -430,13 +475,13 @@
     <!-- @if (Route::has('login'))
         <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
             @auth
-                        <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
+                            <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
 @else
     <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
 
-                        @if (Route::has('register'))
+                            @if (Route::has('register'))
     <a href="{{ route('register') }}"
-                            class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
+                                class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
     @endif
             @endauth
         </div>
