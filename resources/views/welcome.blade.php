@@ -167,21 +167,21 @@
                                     <div class="media"><Strong><span> Membangun dan mengembangkan pelayanan dan pelatihan
                                                 sistem
                                                 penjaminan mutu interal dan eksternal pada semua unit di lingkungan
-                                                ITKJ.</strong></span>
+                                                JGU.</strong></span>
                                     </div>
                                 </div>
                                 </br>
                                 <div class="media">
                                     <div class="activity-dot-primary"></div>
                                     <div class="media"><Strong><span> Terbentuknya budaya mutu bagi civitas akademika dan
-                                                tenaga kependidikan di lingkungan ITKJ.</strong></span>
+                                                tenaga kependidikan di lingkungan JGU.</strong></span>
                                     </div>
                                 </div>
                                 </br>
                                 <div class="media">
                                     <div class="activity-dot-primary"></div>
                                     <div class="media"><Strong><span> Mempermudah akses data perguruan tinggi yang
-                                                terintegrasi bagi semua unit di lingkungan ITKJ.</strong></span>
+                                                terintegrasi bagi semua unit di lingkungan JGU.</strong></span>
                                     </div>
                                 </div>
                             </div>
@@ -204,12 +204,14 @@
                                 <h2>Vision & Mission</h2>
                             </div>
                         </div>
+                        <div class="media-body"></div>
+                        <h3>Vission</h3>
                         <div class="card-body new-update pt-0">
                             <div class="activity-timeline">
                                 <div class="media">
-                                    <div class="media-body"><span>Menjadikan Lembaga Penjaminan Mutu ITKJ sebagai
+                                    <div class="media-body"><span>Menjadikan Lembaga Penjaminan Mutu JGU sebagai
                                             pelopor dalam menerapkan sistem dan budaya mutu tridharma perguruan tinggi
-                                            yang dapat mengantarkan ITKJ menjadi institusi unggul dalam bidang teknologi
+                                            yang dapat mengantarkan JGU menjadi institusi unggul dalam bidang teknologi
                                             dan Kesehatan.</span>
                                     </div>
                                 </div>
@@ -227,19 +229,19 @@
                         <div class="media">
                             <div class="activity-dot-primary"></div>
                             <div class="media"><span>Membangun dan mengembangkan pelayanan dan pelatihan sistem
-                                    penjaminan mutu internal dan eksternal pada semua unit di lingkungan ITKJ.</span>
+                                    penjaminan mutu internal dan eksternal pada semua unit di lingkungan JGU.</span>
                             </div>
                         </div>
                         <div class="media">
                             <div class="activity-dot-primary"></div>
                             <div class="media"><span>Mendorong terbentuknya budaya mutu tridharma perguruan tinggi
-                                    bagi civitas akademika dan tenaga kependidikan di lingkungan ITKJ.</span>
+                                    bagi civitas akademika dan tenaga kependidikan di lingkungan JGU.</span>
                             </div>
                         </div>
                         <div class="media">
                             <div class="activity-dot-primary"></div>
-                            <div class="media"><span>Membangun pangkalan data perguruan tinggi ITKJ yang terintegrasi
-                                    untuk semua unit di lingkungan ITKJ.</span>
+                            <div class="media"><span>Membangun pangkalan data perguruan tinggi JGU yang terintegrasi
+                                    untuk semua unit di lingkungan JGU.</span>
                             </div>
 
                         </div>
