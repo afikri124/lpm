@@ -39,7 +39,7 @@ Buka CMD atau Termianal pada Visual Studio Code:
         <code>MAIL_FROM_ADDRESS=no-replay@gmail.com</code> (isikan email pengirim)<br>
         <code>MAIL_FROM_NAME="${APP_NAME}"</code><br>
 - Jika error ketikkan perintah: <code>php artisan key:generate</code>
-- Membuat tabel dan seeder database: <code>php artisan migrate --seed</code>
+- Migrasi tabel dan seeder database: <code>php artisan migrate --seed</code>
 - Jalankan sistem (kalau di localhost): <code>php artisan serve</code>
 
 - Jika ada pertanyaan hubungi [https://alifikri.com](https://alifikri.com)
