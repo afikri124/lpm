@@ -155,38 +155,38 @@
                                 <h2>About Us</h2>
                             </div>
                             <div class="media-body">
-                                <h2>TUJUAN</h2>
+                                <h2>PURPOSE</h2>
                                 <div class="media">
-                                    <div class="activity-dot-primary"></div>
-                                    <div class="media"><strong><span> Menyusun, menerapkan, dan melakukan perbaikan
-                                                secara
-                                                berkelanjutan terhadap Sistem Penjaminan Mutu Internal
-                                                (SPMI).</span></strong>
+                                    <div class="activity-dot-primary" style="position: absolute; left: 0; top:125px">
+                                    </div>
+                                    <div class="media" style="padding-top:18px"><strong><span> The realization of an
+                                                internal quality assurance
+                                                system within JGU which includes standard setting, implementation,
+                                                evaluation, improvement, and standard control.
+                                            </span></strong>
                                     </div>
                                 </div>
                                 </br>
                                 <div class="media">
                                     <div class="activity-dot-primary"></div>
-                                    <div class="media"><Strong><span> Membangun dan mengembangkan pelayanan dan
-                                                pelatihan
-                                                sistem
-                                                penjaminan mutu interal dan eksternal pada semua unit di lingkungan
-                                                JGU.</strong></span>
+                                    <div class="media"><Strong><span> Ensure the implementation of internal and external
+                                                quality assurance services and training in all units within the JGU.
+                                        </strong></span>
                                     </div>
                                 </div>
                                 </br>
                                 <div class="media">
                                     <div class="activity-dot-primary"></div>
-                                    <div class="media"><Strong><span> Terbentuknya budaya mutu bagi civitas akademika
-                                                dan
-                                                tenaga kependidikan di lingkungan JGU.</strong></span>
+                                    <div class="media"><Strong><span> The establishment of a quality culture for the
+                                                academic community and education staff in the JGU
+                                                environment.</strong></span>
                                     </div>
                                 </div>
                                 </br>
                                 <div class="media">
                                     <div class="activity-dot-primary"></div>
-                                    <div class="media"><Strong><span> Mempermudah akses data perguruan tinggi yang
-                                                terintegrasi bagi semua unit di lingkungan JGU.</strong></span>
+                                    <div class="media"><Strong><span> Facilitate access to integrated higher education
+                                                data for all units within the JGU environment.</strong></span>
                                     </div>
                                 </div>
                             </div>
@@ -206,7 +206,7 @@
                     <div class="col-sm-12 wow pulse">
                         <div class="cuba-demo-content mt50">
                             <div class="couting text-secondary">
-                                <h2>Vision & Mission</h2>
+                                <h2>Vission & Mission</h2>
                             </div>
                         </div>
                         <div class="media-body"></div>
@@ -214,10 +214,11 @@
                         <div class="card-body new-update pt-0">
                             <div class="activity-timeline">
                                 <div class="media">
-                                    <div class="media-body"><span>Menjadikan Lembaga Penjaminan Mutu JGU sebagai
-                                            pelopor dalam menerapkan sistem dan budaya mutu tridharma perguruan tinggi
-                                            yang dapat mengantarkan JGU menjadi institusi unggul dalam bidang teknologi
-                                            dan Kesehatan.</span>
+                                    <div class="media-body"><span>Making the JGU Quality Assurance Institute a pioneer
+                                            in implementing the tridharma quality system and culture of higher education
+                                            that can lead JGU to become a superior institution in the fields of
+                                            technology and health.
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -227,26 +228,28 @@
                         <h3>Mission</h3>
                         <div class="media">
                             <div class="activity-dot-primary"></div>
-                            <div class="media"><span>Menyusun, menerapkan, dan melakukan perbaikan secara
-                                    berkelanjutan terhadap Sistem Penjaminan Mutu Internal (SPMI).</span>
+                            <div class="media"><span>Develop, implement, and make continuous improvements to the
+                                    Internal Quality Assurance System (SPMI).</span>
                             </div>
                         </div>
                         <div class="media">
                             <div class="activity-dot-primary"></div>
-                            <div class="media"><span>Membangun dan mengembangkan pelayanan dan pelatihan sistem
-                                    penjaminan mutu internal dan eksternal pada semua unit di lingkungan JGU.</span>
+                            <div class="media"><span>Build and develop services and training of internal and external
+                                    quality assurance systems in all units within JGU
+                                </span>
                             </div>
                         </div>
                         <div class="media">
                             <div class="activity-dot-primary"></div>
-                            <div class="media"><span>Mendorong terbentuknya budaya mutu tridharma perguruan tinggi
-                                    bagi civitas akademika dan tenaga kependidikan di lingkungan JGU.</span>
+                            <div class="media"><span>Encouraging the formation of a quality culture of higher education
+                                    tridharma for the academic community and education staff in the JGU
+                                    environment.</span>
                             </div>
                         </div>
                         <div class="media">
                             <div class="activity-dot-primary"></div>
-                            <div class="media"><span>Membangun pangkalan data perguruan tinggi JGU yang terintegrasi
-                                    untuk semua unit di lingkungan JGU.</span>
+                            <div class="media"><span>Build an integrated JGU university database for all units within
+                                    the JGU environment.</span>
                             </div>
 
                         </div>
@@ -319,74 +322,62 @@
             <div class="container container-modify">
                 <div class="row component_responsive">
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/1.png"
-                                alt="">
+                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/1.png" alt="">
                             <h6 class="m-0 Pt-4">SweetAlert2</h6>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/2.png"
-                                alt="">
+                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/2.png" alt="">
                             <h6 class="m-0">Avatar</h6>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/3.png"
-                                alt="">
+                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/3.png" alt="">
                             <h6 class="m-0">Scrollable</h6>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/4.png"
-                                alt="">
+                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/4.png" alt="">
                             <h6 class="m-0">Tree view</h6>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/5.png"
-                                alt="">
+                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/5.png" alt="">
                             <h6 class="m-0">Bootstrap notify</h6>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/6.png"
-                                alt="">
+                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/6.png" alt="">
                             <h6 class="m-0">Rating </h6>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/7.png"
-                                alt="">
+                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/7.png" alt="">
                             <h6 class="m-0">Dropzone</h6>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/8.png"
-                                alt="">
+                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/8.png" alt="">
                             <h6 class="m-0">Tour</h6>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/9.png"
-                                alt="">
+                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/9.png" alt="">
                             <h6 class="m-0">Animated modal</h6>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/10.png"
-                                alt="">
+                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/10.png" alt="">
                             <h6 class="m-0">Owl Carousel</h6>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/11.png"
-                                alt="">
+                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/11.png" alt="">
                             <h6 class="m-0">Ribbons </h6>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/12.png"
-                                alt="">
+                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/12.png" alt="">
                             <h6 class="m-0">Pagination </h6>
                         </div>
                     </div>
@@ -429,13 +420,13 @@
                                 </a>
                             </div>
                             <div class="footer-inner">
-                                <p style="font-size: 14px; text-align: justify">
+                                <p style="font-size: 14px; text-align: justify; color:white">
                                     <b>Mengubah Hidup,</b>
                                     <br>
                                     <b>Memperkaya Masa Depan</b>
                                 </p>
                                 <br>
-                                <p style="font-size: 10px; text-align: justify">
+                                <p style="font-size: 10px; text-align: justify; color:white">
                                     <b>Kampus C (Utama)</b>
                                     <br>
                                     Grand Depok City, Jl. Boulevard Raya No.2 Kota Depok
@@ -453,15 +444,19 @@
                                     <br>
                                     Jl. Inspeksi Kalimalang No.204-205, Cibuntu, Kec. Cibitung,
                                     Bekasi, Jawa Barat 17520
-                                    <br> 
-                                    Telp : 021-8837-5585 
-                                    <br> 
+                                    <br>
+                                    Telp : 021-8837-5585
+                                    <br>
                                     Fax : 021-8837-5587
                                     <br>
                                     <br>
+                                    <iframe
+                                        src="https://maps.google.com/maps?q=Jakarta%20Global%20University%2C%20Jalan%20Boulevard%20Grand%20Depok%20City%2C%20Tirtajaya%2C%20Depok%20City%2C%20West%20Java%2C%20Indonesia&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
+                                        width="50%" height="280" frameborder="0"
+                                        style="border:0;  position: absolute; right: 0; top: 145px" allowfullscreen="">
+                                    </iframe>
                                 </p>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -476,13 +471,13 @@
     <!-- @if (Route::has('login'))
         <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
             @auth
-                            <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
+                                <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
 @else
     <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
 
-                            @if (Route::has('register'))
+                                @if (Route::has('register'))
     <a href="{{ route('register') }}"
-                                class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
+                                    class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
     @endif
             @endauth
         </div>
