@@ -41,15 +41,15 @@
     <div class="page-wrapper landing-page">
         <div class="landing-home">
             <ul class="decoration">
-                <li class="one"><img class="img-fluid" src="../assets/images/landing/decore/1.png" alt="">
+                <li class="one"><img class="img-fluid" src="{{ asset('assets/images/landing/decore/1.png') }}" alt="">
                 </li>
-                <li class="two"><img class="img-fluid" src="../assets/images/landing/decore/2.png" alt="">
+                <li class="two"><img class="img-fluid" src="{{ asset('assets/images/landing/decore/2.png') }}" alt="">
                 </li>
-                <li class="three"><img class="img-fluid" src="../assets/images/landing/decore/4.png" alt=""></li>
-                <li class="four"><img class="img-fluid" src="../assets/images/landing/decore/3.png" alt=""></li>
-                <li class="five"><img class="img-fluid" src="../assets/images/landing/2.png" alt=""></li>
-                <li class="six"><img class="img-fluid" src="../assets/images/landing/decore/cloud.png" alt=""></li>
-                <li class="seven"><img class="img-fluid" src="../assets/images/landing/2.png" alt=""></li>
+                <li class="three"><img class="img-fluid" src="{{ asset('assets/images/landing/decore/4.png') }}" alt=""></li>
+                <li class="four"><img class="img-fluid" src="{{ asset('assets/images/landing/decore/3.png') }}" alt=""></li>
+                <li class="five"><img class="img-fluid" src="{{ asset('assets/images/landing/2.png') }}" alt=""></li>
+                <li class="six"><img class="img-fluid" src="{{ asset('assets/images/landing/decore/cloud.png') }}" alt=""></li>
+                <li class="seven"><img class="img-fluid" src="{{ asset('assets/images/landing/2.png') }}') }}" alt=""></li>
             </ul>
             <div class="container-fluid">
                 <div class="sticky-header">
@@ -109,7 +109,8 @@
                                                         Observation</a>
                                                     @endauth
                                                     @endif
-                                                    <a href="#">Coming soon system..</a>
+                                                    <a href="https://lpm.jgu.ac.id/old">PO-Old</a>
+                                                    <a href="#">Coming soon..</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -135,10 +136,10 @@
                     </div>
 
                     <div class="col-xl-7 col-lg-6">
-                        <div class="wow fadeIn"><img class="screen1" src="{{asset('assets/images/landing/jgu.jpg')}}"
-                                alt=""></div>
-                        <div class="wow fadeIn"><img class="screen2" src="{{asset('assets/images/landing/jgu.jpg')}}"
-                                alt="" height="480" width="800"></div>
+                        <!-- <div class="wow fadeIn"><img class="screen1" src="{{asset('assets/images/landing/screen1.jpg')}}"
+                                alt=""></div> -->
+                        <div class="wow fadeIn"><img class="screen2" src="{{asset('assets/images/landing/screen2.jpg')}}"
+                                alt="" ></div>
                     </div>
                 </div>
                 <!-- BATAS AKHIR HALAMAN HOME PALING ATAS -->

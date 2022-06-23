@@ -23014,11 +23014,13 @@ footer {
 
 .landing-home .screen2 {
     position: absolute;
-    left: 0px;
-    top: 125px;
+    left: 70px;
+    top: 140px;
     -webkit-box-shadow: 0 0 47px 10px rgba(115, 102, 255, 0.1);
     box-shadow: 0 0 47px 10px rgba(115, 102, 255, 0.1);
     border-radius: 10px;
+    -webkit-animation: animationtop 30s infinite;
+    animation: animationtop 30s infinite;
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease
 }
@@ -23533,7 +23535,7 @@ footer {
     content: "";
     position: absolute;
     left: 0;
-    background-image: url(../images/landing/left-left.png);
+    /* background-image: url(../images/landing/left-left.png); */
     height: 165px;
     width: 250px;
     top: 0
@@ -23543,7 +23545,7 @@ footer {
     content: "";
     position: absolute;
     right: 0;
-    background-image: url(../images/landing/leaf-right.png);
+    /* background-image: url(../images/landing/leaf-right.png); */
     height: 208px;
     width: 250px;
     top: 0
