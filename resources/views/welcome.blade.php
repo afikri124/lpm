@@ -159,7 +159,7 @@
                                 <h2>About Us</h2>
                             </div>
                             <div class="media-body text-center">
-                                <p>PURPOSE</p>
+                                <p>Purpose</p>
                                 <div class="media">
                                     <div class="activity-dot-primary mx-2"></div>
                                     The realization of an internal quality assurance system within JGU
@@ -189,10 +189,6 @@
                     </div>
                 </div>
             </div>
-            <div class="container">
-                <div class="row demo-imgs">
-                    <!-- CONTENT ABOUT US -->
-                </div>
         </section>
 
         <section class="section-space bg-Widget pb-0 bg-primary pb-5" id="vision-and-mission">
@@ -253,17 +249,12 @@
 
                 </div>
             </div>
-            <div class="container-fluid o-hidden">
-                <div class="row landing-cards">
-                    <!-- CONTENT VISI MISI -->
-                </div>
-            </div>
         </section>
 
         <section class="section-space cuba-demo-section email_bg" id="org-structure">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-4 wow pulse">
+                    <div class="col-lg-6 wow pulse">
                         <div class="cuba-demo-content email-txt text-start">
                             <div class="couting">
                                 <h2>Structure</h2>
@@ -278,8 +269,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-8 wow pulse"><a href=""><img class="img-fluid email-img"
-                                src="../assets/images/dashboard/structure-removebg.png" alt=""></a></div>
+                    <div class="col-lg-6 wow pulse"><a href=""><img class="img-fluid email-img"
+                                src="{{ asset('assets/images/dashboard/structure-removebg.png')}}" alt=""></a></div>
                 </div>
             </div>
         </section>
@@ -295,7 +286,7 @@
                         <h1>For Universities/Study Programs Who Want to Download Accreditation Instruments,</h1>
                         <h1>please click the following link:</h1>
                         <a class="btn mrl5 btn-lg btn-secondary default-view" target="_blank"
-                            href=" https://bit.ly/instrumenakreditasi9"> https://bit.ly/instrumenakreditasi9</a>
+                            href="https://portal.jgu.ac.id/"> Click here </a>
                     </div>
                 </div>
             </div>
@@ -316,80 +307,88 @@
             </div>
             <div class="container container-modify">
                 <div class="row component_responsive">
+
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><i class="fa fa-trophy h1 text-warning"></i>
-                            <h6 class="m-0 Pt-4">Good</h6>
-                            <p>Management</p>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><i class="fa fa-trophy h1 text-warning"></i>
+                        <div class="component-hover-effect"><i class="fa fa-spin fa-star h1 text-warning"></i>
                             <h6 class="m-0">Good</h6>
-                            <p>Electrical Engineering</p>
-                            <p>S1</p>
+                            <p>S1 Pharmacy</p>
                         </div>
                     </div>
+
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><i class="fa fa-trophy h1 text-warning"></i>
+                        <div class="component-hover-effect"><i class="fa fa-spin fa-star h1 text-warning"></i>
                             <h6 class="m-0">Good</h6>
-                            <p>Mechanical Engineering</p>
+                            <p>S1 Digital Business</p>
                         </div>
                     </div>
+
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><i class="fa fa-trophy h1 text-warning"></i>
+                        <div class="component-hover-effect"><i class="fa fa-spin fa-star  h1 text-warning"></i>
                             <h6 class="m-0">Good</h6>
-                            <p>Civil Engineering</p>
+                            <p>S1 Industrial Eng.</p>
                         </div>
                     </div>
+
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><i class="fa fa-trophy h1 text-warning"></i>
+                        <div class="component-hover-effect"><i class="fa fa-spin fa-star  h1 text-warning"></i>
                             <h6 class="m-0">Good</h6>
-                            <p>Digital Business</p>
+                            <p>S2 Electrical Eng.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-2 col-md-4 col-6 component-col-set">
+                        <div class="component-hover-effect"><i class="fa fa-spin fa-star  h1 text-warning"></i>
+                            <h6 class="m-0">B</h6>
+                            <p>S1 Electrical Eng.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-2 col-md-4 col-6 component-col-set">
+                        <div class="component-hover-effect"><i class="fa fa-spin fa-star  h1 text-warning"></i>
+                            <h6 class="m-0">B</h6>
+                            <p>S1 Mechanical Eng.</p>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><i class="fa fa-trophy h1 text-warning"></i>
-                            <h6 class="m-0">Good</h6>
-                            <p>Pharmacy</p>
+                        <div class="component-hover-effect"><i class="fa fa-spin fa-star  h1 text-warning"></i>
+                            <h6 class="m-0 Pt-4">B</h6>
+                            <p>S1 Management</p>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><i class="fa fa-trophy h1 text-warning"></i>
-                            <h6 class="m-0">Good</h6>
-                            <p>Industrial Engineering</p>
+                        <div class="component-hover-effect"><i class="fa fa-spin fa-star h1 text-warning"></i>
+                            <h6 class="m-0">B</h6>
+                            <p>S1 Civil Eng.</p>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><i class="fa fa-trophy h1 text-warning"></i>
-                            <h6 class="m-0">Good</h6>
-                            <p>Electrical Engineering</p>
-                            <p>S2</p>
+                        <div class="component-hover-effect"><i class="fa fa-spin fa-star  h1 text-warning"></i>
+                            <h6 class="m-0">C</h6>
+                            <p>D3 Accountant</p>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><i class="fa fa-trophy h1 text-warning"></i>
-                            <h6 class="m-0">Passable</h6>
-                            <p>Accountant</p>
+                        <div class="component-hover-effect"><i class="fa fa-spin fa-star h1 text-warning"></i>
+                            <h6 class="m-0">C</h6>
+                            <p>D3 Marketing Mngt.</p>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><i class="fa fa-trophy h1 text-warning"></i>
-                            <h6 class="m-0">Passable</h6>
-                            <p>Marketing Management</p>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><i class="fa fa-trophy h1 text-warning"></i>
+                        <div class="component-hover-effect"><i class="fa fa-spin fa-star-o h1 text-warning"></i>
                             <h6 class="m-0">-</h6>
-                            <p>Information Systems</p>
+                            <p>S1 Informatics Eng.</p>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><i class="fa fa-trophy h1 text-warning"></i>
+                        <div class="component-hover-effect"><i class="fa fa-spin fa-star-o  h1 text-warning"></i>
                             <h6 class="m-0">-</h6>
-                            <p>Technical Information</p>
+                            <p>S1 Information System<i class="text-danger">*</i></p>
                         </div>
                     </div>
+
+                    <a target="_blank"
+                        href="https://pddikti.kemdikbud.go.id/data_pt/QUEzRUM1NjktQjI0NS00ODA3LTlGMkYtOERDRkNGMUI2MkNC">click
+                        here for more information</a>
 
                 </div>
             </div>
@@ -436,7 +435,7 @@
                                 </p>
                                 <br>
                                 <p style="font-size: 10px; text-align: justify; color:white">
-                                    <b>Kampus C (Utama)</b>
+                                    <b>Kampus Utama</b>
                                     <br>
                                     Grand Depok City, Jl. Boulevard Raya No.2 Kota Depok
                                     16412, Jawa Barat Indonesia
@@ -468,11 +467,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="container-fluid o-hidden">
-                <div class="row landing-cards">
-                    <!-- CONTENT Contact -->
                 </div>
             </div>
         </footer>
