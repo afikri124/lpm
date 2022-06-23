@@ -154,7 +154,7 @@
                                 <h2>About Us</h2>
                             </div>
                             <div class="media-body">
-                                <h2>TUJUAN</h2>
+                                <h2>PURPOSE</h2>
                                 <div class="media">
                                     <div class="activity-dot-primary"></div>
                                     <div class="media"><strong><span> Menyusun, menerapkan, dan melakukan perbaikan
@@ -205,7 +205,7 @@
                     <div class="col-sm-12 wow pulse">
                         <div class="cuba-demo-content mt50">
                             <div class="couting text-secondary">
-                                <h2>Vision & Mission</h2>
+                                <h2>Vission & Mission</h2>
                             </div>
                         </div>
                         <div class="media-body"></div>
@@ -428,13 +428,13 @@
                                 </a>
                             </div>
                             <div class="footer-inner">
-                                <p style="font-size: 14px; text-align: justify">
+                                <p style="font-size: 14px; text-align: justify; color:white">
                                     <b>Mengubah Hidup,</b>
                                     <br>
                                     <b>Memperkaya Masa Depan</b>
                                 </p>
                                 <br>
-                                <p style="font-size: 10px; text-align: justify">
+                                <p style="font-size: 10px; text-align: justify; color:white">
                                     <b>Kampus C (Utama)</b>
                                     <br>
                                     Grand Depok City, Jl. Boulevard Raya No.2 Kota Depok
