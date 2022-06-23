@@ -323,8 +323,8 @@
             <div class="container container-modify">
                 <div class="row component_responsive">
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/1.png" alt="">
-                            <h6 class="m-0 Pt-4">SweetAlert2</h6>
+                        <div class="component-hover-effect"><img src="../assets/images/dashboard/badge.jpg" alt="">
+                            <h6 class="m-0 Pt-4">Cukup</h6>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
