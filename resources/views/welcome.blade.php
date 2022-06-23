@@ -32,7 +32,6 @@
             text-align: left;
             margin-left: 20px;
         }
-
     </style>
 </head>
 
@@ -45,10 +44,13 @@
                 </li>
                 <li class="two"><img class="img-fluid" src="../assets/images/landing/decore/2.png" alt="">
                 </li>
-                <li class="three"><img class="img-fluid" src="../assets/images/landing/decore/4.png" alt=""></li>
-                <li class="four"><img class="img-fluid" src="../assets/images/landing/decore/3.png" alt=""></li>
+                <li class="three"><img class="img-fluid" src="../assets/images/landing/decore/4.png" alt="">
+                </li>
+                <li class="four"><img class="img-fluid" src="../assets/images/landing/decore/3.png" alt="">
+                </li>
                 <li class="five"><img class="img-fluid" src="../assets/images/landing/2.png" alt=""></li>
-                <li class="six"><img class="img-fluid" src="../assets/images/landing/decore/cloud.png" alt=""></li>
+                <li class="six"><img class="img-fluid" src="../assets/images/landing/decore/cloud.png"
+                        alt=""></li>
                 <li class="seven"><img class="img-fluid" src="../assets/images/landing/2.png" alt=""></li>
             </ul>
             <div class="container-fluid">
@@ -81,7 +83,8 @@
                                     <li class="nav-item">
                                         <div class=" dropup dropdown-basic">
                                             <div class="dropup dropdown">
-                                                <a class="nav-link px-3" href="#"><i class="icofont icofont-trophy"></i>
+                                                <a class="nav-link px-3" href="#"><i
+                                                        class="icofont icofont-trophy"></i>
                                                     Accreditation</a>
                                                 <div class="dropup-content dropdown-content">
                                                     <a href="#instruments">Instruments</a>
@@ -99,15 +102,15 @@
                                                         class="fa fa-th"></i> Application</a>
                                                 <div class="dropup-content dropdown-content">
                                                     @if (Route::has('login'))
-                                                    @auth
-                                                    <a href="{{ url('/dashboard') }}"
-                                                        class="text-sm text-gray-700 dark:text-gray-500 underline">Peer
-                                                        Observation</a>
-                                                    @else
-                                                    <a href="{{ route('login') }}"
-                                                        class="text-sm text-gray-700 dark:text-gray-500 underline">Peer
-                                                        Observation</a>
-                                                    @endauth
+                                                        @auth
+                                                            <a href="{{ url('/dashboard') }}"
+                                                                class="text-sm text-gray-700 dark:text-gray-500 underline">Peer
+                                                                Observation</a>
+                                                        @else
+                                                            <a href="{{ route('login') }}"
+                                                                class="text-sm text-gray-700 dark:text-gray-500 underline">Peer
+                                                                Observation</a>
+                                                        @endauth
                                                     @endif
                                                     <a href="#">Coming soon system..</a>
                                                 </div>
@@ -135,10 +138,11 @@
                     </div>
 
                     <div class="col-xl-7 col-lg-6">
-                        <div class="wow fadeIn"><img class="screen1" src="{{asset('assets/images/landing/jgu.jpg')}}"
-                                alt=""></div>
-                        <div class="wow fadeIn"><img class="screen2" src="{{asset('assets/images/landing/jgu.jpg')}}"
-                                alt="" height="480" width="800"></div>
+                        <div class="wow fadeIn"><img class="screen1"
+                                src="{{ asset('assets/images/landing/jgu.jpg') }}" alt=""></div>
+                        <div class="wow fadeIn"><img class="screen2"
+                                src="{{ asset('assets/images/landing/jgu.jpg') }}" alt="" height="480"
+                                width="800"></div>
                     </div>
                 </div>
                 <!-- BATAS AKHIR HALAMAN HOME PALING ATAS -->
@@ -170,7 +174,7 @@
                                                 pelatihan
                                                 sistem
                                                 penjaminan mutu interal dan eksternal pada semua unit di lingkungan
-                                                ITKJ.</strong></span>
+                                                JGU.</strong></span>
                                     </div>
                                 </div>
                                 </br>
@@ -178,14 +182,14 @@
                                     <div class="activity-dot-primary"></div>
                                     <div class="media"><Strong><span> Terbentuknya budaya mutu bagi civitas akademika
                                                 dan
-                                                tenaga kependidikan di lingkungan ITKJ.</strong></span>
+                                                tenaga kependidikan di lingkungan JGU.</strong></span>
                                     </div>
                                 </div>
                                 </br>
                                 <div class="media">
                                     <div class="activity-dot-primary"></div>
                                     <div class="media"><Strong><span> Mempermudah akses data perguruan tinggi yang
-                                                terintegrasi bagi semua unit di lingkungan ITKJ.</strong></span>
+                                                terintegrasi bagi semua unit di lingkungan JGU.</strong></span>
                                     </div>
                                 </div>
                             </div>
@@ -211,9 +215,9 @@
                         <div class="card-body new-update pt-0">
                             <div class="activity-timeline">
                                 <div class="media">
-                                    <div class="media-body"><span>Menjadikan Lembaga Penjaminan Mutu ITKJ sebagai
+                                    <div class="media-body"><span>Menjadikan Lembaga Penjaminan Mutu JGU sebagai
                                             pelopor dalam menerapkan sistem dan budaya mutu tridharma perguruan tinggi
-                                            yang dapat mengantarkan ITKJ menjadi institusi unggul dalam bidang teknologi
+                                            yang dapat mengantarkan JGU menjadi institusi unggul dalam bidang teknologi
                                             dan Kesehatan.</span>
                                     </div>
                                 </div>
@@ -231,19 +235,19 @@
                         <div class="media">
                             <div class="activity-dot-primary"></div>
                             <div class="media"><span>Membangun dan mengembangkan pelayanan dan pelatihan sistem
-                                    penjaminan mutu internal dan eksternal pada semua unit di lingkungan ITKJ.</span>
+                                    penjaminan mutu internal dan eksternal pada semua unit di lingkungan JGU.</span>
                             </div>
                         </div>
                         <div class="media">
                             <div class="activity-dot-primary"></div>
                             <div class="media"><span>Mendorong terbentuknya budaya mutu tridharma perguruan tinggi
-                                    bagi civitas akademika dan tenaga kependidikan di lingkungan ITKJ.</span>
+                                    bagi civitas akademika dan tenaga kependidikan di lingkungan JGU.</span>
                             </div>
                         </div>
                         <div class="media">
                             <div class="activity-dot-primary"></div>
-                            <div class="media"><span>Membangun pangkalan data perguruan tinggi ITKJ yang terintegrasi
-                                    untuk semua unit di lingkungan ITKJ.</span>
+                            <div class="media"><span>Membangun pangkalan data perguruan tinggi JGU yang terintegrasi
+                                    untuk semua unit di lingkungan JGU.</span>
                             </div>
 
                         </div>
@@ -426,13 +430,13 @@
                                 </a>
                             </div>
                             <div class="footer-inner">
-                                <p style="font-size: 14px; text-align: justify">
+                                <p style="font-size: 14px; text-align: justify; color:white">
                                     <b>Mengubah Hidup,</b>
                                     <br>
                                     <b>Memperkaya Masa Depan</b>
                                 </p>
                                 <br>
-                                <p style="font-size: 10px; text-align: justify">
+                                <p style="font-size: 10px; text-align: justify; color:white">
                                     <b>Kampus C (Utama)</b>
                                     <br>
                                     Grand Depok City, Jl. Boulevard Raya No.2 Kota Depok
@@ -450,15 +454,19 @@
                                     <br>
                                     Jl. Inspeksi Kalimalang No.204-205, Cibuntu, Kec. Cibitung,
                                     Bekasi, Jawa Barat 17520
-                                    <br> 
-                                    Telp : 021-8837-5585 
-                                    <br> 
+                                    <br>
+                                    Telp : 021-8837-5585
+                                    <br>
                                     Fax : 021-8837-5587
                                     <br>
                                     <br>
+                                    <iframe
+                                    src="https://maps.google.com/maps?q=Jakarta%20Global%20University%2C%20Jalan%20Boulevard%20Grand%20Depok%20City%2C%20Tirtajaya%2C%20Depok%20City%2C%20West%20Java%2C%20Indonesia&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
+                                    width="50%" height="280" frameborder="0" style="border:0;  position: absolute; right: 0; top: 145px"
+                                    allowfullscreen="">
+                                </iframe>
                                 </p>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -473,13 +481,13 @@
     <!-- @if (Route::has('login'))
         <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
             @auth
-                            <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
+                                <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
 @else
     <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
 
-                            @if (Route::has('register'))
+                                @if (Route::has('register'))
     <a href="{{ route('register') }}"
-                                class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
+                                    class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
     @endif
             @endauth
         </div>
