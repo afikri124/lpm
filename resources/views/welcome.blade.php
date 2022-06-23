@@ -317,63 +317,77 @@
             <div class="container container-modify">
                 <div class="row component_responsive">
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><img src="../assets/images/dashboard/badge.jpg" alt="">
-                            <h6 class="m-0 Pt-4">Cukup</h6>
+                        <div class="component-hover-effect"><i class="fa fa-trophy h1 text-warning"></i>
+                            <h6 class="m-0 Pt-4">Good</h6>
+                            <p>Management</p>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/2.png" alt="">
-                            <h6 class="m-0">Avatar</h6>
+                        <div class="component-hover-effect"><i class="fa fa-trophy h1 text-warning"></i>
+                            <h6 class="m-0">Good</h6>
+                            <p>Electrical Engineering</p>
+                            <p>S1</p>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/3.png" alt="">
-                            <h6 class="m-0">Scrollable</h6>
+                        <div class="component-hover-effect"><i class="fa fa-trophy h1 text-warning"></i>
+                            <h6 class="m-0">Good</h6>
+                            <p>Mechanical Engineering</p>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/4.png" alt="">
-                            <h6 class="m-0">Tree view</h6>
+                        <div class="component-hover-effect"><i class="fa fa-trophy h1 text-warning"></i>
+                            <h6 class="m-0">Good</h6>
+                            <p>Civil Engineering</p>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/5.png" alt="">
-                            <h6 class="m-0">Bootstrap notify</h6>
+                        <div class="component-hover-effect"><i class="fa fa-trophy h1 text-warning"></i>
+                            <h6 class="m-0">Good</h6>
+                            <p>Digital Business</p>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/6.png" alt="">
-                            <h6 class="m-0">Rating </h6>
+                        <div class="component-hover-effect"><i class="fa fa-trophy h1 text-warning"></i>
+                            <h6 class="m-0">Good</h6>
+                            <p>Pharmacy</p>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/7.png" alt="">
-                            <h6 class="m-0">Dropzone</h6>
+                        <div class="component-hover-effect"><i class="fa fa-trophy h1 text-warning"></i>
+                            <h6 class="m-0">Good</h6>
+                            <p>Industrial Engineering</p>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/8.png" alt="">
-                            <h6 class="m-0">Tour</h6>
+                        <div class="component-hover-effect"><i class="fa fa-trophy h1 text-warning"></i>
+                            <h6 class="m-0">Good</h6>
+                            <p>Electrical Engineering</p>
+                            <p>S2</p>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/9.png" alt="">
-                            <h6 class="m-0">Animated modal</h6>
+                        <div class="component-hover-effect"><i class="fa fa-trophy h1 text-warning"></i>
+                            <h6 class="m-0">Passable</h6>
+                            <p>Accountant</p>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/10.png" alt="">
-                            <h6 class="m-0">Owl Carousel</h6>
+                        <div class="component-hover-effect"><i class="fa fa-trophy h1 text-warning"></i>
+                            <h6 class="m-0">Passable</h6>
+                            <p>Marketing Management</p>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/11.png" alt="">
-                            <h6 class="m-0">Ribbons </h6>
+                        <div class="component-hover-effect"><i class="fa fa-trophy h1 text-warning"></i>
+                            <h6 class="m-0">-</h6>
+                            <p>Information Systems</p>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><img src="../assets/images/landing/icon/12.png" alt="">
-                            <h6 class="m-0">Pagination </h6>
+                        <div class="component-hover-effect"><i class="fa fa-trophy h1 text-warning"></i>
+                            <h6 class="m-0">-</h6>
+                            <p>Technical Information</p>
                         </div>
                     </div>
 
