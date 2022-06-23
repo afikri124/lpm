@@ -212,6 +212,8 @@
                                 <h2>Vision & Mission</h2>
                             </div>
                         </div>
+                        <div class="media-body"></div>
+                        <h3>Vission</h3>
                         <div class="card-body new-update pt-0">
                             <div class="activity-timeline">
                                 <div class="media">
