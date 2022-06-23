@@ -41,17 +41,19 @@
     <div class="page-wrapper landing-page">
         <div class="landing-home">
             <ul class="decoration">
-                <li class="one"><img class="img-fluid" src="../assets/images/landing/decore/1.png" alt="">
+                <li class="one"><img class="img-fluid" src="{{ asset('assets/images/landing/decore/1.png') }}" alt="">
                 </li>
-                <li class="two"><img class="img-fluid" src="../assets/images/landing/decore/2.png" alt="">
+                <li class="two"><img class="img-fluid" src="{{ asset('assets/images/landing/decore/2.png') }}" alt="">
                 </li>
-                <li class="three"><img class="img-fluid" src="../assets/images/landing/decore/4.png" alt="">
+                <li class="three"><img class="img-fluid" src="{{ asset('assets/images/landing/decore/4.png') }}" alt="">
                 </li>
-                <li class="four"><img class="img-fluid" src="../assets/images/landing/decore/3.png" alt="">
+                <li class="four"><img class="img-fluid" src="{{ asset('assets/images/landing/decore/3.png') }}" alt="">
                 </li>
-                <li class="five"><img class="img-fluid" src="../assets/images/landing/2.png" alt=""></li>
-                <li class="six"><img class="img-fluid" src="../assets/images/landing/decore/cloud.png" alt=""></li>
-                <li class="seven"><img class="img-fluid" src="../assets/images/landing/2.png" alt=""></li>
+                <li class="five"><img class="img-fluid" src="{{ asset('assets/images/landing/2.png') }}" alt=""></li>
+                <li class="six"><img class="img-fluid" src="{{ asset('assets/images/landing/decore/cloud.png') }}"
+                        alt=""></li>
+                <li class="seven"><img class="img-fluid" src="{{ asset('assets/images/landing/2.png') }}') }}" alt="">
+                </li>
             </ul>
             <div class="container-fluid">
                 <div class="sticky-header">
@@ -111,7 +113,8 @@
                                                         Observation</a>
                                                     @endauth
                                                     @endif
-                                                    <a href="#">Coming soon system..</a>
+                                                    <a href="https://lpm.jgu.ac.id/old">PO-Old</a>
+                                                    <a href="#">Coming soon..</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -137,10 +140,10 @@
                     </div>
 
                     <div class="col-xl-7 col-lg-6">
-                        <div class="wow fadeIn"><img class="screen1" src="{{ asset('assets/images/landing/jgu.jpg') }}"
-                                alt=""></div>
-                        <div class="wow fadeIn"><img class="screen2" src="{{ asset('assets/images/landing/jgu.jpg') }}"
-                                alt="" height="480" width="800"></div>
+                        <!-- <div class="wow fadeIn"><img class="screen1" src="{{asset('assets/images/landing/screen1.jpg')}}"
+                                alt=""></div> -->
+                        <div class="wow fadeIn"><img class="screen2"
+                                src="{{asset('assets/images/landing/screen2.jpg')}}" alt=""></div>
                     </div>
                 </div>
                 <!-- BATAS AKHIR HALAMAN HOME PALING ATAS -->
@@ -155,40 +158,31 @@
                             <div class="couting">
                                 <h2>About Us</h2>
                             </div>
-                            <div class="media-body">
-                                <h2>PURPOSE</h2>
+                            <div class="media-body text-center">
+                                <p>PURPOSE</p>
                                 <div class="media">
-                                    <div class="activity-dot-primary" style="position: absolute; left: 0; top:125px">
-                                    </div>
-                                    <div class="media" style="padding-top:18px"><strong><span> The realization of an
-                                                internal quality assurance
-                                                system within JGU which includes standard setting, implementation,
-                                                evaluation, improvement, and standard control.
-                                            </span></strong>
-                                    </div>
+                                    <div class="activity-dot-primary mx-2"></div>
+                                    The realization of an internal quality assurance system within JGU
+                                    which includes standard setting, implementation, evaluation, improvement, and
+                                    standard control.
                                 </div>
                                 </br>
                                 <div class="media">
-                                    <div class="activity-dot-primary"></div>
-                                    <div class="media"><Strong><span> Ensure the implementation of internal and external
-                                                quality assurance services and training in all units within the JGU.
-                                        </strong></span>
-                                    </div>
+                                    <div class="activity-dot-primary mx-2"></div>
+                                    Ensure the implementation of internal and external quality assurance services and
+                                    training in all units within the JGU.
                                 </div>
                                 </br>
                                 <div class="media">
-                                    <div class="activity-dot-primary"></div>
-                                    <div class="media"><Strong><span> The establishment of a quality culture for the
-                                                academic community and education staff in the JGU
-                                                environment.</strong></span>
-                                    </div>
+                                    <div class="activity-dot-primary mx-2"></div>
+                                    The establishment of a quality culture for the academic community and education
+                                    staff in the JGU environment.
                                 </div>
                                 </br>
                                 <div class="media">
-                                    <div class="activity-dot-primary"></div>
-                                    <div class="media"><Strong><span> Facilitate access to integrated higher education
-                                                data for all units within the JGU environment.</strong></span>
-                                    </div>
+                                    <div class="activity-dot-primary mx-2"></div>
+                                    Facilitate access to integrated higher education data for all units within the JGU
+                                    environment.
                                 </div>
                             </div>
                         </div>
@@ -215,11 +209,11 @@
                         <div class="card-body new-update pt-0">
                             <div class="activity-timeline">
                                 <div class="media">
-                                    <div class="media-body"><span>Making the JGU Quality Assurance Institute a pioneer
+                                    <div class="media-body"><i>Making the JGU Quality Assurance Institute a pioneer
                                             in implementing the tridharma quality system and culture of higher education
                                             that can lead JGU to become a superior institution in the fields of
                                             technology and health.
-                                        </span>
+                                        </i>
                                     </div>
                                 </div>
                             </div>
@@ -228,27 +222,27 @@
                     <div class="text-left">
                         <h3>Mission</h3>
                         <div class="media">
-                            <div class="activity-dot-primary"></div>
+                            <div class="activity-dot-dark mx-2"></div>
                             <div class="media"><span>Develop, implement, and make continuous improvements to the
                                     Internal Quality Assurance System (SPMI).</span>
                             </div>
                         </div>
                         <div class="media">
-                            <div class="activity-dot-primary"></div>
+                            <div class="activity-dot-dark mx-2"></div>
                             <div class="media"><span>Build and develop services and training of internal and external
                                     quality assurance systems in all units within JGU
                                 </span>
                             </div>
                         </div>
                         <div class="media">
-                            <div class="activity-dot-primary"></div>
+                            <div class="activity-dot-dark mx-2"></div>
                             <div class="media"><span>Encouraging the formation of a quality culture of higher education
                                     tridharma for the academic community and education staff in the JGU
                                     environment.</span>
                             </div>
                         </div>
                         <div class="media">
-                            <div class="activity-dot-primary"></div>
+                            <div class="activity-dot-dark mx-2"></div>
                             <div class="media"><span>Build an integrated JGU university database for all units within
                                     the JGU environment.</span>
                             </div>
@@ -273,7 +267,7 @@
                         <div class="cuba-demo-content email-txt text-start">
                             <div class="couting">
                                 <h2>Structure</h2>
-                                <p>Organizational structure</p>
+                                <p>Organizational LPM</p>
                                 <ul class="landing-ul">
                                     <li>Rektor</li>
                                     <li>Kepala Lembaga</li>
@@ -299,7 +293,7 @@
                     </div>
                     <div class="footer-content">
                         <h1>For Universities/Study Programs Who Want to Download Accreditation Instruments,</h1>
-                        <h1> please click the following link: </h1>
+                        <h1>please click the following link:</h1>
                         <a class="btn mrl5 btn-lg btn-secondary default-view" target="_blank"
                             href=" https://bit.ly/instrumenakreditasi9"> https://bit.ly/instrumenakreditasi9</a>
                     </div>
@@ -315,7 +309,7 @@
                             <div class="couting">
                                 <h2>Results</h2>
                             </div>
-                            <p>Accreditation Results</p>
+                            <p>Study Program Accreditation</p>
                         </div>
                     </div>
                 </div>
@@ -396,7 +390,7 @@
                                 <h2>Contact</h2>
                             </div>
                             <div class="footer_bottom-item footer_social-media penci-col-3">
-                                <div class="block-title"><span>Follow us</span></div>
+                                <div class="block-title mb-4"><span>Follow us</span></div>
                                 <a class="social-media-item socail_media_facebook mx-3" target="_blank"
                                     href="https://www.facebook.com/jakartaglobaluniversity" title="Facebook"
                                     rel="noopener"><span class="socail-media-itemcontent"><i
@@ -420,7 +414,7 @@
                                             class="social_title screen-reader-text"> Twitter</span></span>
                                 </a>
                             </div>
-                            <div class="footer-inner">
+                            <div class="footer-inner mt-3">
                                 <p style="font-size: 14px; text-align: justify; color:white">
                                     <b>Mengubah Hidup,</b>
                                     <br>
