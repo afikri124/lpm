@@ -5,7 +5,7 @@
                     alt=""><img class="img-fluid for-dark"
                     src="{{asset('assets/images/logo/logo_dark.png')}}" alt=""></a>
             <div class="back-btn"><i class="fa fa-angle-left"></i></div>
-            <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i></div>
+            <div class="toggle-sidebar" id="toggle-sidebar-desktop"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i></div>
         </div>
         <div class="logo-icon-wrapper"><a href="{{ url('/') }}"><img class="img-fluid" style="height: 30px;"
                     src="{{asset('assets/images/logo/logo-icon.png')}}" alt=""></a></div>

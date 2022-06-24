@@ -37,6 +37,17 @@
 </head>
 
 <body class="landing-page">
+    <div class="loader-wrapper">
+        <div class="loader-index"><span></span></div>
+        <svg>
+            <defs></defs>
+            <filter id="goo">
+                <fegaussianblur in="SourceGraphic" stddeviation="11" result="blur"></fegaussianblur>
+                <fecolormatrix in="blur" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo">
+                </fecolormatrix>
+            </filter>
+        </svg>
+    </div>
     <div class="tap-top"><i data-feather="chevrons-up"></i></div>
     <div class="page-wrapper landing-page">
         <div class="landing-home">
@@ -52,7 +63,7 @@
                 <li class="five"><img class="img-fluid" src="{{ asset('assets/images/landing/2.png') }}" alt=""></li>
                 <li class="six"><img class="img-fluid" src="{{ asset('assets/images/landing/decore/cloud.png') }}"
                         alt=""></li>
-                <li class="seven"><img class="img-fluid" src="{{ asset('assets/images/landing/2.png') }}') }}" alt="">
+                <li class="seven"><img class="img-fluid" src="{{ asset('assets/images/landing/2.png') }}" alt="">
                 </li>
             </ul>
             <div class="container-fluid">
@@ -475,7 +486,7 @@
         <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
             @auth
                                 <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
-@else
+    @else
     <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
 
                                 @if (Route::has('register'))
@@ -485,7 +496,26 @@
             @endauth
         </div>
         @endif -->
-    @include('layouts.script')
+    <script src="{{asset('assets/js/jquery-3.5.1.min.js')}}"></script>
+    <!-- Bootstrap js-->
+    <script src="{{asset('assets/js/bootstrap/bootstrap.bundle.min.js')}}"></script>
+    <!-- feather icon js-->
+    <script src="{{asset('assets/js/icons/feather-icon/feather.min.js')}}"></script>
+    <script src="{{asset('assets/js/icons/feather-icon/feather-icon.js')}}"></script>
+    <!-- scrollbar js-->
+    <!-- Sidebar jquery-->
+    <script src="{{asset('assets/js/config.js')}}"></script>
+    <!-- Plugins JS start-->
+    @yield('script')
+
+    @if(Route::current()->getName() != 'popover')
+    <script src="{{asset('assets/js/tooltip-init.js')}}"></script>
+    @endif
+
+    <!-- Plugins JS Ends-->
+    <!-- Theme js-->
+    <script src="{{asset('assets/js/chart/apex-chart/moment.min.js')}}"></script>
+    <script src="{{asset('assets/js/script2.js')}}"></script>
 </body>
 
 </html>
