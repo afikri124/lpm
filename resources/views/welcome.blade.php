@@ -32,7 +32,6 @@
             text-align: left;
             margin-left: 20px;
         }
-
     </style>
 </head>
 
@@ -78,13 +77,13 @@
                                 aria-label="Toggle navigation"><span></span><span></span><span></span></button>
                             <div class="navbar-collapse justify-content-end collapse hidenav" id="navbarDefault">
                                 <ul class="navbar-nav navbar_nav_modify" id="scroll-spy">
-                                    <li class="nav-item"><a class="nav-link px-3" href="#"><i
-                                                class="icofont icofont-ui-home"></i> Home</a></li>
+                                    <li class="nav-item"><a class="nav-link px-3" href="#" style="text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;">
+                                        <i class="icofont icofont-ui-home" ></i> Home</a></li>
                                     <li class="nav-item">
                                         <div class=" dropup dropdown-basic">
                                             <div class="dropup dropdown">
-                                                <a class="nav-link px-3" href="#"><i
-                                                        class="icofont icofont-ui-user"></i> About</a>
+                                                <a class="nav-link px-3" href="#" style="text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;">
+                                                <i  class="icofont icofont-ui-user"></i> About</a>
                                                 <div class="dropup-content dropdown-content">
                                                     <a href="#about-us">About Us</a>
                                                     <a href="#vision-and-mission">Vision & Mission</a>
@@ -96,7 +95,8 @@
                                     <li class="nav-item">
                                         <div class=" dropup dropdown-basic">
                                             <div class="dropup dropdown">
-                                                <a class="nav-link px-3" href="#"><i class="icofont icofont-trophy"></i>
+                                                <a class="nav-link px-3" href="#" style="text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;">
+                                                <i class="icofont icofont-trophy"></i>
                                                     Accreditation</a>
                                                 <div class="dropup-content dropdown-content">
                                                     <a href="#instruments">Instruments</a>
@@ -105,8 +105,8 @@
                                             </div>
                                         </div>
                                     </li>
-                                    <li class="nav-item"><a class="nav-link px-3" href="#contact"><i
-                                                class="icofont icofont-ui-head-phone"></i> Contact</a></li>
+                                    <li class="nav-item"><a class="nav-link px-3" href="#contact" style="text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;">
+                                        <i class="icofont icofont-ui-head-phone"></i> Contact</a></li>
                                     <li class="nav-item">
                                         <div class="dropup dropdown-basic">
                                             <div class="dropup dropdown">
@@ -208,11 +208,11 @@
                     <div class="col-sm-12 wow pulse">
                         <div class="cuba-demo-content mt50">
                             <div class="couting text-secondary">
-                                <h2>Vission & Mission</h2>
+                                <h2>Vision & Mission</h2>
                             </div>
                         </div>
                         <div class="media-body"></div>
-                        <h3>Vission</h3>
+                        <h3>Vision</h3>
                         <div class="card-body new-update pt-0">
                             <div class="activity-timeline">
                                 <div class="media">
@@ -438,48 +438,49 @@
                                             class="social_title screen-reader-text"> Twitter</span></span>
                                 </a>
                             </div>
-                            <div class="footer-inner mt-3">
-                                <p style="font-size: 14px; text-align: justify; color:white">
-                                    <b>Mengubah Hidup,</b>
-                                    <br>
-                                    <b>Memperkaya Masa Depan</b>
-                                </p>
-                                <br>
-                                <p style="font-size: 10px; text-align: justify; color:white">
-                                    <b>Kampus Utama</b>
-                                    <br>
-                                    Grand Depok City, Jl. Boulevard Raya No.2 Kota Depok
-                                    16412, Jawa Barat Indonesia
-                                    <br>
-                                    <br>
-                                    <b>Kampus A</b>
-                                    <br>
-                                    Jl. Jatiwaringin Raya No. 278 Pondok Gede 17411, Jakarta
-                                    <br>
-                                    Telp: 021-846-1155 <br> Fax: 021-846-3692
-                                    <br>
-                                    <br>
-                                    <b>Kampus B</b>
-                                    <br>
-                                    Jl. Inspeksi Kalimalang No.204-205, Cibuntu, Kec. Cibitung,
-                                    Bekasi, Jawa Barat 17520
-                                    <br>
-                                    Telp : 021-8837-5585
-                                    <br>
-                                    Fax : 021-8837-5587
-                                    <br>
-                                    <br>
-                                    <iframe
-                                        src="https://maps.google.com/maps?q=Jakarta%20Global%20University%2C%20Jalan%20Boulevard%20Grand%20Depok%20City%2C%20Tirtajaya%2C%20Depok%20City%2C%20West%20Java%2C%20Indonesia&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
-                                        width="50%" height="280" frameborder="0"
-                                        style="border:0;  position: absolute; right: 0; top: 145px" allowfullscreen="">
-                                    </iframe>
-                                </p>
-                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-sm-12 col-lg-6 wow pulse footer-inner" style="text-align: justify;">
+                        <i><b>Mengubah Hidup,</b><br>
+                        <b>Memperkaya Masa Depan!</b><br><br></i>
+                        <b>Kampus Utama</b>
+                        <br>
+                        Grand Depok City, Jl. Boulevard Raya No.2 Kota Depok<br>
+                        16412, Jawa Barat Indonesia
+                        <br>
+                        <br>
+                        <b>Kampus A</b>
+                        <br>
+                        Jl. Jatiwaringin Raya No. 278 Pondok Gede 17411, Jakarta
+                        <br>
+                        Telp: 021-846-1155 <br> Fax: 021-846-3692
+                        <br>
+                        <br>
+                        <b>Kampus B</b>
+                        <br>
+                        Jl. Inspeksi Kalimalang No.204-205, Cibuntu, Kec. Cibitung,
+                        Bekasi,<br>Jawa Barat 17520
+                        <br>
+                        Telp : 021-8837-5585
+                        <br>
+                        Fax : 021-8837-5587
+                        <br>
+                        <br>
+                        <br>
+                    </div>
+                    <div class="col-sm-12 col-lg-6 mb-3">
+                        <iframe
+                            src="https://maps.google.com/maps?q=Jakarta%20Global%20University%2C%20Jalan%20Boulevard%20Grand%20Depok%20City%2C%20Tirtajaya%2C%20Depok%20City%2C%20West%20Java%2C%20Indonesia&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
+                            width="100%" height="350px" frameborder="0" >
+                        </iframe>
+                    </div>
+                </div>
             </div>
+        </footer>
+        <footer class="section-space bg-secondary py-1" >
+            Copyright ©2022 ITIC JGU. All rights reserved.
         </footer>
     </div>
     <!-- @if (Route::has('login'))
