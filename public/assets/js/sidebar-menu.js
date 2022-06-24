@@ -151,6 +151,22 @@ $toggle_nav_top.click(function () {
     $nav.toggleClass('close_icon');
     $header.toggleClass('close_icon');
     $(window).trigger('overlay');
+        if (typeof (Storage) !== "undefined") {
+        if (localStorage.getItem("sidebar_mode") != null) {
+            localStorage.removeItem('sidebar_mode');
+        } else {
+            localStorage.setItem('sidebar_mode', "Sidebar mode off");
+        }
+    }
+});
+
+$back = $('.back-btn');
+$back.click(function () {
+    if (typeof (Storage) !== "undefined") {
+        if (localStorage.getItem("sidebar_mode") != null) {
+            localStorage.removeItem('sidebar_mode');
+        }
+    }
 });
 
 // $(window).resize(function () {

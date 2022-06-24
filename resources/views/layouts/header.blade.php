@@ -29,7 +29,7 @@
                     <div class="mode"><i id="darkmodeicon" class="fa fa-moon-o"></i></div>
                 </li>
 
-                <li class="maximize"><a class="text-dark" href="#!"><i data-feather="maximize"></i></a></li>
+                <li class="maximize" id="maximize"><a class="text-dark" href="#!"><i data-feather="maximize"></i></a></li>
                 <li class="profile-nav onhover-dropdown p-0 me-0">
                     <div class="media profile-media">
                         <img class="b-r-10" src="{{Auth::user()->user_avatar}}" style="width: 40px;" alt="">

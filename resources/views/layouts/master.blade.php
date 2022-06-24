@@ -96,23 +96,36 @@
                 }
             }
         });
+
         // Check browser support
-        if (typeof (Storage) !== "undefined") {
-            if (localStorage.getItem("body") == 'dark-only') {
-                $('body').toggleClass(localStorage.getItem("body"));
-                var y = document.getElementById("darkmodeicon").className;
-                if (y == "fa fa-moon-o") {
-                    console.log("Dark mode on");
-                    $('.mode i').toggleClass("fa-moon-o").toggleClass("fa-lightbulb-o");
+        $(document).ready(function () {
+            if (typeof (Storage) !== "undefined") {
+                if (localStorage.getItem("body") == 'dark-only') {
+                    $('body').toggleClass(localStorage.getItem("body"));
+                    var y = document.getElementById("darkmodeicon").className;
+                    if (y == "fa fa-moon-o") {
+                        console.log("Dark mode on");
+                        $('.mode i').toggleClass("fa-moon-o").toggleClass("fa-lightbulb-o");
+                    }
                 }
+
+                if (localStorage.getItem("sidebar_mode") != null) {
+                    console.log(localStorage.getItem("sidebar_mode"));
+                    $nav = $('.sidebar-wrapper');
+                    $header = $('.page-header');
+                    $nav.toggleClass('close_icon');
+                    $header.toggleClass('close_icon');
+                    $(window).trigger('overlay');
+                }
+
+                if (localStorage.getItem("full_screen") != null) {
+                    console.log(localStorage.getItem("full_screen"));
+                    toggleFullScreen();
+                }
+            } else {
+                console.log("Sorry, your browser does not support Web Storage...");
             }
-            if (localStorage.getItem("full_screen") == "Fullscreen mode on") {
-                console.log(localStorage.getItem("full_screen"));
-                toggleFullScreen();
-            }
-        } else {
-            console.log("Sorry, your browser does not support Web Storage...");
-        }
+        });
 
         $(".maximize").on("click", function () {
             toggleFullScreen();
@@ -153,7 +166,7 @@
                     }
                 }
             });
-            var t = setTimeout(notifications, 60*1000);
+            var t = setTimeout(notifications, 60 * 1000);
         }
         notifications();
 
