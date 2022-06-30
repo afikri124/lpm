@@ -79,34 +79,12 @@
     $callback_url = route('sso_klas2');
     $token = md5($callback_url.date('Y/m/d'));
     $url = "http://klas2.jgu.ac.id/sso/";
-    $link = $url."?login_to=".route('login')."&login_name=Peer Observation";
+    $link = $url."?login_to=".route('login')."&login_name=Peer Observation&callback_url=$callback_url&token=$token&ip=".$_SERVER['REMOTE_ADDR'];
 @endphp
 @section('script')
 <script>
     function Klas2Login() {
-        let windowName = 'w_' + Date.now() + Math.floor(Math.random() * 100000).toString();
-        var form = document.createElement("form");
-        form.setAttribute("method", "post");
-        form.setAttribute("action", "{!!$link!!}");
-        form.setAttribute("target", windowName);
-
-        var token = document.createElement("input"); 
-        token.setAttribute("type", "hidden");
-        token.setAttribute("name", "token");
-        token.setAttribute("value", "{{$token}}");
-        form.appendChild(token);
-
-        var callback_url = document.createElement("input"); 
-        callback_url.setAttribute("type", "hidden");
-        callback_url.setAttribute("name", "callback_url");
-        callback_url.setAttribute("value", "{{$callback_url}}");
-        form.appendChild(callback_url);
-
-        document.body.appendChild(form);
-
-        window.open('', windowName,"location=no, titlebar=no, toolbar=no, fullscreen=yes, resizable=no, scrollbars=yes");
-
-        form.submit();
+        window.open("{!!$link!!}", "LOGIN SSO JGU","location=no, titlebar=no, toolbar=no, fullscreen=yes, resizable=no, scrollbars=yes");
     }
 </script>
 @endsection
