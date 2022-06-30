@@ -63,7 +63,7 @@
                             <div class="btn-showcase">
                                 <button class="btn btn-light btn-block w-100" onclick="Klas2Login()">
                                     <img style="max-width: 20px;" src="{{asset('assets/images/logo/logo-icon.png')}}">
-                                    Klas2 Account </button></div>
+                                    SSO Klas2</button></div>
                         </div>
                         <!-- <p class="mt-4 mb-0 text-center">Don't have account?<a class="ms-2"
                                     href="{{ route('register') }}">Create Account</a></p> -->
