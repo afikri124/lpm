@@ -51,18 +51,24 @@
     <div class="page-wrapper landing-page">
         <div class="landing-home">
             <ul class="decoration">
-                <li class="one"><img class="img-fluid" src="{{ asset('assets/images/landing/decore/1.png') }}" alt="">
+                <li class="one"><img class="img-fluid" src="{{ asset('assets/images/landing/decore/1.png') }}"
+                        alt="">
                 </li>
-                <li class="two"><img class="img-fluid" src="{{ asset('assets/images/landing/decore/2.png') }}" alt="">
+                <li class="two"><img class="img-fluid" src="{{ asset('assets/images/landing/decore/2.png') }}"
+                        alt="">
                 </li>
-                <li class="three"><img class="img-fluid" src="{{ asset('assets/images/landing/decore/4.png') }}" alt="">
+                <li class="three"><img class="img-fluid" src="{{ asset('assets/images/landing/decore/4.png') }}"
+                        alt="">
                 </li>
-                <li class="four"><img class="img-fluid" src="{{ asset('assets/images/landing/decore/3.png') }}" alt="">
+                <li class="four"><img class="img-fluid" src="{{ asset('assets/images/landing/decore/3.png') }}"
+                        alt="">
                 </li>
-                <li class="five"><img class="img-fluid" src="{{ asset('assets/images/landing/2.png') }}" alt=""></li>
+                <li class="five"><img class="img-fluid" src="{{ asset('assets/images/landing/2.png') }}"
+                        alt=""></li>
                 <li class="six"><img class="img-fluid" src="{{ asset('assets/images/landing/decore/cloud.png') }}"
                         alt=""></li>
-                <li class="seven"><img class="img-fluid" src="{{ asset('assets/images/landing/2.png') }}" alt="">
+                <li class="seven"><img class="img-fluid" src="{{ asset('assets/images/landing/2.png') }}"
+                        alt="">
                 </li>
             </ul>
             <div class="container-fluid">
@@ -77,17 +83,19 @@
                                 aria-label="Toggle navigation"><span></span><span></span><span></span></button>
                             <div class="navbar-collapse justify-content-end collapse hidenav" id="navbarDefault">
                                 <ul class="navbar-nav navbar_nav_modify" id="scroll-spy">
-                                    <li class="nav-item"><a class="nav-link px-3" href="#" style="text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;">
-                                        <i class="icofont icofont-ui-home" ></i> Home</a></li>
+                                    <li class="nav-item"><a class="nav-link px-3" href="#"
+                                            style="text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;">
+                                            <i class="icofont icofont-ui-home"></i> Home</a></li>
                                     <li class="nav-item">
                                         <div class=" dropup dropdown-basic">
                                             <div class="dropup dropdown">
-                                                <a class="nav-link px-3" href="#" style="text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;">
-                                                <i  class="icofont icofont-ui-user"></i> About</a>
+                                                <a class="nav-link px-3" href="#"
+                                                    style="text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;">
+                                                    <i class="icofont icofont-ui-user"></i> Tentang</a>
                                                 <div class="dropup-content dropdown-content">
-                                                    <a href="#about-us">About Us</a>
-                                                    <a href="#vision-and-mission">Vision & Mission</a>
-                                                    <a href="#org-structure">Org. Structure</a>
+                                                    <a href="#about-us">Tentang</a>
+                                                    <a href="#vision-and-mission">Visi & Misi</a>
+                                                    <a href="#org-structure">Org. Struktur</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -95,34 +103,36 @@
                                     <li class="nav-item">
                                         <div class=" dropup dropdown-basic">
                                             <div class="dropup dropdown">
-                                                <a class="nav-link px-3" href="#" style="text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;">
-                                                <i class="icofont icofont-trophy"></i>
-                                                    Accreditation</a>
+                                                <a class="nav-link px-3" href="#"
+                                                    style="text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;">
+                                                    <i class="icofont icofont-trophy"></i>
+                                                    Akreditasi</a>
                                                 <div class="dropup-content dropdown-content">
                                                     <a href="#instruments">Instruments</a>
-                                                    <a href="#results">Results</a>
+                                                    <a href="#results">Hasil</a>
                                                 </div>
                                             </div>
                                         </div>
                                     </li>
-                                    <li class="nav-item"><a class="nav-link px-3" href="#contact" style="text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;">
-                                        <i class="icofont icofont-ui-head-phone"></i> Contact</a></li>
+                                    <li class="nav-item"><a class="nav-link px-3" href="#contact"
+                                            style="text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;">
+                                            <i class="icofont icofont-ui-head-phone"></i> Kontak</a></li>
                                     <li class="nav-item">
                                         <div class="dropup dropdown-basic">
                                             <div class="dropup dropdown">
                                                 <a class="nav-link dropbtn btn-primary px-3" href="#"><i
-                                                        class="fa fa-th"></i> Application</a>
+                                                        class="fa fa-th"></i> Aplikasi</a>
                                                 <div class="dropup-content dropdown-content">
                                                     @if (Route::has('login'))
-                                                    @auth
-                                                    <a href="{{ url('/dashboard') }}"
-                                                        class="text-sm text-gray-700 dark:text-gray-500 underline">Peer
-                                                        Observation</a>
-                                                    @else
-                                                    <a href="{{ route('login') }}"
-                                                        class="text-sm text-gray-700 dark:text-gray-500 underline">Peer
-                                                        Observation</a>
-                                                    @endauth
+                                                        @auth
+                                                            <a href="{{ url('/dashboard') }}"
+                                                                class="text-sm text-gray-700 dark:text-gray-500 underline">Peer
+                                                                Observation</a>
+                                                        @else
+                                                            <a href="{{ route('login') }}"
+                                                                class="text-sm text-gray-700 dark:text-gray-500 underline">Peer
+                                                                Observation</a>
+                                                        @endauth
                                                     @endif
                                                     <a href="https://lpm.jgu.ac.id/old">PO-Old</a>
                                                     <a href="#">Coming soon..</a>
@@ -151,10 +161,10 @@
                     </div>
 
                     <div class="col-xl-7 col-lg-6">
-                        <!-- <div class="wow fadeIn"><img class="screen1" src="{{asset('assets/images/landing/screen1.jpg')}}"
+                        <!-- <div class="wow fadeIn"><img class="screen1" src="{{ asset('assets/images/landing/screen1.jpg') }}"
                                 alt=""></div> -->
                         <div class="wow fadeIn"><img class="screen2"
-                                src="{{asset('assets/images/landing/screen2.jpg')}}" alt=""></div>
+                                src="{{ asset('assets/images/landing/screen2.jpg') }}" alt=""></div>
                     </div>
                 </div>
                 <!-- BATAS AKHIR HALAMAN HOME PALING ATAS -->
@@ -167,33 +177,32 @@
                     <div class="col-sm-12 wow pulse">
                         <div class="cuba-demo-content">
                             <div class="couting">
-                                <h2>About Us</h2>
+                                <h2>Tentang</h2>
                             </div>
                             <div class="media-body text-center">
-                                <p>Purpose</p>
+                                <p>Tujuan</p>
                                 <div class="media">
                                     <div class="activity-dot-primary mx-2"></div>
-                                    The realization of an internal quality assurance system within JGU
-                                    which includes standard setting, implementation, evaluation, improvement, and
-                                    standard control.
+                                    Terwujudnya sistem penjaminan mutu internal di lingkungan JGU yang meliputi
+                                    penetapan standar, pelaksanaan, evaluasi, peningkatan, dan pengendalian standar.
                                 </div>
                                 </br>
                                 <div class="media">
                                     <div class="activity-dot-primary mx-2"></div>
-                                    Ensure the implementation of internal and external quality assurance services and
-                                    training in all units within the JGU.
+                                    Menjamin terlaksananya pelayanan dan pelatihan penjaminan mutu internal dan
+                                    eksternal pada semua unit di lingkungan JGU.
                                 </div>
                                 </br>
                                 <div class="media">
                                     <div class="activity-dot-primary mx-2"></div>
-                                    The establishment of a quality culture for the academic community and education
-                                    staff in the JGU environment.
+                                    Terbentuknya budaya mutu bagi civitas akademika dan tenaga kependidikan di
+                                    lingkungan JGU.
                                 </div>
                                 </br>
                                 <div class="media">
                                     <div class="activity-dot-primary mx-2"></div>
-                                    Facilitate access to integrated higher education data for all units within the JGU
-                                    environment.
+                                    Mempermudah akses data perguruan tinggi yang terintegrasi bagi semua unit di
+                                    lingkungan JGU.
                                 </div>
                             </div>
                         </div>
@@ -208,18 +217,18 @@
                     <div class="col-sm-12 wow pulse">
                         <div class="cuba-demo-content mt50">
                             <div class="couting text-secondary">
-                                <h2>Vision & Mission</h2>
+                                <h2>Visi & Misi</h2>
                             </div>
                         </div>
                         <div class="media-body"></div>
-                        <h3>Vision</h3>
+                        <h3>Visi</h3>
                         <div class="card-body new-update pt-0">
                             <div class="activity-timeline">
                                 <div class="media">
-                                    <div class="media-body"><i>Making the JGU Quality Assurance Institute a pioneer
-                                            in implementing the tridharma quality system and culture of higher education
-                                            that can lead JGU to become a superior institution in the fields of
-                                            technology and health.
+                                    <div class="media-body"><i>Menjadikan Lembaga Penjaminan Mutu JGU sebagai pelopor
+                                            dalam menerapkan sistem dan budaya mutu tridharma perguruan tinggi yang
+                                            dapat mengantarkan JGU menjadi institusi unggul dalam bidang teknologi dan
+                                            Kesehatan.
                                         </i>
                                     </div>
                                 </div>
@@ -227,31 +236,30 @@
                         </div>
                     </div>
                     <div class="text-left">
-                        <h3>Mission</h3>
+                        <h3>Misi</h3>
                         <div class="media">
                             <div class="activity-dot-dark mx-2"></div>
-                            <div class="media"><span>Develop, implement, and make continuous improvements to the
-                                    Internal Quality Assurance System (SPMI).</span>
+                            <div class="media"><span>Menyusun, menerapkan, dan melakukan perbaikan secara
+                                    berkelanjutan terhadap Sistem Penjaminan Mutu Internal (SPMI)..</span>
                             </div>
                         </div>
                         <div class="media">
                             <div class="activity-dot-dark mx-2"></div>
-                            <div class="media"><span>Build and develop services and training of internal and external
-                                    quality assurance systems in all units within JGU
+                            <div class="media"><span>Membangun dan mengembangkan pelayanan dan pelatihan sistem
+                                    penjaminan mutu internal dan eksternal pada semua unit di lingkungan JGU.
                                 </span>
                             </div>
                         </div>
                         <div class="media">
                             <div class="activity-dot-dark mx-2"></div>
-                            <div class="media"><span>Encouraging the formation of a quality culture of higher education
-                                    tridharma for the academic community and education staff in the JGU
-                                    environment.</span>
+                            <div class="media"><span>Mendorong terbentuknya budaya mutu tridharma perguruan tinggi
+                                    bagi civitas akademika dan tenaga kependidikan di lingkungan JGU.</span>
                             </div>
                         </div>
                         <div class="media">
                             <div class="activity-dot-dark mx-2"></div>
-                            <div class="media"><span>Build an integrated JGU university database for all units within
-                                    the JGU environment.</span>
+                            <div class="media"><span>Membangun pangkalan data perguruan tinggi JGU yang
+                                    terintegrasi untuk semua unit di lingkungan JGU.</span>
                             </div>
 
                         </div>
@@ -268,8 +276,8 @@
                     <div class="col-lg-6 wow pulse">
                         <div class="cuba-demo-content email-txt text-start">
                             <div class="couting">
-                                <h2>Structure</h2>
-                                <p>Organizational LPM</p>
+                                <h2>Struktur</h2>
+                                <p>Organisasi LPM</p>
                                 <ul class="landing-ul">
                                     <li>Rektor</li>
                                     <li>Kepala Lembaga</li>
@@ -281,7 +289,8 @@
                         </div>
                     </div>
                     <div class="col-lg-6 wow pulse"><a href=""><img class="img-fluid email-img"
-                                src="{{ asset('assets/images/dashboard/structure-removebg.png')}}" alt=""></a></div>
+                                src="{{ asset('assets/images/dashboard/structure-removebg.png') }}"
+                                alt=""></a></div>
                 </div>
             </div>
         </section>
@@ -291,13 +300,13 @@
                 <div class="landing-center ptb50">
                     <div class="title">
                         <h2>Instruments</h2>
-                        <p>Accreditation Instruments</p>
+                        <p>Akreditasi Instruments</p>
                     </div>
                     <div class="footer-content">
-                        <h1>For Universities/Study Programs Who Want to Download Accreditation Instruments,</h1>
-                        <h1>please click the following link:</h1>
+                        <h1>Bagi Perguruan Tinggi/Prodi Yang Ingin Download Instrumen Akreditasi,</h1>
+                        <h1>silahkan klik link berikut :</h1>
                         <a class="btn mrl5 btn-lg btn-secondary default-view" target="_blank"
-                            href="https://portal.jgu.ac.id/"> Click here </a>
+                            href="https://portal.jgu.ac.id/"> Klik Disini</a>
                     </div>
                 </div>
             </div>
@@ -309,9 +318,9 @@
                     <div class="col-sm-12 wow pulse">
                         <div class="cuba-demo-content mt50">
                             <div class="couting">
-                                <h2>Results</h2>
+                                <h2>Hasil</h2>
                             </div>
-                            <p>Study Program Accreditation</p>
+                            <p>Akreditasi Program Pembelajaran</p>
                         </div>
                     </div>
                 </div>
@@ -321,85 +330,85 @@
 
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
                         <div class="component-hover-effect"><i class="fa fa-spin fa-star h1 text-warning"></i>
-                            <h6 class="m-0">Good</h6>
-                            <p>S1 Pharmacy</p>
+                            <h6 class="m-0">Baik</h6>
+                            <p>S1 Farmasi</p>
                         </div>
                     </div>
 
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
                         <div class="component-hover-effect"><i class="fa fa-spin fa-star h1 text-warning"></i>
-                            <h6 class="m-0">Good</h6>
-                            <p>S1 Digital Business</p>
+                            <h6 class="m-0">Baik</h6>
+                            <p>S1 Bisnis Digital</p>
                         </div>
                     </div>
 
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
                         <div class="component-hover-effect"><i class="fa fa-spin fa-star  h1 text-warning"></i>
-                            <h6 class="m-0">Good</h6>
-                            <p>S1 Industrial Eng.</p>
+                            <h6 class="m-0">Baik</h6>
+                            <p>S1 Teknik Industri</p>
                         </div>
                     </div>
 
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
                         <div class="component-hover-effect"><i class="fa fa-spin fa-star  h1 text-warning"></i>
-                            <h6 class="m-0">Good</h6>
-                            <p>S2 Electrical Eng.</p>
+                            <h6 class="m-0">Baik</h6>
+                            <p>S2 Teknik Elektro.</p>
                         </div>
                     </div>
 
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
                         <div class="component-hover-effect"><i class="fa fa-spin fa-star  h1 text-warning"></i>
-                            <h6 class="m-0">B</h6>
-                            <p>S1 Electrical Eng.</p>
+                            <h6 class="m-0">Baik</h6>
+                            <p>S1 Teknik Elektro.</p>
                         </div>
                     </div>
 
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
                         <div class="component-hover-effect"><i class="fa fa-spin fa-star  h1 text-warning"></i>
-                            <h6 class="m-0">B</h6>
-                            <p>S1 Mechanical Eng.</p>
+                            <h6 class="m-0">Baik</h6>
+                            <p>S1 Teknik Mekanik.</p>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
                         <div class="component-hover-effect"><i class="fa fa-spin fa-star  h1 text-warning"></i>
-                            <h6 class="m-0 Pt-4">B</h6>
-                            <p>S1 Management</p>
+                            <h6 class="m-0 Pt-4">Baik</h6>
+                            <p>S1 Manajemen</p>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
                         <div class="component-hover-effect"><i class="fa fa-spin fa-star h1 text-warning"></i>
-                            <h6 class="m-0">B</h6>
-                            <p>S1 Civil Eng.</p>
+                            <h6 class="m-0">Baik</h6>
+                            <p>S1 Teknik Sipil.</p>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
                         <div class="component-hover-effect"><i class="fa fa-spin fa-star  h1 text-warning"></i>
-                            <h6 class="m-0">C</h6>
-                            <p>D3 Accountant</p>
+                            <h6 class="m-0">Cukup</h6>
+                            <p>D3 Akuntansi</p>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
                         <div class="component-hover-effect"><i class="fa fa-spin fa-star h1 text-warning"></i>
-                            <h6 class="m-0">C</h6>
-                            <p>D3 Marketing Mngt.</p>
+                            <h6 class="m-0">Cukup</h6>
+                            <p>D3 Manajemen Pemasaran.</p>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
                         <div class="component-hover-effect"><i class="fa fa-spin fa-star-o h1 text-warning"></i>
                             <h6 class="m-0">-</h6>
-                            <p>S1 Informatics Eng.</p>
+                            <p>S1 Teknik Informatika.</p>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
                         <div class="component-hover-effect"><i class="fa fa-spin fa-star-o  h1 text-warning"></i>
                             <h6 class="m-0">-</h6>
-                            <p>S1 Information System<i class="text-danger">*</i></p>
+                            <p>S1 Sistem Infomasi.<i class="text-danger">*</i></p>
                         </div>
                     </div>
 
                     <a target="_blank"
-                        href="https://pddikti.kemdikbud.go.id/data_pt/QUEzRUM1NjktQjI0NS00ODA3LTlGMkYtOERDRkNGMUI2MkNC">click
-                        here for more information</a>
+                        href="https://pddikti.kemdikbud.go.id/data_pt/QUEzRUM1NjktQjI0NS00ODA3LTlGMkYtOERDRkNGMUI2MkNC">Klik
+                        disini untuk Informasi Lebih Lanjut</a>
 
                 </div>
             </div>
@@ -444,7 +453,7 @@
                 <div class="row">
                     <div class="col-sm-12 col-lg-6 wow pulse footer-inner" style="text-align: justify;">
                         <i><b>Mengubah Hidup,</b><br>
-                        <b>Memperkaya Masa Depan!</b><br><br></i>
+                            <b>Memperkaya Masa Depan!</b><br><br></i>
                         <b>Kampus Utama</b>
                         <br>
                         Grand Depok City, Jl. Boulevard Raya No.2 Kota Depok<br>
@@ -473,50 +482,50 @@
                     <div class="col-sm-12 col-lg-6 mb-3">
                         <iframe
                             src="https://maps.google.com/maps?q=Jakarta%20Global%20University%2C%20Jalan%20Boulevard%20Grand%20Depok%20City%2C%20Tirtajaya%2C%20Depok%20City%2C%20West%20Java%2C%20Indonesia&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
-                            width="100%" height="350px" frameborder="0" >
+                            width="100%" height="350px" frameborder="0">
                         </iframe>
                     </div>
                 </div>
             </div>
         </footer>
-        <footer class="section-space bg-secondary py-1" >
+        <footer class="section-space bg-secondary py-1">
             Copyright ©2022 ITIC JGU. All rights reserved.
         </footer>
     </div>
     <!-- @if (Route::has('login'))
         <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
             @auth
-                                <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
-    @else
+                                                                                        <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
+@else
     <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
 
-                                @if (Route::has('register'))
+                                                                                        @if (Route::has('register'))
     <a href="{{ route('register') }}"
-                                    class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
+                                                                                            class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
     @endif
             @endauth
         </div>
         @endif -->
-    <script src="{{asset('assets/js/jquery-3.5.1.min.js')}}"></script>
+    <script src="{{ asset('assets/js/jquery-3.5.1.min.js') }}"></script>
     <!-- Bootstrap js-->
-    <script src="{{asset('assets/js/bootstrap/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{ asset('assets/js/bootstrap/bootstrap.bundle.min.js') }}"></script>
     <!-- feather icon js-->
-    <script src="{{asset('assets/js/icons/feather-icon/feather.min.js')}}"></script>
-    <script src="{{asset('assets/js/icons/feather-icon/feather-icon.js')}}"></script>
+    <script src="{{ asset('assets/js/icons/feather-icon/feather.min.js') }}"></script>
+    <script src="{{ asset('assets/js/icons/feather-icon/feather-icon.js') }}"></script>
     <!-- scrollbar js-->
     <!-- Sidebar jquery-->
-    <script src="{{asset('assets/js/config.js')}}"></script>
+    <script src="{{ asset('assets/js/config.js') }}"></script>
     <!-- Plugins JS start-->
     @yield('script')
 
-    @if(Route::current()->getName() != 'popover')
-    <script src="{{asset('assets/js/tooltip-init.js')}}"></script>
+    @if (Route::current()->getName() != 'popover')
+        <script src="{{ asset('assets/js/tooltip-init.js') }}"></script>
     @endif
 
     <!-- Plugins JS Ends-->
     <!-- Theme js-->
-    <script src="{{asset('assets/js/chart/apex-chart/moment.min.js')}}"></script>
-    <script src="{{asset('assets/js/script2.js')}}"></script>
+    <script src="{{ asset('assets/js/chart/apex-chart/moment.min.js') }}"></script>
+    <script src="{{ asset('assets/js/script2.js') }}"></script>
 </body>
 
 </html>
