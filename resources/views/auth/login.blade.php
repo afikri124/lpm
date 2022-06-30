@@ -57,16 +57,17 @@
                             <div class="text-end mt-3">
                                 <button class="btn btn-primary btn-block w-100" type="submit">Login</button>
                             </div>
-
-                            <h6 class="text-muted mt-4 or">Or login with</h6>
-                            <div class="social mt-4">
-                                <div class="btn-showcase">
-                                    <a class="btn btn-light btn-block w-100" href="" target="_blank">
-                                    <img style="max-width: 20px;" src="{{asset('assets/images/logo/logo-icon.png')}}"> Klas2 Account </a></div>
-                            </div>
-                            <!-- <p class="mt-4 mb-0 text-center">Don't have account?<a class="ms-2"
-                                    href="{{ route('register') }}">Create Account</a></p> -->
                         </form>
+                        <h6 class="text-muted mt-4 or">Or login with</h6>
+                        <div class="social mt-4">
+                            <div class="btn-showcase">
+                                <button class="btn btn-light btn-block w-100" onclick="Klas2Login()">
+                                    <img style="max-width: 20px;" src="{{asset('assets/images/logo/logo-icon.png')}}">
+                                    Klas2 Account </button></div>
+                        </div>
+                        <!-- <p class="mt-4 mb-0 text-center">Don't have account?<a class="ms-2"
+                                    href="{{ route('register') }}">Create Account</a></p> -->
+
                     </div>
                 </div>
             </div>
@@ -74,6 +75,38 @@
     </div>
 </div>
 @endsection
-
+@php
+    $callback_url = route('sso_klas2');
+    $token = md5($callback_url.date('Y/m/d'));
+    $url = "http://klas2.jgu.ac.id/sso/";
+    $link = $url."?login_to=".route('login')."&login_name=Peer Observation";
+@endphp
 @section('script')
+<script>
+    function Klas2Login() {
+        let windowName = 'w_' + Date.now() + Math.floor(Math.random() * 100000).toString();
+        var form = document.createElement("form");
+        form.setAttribute("method", "post");
+        form.setAttribute("action", "{!!$link!!}");
+        form.setAttribute("target", windowName);
+
+        var token = document.createElement("input"); 
+        token.setAttribute("type", "hidden");
+        token.setAttribute("name", "token");
+        token.setAttribute("value", "{{$token}}");
+        form.appendChild(token);
+
+        var callback_url = document.createElement("input"); 
+        callback_url.setAttribute("type", "hidden");
+        callback_url.setAttribute("name", "callback_url");
+        callback_url.setAttribute("value", "{{$callback_url}}");
+        form.appendChild(callback_url);
+
+        document.body.appendChild(form);
+
+        window.open('', windowName,"location=no, titlebar=no, toolbar=no, fullscreen=yes, resizable=no, scrollbars=yes");
+
+        form.submit();
+    }
+</script>
 @endsection
