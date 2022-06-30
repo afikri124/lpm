@@ -95,7 +95,7 @@
                                                 <div class="dropup-content dropdown-content">
                                                     <a href="#about-us">Tentang</a>
                                                     <a href="#vision-and-mission">Visi & Misi</a>
-                                                    <a href="#org-structure">Org. Struktur</a>
+                                                    <a href="#org-structure">Struktur Org.</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -108,7 +108,7 @@
                                                     <i class="icofont icofont-trophy"></i>
                                                     Akreditasi</a>
                                                 <div class="dropup-content dropdown-content">
-                                                    <a href="#instruments">Instruments</a>
+                                                    <a href="#instruments">Instrumen</a>
                                                     <a href="#results">Hasil</a>
                                                 </div>
                                             </div>
@@ -161,8 +161,6 @@
                     </div>
 
                     <div class="col-xl-7 col-lg-6">
-                        <!-- <div class="wow fadeIn"><img class="screen1" src="{{ asset('assets/images/landing/screen1.jpg') }}"
-                                alt=""></div> -->
                         <div class="wow fadeIn"><img class="screen2"
                                 src="{{ asset('assets/images/landing/screen2.jpg') }}" alt=""></div>
                     </div>
@@ -288,8 +286,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 wow pulse"><a href=""><img class="img-fluid email-img"
-                                src="{{ asset('assets/images/dashboard/structure-removebg.png') }}"
+                    <div class="col-lg-6 wow pulse"><a href=""><img class="img-fluid"
+                                src="{{ asset('assets/images/dashboard/struktur.png') }}"
                                 alt=""></a></div>
                 </div>
             </div>
@@ -299,14 +297,14 @@
             <div class="container">
                 <div class="landing-center ptb50">
                     <div class="title">
-                        <h2>Instruments</h2>
-                        <p>Akreditasi Instruments</p>
+                        <h2>Instrumen</h2>
+                        <p>Instrumen Akreditasi </p>
                     </div>
                     <div class="footer-content">
-                        <h1>Bagi Perguruan Tinggi/Prodi Yang Ingin Download Instrumen Akreditasi,</h1>
+                        <h1>Bagi Perguruan Tinggi/Ketua Program Studi Yang Ingin Download Instrumen Akreditasi,</h1>
                         <h1>silahkan klik link berikut :</h1>
                         <a class="btn mrl5 btn-lg btn-secondary default-view" target="_blank"
-                            href="https://portal.jgu.ac.id/"> Klik Disini</a>
+                            href="https://www.banpt.or.id/wp-content/uploads/2019/10/Lampiran-5-PerBAN-PT-5-2019-tentang-IAPS-Pedoman-Penilaian.pdf">Klik Disini</a>
                     </div>
                 </div>
             </div>
@@ -320,7 +318,7 @@
                             <div class="couting">
                                 <h2>Hasil</h2>
                             </div>
-                            <p>Akreditasi Program Pembelajaran</p>
+                            <p>Akreditasi Program Studi</p>
                         </div>
                     </div>
                 </div>
@@ -328,85 +326,118 @@
             <div class="container container-modify">
                 <div class="row component_responsive">
 
+                
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><i class="fa fa-spin fa-star h1 text-warning"></i>
-                            <h6 class="m-0">Baik</h6>
-                            <p>S1 Farmasi</p>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><i class="fa fa-spin fa-star h1 text-warning"></i>
-                            <h6 class="m-0">Baik</h6>
-                            <p>S1 Bisnis Digital</p>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><i class="fa fa-spin fa-star  h1 text-warning"></i>
-                            <h6 class="m-0">Baik</h6>
-                            <p>S1 Teknik Industri</p>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><i class="fa fa-spin fa-star  h1 text-warning"></i>
-                            <h6 class="m-0">Baik</h6>
-                            <p>S2 Teknik Elektro.</p>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><i class="fa fa-spin fa-star  h1 text-warning"></i>
-                            <h6 class="m-0">Baik</h6>
-                            <p>S1 Teknik Elektro.</p>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><i class="fa fa-spin fa-star  h1 text-warning"></i>
-                            <h6 class="m-0">Baik</h6>
-                            <p>S1 Teknik Mekanik.</p>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><i class="fa fa-spin fa-star  h1 text-warning"></i>
-                            <h6 class="m-0 Pt-4">Baik</h6>
+                        <div class="component-hover-effect">
+                            <i class="fa fa-spin fa-star h2 text-warning"></i>
+                            <i class="fa fa-spin fa-star h2 text-warning"></i>
+                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
+                            <h6 class="m-0">Sarjana</h6>
                             <p>S1 Manajemen</p>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><i class="fa fa-spin fa-star h1 text-warning"></i>
-                            <h6 class="m-0">Baik</h6>
-                            <p>S1 Teknik Sipil.</p>
+                        <div class="component-hover-effect">
+                            <i class="fa fa-spin fa-star h2 text-warning"></i>
+                            <i class="fa fa-spin fa-star h2 text-warning"></i>
+                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
+                            <h6 class="m-0">Sarjana</h6>
+                            <p>S1 Teknik Elektro</p>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-2 col-md-4 col-6 component-col-set">
+                        <div class="component-hover-effect">
+                            <i class="fa fa-spin fa-star h2 text-warning"></i>
+                            <i class="fa fa-spin fa-star h2 text-warning"></i>
+                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
+                            <h6 class="m-0">Sarjana</h6>
+                            <p>S1 Teknik Mesin</p>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><i class="fa fa-spin fa-star  h1 text-warning"></i>
-                            <h6 class="m-0">Cukup</h6>
+                        <div class="component-hover-effect">
+                            <i class="fa fa-spin fa-star h2 text-warning"></i>
+                            <i class="fa fa-spin fa-star h2 text-warning"></i>
+                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
+                            <h6 class="m-0">Sarjana</h6>
+                            <p>S1 Teknik Sipil</p>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-4 col-6 component-col-set">
+                        <div class="component-hover-effect">
+                            <i class="fa fa-spin fa-star h2 text-warning"></i>
+                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
+                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
+                            <h6 class="m-0">Sarjana</h6>
+                            <p>S1 Bisnis Digital</p>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-4 col-6 component-col-set">
+                        <div class="component-hover-effect">
+                            <i class="fa fa-spin fa-star h2 text-warning"></i>
+                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
+                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
+                            <h6 class="m-0">Sarjana</h6>
+                            <p>S1 Farmasi</p>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-4 col-6 component-col-set">
+                        <div class="component-hover-effect">
+                            <i class="fa fa-spin fa-star h2 text-warning"></i>
+                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
+                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
+                            <h6 class="m-0">Sarjana</h6>
+                            <p>S1 Teknik Industri</p>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-4 col-6 component-col-set">
+                        <div class="component-hover-effect">
+                            <i class="fa fa-spin fa-star h2 text-warning"></i>
+                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
+                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
+                            <h6 class="m-0">Sarjana</h6>
+                            <p>S1 Teknik Informatika</p>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-4 col-6 component-col-set">
+                        <div class="component-hover-effect">
+                            <i class="fa fa-spin fa-star h2 text-warning"></i>
+                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
+                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
+                            <h6 class="m-0">Magister</h6>
+                            <p>S2 Teknik Elektro</p>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-4 col-6 component-col-set">
+                        <div class="component-hover-effect">
+                            <i class="fa fa-spin fa-star h2 text-warning"></i>
+                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
+                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
+                            <h6 class="m-0">Diploma</h6>
                             <p>D3 Akuntansi</p>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><i class="fa fa-spin fa-star h1 text-warning"></i>
-                            <h6 class="m-0">Cukup</h6>
-                            <p>D3 Manajemen Pemasaran.</p>
+                        <div class="component-hover-effect">
+                            <i class="fa fa-spin fa-star h2 text-warning"></i>
+                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
+                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
+                            <h6 class="m-0">Diploma</h6>
+                            <p>D3 Mnj. Pemasaran</p>
                         </div>
                     </div>
-                    <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><i class="fa fa-spin fa-star-o h1 text-warning"></i>
-                            <h6 class="m-0">-</h6>
-                            <p>S1 Teknik Informatika.</p>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect"><i class="fa fa-spin fa-star-o  h1 text-warning"></i>
-                            <h6 class="m-0">-</h6>
-                            <p>S1 Sistem Infomasi.<i class="text-danger">*</i></p>
+                    <div class="col-xl-2 col-md-4 col-6 component-col-set" title="Program ditupup sementara">
+                        <div class="component-hover-effect">
+                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
+                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
+                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
+                            <h6 class="m-0">Sarjana</h6>
+                            <p>S1 Sistem Infomasi<i class="text-danger">*</i></p>
                         </div>
                     </div>
 
-                    <a target="_blank"
+                    <a target="_blank" class="text-warning"
                         href="https://pddikti.kemdikbud.go.id/data_pt/QUEzRUM1NjktQjI0NS00ODA3LTlGMkYtOERDRkNGMUI2MkNC">Klik
                         disini untuk Informasi Lebih Lanjut</a>
 
