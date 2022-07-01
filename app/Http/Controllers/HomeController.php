@@ -25,4 +25,16 @@ class HomeController extends Controller
     {
         return view('welcome');
     }
+
+    public function sso_klas2(Request $request)
+    {
+        // echo $request->token;
+        if($request->token == md5(route('sso_klas2').date('Y/m/d')) && md5($request->id.date('Y/m/d')) == $request->token_pass){
+            echo $request->token;
+            echo "<br>".$request->token_pass;
+            echo "<br>".$request->id;
+        } else {
+            echo "ERROR!";
+        }
+    }
 }

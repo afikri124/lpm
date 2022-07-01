@@ -13,8 +13,8 @@ Pertama harus sudah terinstall XAMPP, GIT dan composer..
 setelah semua terinstall buka forder tempat menyimpan kode dan lakukan perintah dibawah ini melalui terminal
 
 Buka CMD atau Termianal pada Visual Studio Code:
-- Cloning laravel @git: $ <code>git clone [https://github.com/afikri124/peer-observation.git](https://github.com/afikri124/peer-observation.git)</code>
-- masuk ke folder koding sistem ini: <code>cd peer-observation</code>
+- Cloning laravel @git: $ <code>git clone [https://github.com/afikri124/lpm.git](https://github.com/afikri124/lpm.git)</code>
+- masuk ke folder koding sistem ini: <code>cd lpm</code>
 - Install depedensi: <code>composer install</code> (atau composer update).
 - membuat file .env: <code>cp .env.example .env</code>
 - kemudian edit konfigurasi didalam file env (bisa di edit menggunakan perintah nano .env dll):
@@ -22,6 +22,7 @@ Buka CMD atau Termianal pada Visual Studio Code:
         <code>APP_NAME=LPM</code><br>
         <code>APP_URL=http://localhost</code>(jika dilocal gunakan localhost, jika di server gunakan domain server)<br>
         <code>FORCE_HTTPS=false</code>(jika dilocal gunakan false, jika server support ssl gunakan true)<br>
+        <code>ASSET_URL=/public</code>(tambahkan iini jika di server)<br>
     - DB_CONNECTION dan seterusnya (Jangan lupa buatkan database dulu)<br>
         <code>DB_CONNECTION=mysql</code><br>
         <code>DB_HOST=127.0.0.1</code><br>

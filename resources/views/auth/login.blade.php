@@ -79,6 +79,7 @@
     $callback_url = route('sso_klas2');
     $token = md5($callback_url.date('Y/m/d'));
     $url = "http://klas2.jgu.ac.id/sso/";
+    //$url = "http://localhost/JGU/sso/test.php"; //for test only
     $link = $url."?login_to=".route('login')."&login_name=Peer Observation&callback_url=$callback_url&token=$token&ip=".$_SERVER['REMOTE_ADDR'];
 @endphp
 @section('script')

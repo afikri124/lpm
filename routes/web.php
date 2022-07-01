@@ -21,7 +21,7 @@ Route::get('/', function () {
 })->name('/');
 Route::get('/',[App\Http\Controllers\HomeController::class, 'index'])->name('index');
 Route::get('/',[App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::post('/login/sso_klas2', [App\Http\Controllers\HomeController::class, 'sso_klas2'])->name('sso_klas2');
+Route::get('/login/sso_klas2/', [App\Http\Controllers\HomeController::class, 'sso_klas2'])->name('sso_klas2');
 
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'dashboard'])->name('dashboard'); 
 Route::group(['middleware' => ['auth']], function () {
