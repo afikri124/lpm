@@ -332,7 +332,7 @@
                             <i class="fa fa-spin fa-star h2 text-warning"></i>
                             <i class="fa fa-spin fa-star h2 text-warning"></i>
                             <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
-                            <h6 class="m-0">Sarjana</h6>
+                            <h6 class="m-0">B</h6>
                             <p>S1 Manajemen</p>
                         </div>
                     </div>
@@ -341,7 +341,7 @@
                             <i class="fa fa-spin fa-star h2 text-warning"></i>
                             <i class="fa fa-spin fa-star h2 text-warning"></i>
                             <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
-                            <h6 class="m-0">Sarjana</h6>
+                            <h6 class="m-0">B</h6>
                             <p>S1 Teknik Elektro</p>
                         </div>
                     </div>
@@ -351,7 +351,7 @@
                             <i class="fa fa-spin fa-star h2 text-warning"></i>
                             <i class="fa fa-spin fa-star h2 text-warning"></i>
                             <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
-                            <h6 class="m-0">Sarjana</h6>
+                            <h6 class="m-0">B</h6>
                             <p>S1 Teknik Mesin</p>
                         </div>
                     </div>
@@ -360,7 +360,7 @@
                             <i class="fa fa-spin fa-star h2 text-warning"></i>
                             <i class="fa fa-spin fa-star h2 text-warning"></i>
                             <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
-                            <h6 class="m-0">Sarjana</h6>
+                            <h6 class="m-0">B</h6>
                             <p>S1 Teknik Sipil</p>
                         </div>
                     </div>
@@ -369,7 +369,7 @@
                             <i class="fa fa-spin fa-star h2 text-warning"></i>
                             <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
                             <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
-                            <h6 class="m-0">Sarjana</h6>
+                            <h6 class="m-0">Baik</h6>
                             <p>S1 Bisnis Digital</p>
                         </div>
                     </div>
@@ -378,7 +378,7 @@
                             <i class="fa fa-spin fa-star h2 text-warning"></i>
                             <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
                             <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
-                            <h6 class="m-0">Sarjana</h6>
+                            <h6 class="m-0">Baik</h6>
                             <p>S1 Farmasi</p>
                         </div>
                     </div>
@@ -387,7 +387,7 @@
                             <i class="fa fa-spin fa-star h2 text-warning"></i>
                             <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
                             <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
-                            <h6 class="m-0">Sarjana</h6>
+                            <h6 class="m-0">Baik</h6>
                             <p>S1 Teknik Industri</p>
                         </div>
                     </div>
@@ -396,7 +396,7 @@
                             <i class="fa fa-spin fa-star h2 text-warning"></i>
                             <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
                             <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
-                            <h6 class="m-0">Sarjana</h6>
+                            <h6 class="m-0">Baik</h6>
                             <p>S1 Teknik Informatika</p>
                         </div>
                     </div>
@@ -405,7 +405,7 @@
                             <i class="fa fa-spin fa-star h2 text-warning"></i>
                             <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
                             <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
-                            <h6 class="m-0">Magister</h6>
+                            <h6 class="m-0">Baik</h6>
                             <p>S2 Teknik Elektro</p>
                         </div>
                     </div>
@@ -414,7 +414,7 @@
                             <i class="fa fa-spin fa-star h2 text-warning"></i>
                             <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
                             <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
-                            <h6 class="m-0">Diploma</h6>
+                            <h6 class="m-0">C</h6>
                             <p>D3 Akuntansi</p>
                         </div>
                     </div>
@@ -423,7 +423,7 @@
                             <i class="fa fa-spin fa-star h2 text-warning"></i>
                             <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
                             <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
-                            <h6 class="m-0">Diploma</h6>
+                            <h6 class="m-0">C</h6>
                             <p>D3 Mnj. Pemasaran</p>
                         </div>
                     </div>
@@ -432,7 +432,7 @@
                             <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
                             <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
                             <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
-                            <h6 class="m-0">Sarjana</h6>
+                            <h6 class="m-0">-</h6>
                             <p>S1 Sistem Infomasi<i class="text-danger">*</i></p>
                         </div>
                     </div>
@@ -451,10 +451,10 @@
                     <div class="col-sm-12 wow pulse">
                         <div class="cuba-demo-content mt50">
                             <div class="couting">
-                                <h2>Contact</h2>
+                                <h2>Kontak</h2>
                             </div>
                             <div class="footer_bottom-item footer_social-media penci-col-3">
-                                <div class="block-title mb-4"><span>Follow us</span></div>
+                                <div class="block-title mb-4"><span>Ikuti Sosial Media</span></div>
                                 <a class="social-media-item socail_media_facebook mx-3" target="_blank"
                                     href="https://www.facebook.com/jakartaglobaluniversity" title="Facebook"
                                     rel="noopener"><span class="socail-media-itemcontent"><i

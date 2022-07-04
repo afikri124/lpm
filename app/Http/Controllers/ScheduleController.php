@@ -58,14 +58,15 @@ class ScheduleController extends Controller
                 'status_id' => "S00",
                 'created_by' => Auth::user()->id
             ]);
-
+            
             //TODO : SEND EMAIL TO LECTURER
-            return redirect()->route('schedules.edit', $schedule);
-        } 
-        $lecturer = User::select('id','email','name')->whereHas('roles', function($q){
-                        $q->where('role_id', "LE");
-                    })->where('username','!=', 'admin')->get();
-        return view('schedules.add', compact('lecturer'));
+            return redirect()->route('schedules.edit', Crypt::encrypt($schedule->id));
+        } else {
+            $lecturer = User::select('id','email','name')->whereHas('roles', function($q){
+                            $q->where('role_id', "LE");
+                        })->where('username','!=', 'admin')->get();
+            return view('schedules.add', compact('lecturer'));
+        }
     }
 
     public function edit($idd, Request $request) {
