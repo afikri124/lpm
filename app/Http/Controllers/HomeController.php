@@ -33,7 +33,7 @@ class HomeController extends Controller
 
     public function sso_klas2(Request $request)
     {
-        if($request->token == md5(route('sso_klas2').gmdate('Y/m/d/H')) && md5(route('sso_klas2').gmdate('Y/m/d/H').$request->id) == $request->token_pass){
+        if($request->token == md5(route('sso_klas2').gmdate('Y/m/d')) && md5(route('sso_klas2').gmdate('Y/m/d').$request->id) == $request->token_pass){
             $user = User::where('username', $request->id)->first();
             if ($user != null) { //login
                 Auth::loginUsingId($user->id);
@@ -82,9 +82,9 @@ class HomeController extends Controller
                     
                     if($old_user){
                         $user = User::where('username', $request->id)->first();
-                        if($request->dept_id == "ACAD"){
+                        if($request->dept_id == "ACAD" && !$user->hasRole('LE')){
                             $user->roles()->attach(Role::where('id', 'LE')->first());
-                        } else if($request->dept_id == "NACAD"){
+                        } else if($request->dept_id == "NACAD" && !$user->hasRole('ST')){
                             $user->roles()->attach(Role::where('id', 'ST')->first());
                         }
                     }  
