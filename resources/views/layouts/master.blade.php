@@ -148,25 +148,28 @@
                         if (data['schedules'].notif != 0) document.getElementById("notif_schedules")
                             .innerHTML = data['schedules'].notif;
                     } else {
-                        document.getElementById("notif_schedules").innerHTML = "";
+                        var x = document.getElementById("notif_schedules");
+                        if(x) x.innerHTML = "";
                     }
 
                     if (data['observations'] != null) {
                         if (data['observations'].notif != 0) document.getElementById(
                             "notif_observations").innerHTML = data['observations'].notif;
                     } else {
-                        document.getElementById("notif_observations").innerHTML = "";
+                        var x = document.getElementById("notif_observations");
+                        if(x) x.innerHTML = "";
                     }
 
                     if (data['follow_ups'] != null) {
                         if (data['follow_ups'] != 0) document.getElementById(
                             "notif_follow_ups").innerHTML = data['follow_ups'].notif;
                     } else {
-                        document.getElementById("notif_follow_ups").innerHTML = "";
+                        var x = document.getElementById("notif_follow_ups");
+                        if(x) x.innerHTML = "";
                     }
                 }
             });
-            var t = setTimeout(notifications, 60 * 1000);
+            var t = setTimeout(notifications, 30 * 1000);
         }
         notifications();
 

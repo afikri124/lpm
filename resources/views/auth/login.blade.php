@@ -10,11 +10,14 @@
 @section('content')
 <div class="container-fluid p-0">
     <div class="row m-0">
-        <div class="col-12 p-0">
+        <div class="col-xl-7">
+            <img class="bg-img-cover bg-center" src="{{asset('assets/images/landing/screen2.jpg')}}" alt="looginpage">
+        </div>
+        <div class="col-xl-5 p-0">
             <div class="login-card">
                 <div>
                     <div><a class="logo" href="{{ route('home') }}">
-                            <img class="img-fluid" style="max-width: 160px;" src="{{asset('assets/images/logo.png')}}"
+                            <img class="img-fluid" style="max-width: 50%;" src="{{asset('assets/images/logo.png')}}"
                                 alt="looginpage"></a>
                     </div>
                     <div class="login-main">
@@ -58,7 +61,7 @@
                                 <button class="btn btn-primary btn-block w-100" type="submit">Login</button>
                             </div>
                         </form>
-                        <h6 class="text-muted mt-4 or">Or login with</h6>
+                        <h6 class="text-muted mt-4 or">or login with</h6>
                         <div class="social mt-4">
                             <div class="btn-showcase">
                                 <button class="btn btn-light btn-block w-100" onclick="Klas2Login()">
@@ -76,16 +79,20 @@
 </div>
 @endsection
 @php
-    $callback_url = route('sso_klas2');
-    $token = md5($callback_url.gmdate('Y/m/d'));
-    $url = "http://klas2.jgu.ac.id/sso/";
-    //$url = "http://localhost/JGU/sso/test.php"; //for test only
-    $link = $url."?login_to=".route('login')."&login_name=Peer Observation&callback_url=$callback_url&token=$token&ip=".$_SERVER['REMOTE_ADDR'];
+$callback_url = route('sso_klas2');
+$token = md5($callback_url.gmdate('Y/m/d'));
+$url = "http://klas2.jgu.ac.id/sso/";
+//$url = "http://localhost/JGU/sso/test.php"; //for test only
+$link =
+$url."?login_to=".route('login')."&login_name=Peer%20Observation&callback_url=$callback_url&token=$token&ip=".$_SERVER['REMOTE_ADDR'];
 @endphp
 @section('script')
 <script>
     function Klas2Login() {
-        window.open("{!!$link!!}", "LOGIN SSO JGU","location=no, titlebar=no, toolbar=no, fullscreen=yes, resizable=no, scrollbars=yes");
+        // alert("SS");
+        window.open("{!!$link!!}", "LOGIN SSO JGU",
+            "location=no, titlebar=no, toolbar=no, fullscreen=yes, resizable=no, scrollbars=yes");
     }
+
 </script>
 @endsection

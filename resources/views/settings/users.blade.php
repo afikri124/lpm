@@ -269,28 +269,37 @@
                 if (x) {
                     $.ajax({
                         type: 'GET',
+                        url: "https://klas2.jgu.ac.id/sso/api/getUser.php",
                         dataType: 'json',
-                        url: "https://api.github.com/users/mralexgray/repos",
-                        beforeSend: function () {
+                        cors: true ,
+                        contentType:'application/json',
+                        secure: true,
+                        headers: {
+                            'Access-Control-Allow-Origin': '*',
+                        },
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader ("Authorization", "Basic " + btoa(""));
                             document.getElementById('loadingSync').style.display = 'block';
                         },
+
                         complete: function () {
                             // document.getElementById('loadingSync').style.display = 'none';
                         },
                         success: function (data) {
+                            console.log(data);
                             document.getElementById('loadingSyncText').innerHTML = '0 data already synced';
-                            // if (data['success']) {
-                            //     swal(data['message'], {
-                            //         icon: "success",
-                            //     });
-                            //     $('#datatable').DataTable().ajax.reload();
-                            // } else {
-                            //     swal(data['message'], {
-                            //         icon: "error",
-                            //     });
-                            // }
                         }
                     })
+
+                    // $.ajax({
+                    //     type: 'GET',
+                    //     // url: 'https://reqres.in/api/products/3',
+                    //     url: 'https://klas2.jgu.ac.id/sso/api/getUser.php',
+                    //     data: '_token = <?php echo csrf_token() ?>',
+                    //     success: function (data) {
+                    //         console.log(data);
+                    //     }
+                    // });
 
                 }
             })
