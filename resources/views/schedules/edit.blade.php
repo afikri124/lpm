@@ -76,15 +76,15 @@
                 <div class="row">
                     <div class="col-md-12 d-flex justify-content-center justify-content-md-end">
                         <a type="button" data-bs-toggle="modal" data-bs-target="#modalAddObserver" title="Add Observer">
-                            <span class="btn btn-primary btn-block btn-mail"><i data-feather="plus"></i>Add</span>
+                            <span class="btn btn-primary">Add</span>
                         </a>
                         @if($data->status_id == "S00" || $data->status_id == "S01")
                         <a type="button" data-bs-toggle="modal" data-bs-target="#modalReschedule">
-                            <span class="btn btn-info btn-block btn-mail">Reschedule</span>
+                            <span class="btn btn-info">Reschedule</span>
                         </a>
                         @endif
                         <a href="{{ route('schedules') }}">
-                            <span class="btn btn-secondary  btn-block btn-mail">Back</span>
+                            <span class="btn btn-secondary">Back</span>
                         </a>
                     </div>
                 </div>

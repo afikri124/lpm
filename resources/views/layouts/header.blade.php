@@ -36,6 +36,9 @@
                         <div class="media-body">
                         @php
                          $first_name = explode(" ", ucfirst(Auth::user()->name));
+                         if(strlen(Auth::user()->name) < 15){
+                            $first_name[0] = Auth::user()->name;
+                         }
                         @endphp
                             <span>{{ $first_name[0] }}</span>
                             <p class="mb-0 font-roboto">{{ Auth::user()->username }} <i

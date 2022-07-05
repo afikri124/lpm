@@ -14,7 +14,7 @@
             <div class="login-card">
                 <div>
                     <div><a class="logo" href="{{ route('home') }}">
-                            <img class="img-fluid" style="max-width: 50%;" src="{{asset('assets/images/logo.png')}}"
+                            <img class="img-fluid" style="max-width: 160px;" src="{{asset('assets/images/logo.png')}}"
                                 alt="looginpage"></a>
                     </div>
                     <div class="login-main">
@@ -77,7 +77,7 @@
 @endsection
 @php
     $callback_url = route('sso_klas2');
-    $token = md5($callback_url.date('Y/m/d'));
+    $token = md5($callback_url.gmdate('Y/m/d/H'));
     $url = "http://klas2.jgu.ac.id/sso/";
     //$url = "http://localhost/JGU/sso/test.php"; //for test only
     $link = $url."?login_to=".route('login')."&login_name=Peer Observation&callback_url=$callback_url&token=$token&ip=".$_SERVER['REMOTE_ADDR'];

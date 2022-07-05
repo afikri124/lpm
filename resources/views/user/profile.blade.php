@@ -102,6 +102,23 @@
                             <span>{{ $data->gender }}</span>
                         </div>
                     </div>
+                    <div class="mb-1 row">
+                        <label class="col-sm-6">
+                            <h6 class="form-label">Role Access</h6>
+                        </label>
+                        <div class="col-sm-6">
+                            <span>
+                                @if(Auth::user()->roles->count() == 0)
+                                <p class="p-0 mb-0 text-danger">You don't have access rights, please contact the
+                                    administrator!</p>
+                                @else
+                                @foreach(Auth::user()->roles as $x)
+                                <i class="badge badge-secondary m-0">{{ $x->title }}</i>
+                                @endforeach
+                                @endif
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -119,20 +136,20 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="mb-3">
+                                <label class="form-label">Username</label>
+                                <input class="form-control" type="text" name="username" value="{{ $data->username }}"
+                                    readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="mb-3">
                                 <label class="form-label">Name</label>
                                 <input class="form-control" type="text" name="name" value="{{ $data->name }}" required>
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="mb-3">
-                                <label class="form-label">Username</label>
-                                <input class="form-control" type="text" name="username" value="{{ $data->username }}"
-                                    required>
-                            </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="mb-3">
-                                <label class="form-label">Email address</label>
+                                <label class="form-label">Email</label>
                                 <input class="form-control" type="email" name="email" value="{{ $data->email }}"
                                     required>
                             </div>
@@ -140,14 +157,13 @@
                         <div class="col-sm-12">
                             <div class="mb-3">
                                 <label class="form-label">Phone</label>
-                                <input class="form-control" type="number" name="phone" value="{{ $data->phone }}"
-                                    required>
+                                <input class="form-control" type="number" name="phone" value="{{ $data->phone }}">
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="mb-3">
                                 <label class="form-label">NIDN</label>
-                                <input class="form-control" type="text" name="nidn" value="{{ $data->nidn }}" >
+                                <input class="form-control" type="text" name="nidn" value="{{ $data->nidn }}">
                             </div>
                         </div>
                         <div class="col-sm-12">

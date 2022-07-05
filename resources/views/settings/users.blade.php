@@ -56,24 +56,34 @@
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <select id="Select_2" class="form-control input-sm select2" data-placeholder="Study Program">
-                            <option value="">Study Program</option>
+                        <select id="Select_2" class="form-control input-sm select2"
+                            data-placeholder="Study Program/Unit">
+                            <option value="">Study Program/Unit</option>
                             @foreach($study_program as $d)
                             <option value="{{ $d->study_program }}">{{ $d->study_program }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="col-md-6 d-flex justify-content-center justify-content-md-end">
-                        <a class="btn btn-light btn-block btn-mail" title="Sync data with klas2" href="">
+                        <button class="btn btn-light" title="Sync data with klas2" onclick="SyncKlas2()">
                             <i data-feather="refresh-cw"></i>Sync
-                        </a>
-                        <a class="btn btn-primary btn-block btn-mail" title="Add new" href="{{ route('settings.user_add')}}">
+                        </button>
+                        <a class="btn btn-primary" title="Add new" href="{{ route('settings.user_add')}}">
                             <i data-feather="user-plus"></i>New
                         </a>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="col-sm-12 text-center mb-5" id="loadingSync" style="display: none;">
+            <div class="loader-box">
+                <div class="loader-11"></div>
+            </div>
+            <br>
+            Please wait...
+            <span id="loadingSyncText"></span>
+        </div>
+
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-body">
@@ -86,7 +96,7 @@
                                     <th scope="col">Contact</th>
                                     <th scope="col">Prog.</th>
                                     <th scope="col">Job</th>
-                                    <th scope="col" >Roles</th>
+                                    <th scope="col">Roles</th>
                                     <th scope="col" width="65px">Action</th>
                                 </tr>
                             </thead>
@@ -143,7 +153,8 @@
                     render: function (data, type, row, meta) {
                         var x =
                             '<img class="rounded-circle float-start chat-user-img img-30" src="' +
-                            row.user_avatar + '"> <code title="' + row.username + '">' + row.username + '</code>';
+                            row.user_avatar + '"> <code title="' + row.username + '">' + row
+                            .username + '</code>';
                         return x;
                     },
                 },
@@ -189,7 +200,9 @@
                         var x = row.id;
                         var html =
                             `<a class="btn btn-success btn-sm px-2" title="Edit" href="{{ url('settings/user/edit/` +
-                            row.link + `') }}"><i class="fa fa-pencil-square-o"></i></a> <a class="btn btn-danger btn-sm px-2" title="Delete" onclick="DeleteId(` + x + `)" ><i class="fa fa-trash"></i></a>`;
+                            row.link +
+                            `') }}"><i class="fa fa-pencil-square-o"></i></a> <a class="btn btn-danger btn-sm px-2" title="Delete" onclick="DeleteId(` +
+                            x + `)" ><i class="fa fa-trash"></i></a>`;
                         if (x != 1) {
                             return html;
                         } else {
@@ -237,6 +250,45 @@
                                     icon: "error",
                                 });
                             }
+                        }
+                    })
+
+                }
+            })
+    }
+
+    function SyncKlas2() {
+        swal({
+                title: "Data Synchronization",
+                text: "Make sure you are logged in Klas2 System",
+                icon: "info",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((x) => {
+                if (x) {
+                    $.ajax({
+                        type: 'GET',
+                        dataType: 'json',
+                        url: "https://api.github.com/users/mralexgray/repos",
+                        beforeSend: function () {
+                            document.getElementById('loadingSync').style.display = 'block';
+                        },
+                        complete: function () {
+                            // document.getElementById('loadingSync').style.display = 'none';
+                        },
+                        success: function (data) {
+                            document.getElementById('loadingSyncText').innerHTML = '0 data already synced';
+                            // if (data['success']) {
+                            //     swal(data['message'], {
+                            //         icon: "success",
+                            //     });
+                            //     $('#datatable').DataTable().ajax.reload();
+                            // } else {
+                            //     swal(data['message'], {
+                            //         icon: "error",
+                            //     });
+                            // }
                         }
                     })
 
