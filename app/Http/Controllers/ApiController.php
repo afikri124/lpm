@@ -198,9 +198,10 @@ class ApiController extends Controller
 
     public function tes(Request $request)
     {
-        $data = User::select('id','email','name')->whereHas('roles', function($q){
-            $q->where('role_id', "AU");
-        })->get();
+        // $data = User::select('id','email','name')->whereHas('roles', function($q){
+        //     $q->where('role_id', "AU");
+        // })->get();
+        $data = DB::connection('mysql2')->table('new_employee')->select('empid', 'name')->get();
         return Datatables::of($data)->make(true);
     }
 
