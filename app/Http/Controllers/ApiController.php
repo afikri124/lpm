@@ -201,7 +201,13 @@ class ApiController extends Controller
         // $data = User::select('id','email','name')->whereHas('roles', function($q){
         //     $q->where('role_id', "AU");
         // })->get();
-        $data = DB::connection('mysql2')->table('new_employee')->select('empid', 'name')->get();
+        $data =  DB::connection('mysql2')
+        ->table('new_employee as e')
+        // ->leftJoin('employee_type as t', 'e.emp_type', '=', 't.id')
+        ->leftJoin('lookup_gender as g', 'e.gender', '=', 'g.id')
+        ->select('e.empid as id', 'e.name', 'e.unit_id', 'e.sub_unit_id', 'e.sub_unit_id',
+        'e.email','e.mobile', "emp_type AS job",
+        'g.short_code AS gender', "e.dept_id")->get();
         return Datatables::of($data)->make(true);
     }
 

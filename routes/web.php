@@ -33,6 +33,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 Route::group(['prefix' => 'settings', 'middleware' => ['auth', 'role:AD']], function() {
     Route::get('users', [App\Http\Controllers\SettingController::class, 'users'])->name('settings.users');
+    Route::get('syncKlas2', [App\Http\Controllers\SettingController::class, 'syncKlas2'])->name('settings.syncKlas2');
     Route::any('user/add', [App\Http\Controllers\SettingController::class, 'user_add'])->name('settings.user_add');
     Route::any('user/edit/{id}', [App\Http\Controllers\SettingController::class, 'user_edit'])->name('settings.user_edit');
     Route::delete('user/delete', [App\Http\Controllers\SettingController::class, 'user_delete'])->name('settings.user_delete');

@@ -15,6 +15,8 @@ use App\Models\Criteria;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Crypt;
+use Yajra\DataTables\DataTables;
+use DB;
 
 class SettingController extends Controller
 {
@@ -28,6 +30,97 @@ class SettingController extends Controller
         $roles = Role::get();
         $study_program = User::select('study_program')->groupBy('study_program')->get();
         return view('settings.users', ['roles'=> $roles, 'study_program' => $study_program]);
+    }
+
+    public function syncKlas2(Request $request)
+    {
+        $data =  DB::connection('mysql2')
+                ->table('new_employee as e')
+                // ->leftJoin('employee_type as t', 'e.emp_type', '=', 't.id')
+                ->leftJoin('lookup_gender as g', 'e.gender', '=', 'g.id')
+                ->select('e.empid as id', 'e.name', 'e.unit_id', 'e.sub_unit_id', 'e.sub_unit_id',
+                'e.email','e.mobile', "emp_type AS job",
+                'g.short_code AS gender', "e.dept_id")->orderBy('name')->orderBy('last_modified_date', 'DESC')->get();
+        $i = 0;
+        $NewUser = array();
+        $UpdatedUser = array();
+        $FailedUser = array();
+        foreach ($data as $u) {
+            $prodi = null;
+            if($u->dept_id == "ACAD"){
+                $prodi = $u->sub_unit_id;
+            }
+            $email = $u->email;
+            $cek = User::where('email', $email)->first();
+            if($cek != null){
+                $email = "USER_DUPLICATE_".$email;
+            }
+            $user = User::where('username', $u->id)->first();
+            if($user == null){
+                $new_user = false;
+                if($u->email != null || $u->email != ""){
+                    $new_user=User::insert([
+                        'name' => $u->name,
+                        'email' => $email,
+                        'username' => $u->id,
+                        // 'nidn' => $u->nidn,
+                        'department' => $u->unit_id,
+                        'study_program' => $prodi,
+                        'phone' => preg_replace("/[^0-9]/", "", $u->mobile ),
+                        'job' => $u->job,
+                        'gender' => $u->gender,
+                        'password'=> Hash::make("itkj2022"),
+                        'email_verified_at' => Carbon::now(),
+                        'created_at' => Carbon::now()
+                    ]);
+                }
+                if($new_user){
+                    $user = User::where('username', $u->id)->first();
+                    if($u->dept_id == "ACAD"){
+                        $user->roles()->attach(Role::where('id', 'LE')->first());
+                    } else if($u->dept_id == "NACAD"){
+                        $user->roles()->attach(Role::where('id', 'ST')->first());
+                    }
+                    
+                    array_push($NewUser,$user->name);
+                    $i++;
+                } else {
+                    array_push($FailedUser,$u->name);
+                }  
+            } else {
+                $old_user = User::where('username', $u->id)->update([
+                    'name' => $u->name,
+                    // 'email' => $email,
+                    // 'nidn' => $u->nidn,
+                    'department' => $u->unit_id,
+                    'study_program' => $prodi,
+                    'phone' => preg_replace("/[^0-9]/", "", $u->mobile ),
+                    'job' => $u->job,
+                    'gender' => $u->gender,
+                    'updated_at' => Carbon::now()
+                ]);
+                
+                if($old_user){
+                    $user = User::where('username', $u->id)->first();
+                    if($u->dept_id == "ACAD" && !$user->hasRole('LE')){
+                        $user->roles()->attach(Role::where('id', 'LE')->first());
+                    } else if($u->dept_id == "NACAD" && !$user->hasRole('ST')){
+                        $user->roles()->attach(Role::where('id', 'ST')->first());
+                    }
+                    
+                    array_push($UpdatedUser,$user->name);
+                    $i++;
+                } else {
+                    array_push($FailedUser,$u->name);
+                }  
+            }
+        }
+        return response()->json([
+            'total' => $i,
+            'new' => $NewUser,
+            'updated' => $UpdatedUser,
+            'failed' => $FailedUser
+        ]);
     }
 
     public function user_add(Request $request) {

@@ -46,20 +46,24 @@ class HomeController extends Controller
                 }
                 $user = User::where('email',$request->email)->first();
                 if($user == null){
+                    $new_user = false;
+                    if($request->email == null || $request->email == ""){
+                        $request->email = $request->id."@jgu.ac.id";
+                    }
                     $new_user=User::insert([
-                        'name' => $request->name,
-                        'email' => $request->email,
-                        'username' => $request->id,
-                        // 'nidn' => $request->nidn,
-                        'department' => $request->unit_id,
-                        'study_program' => $prodi,
-                        'phone' => $request->mobile,
-                        'job' => $request->job,
-                        'gender' => $request->gender,
-                        'password'=> Hash::make("itkj2022"),
-                        'email_verified_at' => Carbon::now(),
-                        'created_at' => Carbon::now()
-                    ]);
+                            'name' => $request->name,
+                            'email' => $request->email,
+                            'username' => $request->id,
+                            // 'nidn' => $request->nidn,
+                            'department' => $request->unit_id,
+                            'study_program' => $prodi,
+                            'phone' => preg_replace("/[^0-9]/", "", $request->mobile ),
+                            'job' => $request->job,
+                            'gender' => $request->gender,
+                            'password'=> Hash::make("itkj2022"),
+                            'email_verified_at' => Carbon::now(),
+                            'created_at' => Carbon::now()
+                        ]);
                     if($new_user){
                         $user = User::where('username', $request->id)->first();
                         if($request->dept_id == "ACAD"){
@@ -75,7 +79,7 @@ class HomeController extends Controller
                         // 'nidn' => $request->nidn,
                         'department' => $request->unit_id,
                         'study_program' => $prodi,
-                        'phone' => $request->mobile,
+                        'phone' => preg_replace("/[^0-9]/", "", $request->mobile ),
                         'job' => $request->job,
                         'gender' => $request->gender,
                         'updated_at' => Carbon::now()
