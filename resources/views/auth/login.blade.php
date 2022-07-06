@@ -62,7 +62,7 @@
                             </div>
                         </form>
                         <h6 class="text-muted mt-4 or">or login with</h6>
-                        <div class="social mt-4">
+                        <div class="social my-4">
                             <div class="btn-showcase">
                                 <button class="btn btn-light btn-block w-100" onclick="Klas2Login()">
                                     <img style="max-width: 20px;" src="{{asset('assets/images/logo/logo-icon.png')}}">
@@ -79,12 +79,14 @@
 </div>
 @endsection
 @php
+$login_name = "Peer%20Observation";
+$api_key = Crypt::encrypt("PO".gmdate('Y/m/d'));
 $callback_url = route('sso_klas2');
-$token = md5($callback_url.gmdate('Y/m/d'));
+$token = md5($api_key.$callback_url);
 $url = "http://klas2.jgu.ac.id/sso/";
 //$url = "http://localhost/JGU/sso/test.php"; //for test only
 $link =
-$url."?login_to=".route('login')."&login_name=Peer%20Observation&callback_url=$callback_url&token=$token&ip=".$_SERVER['REMOTE_ADDR'];
+$url."?login_to=".route('login')."&login_name=$login_name&api_key=$api_key&callback_url=$callback_url&token=$token&ip=".$_SERVER['REMOTE_ADDR'];
 @endphp
 @section('script')
 <script>

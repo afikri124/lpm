@@ -8,6 +8,7 @@ use App\Models\Role;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Crypt;
 
 class HomeController extends Controller
 {
@@ -33,7 +34,7 @@ class HomeController extends Controller
 
     public function sso_klas2(Request $request)
     {
-        if($request->token == md5(route('sso_klas2').gmdate('Y/m/d')) && md5(route('sso_klas2').gmdate('Y/m/d').$request->id) == $request->token_pass){
+        if($request->token == md5($request->api_key.$request->id) && "PO".gmdate('Y/m/d') == Crypt::decrypt($request->api_key)){
             $user = User::where('username', $request->id)->first();
             if ($user != null) { //login
                 Auth::loginUsingId($user->id);

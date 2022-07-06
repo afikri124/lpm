@@ -283,7 +283,7 @@
                         },
 
                         complete: function () {
-                            // document.getElementById('loadingSync').style.display = 'none';
+                            document.getElementById('loadingSync').style.display = 'none';
                         },
                         success: function (data) {
                             console.log(data);
