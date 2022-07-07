@@ -57,8 +57,8 @@
                     </div>
                     <div class="col-md-3">
                         <select id="Select_2" class="form-control input-sm select2"
-                            data-placeholder="Study Program/Unit">
-                            <option value="">Study Program/Unit</option>
+                            data-placeholder="Study Program">
+                            <option value="">Study Program</option>
                             @foreach($study_program as $d)
                             <option value="{{ $d->study_program }}">{{ $d->study_program }}</option>
                             @endforeach
@@ -160,7 +160,7 @@
                 },
                 {
                     render: function (data, type, row, meta) {
-                        var x = row.name + "<br><small class='text-muted'>" + row.nidn +
+                        var x = row.name + "<br><small class='text-muted'>" + (row.nidn==null?'':row.nidn) +
                             "</small>";
                         return x;
                     },

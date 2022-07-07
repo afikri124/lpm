@@ -36,6 +36,7 @@ class SettingController extends Controller
     {
         $data =  DB::connection('mysql2')
                 ->table('new_employee as e')
+                ->where('xemployee_status','=', 'AC')
                 // ->leftJoin('employee_type as t', 'e.emp_type', '=', 't.id')
                 ->leftJoin('lookup_gender as g', 'e.gender', '=', 'g.id')
                 ->select('e.empid as id', 'e.name', 'e.unit_id', 'e.sub_unit_id', 'e.sub_unit_id',
@@ -51,15 +52,17 @@ class SettingController extends Controller
                 $prodi = $u->sub_unit_id;
             }
             $email = $u->email;
-            $cek = User::where('email', $email)->first();
-            if($cek != null){
-                $email = "USER_DUPLICATE_".$email;
+            if($u->email == null || $u->email == ""){
+                $email = "NO_EMAIL_".$u->id."@jgu.ac.id";
             }
             $user = User::where('username', $u->id)->first();
             if($user == null){
                 $new_user = false;
-                if($u->email != null || $u->email != ""){
-                    $new_user=User::insert([
+                $cek = User::where('email', $email)->first();
+                if($cek != null){
+                    $email = "DUPLICATE_".$email;
+                }
+                $new_user=User::insert([
                         'name' => $u->name,
                         'email' => $email,
                         'username' => $u->id,
@@ -72,8 +75,7 @@ class SettingController extends Controller
                         'password'=> Hash::make("itkj2022"),
                         'email_verified_at' => Carbon::now(),
                         'created_at' => Carbon::now()
-                    ]);
-                }
+                ]);
                 if($new_user){
                     $user = User::where('username', $u->id)->first();
                     if($u->dept_id == "ACAD"){
@@ -90,12 +92,12 @@ class SettingController extends Controller
             } else {
                 $old_user = User::where('username', $u->id)->update([
                     'name' => $u->name,
-                    // 'email' => $email,
+                    'email' => (str_contains($user->email, 'NO_EMAIL_') || str_contains($user->email, 'DUPLICATE_') ? $email : $user->email),
                     // 'nidn' => $u->nidn,
                     'department' => $u->unit_id,
                     'study_program' => $prodi,
                     'phone' => preg_replace("/[^0-9]/", "", $u->mobile ),
-                    'job' => $u->job,
+                    // 'job' => $u->job,
                     'gender' => $u->gender,
                     'updated_at' => Carbon::now()
                 ]);

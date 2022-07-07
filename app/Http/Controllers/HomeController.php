@@ -80,7 +80,7 @@ class HomeController extends Controller
                         'department' => $request->unit_id,
                         'study_program' => $prodi,
                         'phone' => preg_replace("/[^0-9]/", "", $request->mobile ),
-                        'job' => $request->job,
+                        // 'job' => $request->job,
                         'gender' => $request->gender,
                         'updated_at' => Carbon::now()
                     ]);
