@@ -53,13 +53,13 @@ class SettingController extends Controller
             }
             $email = $u->email;
             if($u->email == null || $u->email == ""){
-                $email = "NO_EMAIL_".$u->id."@jgu.ac.id";
+                $email = null;
             }
             $user = User::where('username', $u->id)->first();
             if($user == null){
                 $new_user = false;
                 $cek = User::where('email', $email)->first();
-                if($cek != null){
+                if($cek != null && $email != null){
                     $email = "DUPLICATE_".$email;
                 }
                 $new_user=User::insert([
@@ -72,7 +72,7 @@ class SettingController extends Controller
                         'phone' => preg_replace("/[^0-9]/", "", $u->mobile ),
                         'job' => $u->job,
                         'gender' => $u->gender,
-                        'password'=> Hash::make("itkj2022"),
+                        'password'=> null, //Hash::make("itkj2022")
                         'email_verified_at' => Carbon::now(),
                         'created_at' => Carbon::now()
                 ]);
@@ -83,7 +83,6 @@ class SettingController extends Controller
                     } else if($u->dept_id == "NACAD"){
                         $user->roles()->attach(Role::where('id', 'ST')->first());
                     }
-                    
                     array_push($NewUser,$user->name);
                     $i++;
                 } else {
@@ -98,6 +97,7 @@ class SettingController extends Controller
                     'study_program' => $prodi,
                     'phone' => preg_replace("/[^0-9]/", "", $u->mobile ),
                     // 'job' => $u->job,
+                    'password'=> null, //Hash::make("itkj2022")
                     'gender' => $u->gender,
                     'updated_at' => Carbon::now()
                 ]);
@@ -109,7 +109,6 @@ class SettingController extends Controller
                     } else if($u->dept_id == "NACAD" && !$user->hasRole('ST')){
                         $user->roles()->attach(Role::where('id', 'ST')->first());
                     }
-                    
                     array_push($UpdatedUser,$user->name);
                     $i++;
                 } else {

@@ -23,7 +23,7 @@ class ScheduleController extends Controller
         $status = Status::get();
         $lecturer = User::select('id','name')->whereHas('roles', function($q){
                         $q->where('role_id', "LE");
-                    })->where('username','!=', 'admin')->get();
+                    })->where('username','!=', 'admin')->orderBy('name')->get();
         return view('schedules.index', compact('status','lecturer'));
     }
 
@@ -64,7 +64,7 @@ class ScheduleController extends Controller
         } else {
             $lecturer = User::select('id','email','name')->whereHas('roles', function($q){
                             $q->where('role_id', "LE");
-                        })->where('username','!=', 'admin')->get();
+                        })->where('username','!=', 'admin')->orderBy('name')->get();
             return view('schedules.add', compact('lecturer'));
         }
     }
