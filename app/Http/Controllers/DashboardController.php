@@ -76,15 +76,21 @@ class DashboardController extends Controller
                 'email'=> ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore(Auth::user()->id, 'id')],
                 'password' => ['required', 'string', 'min:8','same:password_confirmation'],
                 'password_confirmation' => ['required', 'string', 'min:8'],
+                'phone' => ['required'],
             ]);
             User::where('id', Auth::user()->id)->update([
                 'email' => $request->email,
+                'phone' => $request->phone,
                 'password'=> Hash::make($request->password),
                 'email_verified_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ]);
             return redirect()->route('dashboard');
         }
-        return view('user.update');
+        if(Auth::user()->password == null || Auth::user()->email == null){
+            return view('user.update');
+        } else {
+            abort(403, "Cannot access to restricted page!");
+        }
     }
 }

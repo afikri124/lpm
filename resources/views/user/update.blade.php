@@ -1,5 +1,5 @@
 @extends('layouts.authentication.master')
-@section('title', 'Register')
+@section('title', 'Update Account')
 
 @section('css')
 @endsection
@@ -47,10 +47,22 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
+                                        <label class="col-form-label">Phone</label>
+                                        <input id="phone" type="number"
+                                            class="form-control @error('phone') is-invalid @enderror" name="phone"
+                                            value="{{ (old('phone') == null ? Auth::user()->phone : old('phone')) }}"
+                                            placeholder="62xxxxxxxxxxx" autocomplete="off">
+                                        @error('phone')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
                                         <label class="col-form-label">Password</label>
                                         <input id="password" type="password"
                                             class="form-control @error('password') is-invalid @enderror" name="password"
-                                            required autocomplete="new-password">
+                                            required autocomplete="off">
                                         @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -61,7 +73,7 @@
                                         <label class="col-form-label">Confirm Password</label>
                                         <input id="password-confirm" type="password"
                                             class="form-control @error('password_confirmation') is-invalid @enderror"
-                                            name="password_confirmation" required autocomplete="new-password">
+                                            name="password_confirmation" required autocomplete="off">
                                         @error('password_confirmation')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

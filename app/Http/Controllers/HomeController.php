@@ -52,7 +52,7 @@ class HomeController extends Controller
                 if($user == null){
                     $new_user = false;
                     if($request->email == null || $request->email == ""){
-                        $request->email = $request->id."@jgu.ac.id";
+                        $request->email = null;
                     }
                     $new_user=User::insert([
                             'name' => $request->name,
@@ -64,7 +64,7 @@ class HomeController extends Controller
                             'phone' => preg_replace("/[^0-9]/", "", $request->mobile ),
                             'job' => $request->job,
                             'gender' => $request->gender,
-                            'password'=> Hash::make("itkj2022"),
+                            'password'=> null,
                             'email_verified_at' => Carbon::now(),
                             'created_at' => Carbon::now()
                         ]);
