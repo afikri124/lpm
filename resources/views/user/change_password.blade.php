@@ -37,7 +37,7 @@
                                     <h3 class="mb-1">{{ ucfirst(Auth::user()->name) }}
                                         {{ ucfirst(Auth::user()->last_name) }}</h3>
                                     <p>{{ ucfirst(Auth::user()->level) }}</p>
-                                    <p><i>Disclaimer:</i><br>
+                                    <p class="text-danger"><i>Disclaimer!</i><br>
                                         Password changes on this form only apply to this system, will not affect users
                                         who log in using the Single Sign-On Klas2 system.</p>
                                 </div>

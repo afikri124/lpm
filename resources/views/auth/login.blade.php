@@ -17,7 +17,7 @@
             <div class="login-card">
                 <div>
                     <div><a class="logo" href="{{ route('home') }}">
-                            <img class="img-fluid" style="max-width: 50%;" src="{{asset('assets/images/logo.png')}}"
+                            <img class="img-fluid" style="max-height: 50px;" src="{{asset('assets/images/logo.png')}}"
                                 alt="looginpage"></a>
                     </div>
                     <div class="login-main">

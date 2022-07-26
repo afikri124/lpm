@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Illuminate\Validation\Rule;
 
 class DashboardController extends Controller
@@ -66,5 +67,24 @@ class DashboardController extends Controller
    
         Auth::logout();
         return redirect('/login');
+    }
+
+    protected function update_account(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            $this->validate($request, [ 
+                'email'=> ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore(Auth::user()->id, 'id')],
+                'password' => ['required', 'string', 'min:8','same:password_confirmation'],
+                'password_confirmation' => ['required', 'string', 'min:8'],
+            ]);
+            User::where('id', Auth::user()->id)->update([
+                'email' => $request->email,
+                'password'=> Hash::make($request->password),
+                'email_verified_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]);
+            return redirect()->route('dashboard');
+        }
+        return view('user.update');
     }
 }

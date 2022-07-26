@@ -29,6 +29,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('update-profile', [App\Http\Controllers\DashboardController::class, 'update_profile'])->name('update_profile');
     Route::view('change-password', 'user.change_password')->name('change_password');
     Route::post('update-password', [App\Http\Controllers\DashboardController::class, 'update_password'])->name('update_password');
+    Route::any('update-account', [App\Http\Controllers\DashboardController::class, 'update_account'])->name('update_account');
 });
 
 Route::group(['prefix' => 'settings', 'middleware' => ['auth', 'role:AD']], function() {

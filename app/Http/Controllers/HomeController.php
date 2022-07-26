@@ -38,7 +38,11 @@ class HomeController extends Controller
             $user = User::where('username', $request->id)->first();
             if ($user != null) { //login
                 Auth::loginUsingId($user->id);
-                return redirect()->route('dashboard');
+                if(Auth::user()->password == null || Auth::user()->email == null){
+                    return redirect()->route('update_account');
+                } else {
+                    return redirect()->route('dashboard');
+                }
             } else { //register
                 $prodi = null;
                 if($request->dept_id == "ACAD"){
@@ -95,7 +99,11 @@ class HomeController extends Controller
                     }  
                 }
                 Auth::loginUsingId($user->id);
-                return redirect()->route('my_profile');
+                if(Auth::user()->password == null || Auth::user()->email == null){
+                    return redirect()->route('update_account');
+                } else {
+                    return redirect()->route('my_profile');
+                }
             }
         } else {
             abort(403, "Cannot access to restricted page!");

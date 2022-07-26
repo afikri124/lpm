@@ -134,8 +134,8 @@
                                                                 Observation</a>
                                                         @endauth
                                                     @endif
-                                                    <a href="https://lpm.jgu.ac.id/old">PO-Old</a>
-                                                    <a href="#">Coming soon..</a>
+                                                    <!-- <a href="https://lpm.jgu.ac.id/old">PO-Old</a>
+                                                    <a href="#">Coming soon..</a> -->
                                                 </div>
                                             </div>
                                         </div>
