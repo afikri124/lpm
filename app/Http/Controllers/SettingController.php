@@ -72,7 +72,7 @@ class SettingController extends Controller
                         'phone' => preg_replace("/[^0-9]/", "", $u->mobile ),
                         'job' => $u->job,
                         'gender' => $u->gender,
-                        'password'=> null, //Hash::make("itkj2022")
+                        'password'=> null, //Hash::make("itkj2022") before
                         'email_verified_at' => Carbon::now(),
                         'created_at' => Carbon::now()
                 ]);
@@ -91,13 +91,12 @@ class SettingController extends Controller
             } else {
                 $old_user = User::where('username', $u->id)->update([
                     'name' => $u->name,
-                    'email' => (str_contains($user->email, 'NO_EMAIL_') || str_contains($user->email, 'DUPLICATE_') ? $email : $user->email),
+                    'email' => (($user->email == null) || str_contains($user->email, 'NO_EMAIL_') || str_contains($user->email, 'DUPLICATE_') ? $email : $user->email),
                     // 'nidn' => $u->nidn,
                     'department' => $u->unit_id,
                     'study_program' => $prodi,
                     'phone' => preg_replace("/[^0-9]/", "", $u->mobile ),
                     // 'job' => $u->job,
-                    'password'=> null, //Hash::make("itkj2022")
                     'gender' => $u->gender,
                     'updated_at' => Carbon::now()
                 ]);
