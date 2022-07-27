@@ -59,7 +59,9 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-form-label">Password</label>
+                                        <label class="col-form-label">New Password
+                                            <i class="fa fa-info-circle" title="Create new password for this system"></i>
+                                        </label>
                                         <input id="password" type="password"
                                             class="form-control @error('password') is-invalid @enderror" name="password"
                                             required autocomplete="off">

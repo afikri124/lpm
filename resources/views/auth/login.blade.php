@@ -16,16 +16,16 @@
         <div class="col-xl-5 p-0">
             <div class="login-card">
                 <div>
-                    <div><a class="logo" href="{{ route('home') }}">
+                    <div class="d-lg-none"><a class="logo" href="{{ route('home') }}">
                             <img class="img-fluid" style="max-height: 50px;" src="{{asset('assets/images/logo.png')}}"
                                 alt="looginpage"></a>
                     </div>
                     <div class="login-main">
                         <form class="theme-form" method="POST" action="{{ route('login') }}">
                             @csrf
-                            <h4>Login to your account</h4>
+                            <h4>Login to Peer Observation</h4>
                             <div class="form-group">
-                                <label class="col-form-label">{{ __('Email or username') }}</label>
+                                <label class="col-form-label">{{ __('Username or email') }}</label>
                                 <input id="username" type="text"
                                     class="form-control @error('username') is-invalid @enderror" name="username"
                                     value="{{ old('username') }}" required autofocus autocomplete="off">
@@ -61,12 +61,12 @@
                                 <button class="btn btn-primary btn-block w-100" type="submit">Login</button>
                             </div>
                         </form>
-                        <h6 class="text-muted mt-4 or">or login with</h6>
+                        <h6 class="text-muted mt-4 or">Or login with</h6>
                         <div class="social my-4">
                             <div class="btn-showcase">
-                                <button class="btn btn-light btn-block w-100" onclick="Klas2Login()">
+                                <button class="btn btn-light btn-block w-100 text-danger" onclick="Klas2Login()">
                                     <img style="max-width: 20px;" src="{{asset('assets/images/logo/logo-icon.png')}}">
-                                    SSO Klas2</button></div>
+                                    <b>SSO Klas2</b></button></div>
                         </div>
                         <!-- <p class="mt-4 mb-0 text-center">Don't have account?<a class="ms-2"
                                     href="{{ route('register') }}">Create Account</a></p> -->

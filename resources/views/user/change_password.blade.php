@@ -61,7 +61,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="mb-3">
-                                <label class="form-label">Current Password</label>
+                                <label class="form-label">Current Password <i class="fa fa-info-circle" title="If you forget, please contact the administrator or press forgot password on the login page"></i></label>
                                 <input id="password" type="password" class="form-control" name="current_password"
                                     autocomplete="current-password" required>
                             </div>

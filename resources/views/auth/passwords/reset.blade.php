@@ -13,7 +13,7 @@
         <div class="col-12 p-0">
             <div class="login-card">
                 <div>
-                    <div><a class="logo" href="{{ route('home') }}">
+                    <div><a class="logo" href="{{ route('login') }}">
                             <img class="img-fluid" style="max-width: 50%;" src="{{asset('assets/images/logo.png')}}"
                                 alt="looginpage"></a>
                     </div>

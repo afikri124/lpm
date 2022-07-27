@@ -14,6 +14,12 @@ class Observation extends Model
         'attendance',
         'remark',
         'image_path',
+        'subject_course',
+        'topic',
+        'class_type',
+        'location',
+        'study_program',
+        'total_students',
     ];
 
     public function auditor()

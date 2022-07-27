@@ -47,7 +47,7 @@
         <div class="col-md-12 project-list">
             <div class="card">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-5">
                         <select id="Select_1" class="form-control input-sm select2" data-placeholder="Categories">
                             <option value="">Categories</option>
                             @foreach($categories as $d)
@@ -55,7 +55,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-md-9 d-flex justify-content-center justify-content-md-end">
+                    <div class="col-md-7 d-flex justify-content-center justify-content-md-end">
                         <a class="btn btn-primary btn-block btn-mail" title="Add new"
                             href="{{ route('settings.criteria_add')}}">
                             <i data-feather="plus"></i>New
@@ -148,7 +148,11 @@
                 },
                 {
                     render: function (data, type, row, meta) {
-                        var x = '<code title="'+ row.category['title'] +'">' + row.criteria_category_id + '</code>';
+                        if(row.criteria_category_id != null){
+                            var x = '<code title="'+ row.category['title'] +'">' + row.criteria_category_id + '</code>';
+                        } else {
+                            var x = "";
+                        }
                         return x;
                     },
                 },

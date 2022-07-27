@@ -57,14 +57,14 @@
                             <div class="form-group mb-2">
                                 <label class="col-form-label">Start</label>
                                 <input class="form-control" type="text"
-                                    value="{{ date('d M Y ( H:i )', strtotime($data->date_start)) }}" disabled>
+                                    value="{{ date('l, d M Y H:i', strtotime($data->date_start)) }}" disabled>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-12">
                             <div class="form-group mb-2">
                                 <label class="col-form-label">End</label>
                                 <input class="form-control" type="text"
-                                    value="{{ date('d M Y ( H:i )', strtotime($data->date_end)) }}" disabled>
+                                    value="{{ date('l, d M Y H:i', strtotime($data->date_end)) }}" disabled>
                             </div>
                         </div>
                     </div>

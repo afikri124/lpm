@@ -20,9 +20,13 @@ class DashboardController extends Controller
 
     public function dashboard()
     {
-        return view('dashboard', [
-            'data' => ''
-        ]);
+        if(Auth::user()->password == null || Auth::user()->email == null){
+            return redirect()->route('update_account');
+        } else {
+            return view('dashboard', [
+                'data' => ''
+            ]);
+        }
     }
 
     public function my_profile()
