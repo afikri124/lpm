@@ -87,8 +87,12 @@ class ObservationController extends Controller
     }
 
     public function view($id, Request $request){
-        $data = Crypt::decrypt($id);
-        return view('observations.view', compact('data'));
+        if ($request->isMethod('POST') && isset($request->submit)) {
+            var_dump($request->submit);
+        } else {
+            $data = Crypt::decrypt($id);
+            return view('observations.view', compact('data'));
+        }
     }
 
 

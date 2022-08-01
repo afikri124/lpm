@@ -65,8 +65,8 @@
                                 <button class="btn btn-primary btn-block w-100" type="submit">Login</button>
                             </div>
                         </form>
-                        <h6 class="text-muted mt-4 or">Or login with</h6>
-                        <div class="row">
+                        <h6 class="text-muted mt-4 or">Or sign in with</h6>
+                        <div class="row mb-2">
                             <div class="col-6">
                                 <div class="btn-showcase">
                                     <button class="btn btn-light btn-block w-100" onclick="Klas2Login()">
