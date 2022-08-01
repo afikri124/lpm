@@ -16,14 +16,19 @@
         <div class="col-xl-5 p-0">
             <div class="login-card">
                 <div>
-                    <div class="d-lg-none"><a class="logo" href="{{ route('home') }}">
+                    <div class="">
+                        <a class="logo" href="{{ route('home') }}">
                             <img class="img-fluid" style="max-height: 50px;" src="{{asset('assets/images/logo.png')}}"
-                                alt="looginpage"></a>
+                                alt="looginpage">
+                        </a>
                     </div>
                     <div class="login-main">
                         <form class="theme-form" method="POST" action="{{ route('login') }}">
                             @csrf
                             <h4>Login to Peer Observation</h4>
+                            @error('msg')
+                            <b class="text-danger m-0">{{ $message }}</b>
+                            @enderror
                             <div class="form-group">
                                 <label class="col-form-label">{{ __('Username or email') }}</label>
                                 <input id="username" type="text"
@@ -36,7 +41,6 @@
                                 </span>
                                 @enderror
                             </div>
-
                             <div class="form-group">
                                 <label class="col-form-label">Password</label>
                                 <div class="form-input position-relative">
@@ -62,11 +66,25 @@
                             </div>
                         </form>
                         <h6 class="text-muted mt-4 or">Or login with</h6>
-                        <div class="social my-4">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="btn-showcase">
+                                    <button class="btn btn-light btn-block w-100" onclick="Klas2Login()">
+                                        <img style="max-height: 20px;"
+                                            src="{{asset('assets/images/logo/logo-icon.png')}}">
+                                        <span>SSO Klas2</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-6">
                             <div class="btn-showcase">
-                                <button class="btn btn-light btn-block w-100 text-danger" onclick="Klas2Login()">
-                                    <img style="max-width: 20px;" src="{{asset('assets/images/logo/logo-icon.png')}}">
-                                    <b>SSO Klas2</b></button></div>
+                                <a class="btn btn-light btn-block w-100" href="{{ url('login/google') }}">
+                                    <img style="max-height: 20px;"
+                                        src="https://avatars.githubusercontent.com/u/19180220?s=200&v=4">
+                                    <span>Google</span>
+                                </a>
+                            </div>
+                            </div>
                         </div>
                         <!-- <p class="mt-4 mb-0 text-center">Don't have account?<a class="ms-2"
                                     href="{{ route('register') }}">Create Account</a></p> -->

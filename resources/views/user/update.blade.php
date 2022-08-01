@@ -18,7 +18,7 @@
                                 alt="signuppage"></a>
                     </div>
                     <div class="login-main">
-                        <form method="POST" action="">
+                        <form method="POST" action="" autocomplete="off">
                             @csrf
                             <h4 class="text-center">Update Account</h4>
                             <p class="text-center">Please complete the following data before using this system</p>
@@ -38,8 +38,8 @@
                                         <label class="col-form-label">Email</label>
                                         <input id="email" type="email"
                                             class="form-control @error('email') is-invalid @enderror" name="email"
-                                            value="{{ (old('email') == null ? Auth::user()->email : old('email')) }}"
-                                            required autocomplete="email">
+                                            value="{{ Auth::user()->email }}" required autocomplete="off"
+                                            placeholder="xxxxx@jgu.ac.id">
                                         @error('email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -60,11 +60,12 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="col-form-label">New Password
-                                            <i class="fa fa-info-circle" title="Create new password for this system"></i>
+                                            <i class="fa fa-info-circle"
+                                                title="Create new password for this system"></i>
                                         </label>
                                         <input id="password" type="password"
                                             class="form-control @error('password') is-invalid @enderror" name="password"
-                                            required autocomplete="off">
+                                            required autocomplete="off" placeholder="at least 8 characters">
                                         @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -85,14 +86,25 @@
                                     <div class="form-group mb-0 mt-4">
                                         <button class="btn btn-primary btn-block w-100" type="submit">Submit</button>
                                     </div>
+                    </form>
+                                    <div class="form-group mb-0 mt-2">
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                        <a class="btn btn-light btn-block w-100" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Cancel</a>
+                                    </div>
                                 </div>
                             </div>
-                        </form>
                     </div>
+
+
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 @endsection
 @section('script')

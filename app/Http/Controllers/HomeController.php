@@ -49,6 +49,9 @@ class HomeController extends Controller
                     $prodi = $request->sub_unit_id;
                 }
                 $user = User::where('email',$request->email)->first();
+                if($request->email == null){
+                    $user = User::where('username',$request->id)->first();
+                }
                 if($user == null){
                     $new_user = false;
                     if($request->email == null || $request->email == ""){
@@ -67,7 +70,8 @@ class HomeController extends Controller
                             'password'=> null,
                             'email_verified_at' => Carbon::now(),
                             'created_at' => Carbon::now()
-                        ]);
+                    ]);
+                    
                     if($new_user){
                         $user = User::where('username', $request->id)->first();
                         if($request->dept_id == "ACAD"){
@@ -77,7 +81,7 @@ class HomeController extends Controller
                         }
                     }  
                 } else {
-                    $old_user = User::where('email',$request->email)->update([
+                    $old_user = $user->update([
                         'name' => $request->name,
                         'username' => $request->id,
                         // 'nidn' => $request->nidn,

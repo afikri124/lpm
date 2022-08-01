@@ -22,6 +22,8 @@ Route::get('/', function () {
 Route::get('/',[App\Http\Controllers\HomeController::class, 'index'])->name('index');
 Route::get('/',[App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/login/sso_klas2/', [App\Http\Controllers\HomeController::class, 'sso_klas2'])->name('sso_klas2');
+Route::get('/login/google', [App\Http\Controllers\GoogleController::class, 'redirectToGoogle']);
+Route::get('/login/google/callback', [App\Http\Controllers\GoogleController::class, 'handleCallback']);
 
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'dashboard'])->name('dashboard'); 
 Route::group(['middleware' => ['auth']], function () {

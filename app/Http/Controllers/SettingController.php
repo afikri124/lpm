@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Crypt;
 use Yajra\DataTables\DataTables;
 use DB;
+use Illuminate\Database\QueryException;
 
 class SettingController extends Controller
 {
@@ -62,6 +63,7 @@ class SettingController extends Controller
                 if($cek != null && $email != null){
                     $email = "DUPLICATE_".$email;
                 }
+                
                 $new_user=User::insert([
                         'name' => $u->name,
                         'email' => $email,

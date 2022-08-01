@@ -28,6 +28,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'phone',
         'job',
         'gender',
+        'google_id',
     ];
 
     protected $appends = ['user_avatar'];

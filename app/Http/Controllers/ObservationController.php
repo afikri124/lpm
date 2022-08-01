@@ -87,7 +87,8 @@ class ObservationController extends Controller
     }
 
     public function view($id, Request $request){
-        return $data = Crypt::decrypt($id);
+        $data = Crypt::decrypt($id);
+        return view('observations.view', compact('data'));
     }
 
 
