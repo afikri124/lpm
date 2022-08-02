@@ -208,7 +208,7 @@ class ApiController extends Controller
         ->leftJoin('employee_type as t', 'e.emp_type', '=', 't.id')
         ->leftJoin('lookup_gender as g', 'e.gender', '=', 'g.id')
         ->select('e.empid as id', 'e.name', 'du.description as unit_id', 'dsu.desc_malay as sub_unit_id', 
-        'e.email','e.mobile', "t.title AS job",
+        'e.email','e.mobile', "t.title AS job", 'e.emp_type',
         'g.short_code AS gender', "e.dept_id")->get();
         return Datatables::of($data)->make(true);
     }

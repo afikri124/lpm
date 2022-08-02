@@ -42,7 +42,7 @@ class SettingController extends Controller
         ->leftJoin('employee_type as t', 'e.emp_type', '=', 't.id')
         ->leftJoin('lookup_gender as g', 'e.gender', '=', 'g.id')
         ->select('e.empid as id', 'e.name', 'du.description as unit_id', 'dsu.desc_malay as sub_unit_id', 
-        'e.email','e.mobile', "t.title AS job",
+        'e.email','e.mobile', "t.title AS job", 'e.emp_type',
         'g.short_code AS gender', "e.dept_id")
         ->orderBy('name')->orderBy('last_modified_date', 'DESC')->get();
         $i = 0;
@@ -59,13 +59,16 @@ class SettingController extends Controller
                 $email = null;
             }
             $user = User::where('username', $u->id)->first();
+            // if($u->email == null){
+            //     $user = User::where('username',$u->id)->first();
+            // }
+            $cek = User::where('email', $email)->first();
+            if($cek != null && $email != null){
+                $email = "DUPLICATE_".$email;
+            }
             if($user == null){
                 $new_user = false;
-                $cek = User::where('email', $email)->first();
-                if($cek != null && $email != null){
-                    $email = "DUPLICATE_".$email;
-                }
-                
+               
                 $new_user=User::insert([
                         'name' => $u->name,
                         'email' => $email,
@@ -93,14 +96,14 @@ class SettingController extends Controller
                     array_push($FailedUser,$u->name);
                 }  
             } else {
-                $old_user = User::where('username', $u->id)->update([
+                $old_user = $user->update([
                     'name' => $u->name,
                     'email' => (($user->email == null) || str_contains($user->email, 'NO_EMAIL_') || str_contains($user->email, 'DUPLICATE_') ? $email : $user->email),
                     // 'nidn' => $u->nidn,
                     'department' => $u->unit_id,
                     'study_program' => $prodi,
                     'phone' => (($user->phone == null) ? preg_replace("/[^0-9]/", "", $u->mobile ) : $user->phone),
-                    'job' => (($user->job == null) ? $u->job : $user->job),
+                    'job' => $u->job,
                     'gender' => $u->gender,
                     'updated_at' => Carbon::now()
                 ]);
