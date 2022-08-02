@@ -99,8 +99,8 @@ class SettingController extends Controller
                     // 'nidn' => $u->nidn,
                     'department' => $u->unit_id,
                     'study_program' => $prodi,
-                    'phone' => preg_replace("/[^0-9]/", "", $u->mobile ),
-                    // 'job' => $u->job,
+                    'phone' => (($user->phone == null) ? preg_replace("/[^0-9]/", "", $u->mobile ) : $user->phone),
+                    'job' => (($user->job == null) ? $u->job : $user->job),
                     'gender' => $u->gender,
                     'updated_at' => Carbon::now()
                 ]);
