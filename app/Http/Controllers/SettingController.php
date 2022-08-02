@@ -36,13 +36,15 @@ class SettingController extends Controller
     public function syncKlas2(Request $request)
     {
         $data =  DB::connection('mysql2')
-                ->table('new_employee as e')
-                ->where('xemployee_status','=', 'AC')
-                // ->leftJoin('employee_type as t', 'e.emp_type', '=', 't.id')
-                ->leftJoin('lookup_gender as g', 'e.gender', '=', 'g.id')
-                ->select('e.empid as id', 'e.name', 'e.unit_id', 'e.sub_unit_id', 'e.sub_unit_id',
-                'e.email','e.mobile', "emp_type AS job",
-                'g.short_code AS gender', "e.dept_id")->orderBy('name')->orderBy('last_modified_date', 'DESC')->get();
+        ->table('new_employee as e')
+        ->leftJoin('dept_unit as du', 'e.unit_id', '=', 'du.id')
+        ->leftJoin('dept_sub_unit as dsu', 'e.sub_unit_id', '=', 'dsu.id')
+        ->leftJoin('employee_type as t', 'e.emp_type', '=', 't.id')
+        ->leftJoin('lookup_gender as g', 'e.gender', '=', 'g.id')
+        ->select('e.empid as id', 'e.name', 'du.description as unit_id', 'dsu.desc_malay as sub_unit_id', 
+        'e.email','e.mobile', "t.title AS job",
+        'g.short_code AS gender', "e.dept_id")
+        ->orderBy('name')->orderBy('last_modified_date', 'DESC')->get();
         $i = 0;
         $NewUser = array();
         $UpdatedUser = array();
