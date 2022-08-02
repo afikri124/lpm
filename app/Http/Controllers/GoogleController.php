@@ -8,6 +8,7 @@ use Auth;
 use Exception;
 use App\Models\User;
 use Carbon\Carbon;
+use DB;
 
 class GoogleController extends Controller
 {
@@ -29,6 +30,11 @@ class GoogleController extends Controller
      */
     public function handleCallback()
     {
+        try {
+            DB::connection()->getPdo();
+        } catch (\Exception $e) {
+            return redirect()->route('login')->withErrors(['msg' => $e->getMessage() ]);
+        }
         try {
      
             $user = Socialite::driver('google')->user();
