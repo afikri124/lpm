@@ -43,9 +43,10 @@
                             </div>
                         </div>
                         <h4>
-                            <div class="badge f-10 rounded-pill badge-primary"><i class="fa fa-clock-o"></i> <span id="txt"></span>
+                            <div class="badge f-10 rounded-pill badge-primary"><i class="fa fa-clock-o"></i> <span
+                                    id="txt"></span>
                             </div>
-                            </h4>
+                        </h4>
                     </div>
                     <div class="cartoon"><img class="img-fluid" src="{{asset('/assets/images/cartoon.png')}}"
                             style="max-width: 90%;" alt="">

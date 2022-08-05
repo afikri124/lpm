@@ -49,7 +49,7 @@
                                     @foreach($lecturer as $p)
                                     <option value="{{ $p->id }}"
                                         {{ ($p->id==old('lecturer_id') ? "selected": "") }}>
-                                        {{ $p->name }} ({{ $p->email }})
+                                        {{ $p->name }} {{ ($p->email==null ? '' : '- '.$p->email) }}
                                     </option>
                                     @endforeach
                                 </select>

@@ -286,9 +286,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 wow pulse"><a href=""><img class="img-fluid"
-                                src="{{ asset('assets/images/dashboard/struktur.png') }}"
-                                alt=""></a></div>
+                    <div class="col-lg-6 wow pulse text-center">
+                        <a href="{{ asset('assets/images/dashboard/struktur.png') }}" target="_blank">
+                            <img class="img-fluid" src="{{ asset('assets/images/dashboard/struktur.png') }}">
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -301,8 +303,8 @@
                         <p>Instrumen Akreditasi </p>
                     </div>
                     <div class="footer-content">
-                        <h1>Bagi Perguruan Tinggi/Ketua Program Studi Yang Ingin Download Instrumen Akreditasi,</h1>
-                        <h1>silahkan klik link berikut :</h1>
+                        <h1>Bagi Perguruan Tinggi/Ketua Program Studi yang ingin mengunduh Instrumen Akreditasi,</h1>
+                        <h1>silahkan klik tautan berikut :</h1>
                         <a class="btn mrl5 btn-lg btn-secondary default-view" target="_blank"
                             href="https://www.banpt.or.id/wp-content/uploads/2019/10/Lampiran-5-PerBAN-PT-5-2019-tentang-IAPS-Pedoman-Penilaian.pdf">Klik Disini</a>
                     </div>
