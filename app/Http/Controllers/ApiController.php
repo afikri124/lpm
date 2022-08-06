@@ -201,15 +201,7 @@ class ApiController extends Controller
         // $data = User::select('id','email','name')->whereHas('roles', function($q){
         //     $q->where('role_id', "AU");
         // })->get();
-        $data =  DB::connection('mysql2')
-        ->table('new_employee as e')
-        ->leftJoin('dept_unit as du', 'e.unit_id', '=', 'du.id')
-        ->leftJoin('dept_sub_unit as dsu', 'e.sub_unit_id', '=', 'dsu.id')
-        ->leftJoin('employee_type as t', 'e.emp_type', '=', 't.id')
-        ->leftJoin('lookup_gender as g', 'e.gender', '=', 'g.id')
-        ->select('e.empid as id', 'e.name', 'du.description as unit_id', 'dsu.desc_malay as sub_unit_id', 
-        'e.email','e.mobile', "t.title AS job", 'e.emp_type',
-        'g.short_code AS gender', "e.dept_id")->get();
+        $data = Criteria_category::with('criterias')->get();
         return Datatables::of($data)->make(true);
     }
 

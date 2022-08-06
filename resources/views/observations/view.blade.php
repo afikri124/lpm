@@ -1,15 +1,20 @@
 @extends('layouts.master')
-@section('title', 'Observation '.$data)
+@section('title', 'Observation : '.$lecturer->name)
 
 @section('css')
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/select2.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/select2-bootstrap.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/rating.css')}}">
 @endsection
 
 @section('style')
 <style>
     .input-validation-error~.select2 .select2-selection {
         border: 1px solid red;
+    }
+
+    .input-error {
+        color: red;
     }
 
 </style>
@@ -21,7 +26,7 @@
 
 @section('breadcrumb-items')
 <li class="breadcrumb-item">Observations</li>
-<li class="breadcrumb-item active">#{{ $data }}</li>
+<li class="breadcrumb-item active">{{ $lecturer->name }}</li>
 @endsection
 
 @section('content')
@@ -29,9 +34,10 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <div class="card-header">
-                    <h5>@yield('title')</h5>
-                </div>
+                <!-- <div class="card-header">
+                    <h5>Observation</h5>
+                </div> -->
+
                 <div class="card-body">
                     <form class="f1" method="POST" action="" enctype="multipart/form-data">
                         @csrf
@@ -52,39 +58,82 @@
                                 <p>Observation Report</p>
                             </div>
                         </div>
+                        @if ($errors->any())
+                        <div class="alert alert-danger outline alert-dismissible fade show" role="alert">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                            <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"
+                                data-bs-original-title="" title=""></button>
+                        </div>
+                        @endif
+
+                        <!-- <div class="alert alert-danger outline alert-dismissible fade show" role="alert"><svg
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-thumbs-down">
+                                <path
+                                    d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17">
+                                </path>
+                            </svg>
+                            <p>Your <b> Perfomance </b> is down on this week</p>
+                            
+                        </div> -->
+
                         <fieldset>
                             <div class="row">
                                 <div class="mb-3 mb-2 col-lg-6 col-md-12">
                                     <label>Lecturer</label>
-                                    <input class="form-control" type="text" value="X" disabled>
+                                    <input class="form-control" type="text" value="{{ $lecturer->name }}" disabled>
                                 </div>
                                 <div class="mb-3 mb-2 col-lg-6 col-md-12">
                                     <label>Auditor</label>
-                                    <input class="form-control"  type="text" value="Y" disabled >
+                                    <input class="form-control" type="text" value="{{ $data->auditor->name }}" disabled>
                                 </div>
                                 <div class="mb-3 mb-2 col-lg-6 col-md-12">
-                                    <label>Subject Course</label>
-                                    <input class="form-control" type="text" name="">
-                                </div>
-                                <div class="mb-3 mb-2 col-lg-6 col-md-12">
-                                    <label>Topic</label>
-                                    <input class="form-control"  type="text" name="" >
-                                </div>
-                                <div class="mb-3 mb-2 col-lg-6 col-md-12">
-                                    <label>Class Type</label>
-                                    <input class="form-control" type="text" name="">
-                                </div>
-                                <div class="mb-3 mb-2 col-lg-6 col-md-12">
-                                    <label>Location</label>
-                                    <input class="form-control"  type="text" name="" >
-                                </div>
-                                <div class="mb-3 mb-2 col-lg-6 col-md-12">
-                                    <label>Study Program</label>
-                                    <input class="form-control" type="text" name="">
+                                    <label>Study Program {{old('study_program')}}</label>
+                                    <select class="form-control input-sm select2" name="study_program"
+                                        title="Study Program" data-placeholder="Select Study Program" required>
+                                        @foreach($study_program as $d)
+                                        <option value="{{ $d->study_program }}"
+                                            {{ ($d->study_program==$data->study_program ? "selected": "") }}
+                                            {{ ($d->study_program==old('study_program') ? "selected": "") }}>
+                                            {{ $d->study_program }}
+                                        </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="mb-3 mb-2 col-lg-6 col-md-12">
                                     <label>Total Students</label>
-                                    <input class="form-control" type="text" name="">
+                                    <input class="form-control" type="number" name="total_students"
+                                        title="Total Students"
+                                        value="{{ (old('total_students')==null ? $data->total_students : old('total_students')) }}"
+                                        required>
+                                </div>
+                                <div class="mb-3 mb-2 col-lg-6 col-md-12">
+                                    <label>Class Type</label>
+                                    <input class="form-control" type="text" name="class_type" title="Class Type"
+                                        value="{{ (old('class_type')==null ? $data->class_type : old('class_type')) }}"
+                                        required>
+                                </div>
+                                <div class="mb-3 mb-2 col-lg-6 col-md-12">
+                                    <label>Location</label>
+                                    <input class="form-control" type="text" name="location" title="Location"
+                                        value="{{ (old('location')==null ? $data->location : old('location')) }}"
+                                        required>
+                                </div>
+                                <div class="mb-3 mb-2 col-lg-6 col-md-12">
+                                    <label>Subject Course</label>
+                                    <input class="form-control" type="text" name="subject_course" title="Subject Course"
+                                        value="{{ (old('subject_course')==null ? $data->subject_course : old('subject_course')) }}"
+                                        required>
+                                </div>
+                                <div class="mb-3 mb-2 col-lg-6 col-md-12">
+                                    <label>Topic</label>
+                                    <input class="form-control" type="text" name="topic" title="Topic"
+                                        value="{{ (old('topic')==null ? $data->topic : old('topic')) }}">
                                 </div>
                             </div>
                             <div class="f1-buttons">
@@ -92,7 +141,85 @@
                             </div>
                         </fieldset>
                         <fieldset>
-  
+                            <div class="mb-3 mb-2 col-lg-12 col-md-12">
+                                <table class="table table-hover" width="100%">
+                                    @foreach($survey as $key => $q)
+                                    <tr valign="top">
+                                        <th><strong>{{ $q->id }}</strong></th>
+                                        <th colspan="2">{{ $q->title }} <u>{{ $q->description }}</u></th>
+                                    </tr>
+                                    @foreach($q->criterias as $no => $c)
+                                    <tr valign="top">
+                                        <td>{{ $q->id }}.{{ $no + 1 }}</td>
+                                        <td>{{ $c->title }}
+                                            <input type="hidden" name='questions[{{ $c->id }}][w]' value='{{ $c->weight }}'>
+                                            <input type="hidden" name='questions[{{ $c->id }}][c]' value='{{ $q->id }}'>
+                                        </td>
+                                        <td>
+                                            <span class="star-ratings">
+                                                <select class="u-rating-fontawesome-o" name="questions[{{ $c->id }}][q]"
+                                                    title="Question {{ $q->id }}.{{ $no + 1 }}" autocomplete="off" required>
+                                                    <option value="" selected>0</option>
+                                                    <option value="1"
+                                                        {{ (old('questions.'.$c->id.'.q')=='1'? "selected": "")}}>1</option>
+                                                    <option value="2"
+                                                        {{ (old('questions.'.$c->id.'.q')=='2'? "selected": "")}}>2</option>
+                                                    <option value="3"
+                                                        {{ (old('questions.'.$c->id.'.q')=='3'? "selected": "")}}>3</option>
+                                                    <option value="4"
+                                                        {{ (old('questions.'.$c->id.'.q')=='4'? "selected": "")}}>4</option>
+                                                    <option value="5"
+                                                        {{ (old('questions.'.$c->id.'.q')=='5'? "selected": "")}}>5</option>
+                                                </select>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                    <tr valign="top">
+                                        <td></td>
+                                        <td colspan="2">
+                                            <label><i>Remark (Additional Comments) for {{ $q->id }}</i></label>
+                                            <textarea class="form-control mb-4" rows="2"
+                                                name="categories[{{ $q->id }}]">{{ old('categories.'.$q->id)}}</textarea>
+                                        </td>
+                                    </tr>
+
+                                    <!-- <div class="card mt-4">
+                                    <div class="card-header"><strong> {{ $key + 1 }} </strong>{{ $q->id }}</div>
+                                    <div class="card-body"> -->
+                                    <!-- <div class="star-ratings">
+							<div class="stars stars-example-fontawesome-o">
+								<select id="u-rating-fontawesome-o" name="rating" data-current-rating="0" autocomplete="off">
+                                    <option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+								</select>
+								<span class="title current-rating">Current rating: <span class="value digits"></span></span><span class="title your-rating hidden">Your rating: <span class="value digits"></span><a class="clear-rating" href="#"><i class="fa fa-times-circle"></i></a></span>
+							</div>
+						</div> -->
+                                    <!-- <ul class="list-group">
+                                            @foreach($q->criterias as $c)
+                                            <label for="answer{{$c->id}}">
+                                                <li class="list-group-item">
+                                                    <input type="hidden" name='responses[{{$key}}][questionid]'
+                                                        value='{{ $q->id }}'>
+                                                    <input type="radio" name='responses[{{$key}}][answerid]'
+                                                        id='answer{{ $c->id }}' class="mr-2" value="{{$c->id}}"
+                                                        {{ old('responses.' . $key . '.answer_id') == $c->id ? 'checked' : '' }}>
+                                                    {{ $c->weight }}
+
+                                                </li>
+                                            </label>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div> -->
+
+                                    @endforeach
+                                </table>
+                            </div>
                             <div class="f1-buttons">
                                 <button class="btn btn-secondary btn-previous" type="button">Previous</button>
                                 <button class="btn btn-primary btn-next" type="button">Next</button>
@@ -100,18 +227,21 @@
                         </fieldset>
                         <fieldset>
                             <div class="row">
-                                <div class="mb-3 mb-2 col-lg-6 col-md-12">
+                                <!-- <div class="mb-3 mb-2 col-lg-6 col-md-12">
                                     <label>Date/time</label>
-                                    <input  class="form-control digits" autocomplete="off" type="datetime-local"
-                                    id="date_time" name="date_time" >
-                                </div>
-                                <div class="mb-3 mb-2 col-lg-6 col-md-12">
+                                    <input class="form-control digits" autocomplete="off" type="datetime-local"
+                                     name="updated_at" required>
+                                </div> -->
+                                <div class="mb-3 mb-2 col-lg-12 col-md-12">
                                     <label>Photo documentation</label>
-                                    <input class="form-control" type="file" accept="image/*" data-bs-original-title="" title="Image Only">
+                                    <input class="form-control" name="image_path" type="file" accept="image/*"
+                                        title="Photo documentation" data-bs-original-title="" title="only accept image"
+                                        required>
                                 </div>
                                 <div class="mb-3 mb-2 col-lg-12 col-md-12">
-                                    <label>Remark</label>
-                                    <textarea class="form-control" id="remark" rows="3"></textarea>
+                                    <label>Remark (Additional Comments)</label>
+                                    <textarea class="form-control" name="remark" title="Additional Comments"
+                                        rows="3">{{ (old('remark')==null ? $data->remark : old('remark')) }}</textarea>
                                 </div>
                             </div>
                             <div class="f1-buttons">
@@ -142,8 +272,33 @@
     }, 350);
 
 </script>
+<script src="{{asset('assets/js/form-wizard/jquery.backstretch.min.js')}}"></script>
+<script src="{{asset('assets/js/rating/jquery.barrating.js')}}"></script>
+<script src="{{asset('assets/js/notify/bootstrap-notify.min.js')}}"></script>
+<script src="{{asset('assets/js/notify/notify-script.js')}}"></script>
+<script>
+    'use strict';
+    $(function () {
+        function ratingEnable() {
+            $('.u-rating-fontawesome-o').barrating({
+                theme: 'fontawesome-stars-o',
+                showSelectedRating: true,
+                initialRating: $(this).val(),
+                // onSelect: function (value, text) {
+                //     if (!value) {
+                //         // $('.u-rating-fontawesome-o').barrating('clear');
+                //     } else {
+                //         // $('.stars-example-fontawesome-o .current-rating').addClass('hidden');
+                //         // $('.stars-example-fontawesome-o .your-rating').removeClass('hidden').find(
+                //         //     'span').html(value);
+                //     }
+                // },
+            });
+        }
+        ratingEnable();
+    });
 
-<!-- <script src="{{asset('assets/js/form-wizard/form-wizard-three.js')}}"></script> -->
+</script>
 <script>
     "use strict";
 
@@ -178,7 +333,7 @@
         });
         $('.f1 fieldset:first').fadeIn('slow');
 
-        $('.f1 input[required]').on('focus', function () {
+        $('.f1 input[required], select[required]').on('focus', function () {
             $(this).removeClass('input-error');
         });
         $('.f1 .btn-next').on('click', function () {
@@ -186,10 +341,35 @@
             var next_step = true;
             var current_active_step = $(this).parents('.f1').find('.f1-step.active');
             var progress_line = $(this).parents('.f1').find('.f1-progress-line');
-            parent_fieldset.find('input[required]').each(function () {
+            parent_fieldset.find('input[required], select[required]').each(function () {
                 if ($(this).val() == "") {
                     $(this).addClass('input-error');
                     next_step = false;
+                    var tes = $(this).attr('title');
+                    if (tes == null || tes == '') {
+                        tes = $(this).attr('name');
+                    }
+                    $.notify({
+                        message: 'The \"' + tes + '\" field is required.'
+                    }, {
+                        type: 'danger',
+                        allow_dismiss: true,
+                        newest_on_top: false,
+                        mouse_over: false,
+                        showProgressbar: false,
+                        spacing: 10,
+                        timer: 2000,
+                        placement: {
+                            from: 'top',
+                            align: 'right'
+                        },
+                        offset: {
+                            x: 30,
+                            y: 30
+                        },
+                        delay: 1000,
+                        z_index: 10000,
+                    });
                 } else {
                     $(this).removeClass('input-error');
                 }
@@ -216,7 +396,7 @@
             });
         });
         $('.f1').on('submit', function (e) {
-            $(this).find('input[required]').each(function () {
+            $(this).find('input[required], select[required]').each(function () {
                 if ($(this).val() == "") {
                     e.preventDefault();
                     $(this).addClass('input-error');
@@ -228,5 +408,4 @@
     })(jQuery);
 
 </script>
-<script src="{{asset('assets/js/form-wizard/jquery.backstretch.min.js')}}"></script>
 @endsection

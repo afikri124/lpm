@@ -52,7 +52,7 @@ class HomeController extends Controller
                 } else { //register
                     $prodi = null;
                     if($request->dept_id == "ACAD"){
-                        $prodi = $request->sub_unit_id;
+                        $prodi = $request->sub_unit;
                     }
                     $user = User::where('email',$request->email)->first();
                     if($request->email == null){
@@ -68,7 +68,7 @@ class HomeController extends Controller
                                 'email' => $request->email,
                                 'username' => $request->id,
                                 // 'nidn' => $request->nidn,
-                                'department' => $request->unit_id,
+                                'department' => $request->unit,
                                 'study_program' => $prodi,
                                 'phone' => preg_replace("/[^0-9]/", "", $request->mobile ),
                                 'job' => $request->job,
@@ -91,10 +91,10 @@ class HomeController extends Controller
                             'name' => $request->name,
                             'username' => $request->id,
                             // 'nidn' => $request->nidn,
-                            'department' => $request->unit_id,
+                            'department' => $request->unit,
                             'study_program' => $prodi,
                             'phone' => preg_replace("/[^0-9]/", "", $request->mobile ),
-                            // 'job' => $request->job,
+                            'job' => $request->job,
                             'gender' => $request->gender,
                             'updated_at' => Carbon::now()
                         ]);

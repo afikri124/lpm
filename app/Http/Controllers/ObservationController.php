@@ -7,9 +7,12 @@ use App\Models\User;
 use App\Models\Observation;
 use App\Models\Status;
 use App\Models\Schedule_history;
+use App\Models\Criteria_category;
+use App\Models\Criteria;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Crypt;
+use Yajra\DataTables\DataTables;
 
 class ObservationController extends Controller
 {
@@ -88,10 +91,24 @@ class ObservationController extends Controller
 
     public function view($id, Request $request){
         if ($request->isMethod('POST') && isset($request->submit)) {
-            var_dump($request->submit);
+            $this->validate($request, [ 
+                'questions[*]'=> ['required'],
+                'study_program'=> ['required'],
+                'remark'=> ['required'],
+                'image_path' => ['required','image'],
+            ]);
+            // var_dump($request->questions);
+            // var_dump($request->categories);
+            return Datatables::of($request->questions)->make(true);
+            // var_dump($request->weigth);
+            // var_dump($request->category);
         } else {
-            $data = Crypt::decrypt($id);
-            return view('observations.view', compact('data'));
+            $o_id = Crypt::decrypt($id);
+            $data = Observation::with('auditor')->with('schedule')->findOrFail($o_id);
+            $lecturer = User::find($data->schedule->lecturer_id);
+            $study_program = User::select('study_program')->groupBy('study_program')->get();
+            $survey = Criteria_category::with('criterias')->get();
+            return view('observations.view', compact('data', 'lecturer', 'study_program', 'survey'));
         }
     }
 

@@ -24,8 +24,7 @@
 
 @section('breadcrumb-items')
 <li class="breadcrumb-item">Schedules</li>
-<li class="breadcrumb-item">Edit</li>
-<li class="breadcrumb-item active">#{{ $data->lecturer->name }} </li>
+<li class="breadcrumb-item active">{{ $data->lecturer->name }} </li>
 @endsection
 
 @section('content')

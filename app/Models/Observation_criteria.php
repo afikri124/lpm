@@ -10,6 +10,6 @@ class Observation_criteria extends Model
     use HasFactory;
     public $timestamps = false;
     protected $fillable = [
-        'observation_id', 'criteria_id', 'score',
+        'observation_id', 'criteria_id', 'score', 'weight', 'observation_category_id'
     ];
 }
