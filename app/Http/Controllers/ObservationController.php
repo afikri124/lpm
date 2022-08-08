@@ -120,7 +120,7 @@ class ObservationController extends Controller
                         'subject_course'=> $request->subject_course,
                         'topic'=> $request->topic,
                         'remark'=> $request->remark,
-                        'image_path'=> url('/')."images/".$folderName."/".$imageName,
+                        'image_path'=> url('/')."/images".$folderName."/".$imageName,
                         'updated_at'=> Carbon::now(),
                         'attendance'=> true
                 ]);
