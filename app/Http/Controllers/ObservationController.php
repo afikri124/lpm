@@ -106,7 +106,7 @@ class ObservationController extends Controller
             $folderName =  "/observations";
             $path = public_path('images').$folderName;
             if (! File::exists($path)) {
-                File::makeDirectory($path); //create folder
+                File::makeDirectory($path, 0755, true); //create folder
             }
             $request->image_path->move($path, $imageName); //upload image to folder
             DB::beginTransaction();
