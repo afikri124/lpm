@@ -32,6 +32,7 @@
             text-align: left;
             margin-left: 20px;
         }
+
     </style>
 </head>
 
@@ -51,24 +52,18 @@
     <div class="page-wrapper landing-page">
         <div class="landing-home">
             <ul class="decoration">
-                <li class="one"><img class="img-fluid" src="{{ asset('assets/images/landing/decore/1.png') }}"
-                        alt="">
+                <li class="one"><img class="img-fluid" src="{{ asset('assets/images/landing/decore/1.png') }}" alt="">
                 </li>
-                <li class="two"><img class="img-fluid" src="{{ asset('assets/images/landing/decore/2.png') }}"
-                        alt="">
+                <li class="two"><img class="img-fluid" src="{{ asset('assets/images/landing/decore/2.png') }}" alt="">
                 </li>
-                <li class="three"><img class="img-fluid" src="{{ asset('assets/images/landing/decore/4.png') }}"
-                        alt="">
+                <li class="three"><img class="img-fluid" src="{{ asset('assets/images/landing/decore/4.png') }}" alt="">
                 </li>
-                <li class="four"><img class="img-fluid" src="{{ asset('assets/images/landing/decore/3.png') }}"
-                        alt="">
+                <li class="four"><img class="img-fluid" src="{{ asset('assets/images/landing/decore/3.png') }}" alt="">
                 </li>
-                <li class="five"><img class="img-fluid" src="{{ asset('assets/images/landing/2.png') }}"
-                        alt=""></li>
+                <li class="five"><img class="img-fluid" src="{{ asset('assets/images/landing/2.png') }}" alt=""></li>
                 <li class="six"><img class="img-fluid" src="{{ asset('assets/images/landing/decore/cloud.png') }}"
                         alt=""></li>
-                <li class="seven"><img class="img-fluid" src="{{ asset('assets/images/landing/2.png') }}"
-                        alt="">
+                <li class="seven"><img class="img-fluid" src="{{ asset('assets/images/landing/2.png') }}" alt="">
                 </li>
             </ul>
             <div class="container-fluid">
@@ -124,15 +119,15 @@
                                                         class="fa fa-th"></i> Aplikasi</a>
                                                 <div class="dropup-content dropdown-content">
                                                     @if (Route::has('login'))
-                                                        @auth
-                                                            <a href="{{ url('/dashboard') }}"
-                                                                class="text-sm text-gray-700 dark:text-gray-500 underline">Peer
-                                                                Observation</a>
-                                                        @else
-                                                            <a href="{{ route('login') }}"
-                                                                class="text-sm text-gray-700 dark:text-gray-500 underline">Peer
-                                                                Observation</a>
-                                                        @endauth
+                                                    @auth
+                                                    <a href="{{ url('/dashboard') }}"
+                                                        class="text-sm text-gray-700 dark:text-gray-500 underline">Peer
+                                                        Observation</a>
+                                                    @else
+                                                    <a href="{{ route('login') }}"
+                                                        class="text-sm text-gray-700 dark:text-gray-500 underline">Peer
+                                                        Observation</a>
+                                                    @endauth
                                                     @endif
                                                     <!-- <a href="https://lpm.jgu.ac.id/old">PO-Old</a>
                                                     <a href="#">Coming soon..</a> -->
@@ -306,7 +301,8 @@
                         <h1>Bagi Perguruan Tinggi/Ketua Program Studi yang ingin mengunduh Instrumen Akreditasi,</h1>
                         <h1>silahkan klik tautan berikut :</h1>
                         <a class="btn mrl5 btn-lg btn-secondary default-view" target="_blank"
-                            href="https://www.banpt.or.id/wp-content/uploads/2019/10/Lampiran-5-PerBAN-PT-5-2019-tentang-IAPS-Pedoman-Penilaian.pdf">Klik Disini</a>
+                            href="https://www.banpt.or.id/wp-content/uploads/2019/10/Lampiran-5-PerBAN-PT-5-2019-tentang-IAPS-Pedoman-Penilaian.pdf">Klik
+                            Disini</a>
                     </div>
                 </div>
             </div>
@@ -328,7 +324,7 @@
             <div class="container container-modify">
                 <div class="row component_responsive">
 
-                
+
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
                         <div class="component-hover-effect">
                             <i class="fa fa-spin fa-star h2 text-warning"></i>
@@ -552,7 +548,7 @@
     @yield('script')
 
     @if (Route::current()->getName() != 'popover')
-        <script src="{{ asset('assets/js/tooltip-init.js') }}"></script>
+    <script src="{{ asset('assets/js/tooltip-init.js') }}"></script>
     @endif
 
     <!-- Plugins JS Ends-->

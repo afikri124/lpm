@@ -9,14 +9,9 @@
 
 @section('style')
 <style>
-    .input-validation-error~.select2 .select2-selection {
+    .input-error ~ .select2-container .select2-selection--single {
         border: 1px solid red;
     }
-
-    .input-error {
-        color: red;
-    }
-
 </style>
 @endsection
 
@@ -236,15 +231,6 @@
                 theme: 'fontawesome-stars-o',
                 showSelectedRating: true,
                 initialRating: $(this).val(),
-                // onSelect: function (value, text) {
-                //     if (!value) {
-                //         // $('.u-rating-fontawesome-o').barrating('clear');
-                //     } else {
-                //         $('.stars-example-fontawesome-o .current-rating').addClass('hidden');
-                //         $('.stars-example-fontawesome-o .your-rating').removeClass('hidden').find(
-                //             'span').html(value);
-                //     }
-                // },
             });
         }
         ratingEnable();
@@ -287,6 +273,9 @@
 
         $('.f1 input[required], select[required]').on('focus', function () {
             $(this).removeClass('input-error');
+        });
+        $('select.select2').on('select2:closing', function (e) {
+            $(this).removeClass('input-error');  
         });
         $('.f1 .btn-next').on('click', function () {
             var parent_fieldset = $(this).parents('fieldset');

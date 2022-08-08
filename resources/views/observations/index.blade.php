@@ -183,8 +183,7 @@
                         var x = "";
                         if (row.image_path != null) {
                             x =
-                                '<a target="_blank" href="' +
-                                row.image_path +
+                                '<a target="_blank" href="' + row.image_path +
                                 '"><img class="float-start chat-user-img img-30" src="' +
                                 row.image_path + '"></a>';
                         }

@@ -36,6 +36,7 @@ class ObservationController extends Controller
     public function delete(Request $request) {
         $data = Observation::find($request->id);
         if($data){
+            File::delete(public_path()."/".$data->image_path);
             $data->delete();
             $auditor = User::find($data->auditor_id);
                 $x = Schedule_history::insert([
@@ -46,6 +47,7 @@ class ObservationController extends Controller
                     'created_at' => Carbon::now(),
                 ]);
             //TODO : SEND EMAIL cancelled TO AUDITOR
+
             return response()->json([
                 'success' => true,
                 'message' => 'Record deleted successfully!'
@@ -103,9 +105,9 @@ class ObservationController extends Controller
             ]);
 
             $imageName = Carbon::now()->format('Ym').'_'.md5($o_id).'.'.$request->image_path->extension(); 
-            $folderName =  "/observations";
-            $path = public_path('images').$folderName;
-            if (! File::exists($path)) {
+            $folderName =  "/images/observations";
+            $path = public_path().$folderName;
+            if (!File::exists($path)) {
                 File::makeDirectory($path, 0755, true); //create folder
             }
             $request->image_path->move($path, $imageName); //upload image to folder
@@ -120,7 +122,7 @@ class ObservationController extends Controller
                         'subject_course'=> $request->subject_course,
                         'topic'=> $request->topic,
                         'remark'=> $request->remark,
-                        'image_path'=> url('/')."/public/images".$folderName."/".$imageName,
+                        'image_path'=> $folderName."/".$imageName,
                         'updated_at'=> Carbon::now(),
                         'attendance'=> true
                 ]);
