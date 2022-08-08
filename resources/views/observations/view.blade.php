@@ -37,7 +37,6 @@
                 <!-- <div class="card-header">
                     <h5>Observation</h5>
                 </div> -->
-
                 <div class="card-body">
                     <form class="f1" method="POST" action="" enctype="multipart/form-data">
                         @csrf
@@ -69,19 +68,6 @@
                                 data-bs-original-title="" title=""></button>
                         </div>
                         @endif
-
-                        <!-- <div class="alert alert-danger outline alert-dismissible fade show" role="alert"><svg
-                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="feather feather-thumbs-down">
-                                <path
-                                    d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17">
-                                </path>
-                            </svg>
-                            <p>Your <b> Perfomance </b> is down on this week</p>
-                            
-                        </div> -->
-
                         <fieldset>
                             <div class="row">
                                 <div class="mb-3 mb-2 col-lg-6 col-md-12">
@@ -157,19 +143,19 @@
                                         </td>
                                         <td>
                                             <span class="star-ratings">
-                                                <select class="u-rating-fontawesome-o" name="questions[{{ $c->id }}][q]"
+                                                <select class="u-rating-fontawesome-o" name="questions[{{ $c->id }}][s]"
                                                     title="Question {{ $q->id }}.{{ $no + 1 }}" autocomplete="off" required>
                                                     <option value="" selected>0</option>
                                                     <option value="1"
-                                                        {{ (old('questions.'.$c->id.'.q')=='1'? "selected": "")}}>1</option>
+                                                        {{ (old('questions.'.$c->id.'.s')=='1'? "selected": "")}}>1</option>
                                                     <option value="2"
-                                                        {{ (old('questions.'.$c->id.'.q')=='2'? "selected": "")}}>2</option>
+                                                        {{ (old('questions.'.$c->id.'.s')=='2'? "selected": "")}}>2</option>
                                                     <option value="3"
-                                                        {{ (old('questions.'.$c->id.'.q')=='3'? "selected": "")}}>3</option>
+                                                        {{ (old('questions.'.$c->id.'.s')=='3'? "selected": "")}}>3</option>
                                                     <option value="4"
-                                                        {{ (old('questions.'.$c->id.'.q')=='4'? "selected": "")}}>4</option>
+                                                        {{ (old('questions.'.$c->id.'.s')=='4'? "selected": "")}}>4</option>
                                                     <option value="5"
-                                                        {{ (old('questions.'.$c->id.'.q')=='5'? "selected": "")}}>5</option>
+                                                        {{ (old('questions.'.$c->id.'.s')=='5'? "selected": "")}}>5</option>
                                                 </select>
                                             </span>
                                         </td>
@@ -183,40 +169,6 @@
                                                 name="categories[{{ $q->id }}]">{{ old('categories.'.$q->id)}}</textarea>
                                         </td>
                                     </tr>
-
-                                    <!-- <div class="card mt-4">
-                                    <div class="card-header"><strong> {{ $key + 1 }} </strong>{{ $q->id }}</div>
-                                    <div class="card-body"> -->
-                                    <!-- <div class="star-ratings">
-							<div class="stars stars-example-fontawesome-o">
-								<select id="u-rating-fontawesome-o" name="rating" data-current-rating="0" autocomplete="off">
-                                    <option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-									<option value="5">5</option>
-								</select>
-								<span class="title current-rating">Current rating: <span class="value digits"></span></span><span class="title your-rating hidden">Your rating: <span class="value digits"></span><a class="clear-rating" href="#"><i class="fa fa-times-circle"></i></a></span>
-							</div>
-						</div> -->
-                                    <!-- <ul class="list-group">
-                                            @foreach($q->criterias as $c)
-                                            <label for="answer{{$c->id}}">
-                                                <li class="list-group-item">
-                                                    <input type="hidden" name='responses[{{$key}}][questionid]'
-                                                        value='{{ $q->id }}'>
-                                                    <input type="radio" name='responses[{{$key}}][answerid]'
-                                                        id='answer{{ $c->id }}' class="mr-2" value="{{$c->id}}"
-                                                        {{ old('responses.' . $key . '.answer_id') == $c->id ? 'checked' : '' }}>
-                                                    {{ $c->weight }}
-
-                                                </li>
-                                            </label>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                </div> -->
-
                                     @endforeach
                                 </table>
                             </div>
@@ -288,9 +240,9 @@
                 //     if (!value) {
                 //         // $('.u-rating-fontawesome-o').barrating('clear');
                 //     } else {
-                //         // $('.stars-example-fontawesome-o .current-rating').addClass('hidden');
-                //         // $('.stars-example-fontawesome-o .your-rating').removeClass('hidden').find(
-                //         //     'span').html(value);
+                //         $('.stars-example-fontawesome-o .current-rating').addClass('hidden');
+                //         $('.stars-example-fontawesome-o .your-rating').removeClass('hidden').find(
+                //             'span').html(value);
                 //     }
                 // },
             });

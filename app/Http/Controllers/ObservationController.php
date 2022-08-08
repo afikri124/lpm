@@ -9,10 +9,14 @@ use App\Models\Status;
 use App\Models\Schedule_history;
 use App\Models\Criteria_category;
 use App\Models\Criteria;
+use App\Models\Observation_category;
+use App\Models\Observation_criteria;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Crypt;
 use Yajra\DataTables\DataTables;
+use DB;
+use Illuminate\Support\Facades\File;
 
 class ObservationController extends Controller
 {
@@ -90,25 +94,78 @@ class ObservationController extends Controller
     }
 
     public function view($id, Request $request){
+        $o_id = Crypt::decrypt($id);
         if ($request->isMethod('POST') && isset($request->submit)) {
             $this->validate($request, [ 
-                'questions[*]'=> ['required'],
+                'questions'=> ['required'],
                 'study_program'=> ['required'],
-                'remark'=> ['required'],
                 'image_path' => ['required','image'],
             ]);
-            // var_dump($request->questions);
-            // var_dump($request->categories);
-            return Datatables::of($request->questions)->make(true);
-            // var_dump($request->weigth);
-            // var_dump($request->category);
+
+            $imageName = Carbon::now()->format('Ym').'_'.md5($o_id).'.'.$request->image_path->extension(); 
+            $folderName =  "/observations";
+            $path = public_path('images').$folderName;
+            if (! File::exists($path)) {
+                File::makeDirectory($path); //create folder
+            }
+            $request->image_path->move($path, $imageName); //upload image to folder
+            DB::beginTransaction();
+            try {
+                DB::table('observations')->where('id',$o_id)
+                    ->update([
+                        'study_program'=> $request->study_program,
+                        'total_students'=> $request->total_students,
+                        'class_type'=> $request->class_type,
+                        'location'=> $request->location,
+                        'subject_course'=> $request->subject_course,
+                        'topic'=> $request->topic,
+                        'remark'=> $request->remark,
+                        'image_path'=> url('/')."images/".$folderName."/".$imageName,
+                        'updated_at'=> Carbon::now(),
+                        'attendance'=> true
+                ]);
+
+                foreach($request->categories as $key => $remark) {
+                    if(!Observation_category::where('observation_id', $o_id)->where('criteria_category_id', $key)->first()){
+                        DB::table('observation_categories')->insert([
+                            'observation_id' => $o_id,
+                            'criteria_category_id' => $key,
+                            'remark' => $remark,
+                        ]);
+                    }
+                }
+                $criteria_categories = Observation_category::where('observation_id', $o_id)->get();
+                foreach($criteria_categories as $cc) {
+                    foreach($request->questions as $key => $q) {
+                        if($cc->criteria_category_id == $q['c']){
+                            DB::table('observation_criterias')->insert([
+                                'observation_id' => $o_id,
+                                'criteria_id' => $key,
+                                'score' => $q['s'],
+                                'weight' => $q['w'],
+                                'observation_category_id' => $cc->id,
+                            ]);
+                        }
+                    }
+                }
+                DB::commit();
+                // all good
+                return redirect()->route('observations');
+            } catch (\Exception $e) {
+                DB::rollback();
+                // something went wrong
+                echo $e;
+            }
         } else {
-            $o_id = Crypt::decrypt($id);
             $data = Observation::with('auditor')->with('schedule')->findOrFail($o_id);
             $lecturer = User::find($data->schedule->lecturer_id);
-            $study_program = User::select('study_program')->groupBy('study_program')->get();
-            $survey = Criteria_category::with('criterias')->get();
-            return view('observations.view', compact('data', 'lecturer', 'study_program', 'survey'));
+            if($data->attendance == false){
+                $study_program = User::select('study_program')->groupBy('study_program')->get();
+                $survey = Criteria_category::with('criterias')->get();
+                return view('observations.view', compact('data', 'lecturer', 'study_program', 'survey'));
+            } else {
+                echo "Tes SuDAH DI DINILAI";
+            }
         }
     }
 

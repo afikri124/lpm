@@ -22,6 +22,7 @@
     table.dataTable td:nth-child(3) {
         max-width: 170px;
     }
+
     table.dataTable td:nth-child(7) {
         max-width: 50px;
     }
@@ -58,7 +59,8 @@
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <select id="Select_2" class="form-control input-sm select2" data-placeholder="Attendance Status">
+                        <select id="Select_2" class="form-control input-sm select2"
+                            data-placeholder="Attendance Status">
                             <option value="">Attendance Status</option>
                             <option value=0>Not Yet</option>
                             <option value=1>Attend</option>
@@ -135,8 +137,7 @@
                         d.search = $('input[type="search"]').val()
                 },
             },
-            columns: [
-                {
+            columns: [{
                     render: function (data, type, row, meta) {
                         var no = (meta.row + meta.settings._iDisplayStart + 1);
                         return no;
@@ -146,14 +147,17 @@
                 },
                 {
                     render: function (data, type, row, meta) {
-                        var x = "<span title='"+ row.schedule.lecturer['name'] + "'>"+ row.schedule.lecturer['name'] + "</span>";
+                        var x = "<span title='" + row.schedule.lecturer['name'] + "'>" + row
+                            .schedule.lecturer['name'] + "</span>";
                         return x;
                     },
                 },
                 {
                     render: function (data, type, row, meta) {
-                        var x = moment(row.schedule.date_start).format("DD-MMM-YY HH:mm") + " to ";
-                        if(moment(row.schedule.date_start).format("DD/MM/YY") == moment(row.schedule.date_end).format("DD/MM/YY")){
+                        var x = moment(row.schedule.date_start).format("DD-MMM-YY HH:mm") +
+                            " to ";
+                        if (moment(row.schedule.date_start).format("DD/MM/YY") == moment(row
+                                .schedule.date_end).format("DD/MM/YY")) {
                             x += moment(row.schedule.date_end).format("HH:mm");
                         } else {
                             x += moment(row.schedule.date_end).format("DD-MMM-YY HH:mm");
@@ -165,7 +169,9 @@
                     render: function (data, type, row, meta) {
                         var x = "";
                         if (row.attendance == true) {
-                            x = '<span class="badge badge-' + row.color + '">attend</span>';
+                            x = '<span class="badge badge-' + row.color + '" title="attend">' +
+                                moment(row.updated_at).format("DD-MMM-YY HH:mm") +
+                                '</span>';
                         } else {
                             x = '<span class="badge badge-' + row.color + '">not yet</span>';
                         }
@@ -179,13 +185,13 @@
                             x =
                                 '<a target="_blank" href="' +
                                 row.image_path +
-                                '"><img class="rounded-circle float-start chat-user-img img-30" src="' +
+                                '"><img class="float-start chat-user-img img-30" src="' +
                                 row.image_path + '"></a>';
                         }
                         return x;
                     },
                 },
-                
+
                 {
                     render: function (data, type, row, meta) {
                         return row.remark;
@@ -193,7 +199,8 @@
                 },
                 {
                     render: function (data, type, row, meta) {
-                        return  `<a class="btn btn-info btn-sm px-2" href="{{ url('observations/` + row.link + `') }}"><i class="fa fa-eye"></i></a>`;
+                        return `<a class="btn btn-info btn-sm px-2" href="{{ url('observations/` +
+                            row.link + `') }}"><i class="fa fa-eye"></i></a>`;
                     },
                     orderable: false,
                     className: "text-end"
