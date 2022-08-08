@@ -326,9 +326,9 @@
                         if (row.image_path != null) {
                             x =
                                 '<a target="_blank" href="' +
-                                row.image_path +
+                                "{{ asset('') }}" + row.image_path +
                                 '"><img class="float-start chat-user-img img-30" src="' +
-                                row.image_path + '"></a>';
+                                "{{ asset('') }}" + row.image_path + '"></a>';
                         }
                         return x;
                     },

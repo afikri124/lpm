@@ -105,8 +105,8 @@ class ObservationController extends Controller
             ]);
 
             $imageName = Carbon::now()->format('Ym').'_'.md5($o_id).'.'.$request->image_path->extension(); 
-            $folderName =  "/images/observations";
-            $path = public_path().$folderName;
+            $folderName =  "images/observations";
+            $path = public_path()."/".$folderName;
             if (!File::exists($path)) {
                 File::makeDirectory($path, 0755, true); //create folder
             }
