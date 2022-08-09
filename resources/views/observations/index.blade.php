@@ -124,6 +124,7 @@
             processing: true,
             serverSide: true,
             ordering: false,
+            bFilter: false,
             language: {
                 searchPlaceholder: 'Search by remark..',
                 sSearch: '_INPUT_ &nbsp;',
@@ -183,9 +184,8 @@
                         var x = "";
                         if (row.image_path != null) {
                             x =
-                                '<span><a target="_blank" href="' + "{{ asset('') }}" + row.image_path +
-                                '"><img class="chat-user-img img-30" src="' + "{{ asset('') }}" +
-                                row.image_path + '"></a></span>';
+                                '<span><img class="chat-user-img img-30" src="' + "{{ asset('') }}" +
+                                row.image_path + '"></span>';
                         }
                         return x;
                     },

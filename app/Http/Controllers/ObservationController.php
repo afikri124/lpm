@@ -8,15 +8,14 @@ use App\Models\Observation;
 use App\Models\Status;
 use App\Models\Schedule_history;
 use App\Models\Criteria_category;
-use App\Models\Criteria;
 use App\Models\Observation_category;
-use App\Models\Observation_criteria;
+use App\Models\Schedule;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Crypt;
-use Yajra\DataTables\DataTables;
 use DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Contracts\Encryption\DecryptException;
 
 class ObservationController extends Controller
 {
@@ -96,12 +95,17 @@ class ObservationController extends Controller
     }
 
     public function view($id, Request $request){
-        $o_id = Crypt::decrypt($id);
+        try {
+            $o_id = Crypt::decrypt($id);
+        } catch (DecryptException $e) {
+            return redirect()->route('observations');
+        }
         if ($request->isMethod('POST') && isset($request->submit)) {
             $this->validate($request, [ 
                 'questions'=> ['required'],
                 'study_program'=> ['required'],
                 'image_path' => ['required','image'],
+                'remark'=> ['required'],
             ]);
 
             $imageName = Carbon::now()->format('Ym').'_'.md5($o_id).'.'.$request->image_path->extension(); 
@@ -113,7 +117,7 @@ class ObservationController extends Controller
             $request->image_path->move($path, $imageName); //upload image to folder
             DB::beginTransaction();
             try {
-                DB::table('observations')->where('id',$o_id)
+                $updatePO = DB::table('observations')->where('id',$o_id)
                     ->update([
                         'study_program'=> $request->study_program,
                         'total_students'=> $request->total_students,
@@ -126,6 +130,21 @@ class ObservationController extends Controller
                         'updated_at'=> Carbon::now(),
                         'attendance'=> true
                 ]);
+
+                if($updatePO){
+                    $o = Observation::with('schedule')->findOrFail($o_id);
+                    if($o->schedule->status_id == 'S00' || $o->schedule->status_id == 'S01'){
+                        DB::table('schedules')->where('id',$o->schedule_id)
+                            ->update([
+                            'status_id'=> 'S02'
+                        ]);
+                    } else if ($o->schedule->status_id == 'S02'){
+                        DB::table('schedules')->where('id',$o->schedule_id)
+                            ->update([
+                            'status_id'=> 'S03'
+                        ]);
+                    }
+                }
 
                 foreach($request->categories as $key => $remark) {
                     if(!Observation_category::where('observation_id', $o_id)->where('criteria_category_id', $key)->first()){
@@ -161,12 +180,22 @@ class ObservationController extends Controller
         } else {
             $data = Observation::with('auditor')->with('schedule')->findOrFail($o_id);
             $lecturer = User::find($data->schedule->lecturer_id);
-            if($data->attendance == false){
-                $study_program = User::select('study_program')->groupBy('study_program')->get();
-                $survey = Criteria_category::with('criterias')->get();
-                return view('observations.view', compact('data', 'lecturer', 'study_program', 'survey'));
+            if($data->attendance == false){ //belum hadir/belum dinilai
+                if(Carbon::now() < $data->schedule->date_start){ //Belum waktunya audit
+                    return view('observations.view', compact('data', 'lecturer'))
+                    ->withErrors(['msg' => 'Sorry, it\'s not time to make observations, please contact admin for schedule changes.']);
+                } else if(Carbon::now() > $data->schedule->date_end){ //Sudah kelewat waktunya
+                    return view('observations.view', compact('data', 'lecturer'))
+                    ->withErrors(['msg' => 'Sorry, you have missed the specified schedule, please contact admin for rescheduling.']);
+                } else {
+                    $study_program = User::select('study_program')->groupBy('study_program')->get();
+                    $survey = Criteria_category::with('criterias')->get();
+                    return view('observations.make', compact('data', 'lecturer', 'study_program', 'survey'));
+                }
             } else {
-                echo "Tes SuDAH DI DINILAI";
+                $survey = Observation_category::with('criteria_category')->with('observation_criterias')->with('observation_criterias.criteria')
+                        ->where('observation_id', $o_id)->orderBy('criteria_category_id')->get();
+                return view('observations.view', compact('data', 'lecturer', 'survey'));
             }
         }
     }

@@ -196,13 +196,13 @@
                         <table class="table table-hover table-sm" id="datatable" width="100%">
                             <thead>
                                 <tr>
-                                    <th scope="col" width="20px">No</th>
-                                    <th scope="col">Auditor</th>
-                                    <th scope="col">Attendance</th>
-                                    <th scope="col">Submit Date</th>
+                                    <th scope="col" data-priority="1" width="20px">No</th>
+                                    <th scope="col" data-priority="2" >Auditor</th>
+                                    <th scope="col" data-priority="3" >Attendance</th>
+                                    <th scope="col">Date</th>
                                     <th scope="col">Remark</th>
-                                    <th scope="col">Doc.</th>
-                                    <th scope="col" width="65px">Action</th>
+                                    <th scope="col" data-priority="4" >Doc.</th>
+                                    <th scope="col" data-priority="5" width="65px">Action</th>
                                 </tr>
                             </thead>
                         </table>

@@ -79,6 +79,7 @@ class ScheduleController extends Controller
             ]);
             $data = Schedule::find($id)
             ->update([ 
+                'status_id'=> 'S01',
                 'date_start'=> $request->date_start,
                 'date_end'=> $request->date_end
             ]);

@@ -11,6 +11,7 @@ use App\Models\Criteria_category;
 use App\Models\Criteria;
 use App\Models\Follow_up;
 use App\Models\Observation;
+use App\Models\Observation_category;
 use App\Models\Schedule;
 use App\Models\Role;
 use App\Models\User_role;
@@ -97,7 +98,7 @@ class ApiController extends Controller
     public function schedules(Request $request)
     {
         $data = Schedule::with('observations')
-        ->with('status')->with('lecturer')->with('observations.auditor')->select('*');
+        ->with('status')->with('lecturer')->with('observations.auditor')->select('*')->orderBy('status_id');
             return Datatables::of($data)
                     ->filter(function ($instance) use ($request) {
                         if (!empty($request->get('lecturer_id'))) {
@@ -141,7 +142,7 @@ class ApiController extends Controller
 
     public function observations_by_auditor_id(Request $request)
     {
-        $data = Observation::with('schedule')->with('schedule.lecturer')->where('auditor_id', Auth::user()->id)->select('*');
+        $data = Observation::with('schedule')->with('schedule.lecturer')->where('auditor_id', Auth::user()->id)->select('*')->orderBy('attendance');
             return Datatables::of($data)
                     ->filter(function ($instance) use ($request) {
                         if (!empty($request->get('lecturer_id'))) {
@@ -201,8 +202,11 @@ class ApiController extends Controller
         // $data = User::select('id','email','name')->whereHas('roles', function($q){
         //     $q->where('role_id', "AU");
         // })->get();
-        $data = Criteria_category::with('criterias')->get();
-        return Datatables::of($data)->make(true);
+        $data = Observation::with('schedule')->findOrFail(25);
+
+        var_dump($data->schedule->status_id);
+
+        // return Datatables::of($data)->make(true);
     }
 
 }

@@ -88,7 +88,7 @@
                                     <th scope="col">Date End</th>
                                     <th scope="col" data-priority="3" >Status</th>
                                     <th scope="col">Auditor</th>
-                                    <th scope="col" data-priority="4"  width="65px">Action</th>
+                                    <th scope="col" data-priority="4" width="65px">Action</th>
                                 </tr>
                             </thead>
                         </table>
@@ -127,6 +127,7 @@
             processing: true,
             serverSide: true,
             ordering: false,
+            bFilter: false,
             language: {
                 searchPlaceholder: 'Search by remark..',
                 sSearch: '_INPUT_ &nbsp;',
@@ -186,7 +187,7 @@
                     render: function (data, type, row, meta) {
                         var x = row.id;
                         var html =
-                            `<a class="btn btn-success btn-sm px-2" title="Edit" href="{{ url('schedules/edit/` +
+                            `<a class="btn btn-success btn-sm px-2" title="Edit" href="{{ url('schedules/` +
                             row.link + `') }}"><i class="fa fa-pencil-square-o"></i></a> <a class="btn btn-danger btn-sm px-2" title="Delete" onclick="DeleteId(` + x + `)" ><i class="fa fa-trash"></i></a>`;
                             return html;
                     },

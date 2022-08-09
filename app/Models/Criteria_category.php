@@ -14,7 +14,7 @@ class Criteria_category extends Model
         'id', 'title', 'description',
     ];
 
-    public function Criterias()
+    public function criterias()
     {
         return $this->hasMany(Criteria::class);
     }
