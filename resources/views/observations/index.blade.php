@@ -79,13 +79,13 @@
                         <table class="table table-hover table-sm" id="datatable" width="100%">
                             <thead>
                                 <tr>
-                                    <th scope="col" width="20px">No</th>
-                                    <th scope="col">Lecturer</th>
+                                    <th scope="col" data-priority="1" width="20px">No</th>
+                                    <th scope="col" data-priority="2">Lecturer</th>
                                     <th scope="col">Schedule</th>
-                                    <th scope="col">Attendance</th>
+                                    <th scope="col" data-priority="3">Attendance</th>
                                     <th scope="col">Doc.</th>
                                     <th scope="col">Remark</th>
-                                    <th scope="col" width="65px">Action</th>
+                                    <th scope="col" data-priority="4" width="65px">Action</th>
                                 </tr>
                             </thead>
                         </table>
@@ -183,9 +183,9 @@
                         var x = "";
                         if (row.image_path != null) {
                             x =
-                                '<a target="_blank" href="' + "{{ asset('') }}" + row.image_path +
-                                '"><img class="float-start chat-user-img img-30" src="' + "{{ asset('') }}" +
-                                row.image_path + '"></a>';
+                                '<span><a target="_blank" href="' + "{{ asset('') }}" + row.image_path +
+                                '"><img class="chat-user-img img-30" src="' + "{{ asset('') }}" +
+                                row.image_path + '"></a></span>';
                         }
                         return x;
                     },

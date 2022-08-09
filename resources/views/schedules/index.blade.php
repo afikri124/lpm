@@ -82,13 +82,13 @@
                         <table class="table table-hover table-sm" id="datatable" width="100%">
                             <thead>
                                 <tr>
-                                    <th scope="col" width="20px">No</th>
-                                    <th scope="col">Lecturer Name</th>
+                                    <th scope="col" data-priority="1" width="20px">No</th>
+                                    <th scope="col" data-priority="2" >Lecturer Name</th>
                                     <th scope="col">Date Start</th>
                                     <th scope="col">Date End</th>
-                                    <th scope="col">Status</th>
+                                    <th scope="col" data-priority="3" >Status</th>
                                     <th scope="col">Auditor</th>
-                                    <th scope="col" width="65px">Action</th>
+                                    <th scope="col" data-priority="4"  width="65px">Action</th>
                                 </tr>
                             </thead>
                         </table>
