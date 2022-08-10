@@ -100,8 +100,8 @@
                                     <tr>
                                         <th>Code</th>
                                         <th>Criteria</th>
-                                        <th class="text-center">Score</th>
-                                        <th class="text-center">Weight</th>
+                                        <th class="text-center d-none d-lg-table-cell">Score</th>
+                                        <th class="text-center d-none d-lg-table-cell">Weight</th>
                                         <th class="text-center">Point</th>
                                     </tr>
                                 </thead>
@@ -123,8 +123,8 @@
                                     <tr valign="top">
                                         <td>{{ $q->criteria_category_id }}.{{ $no + 1 }}</td>
                                         <td>{{ $c->criteria->title }}</td>
-                                        <td class="text-center">{{ $c->score }}</td>
-                                        <td class="text-center">{{ $c->weight }}</td>
+                                        <td class="text-center d-none d-lg-table-cell">{{ $c->score }}</td>
+                                        <td class="text-center d-none d-lg-table-cell">{{ $c->weight }}</td>
                                         <td class="text-center">{{ $c->score*$c->weight }}</td>
                                     </tr>
                                     @php

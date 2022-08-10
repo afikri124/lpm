@@ -10,12 +10,14 @@ use App\Models\Schedule_history;
 use App\Models\Criteria_category;
 use App\Models\Observation_category;
 use App\Models\Schedule;
+use App\Models\Locations;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Crypt;
 use DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Contracts\Encryption\DecryptException;
+use phpDocumentor\Reflection\Location;
 
 class ObservationController extends Controller
 {
@@ -189,8 +191,9 @@ class ObservationController extends Controller
                     ->withErrors(['msg' => 'Sorry, you have missed the specified schedule, please contact admin for rescheduling.']);
                 } else {
                     $study_program = User::select('study_program')->groupBy('study_program')->get();
+                    $locations = Locations::orderBy('title')->get();
                     $survey = Criteria_category::with('criterias')->get();
-                    return view('observations.make', compact('data', 'lecturer', 'study_program', 'survey'));
+                    return view('observations.make', compact('data', 'lecturer', 'study_program', 'survey', 'locations'));
                 }
             } else {
                 $survey = Observation_category::with('criteria_category')->with('observation_criterias')->with('observation_criterias.criteria')

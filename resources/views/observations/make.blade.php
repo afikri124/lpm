@@ -88,22 +88,43 @@
                                     </select>
                                 </div>
                                 <div class="mb-3 mb-2 col-lg-6 col-md-12">
+                                    <label>Class Type</label>
+                                    <select class="form-control input-sm select2" name="class_type"
+                                        title="Select Class type" data-placeholder="Select Class type" required>
+                                        <option value="" selected></option>
+                                        <option value="Reguler" {{ ("Reguler" == $data->class_type ? "selected": "") }}
+                                            {{ ("Reguler" == old('class_type') ? "selected": "") }}>Reguler</option>
+                                        <option value="Malam" {{ ("Malam" == $data->class_type ? "selected": "") }}
+                                            {{ ("Malam" == old('class_type') ? "selected": "") }}>Malam</option>
+                                        <option value="Karyawan"
+                                            {{ ("Karyawan" == $data->class_type ? "selected": "") }}
+                                            {{ ("Karyawan" == old('class_type') ? "selected": "") }}>Karyawan</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3 mb-2 col-lg-6 col-md-12">
+                                    <label>Room/Location</label>
+                                    <select class="form-control input-sm select2" name="location"
+                                        title="Select Room/Location" data-placeholder="Select Room/Location" required>
+                                        <option value="" selected></option>
+                                        <option value="Online" {{ ("Online" == $data->location ? "selected": "") }}
+                                            {{ ("Online" == old('location') ? "selected": "") }}>Online (Zoom/Meet/etc.)
+                                        </option>
+                                        @foreach($locations as $d)
+                                        <option value="{{ $d->title }}"
+                                            {{ ($d->title==$data->location ? "selected": "") }}
+                                            {{ ($d->title==old('location') ? "selected": "") }}>
+                                            {{ $d->title }}
+                                        </option>
+                                        @endforeach
+                                        <option value="Others" {{ ("Others" == $data->location ? "selected": "") }}
+                                            {{ ("Others" == old('location') ? "selected": "") }}>Others</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3 mb-2 col-lg-6 col-md-12">
                                     <label>Total Students</label>
                                     <input class="form-control" type="number" name="total_students"
                                         title="Total Students"
                                         value="{{ (old('total_students')==null ? $data->total_students : old('total_students')) }}"
-                                        required>
-                                </div>
-                                <div class="mb-3 mb-2 col-lg-6 col-md-12">
-                                    <label>Class Type</label>
-                                    <input class="form-control" type="text" name="class_type" title="Class Type"
-                                        value="{{ (old('class_type')==null ? $data->class_type : old('class_type')) }}"
-                                        required>
-                                </div>
-                                <div class="mb-3 mb-2 col-lg-6 col-md-12">
-                                    <label>Location</label>
-                                    <input class="form-control" type="text" name="location" title="Room/Location"
-                                        value="{{ (old('location')==null ? $data->location : old('location')) }}"
                                         required>
                                 </div>
                                 <div class="mb-3 mb-2 col-lg-6 col-md-12">

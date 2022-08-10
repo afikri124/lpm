@@ -74,13 +74,16 @@
             <div class="card">
                 <div class="row">
                     <div class="col-md-12 d-flex justify-content-center justify-content-md-end">
-                        <a type="button" id="buttonAddObserver" data-bs-toggle="modal" data-bs-target="#modalAddObserver" title="Add Observer">
+                        @if($data->status_id == "S00" || $data->status_id == "S01" || $data->status_id == "S02")
+                        <a type="button" id="buttonAddObserver" data-bs-toggle="modal"
+                            data-bs-target="#modalAddObserver" title="Add Observer">
                             <span class="btn btn-primary">Add</span>
                         </a>
-                        @if($data->status_id == "S00" || $data->status_id == "S01")
+                        @if($data->status_id != "S02")
                         <a type="button" data-bs-toggle="modal" data-bs-target="#modalReschedule">
                             <span class="btn btn-info">Reschedule</span>
                         </a>
+                        @endif
                         @endif
                         <a href="{{ route('schedules') }}">
                             <span class="btn btn-secondary">Back</span>
@@ -197,11 +200,11 @@
                             <thead>
                                 <tr>
                                     <th scope="col" data-priority="1" width="20px">No</th>
-                                    <th scope="col" data-priority="2" >Auditor</th>
-                                    <th scope="col" data-priority="3" >Attendance</th>
+                                    <th scope="col" data-priority="2">Auditor</th>
+                                    <th scope="col" data-priority="3">Attendance</th>
                                     <th scope="col">Date</th>
                                     <th scope="col">Remark</th>
-                                    <th scope="col" data-priority="4" >Doc.</th>
+                                    <th scope="col" data-priority="4">Doc.</th>
                                     <th scope="col" data-priority="5" width="65px">Action</th>
                                 </tr>
                             </thead>

@@ -108,14 +108,16 @@
                         $('.mode i').toggleClass("fa-moon-o").toggleClass("fa-lightbulb-o");
                     }
                 }
-
-                if (localStorage.getItem("sidebar_mode") != null) {
-                    console.log(localStorage.getItem("sidebar_mode"));
-                    $nav = $('.sidebar-wrapper');
-                    $header = $('.page-header');
-                    $nav.toggleClass('close_icon');
-                    $header.toggleClass('close_icon');
-                    $(window).trigger('overlay');
+                if (window.innerWidth >= 991) {
+                    // load desktop script
+                    if (localStorage.getItem("sidebar_mode") != null) {
+                        console.log(localStorage.getItem("sidebar_mode"));
+                        $nav = $('.sidebar-wrapper');
+                        $header = $('.page-header');
+                        $nav.toggleClass('close_icon');
+                        $header.toggleClass('close_icon');
+                        $(window).trigger('overlay');
+                    }
                 }
 
                 if (localStorage.getItem("full_screen") != null) {
@@ -149,7 +151,7 @@
                             .innerHTML = data['schedules'].notif;
                     } else {
                         var x = document.getElementById("notif_schedules");
-                        if(x) x.innerHTML = "";
+                        if (x) x.innerHTML = "";
                     }
 
                     if (data['observations'] != null) {
@@ -157,7 +159,7 @@
                             "notif_observations").innerHTML = data['observations'].notif;
                     } else {
                         var x = document.getElementById("notif_observations");
-                        if(x) x.innerHTML = "";
+                        if (x) x.innerHTML = "";
                     }
 
                     if (data['follow_ups'] != null) {
@@ -165,7 +167,7 @@
                             "notif_follow_ups").innerHTML = data['follow_ups'].notif;
                     } else {
                         var x = document.getElementById("notif_follow_ups");
-                        if(x) x.innerHTML = "";
+                        if (x) x.innerHTML = "";
                     }
                 }
             });
