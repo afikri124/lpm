@@ -74,7 +74,7 @@
             <div class="card">
                 <div class="row">
                     <div class="col-md-12 d-flex justify-content-center justify-content-md-end">
-                        <a type="button" data-bs-toggle="modal" data-bs-target="#modalAddObserver" title="Add Observer">
+                        <a type="button" id="buttonAddObserver" data-bs-toggle="modal" data-bs-target="#modalAddObserver" title="Add Observer">
                             <span class="btn btn-primary">Add</span>
                         </a>
                         @if($data->status_id == "S00" || $data->status_id == "S01")
