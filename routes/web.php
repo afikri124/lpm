@@ -68,6 +68,10 @@ Route::group(['prefix' => 'observations', 'middleware' => ['auth', 'role:AU']], 
     Route::any('/{id}', [App\Http\Controllers\ObservationController::class, 'view'])->name('observations.view');
 });
 
+Route::group(['prefix' => 'observations', 'middleware' => ['auth']], function() {
+    Route::any('/results/{id}', [App\Http\Controllers\ObservationController::class, 'results'])->name('observations.results');
+});
+
 Route::group(['prefix' => 'follow_ups', 'middleware' => ['auth', 'role:DE']], function() {
     Route::get('/', [App\Http\Controllers\FollowUpController::class, 'index'])->name('follow_ups');
 });

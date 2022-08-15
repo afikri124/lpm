@@ -129,7 +129,10 @@ class ScheduleController extends Controller
     
             // Observation_category::with('criteria_category')->with('observation_criterias')->with('observation_criterias.criteria')
             //             ->where('observation_id', $o_id)->orderBy('criteria_category_id')->get();
-            return view('schedules.review_observations', compact('id','data', 'survey'));
+            $dean = User::select('id','email','name','department')->whereHas('roles', function($q){
+                $q->where('role_id', "DE");
+            })->where('username','!=', 'admin')->where('id','!=', $data->lecturer_id)->get();
+            return view('schedules.review_observations', compact('id','data', 'survey', 'dean'));
         }
     }
 }

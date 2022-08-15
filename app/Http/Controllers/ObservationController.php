@@ -210,5 +210,17 @@ class ObservationController extends Controller
         }
     }
 
+    public function results($id, Request $request){
+        try {
+            $o_id = Crypt::decrypt($id);
+        } catch (DecryptException $e) {
+            return redirect()->route('observations');
+        }
+            $data = Observation::with('auditor')->with('schedule')->findOrFail($o_id);
+            $lecturer = User::find($data->schedule->lecturer_id);
+            $survey = Observation_category::with('criteria_category')->with('observation_criterias')->with('observation_criterias.criteria')
+                        ->where('observation_id', $o_id)->orderBy('criteria_category_id')->get();
+            return view('observations.view', compact('data', 'lecturer', 'survey'));
+    }
 
 }

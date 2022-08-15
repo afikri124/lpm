@@ -32,7 +32,7 @@
                     </li>
                     @if(Auth::user()->hasRole('AD'))
                     <li class="sidebar-list">
-                    <label class="badge rounded-pill badge-primary" id="notif_schedules"></label>
+                    <label class="badge rounded-pill badge-primary" id="notif_schedules" title="Review Task"></label>
                         <a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='schedules' ? 'active' : '' }} "
                             href="{{route('schedules')}}">
                             <i data-feather="calendar"> </i><span>Schedules</span>
@@ -41,7 +41,7 @@
                     @endif
                     @if(Auth::user()->hasRole('AU'))
                     <li class="sidebar-list">
-                    <label class="badge rounded-pill badge-primary" id="notif_observations"></label>
+                    <label class="badge rounded-pill badge-primary" id="notif_observations" title="Observation Task"></label>
                         <a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='observations' ? 'active' : '' }} "
                             href="{{route('observations')}}">
                             <i data-feather="clipboard"> </i><span>Observations</span>

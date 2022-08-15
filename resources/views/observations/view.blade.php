@@ -192,7 +192,7 @@
             <div class="card project-list">
                 <div class="row">
                     <div class="col-md-12 d-flex justify-content-center">
-                        <a href="{{ route('observations') }}">
+                        <a href="{{ url()->previous() }}">
                             <span class="btn btn-secondary">Back</span>
                         </a>
                     </div>
