@@ -12,6 +12,7 @@ use App\Models\Criteria;
 use App\Models\Follow_up;
 use App\Models\Observation;
 use App\Models\Observation_category;
+use App\Models\Observation_criteria;
 use App\Models\Schedule;
 use App\Models\Role;
 use App\Models\User_role;
@@ -98,7 +99,9 @@ class ApiController extends Controller
     public function schedules(Request $request)
     {
         $data = Schedule::with('observations')
-        ->with('status')->with('lecturer')->with('observations.auditor')->select('*')->orderBy('status_id');
+        ->with('status')->with('lecturer')
+        ->with('observations.auditor')
+        ->select('*')->orderBy("status_id");
             return Datatables::of($data)
                     ->filter(function ($instance) use ($request) {
                         if (!empty($request->get('lecturer_id'))) {
@@ -123,7 +126,9 @@ class ApiController extends Controller
 
     public function observations_by_schedule_id(Request $request)
     {
-        $data = Observation::with('auditor')->where('schedule_id', $request->get('schedule_id'))->select('*');
+        $data = Observation::with('auditor')
+        ->where('schedule_id', $request->get('schedule_id'))
+        ->select('*');
             return Datatables::of($data)
                     ->filter(function ($instance) use ($request) {
                         if (!empty($request->get('search'))) {
@@ -202,9 +207,20 @@ class ApiController extends Controller
         // $data = User::select('id','email','name')->whereHas('roles', function($q){
         //     $q->where('role_id', "AU");
         // })->get();
-        $data = Observation::with('schedule')->findOrFail(25);
+        // $data = Schedule::with('lecturer')->with('status')->with('observations')->with('observations.auditor')->findOrFail(15);
+        $o = Schedule::with('observations')->findOrFail(15);
+        $oids = array();
+        foreach($o->observations as $idx)
+        {
+            array_push($oids, $idx->id);
+        }
+        // Dump array with object-arrays
+ 
+        $data = Observation_category::with('criteria_category')->with('observation_criterias')->with('observation_criterias.criteria')
+        ->whereIn('observation_id',$oids)->orderBy('criteria_category_id')->get()->groupBy('criteria_category_id');
 
-        var_dump($data->schedule->status_id);
+
+        return response()->json( $data );
 
         // return Datatables::of($data)->make(true);
     }

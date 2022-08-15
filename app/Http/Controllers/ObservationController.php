@@ -132,9 +132,8 @@ class ObservationController extends Controller
                         'updated_at'=> Carbon::now(),
                         'attendance'=> true
                 ]);
-
+                $o = Observation::with('schedule')->findOrFail($o_id);
                 if($updatePO){
-                    $o = Observation::with('schedule')->findOrFail($o_id);
                     if($o->schedule->status_id == 'S00' || $o->schedule->status_id == 'S01'){
                         DB::table('schedules')->where('id',$o->schedule_id)
                             ->update([
@@ -171,22 +170,30 @@ class ObservationController extends Controller
                         }
                     }
                 }
+                if($criteria_categories){
+                    $x = Schedule_history::insert([
+                        'schedule_id' => $o->schedule_id,
+                        'description' => "<b>".Auth::user()->name."</b> has <u>made</u> observations.",
+                        'created_by' => Auth::user()->id,
+                        'created_at' => Carbon::now(),
+                    ]);
+                }
                 DB::commit();
                 // all good
                 return redirect()->route('observations');
             } catch (\Exception $e) {
                 DB::rollback();
-                // something went wrong
+                echo "An error occurred, please notify the system developer!<br><br>";
                 echo $e;
             }
         } else {
             $data = Observation::with('auditor')->with('schedule')->findOrFail($o_id);
             $lecturer = User::find($data->schedule->lecturer_id);
-            if($data->attendance == false){ //belum hadir/belum dinilai
-                if(Carbon::now() < $data->schedule->date_start){ //Belum waktunya audit
+            if($data->attendance == false){                             //belum hadir/belum dinilai
+                if(Carbon::now() < $data->schedule->date_start){        //Belum waktunya audit
                     return view('observations.view', compact('data', 'lecturer'))
                     ->withErrors(['msg' => 'Sorry, it\'s not time to make observations, please contact admin for schedule changes.']);
-                } else if(Carbon::now() > $data->schedule->date_end){ //Sudah kelewat waktunya
+                } else if(Carbon::now() > $data->schedule->date_end){   //Sudah kelewat waktunya
                     return view('observations.view', compact('data', 'lecturer'))
                     ->withErrors(['msg' => 'Sorry, you have missed the specified schedule, please contact admin for rescheduling.']);
                 } else {

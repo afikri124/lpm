@@ -15,6 +15,19 @@
         border: 1px solid red;
     }
 
+    table.dataTable tbody td {
+        vertical-align: middle;
+    }
+
+    table.dataTable td:nth-child(5) {
+        max-width: 120px;
+    }
+
+    table.dataTable td {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
 </style>
 @endsection
 
@@ -84,6 +97,10 @@
                             <span class="btn btn-info">Reschedule</span>
                         </a>
                         @endif
+                        @else
+                        <a href="{{ route('schedules.review_observations', ['id' => Crypt::encrypt($data->id)]) }}">
+                            <span class="btn btn-primary">Review Results</span>
+                        </a>
                         @endif
                         <a href="{{ route('schedules') }}">
                             <span class="btn btn-secondary">Back</span>

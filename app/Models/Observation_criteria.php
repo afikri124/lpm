@@ -22,4 +22,10 @@ class Observation_criteria extends Model
     {
         return $this->belongsTo(Criteria::class, 'criteria_id');
     }
+
+    public function observations()
+    {
+        return $this->hasMany(Observation::class);
+    }
+
 }

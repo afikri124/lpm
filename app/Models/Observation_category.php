@@ -22,4 +22,9 @@ class Observation_category extends Model
     {
         return $this->belongsTo(Criteria_category::class, 'criteria_category_id');
     }
+
+    public function observation()
+    {
+        return $this->belongsTo(Observation::class, 'observation_id');
+    }
 }

@@ -55,6 +55,7 @@ Route::group(['prefix' => 'schedules', 'middleware' => ['auth', 'role:AD']], fun
     Route::delete('delete', [App\Http\Controllers\ScheduleController::class, 'delete'])->name('schedules.delete');
     Route::any('add', [App\Http\Controllers\ScheduleController::class, 'add'])->name('schedules.add');
     Route::any('/{id}', [App\Http\Controllers\ScheduleController::class, 'edit'])->name('schedules.edit');
+    Route::any('/review/{id}', [App\Http\Controllers\ScheduleController::class, 'review_observations'])->name('schedules.review_observations');
 });
 
 Route::group(['prefix' => 'observations', 'middleware' => ['auth', 'role:AD']], function() {

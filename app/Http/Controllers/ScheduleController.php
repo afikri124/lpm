@@ -7,9 +7,12 @@ use App\Models\User;
 use App\Models\Status;
 use App\Models\Schedule;
 use App\Models\Schedule_history;
+use App\Models\Observation;
+use App\Models\Observation_category;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Contracts\Encryption\DecryptException;
 
 class ScheduleController extends Controller
 {
@@ -102,5 +105,31 @@ class ScheduleController extends Controller
                         $q->where('role_id', "AU");
                     })->where('username','!=', 'admin')->where('id','!=', $data->lecturer_id)->get();
         return view('schedules.edit', compact('data','auditors'));
+    }
+
+    public function review_observations($id, Request $request){
+        try {
+            $s_id = Crypt::decrypt($id);
+        } catch (DecryptException $e) {
+            return redirect()->route('schedules');
+        }
+        if ($request->isMethod('POST') && isset($request->submit)) {
+
+        } else {
+            $data = Schedule::with('lecturer')->with('status')->with('observations')->with('observations.auditor')->findOrFail($s_id);
+            // $lecturer = User::find($data->lecturer_id);
+            // $o = Schedule::with('observations')->findOrFail(15);
+            $oids = array();
+            foreach($data->observations as $idx)
+            {
+                array_push($oids, $idx->id);
+            }
+            $survey = Observation_category::with('criteria_category')->with('observation_criterias')->with('observation_criterias.criteria')
+            ->whereIn('observation_id',$oids)->orderBy('criteria_category_id')->get()->groupBy('criteria_category_id');
+    
+            // Observation_category::with('criteria_category')->with('observation_criterias')->with('observation_criterias.criteria')
+            //             ->where('observation_id', $o_id)->orderBy('criteria_category_id')->get();
+            return view('schedules.review_observations', compact('id','data', 'survey'));
+        }
     }
 }
