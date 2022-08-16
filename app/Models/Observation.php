@@ -32,6 +32,11 @@ class Observation extends Model
         return $this->belongsTo(Schedule::class, 'schedule_id');
     }
 
+    public function observation_categories()
+    {
+        return $this->hasMany(Observation_category::class);
+    }
+
     protected $appends = ['color'];
 
     public function getColorAttribute(){

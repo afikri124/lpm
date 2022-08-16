@@ -9,6 +9,7 @@ use App\Models\Schedule;
 use App\Models\Schedule_history;
 use App\Models\Observation;
 use App\Models\Observation_category;
+use App\Models\Follow_up;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Crypt;
@@ -113,12 +114,39 @@ class ScheduleController extends Controller
         } catch (DecryptException $e) {
             return redirect()->route('schedules');
         }
-        if ($request->isMethod('POST') && isset($request->submit)) {
+        if ($request->isMethod('POST')) {
+            if($request->action == "followup"){
+                $data = Schedule::findOrFail($s_id)
+                ->update([ 
+                    'status_id'=> 'S04',
+                    'remark'=> $request->remark,
+                ]);
+                if($data){
+                    $followup = Follow_up::create([
+                        'schedule_id' => $s_id,
+                        'dean_id' => $request->dean_id,
+                        'date_start' => date('Y-m-d H:i', strtotime($request->date_start)),
+                        'date_end' => date('Y-m-d H:i', strtotime($request->date_end)),
+                        'created_by' => Auth::user()->id
+                    ]);
+                    //TODO : SEND EMAIL TO DEAN
+                    return redirect()->route('schedules.review_observations', $id);
+                }
 
+            } else if($request->action == "result"){
+                $data = Schedule::findOrFail($s_id)
+                ->update([ 
+                    'status_id'=> 'S05',
+                    'remark'=> $request->remark,
+                ]);
+                if($data){
+                    //CREATE PDF
+                    //TODO : SEND EMAIL TO LECTURER
+                    return redirect()->route('schedules.edit', $id);
+                }
+            }
         } else {
             $data = Schedule::with('lecturer')->with('status')->with('observations')->with('observations.auditor')->findOrFail($s_id);
-            // $lecturer = User::find($data->lecturer_id);
-            // $o = Schedule::with('observations')->findOrFail(15);
             $oids = array();
             foreach($data->observations as $idx)
             {
@@ -126,9 +154,6 @@ class ScheduleController extends Controller
             }
             $survey = Observation_category::with('criteria_category')->with('observation_criterias')->with('observation_criterias.criteria')
             ->whereIn('observation_id',$oids)->orderBy('criteria_category_id')->get()->groupBy('criteria_category_id');
-    
-            // Observation_category::with('criteria_category')->with('observation_criterias')->with('observation_criterias.criteria')
-            //             ->where('observation_id', $o_id)->orderBy('criteria_category_id')->get();
             $dean = User::select('id','email','name','department')->whereHas('roles', function($q){
                 $q->where('role_id', "DE");
             })->where('username','!=', 'admin')->where('id','!=', $data->lecturer_id)->get();

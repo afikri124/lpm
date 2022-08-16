@@ -302,22 +302,21 @@
                             <div class="form-group mb-2">
                                 <label class="col-form-label">Start<i class="text-danger">*</i></label>
                                 <input class="form-control digits" autocomplete="off" type="datetime-local"
-                                    id="date_start" name="date_start"
-                                    value="{{ date('Y-m-d\TH:i', strtotime($data->date_start)) }}" required>
+                                    id="date_start" name="date_start" required>
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group mb-2">
                                 <label class="col-form-label">End<i class="text-danger">*</i></label>
                                 <input class="form-control digits" autocomplete="off" type="datetime-local"
-                                    id="date_end" name="date_end"
-                                    value="{{ date('Y-m-d\TH:i', strtotime($data->date_end)) }}" required>
+                                    id="date_end" name="date_end" required>
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group mb-2">
                                 <label class="col-form-label">Remark<i class="text-danger">*</i></label>
                                 <textarea class="form-control" rows="2" name="remark" required></textarea>
+                                <input type="hidden" name="action" value="followup" required>
                             </div>
                         </div>
                         <span class="invalid-feedback d-block" role="alert">
@@ -347,6 +346,7 @@
                         <div class="col-md-12">
                             <div class="form-group mb-2">
                                 <label class="col-form-label">Lecturer</label>
+                                <input type="hidden" name="action" value="result" required>
                                 <input class="form-control digits" autocomplete="off" type="text" name="lecturer"
                                     value="{{ $data->lecturer->name }}" disabled>
                             </div>

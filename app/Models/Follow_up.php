@@ -17,4 +17,9 @@ class Follow_up extends Model
         'image_path',
         'created_by',
     ];
+
+    public function dean()
+    {
+        return $this->belongsTo(User::class, 'dean_id');
+    }
 }

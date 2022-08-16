@@ -87,6 +87,11 @@
             <div class="card">
                 <div class="row">
                     <div class="col-md-12 d-flex justify-content-center justify-content-md-end">
+                        @if($data->status_id == "S04" || $data->status_id == "S05" || $data->status_id == "S06")
+                        <a href="{{ route('pdf.report', ['id' => Crypt::encrypt($data->id)]) }}" target="_blank">
+                            <span class="btn btn-success btn-block" title="Print Pdf">Report</span>
+                        </a>
+                        @endif
                         @if($data->status_id == "S00" || $data->status_id == "S01" || $data->status_id == "S02")
                         <a type="button" id="buttonAddObserver" data-bs-toggle="modal"
                             data-bs-target="#modalAddObserver" title="Add Observer">
@@ -99,7 +104,7 @@
                         @endif
                         @else
                         <a href="{{ route('schedules.review_observations', ['id' => Crypt::encrypt($data->id)]) }}">
-                            <span class="btn btn-primary">Review Results</span>
+                            <span class="btn btn-primary" title="Review Results">Results</span>
                         </a>
                         @endif
                         <a href="{{ route('schedules') }}">

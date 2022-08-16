@@ -208,17 +208,12 @@ class ApiController extends Controller
         //     $q->where('role_id', "AU");
         // })->get();
         // $data = Schedule::with('lecturer')->with('status')->with('observations')->with('observations.auditor')->findOrFail(15);
-        $o = Schedule::with('observations')->findOrFail(15);
-        $oids = array();
-        foreach($o->observations as $idx)
-        {
-            array_push($oids, $idx->id);
-        }
-        // Dump array with object-arrays
- 
-        $data = Observation_category::with('criteria_category')->with('observation_criterias')->with('observation_criterias.criteria')
-        ->whereIn('observation_id',$oids)->orderBy('criteria_category_id')->get()->groupBy('criteria_category_id');
-
+        // $oids = array();
+        // foreach($data->observations as $idx)
+        // {
+        //     array_push($oids, $idx->id);
+        // }
+        $data = Follow_up::with('dean')->where('schedule_id',15)->first();
 
         return response()->json( $data );
 
