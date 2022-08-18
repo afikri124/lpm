@@ -59,7 +59,7 @@ class ApiController extends Controller
 
     public function categories(Request $request)
     {
-        $data = Criteria_category::all();
+        $data = Criteria_category::select('*');
             return Datatables::of($data)
                     ->filter(function ($instance) use ($request) {
                         if (!empty($request->get('search'))) {

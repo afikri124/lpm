@@ -84,7 +84,6 @@
                                     <th scope="col">Schedule</th>
                                     <th scope="col" data-priority="3">Attendance</th>
                                     <th scope="col">Doc.</th>
-                                    <th scope="col">Remark</th>
                                     <th scope="col" data-priority="4" width="65px">Action</th>
                                 </tr>
                             </thead>
@@ -155,13 +154,13 @@
                 },
                 {
                     render: function (data, type, row, meta) {
-                        var x = moment(row.schedule.date_start).format("DD-MMM-YY HH:mm") +
+                        var x = moment(row.schedule.date_start).format("DD MMM YY HH:mm") +
                             " to ";
                         if (moment(row.schedule.date_start).format("DD/MM/YY") == moment(row
                                 .schedule.date_end).format("DD/MM/YY")) {
                             x += moment(row.schedule.date_end).format("HH:mm");
                         } else {
-                            x += moment(row.schedule.date_end).format("DD-MMM-YY HH:mm");
+                            x += moment(row.schedule.date_end).format("DD MMM YY HH:mm");
                         }
                         return x;
                     },
@@ -188,12 +187,6 @@
                                 row.image_path + '"></span>';
                         }
                         return x;
-                    },
-                },
-
-                {
-                    render: function (data, type, row, meta) {
-                        return row.remark;
                     },
                 },
                 {

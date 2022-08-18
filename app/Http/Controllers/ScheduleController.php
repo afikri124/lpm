@@ -129,7 +129,14 @@ class ScheduleController extends Controller
                         'date_end' => date('Y-m-d H:i', strtotime($request->date_end)),
                         'created_by' => Auth::user()->id
                     ]);
-                    //TODO : SEND EMAIL TO DEAN
+                    $x = Schedule_history::insert([
+                        'schedule_id' => $s_id,
+                        'description' => "<b>".Auth::user()->name."</b> changed the observation status to <u>follow-up</u> dean.",
+                        'remark' => $request->remark,
+                        'created_by' => Auth::user()->id,
+                        'created_at' => Carbon::now(),
+                    ]);
+                    //TODO : SEND EMAIL TO DEAN folow up
                     return redirect()->route('schedules.review_observations', $id);
                 }
 
@@ -140,8 +147,14 @@ class ScheduleController extends Controller
                     'remark'=> $request->remark,
                 ]);
                 if($data){
-                    //CREATE PDF
-                    //TODO : SEND EMAIL TO LECTURER
+                    $x = Schedule_history::insert([
+                        'schedule_id' => $s_id,
+                        'description' => "<b>".Auth::user()->name."</b> has upgraded observation status to <u>Result and Recommendation</u>.",
+                        'remark' => $request->remark,
+                        'created_by' => Auth::user()->id,
+                        'created_at' => Carbon::now(),
+                    ]);
+                    //TODO : SEND EMAIL TO LECTURER (result)
                     return redirect()->route('schedules.edit', $id);
                 }
             }

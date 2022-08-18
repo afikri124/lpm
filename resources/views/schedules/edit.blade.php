@@ -365,7 +365,7 @@
                             `<a class="btn btn-danger btn-sm px-2" title="Delete" onclick="DeleteId(` +
                             x + `)" ><i class="fa fa-trash"></i></a>`;
                         if (row.attendance == true) {
-                            html = `<a class="btn btn-info btn-sm px-2" href="{{ url('observations/results/` +
+                            html = `<a class="btn btn-info btn-sm px-2" target="_blank" href="{{ url('observations/results/` +
                             row.link + `') }}"><i class="fa fa-eye"></i></a>  ` + html;
                         }
                         return html;

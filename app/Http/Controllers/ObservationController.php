@@ -67,31 +67,45 @@ class ObservationController extends Controller
                 'auditor_id'=> ['required'],
                 'schedule_id' => ['required'],
             ]);
-            $data = Observation::insert([
-                'schedule_id' => $request->schedule_id,
-                'auditor_id' => $request->auditor_id,
-                'created_at' => Carbon::now(),
-            ]);
-            if($data){
-                $auditor = User::find($request->auditor_id);
-                $x = Schedule_history::insert([
-                    'schedule_id' => $request->schedule_id,
-                    'description' => Auth::user()->name." has <u>added</u> <b>".$auditor->name."</b> as an auditor.",
-                    'remark' => null,
-                    'created_by' => Auth::user()->id,
-                    'created_at' => Carbon::now(),
-                ]);
-                //TODO : SEND EMAIL notif TO AUDITOR
-
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Observer added successfully!'
-                ]);
-            } else {
+            $count_auditor = Observation::where('schedule_id', $request->schedule_id)->count();
+            $check_auditor = Observation::where('schedule_id', $request->schedule_id)->where('auditor_id', $request->auditor_id)->count();
+            if($count_auditor >= 2){
                 return response()->json([
                     'success' => false,
-                    'message' => 'Failed to add!'
+                    'message' => 'Not allowed! maximum of 2 auditors.'
                 ]);
+            } else if($check_auditor > 0){
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Not allowed! auditors must be different.'
+                ]);
+            }else {
+                $data = Observation::insert([
+                    'schedule_id' => $request->schedule_id,
+                    'auditor_id' => $request->auditor_id,
+                    'created_at' => Carbon::now(),
+                ]);
+                if($data){
+                    $auditor = User::find($request->auditor_id);
+                    $x = Schedule_history::insert([
+                        'schedule_id' => $request->schedule_id,
+                        'description' => Auth::user()->name." has <u>added</u> <b>".$auditor->name."</b> as an auditor.",
+                        'remark' => null,
+                        'created_by' => Auth::user()->id,
+                        'created_at' => Carbon::now(),
+                    ]);
+                    //TODO : SEND EMAIL notif TO AUDITOR
+    
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'Observer added successfully!'
+                    ]);
+                } else {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Failed to add!'
+                    ]);
+                }
             }
         }
     }
@@ -105,7 +119,6 @@ class ObservationController extends Controller
         if ($request->isMethod('POST') && isset($request->submit)) {
             $this->validate($request, [ 
                 'questions'=> ['required'],
-                'study_program'=> ['required'],
                 'image_path' => ['required','image'],
                 'remark'=> ['required'],
             ]);
@@ -197,10 +210,9 @@ class ObservationController extends Controller
                     return view('observations.view', compact('data', 'lecturer'))
                     ->withErrors(['msg' => 'Sorry, you have missed the specified schedule, please contact admin for rescheduling.']);
                 } else {
-                    $study_program = User::select('study_program')->groupBy('study_program')->get();
                     $locations = Locations::orderBy('title')->get();
                     $survey = Criteria_category::with('criterias')->get();
-                    return view('observations.make', compact('data', 'lecturer', 'study_program', 'survey', 'locations'));
+                    return view('observations.make', compact('data', 'lecturer', 'survey', 'locations'));
                 }
             } else {
                 $survey = Observation_category::with('criteria_category')->with('observation_criterias')->with('observation_criterias.criteria')

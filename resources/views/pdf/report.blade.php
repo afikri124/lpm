@@ -67,7 +67,7 @@
         <tr>
             <td colspan="2">
                 <p style="text-align: justify;padding-top:15px">Telah diselenggarakan kegiatan <i>Peer Observation</i>
-                    di lingkungan Program Studi <b>{{ $data->observations[0]->study_program }}</b>, sebagaimana
+                    di lingkungan Program Studi <b>{{ $data->lecturer->study_program }}</b>, sebagaimana
                     tercantum dalam daftar hadir terlampir. Unsur kegiatan pada hari ini antara lain:</p>
             </td>
         </tr>
@@ -99,7 +99,8 @@
             @foreach($data->observations as $key => $o)
             <td width="50%" style="text-align: center;">
                 Auditor {{ $key+1 }}<br><br><br><br>
-                <b>( {{ $o->auditor->name }} )</b>
+                <b>( {{ $o->auditor->name }} )</b><br>
+                <small>NIK. {{ $o->auditor->username }}</small>
             </td>
             @endforeach
         </tr>
@@ -109,11 +110,13 @@
         <tr>
             <td width="50%" style="text-align: center;">
                 Mengetahui,<br>Kepala LPM<br><br><br><br>
-                <b>( ARIEP JAENUL )</b>
+                <b>( ARIEP JAENUL )</b><br>
+                <small>NIK. </small>
             </td>
             <td width="50%" style="text-align: center;">
                 <br>Auditee<br><br><br><br>
-                <b>( {{ $data->lecturer->name }} )</b>
+                <b>( {{ $data->lecturer->name }} )</b><br>
+                <small>NIK. {{ $data->lecturer->username }}</small>
             </td>
         </tr>
     </table>
@@ -166,11 +169,11 @@
     <table class="table table-sm" width="100%" style="font-size: 10pt">
         <thead>
             <tr>
-                <th>Code</th>
-                <th>Criteria</th>
-                <th class="text-center">Score</th>
-                <th class="text-center">Weight</th>
-                <th class="text-center">Point</th>
+                <th>Kode</th>
+                <th>Kriteria Penilaian</th>
+                <th class="text-center">Skor</th>
+                <th class="text-center">Bobot</th>
+                <th class="text-center">Poin</th>
             </tr>
         </thead>
         <tbody>
@@ -205,8 +208,8 @@
             @endphp
             @if(count($q->observation_criterias) > 0)
             <tr valign="top">
-                <td colspan="2">Total rating {{ $q->criteria_category_id }}</td>
-                <td colspan="3" class="text-center">{{ $point }} points</td>
+                <td colspan="2">Total penilaian {{ $q->criteria_category_id }}</td>
+                <td colspan="3" class="text-center">{{ $point }} poin</td>
             </tr>
             @endif
             <tr valign="top">
@@ -220,17 +223,17 @@
     <table  width="100%" style="font-size: 10pt">
         <thead valign="top">
             <tr>
-                <th>Overall rating</th>
-                <th class="text-right">{{ $total }} points</th>
+                <th>Penilaian Keseluruhan</th>
+                <th class="text-right">{{ $total }} poin</th>
             </tr>
             <tr>
-                <th>Percentage</th>
+                <th>Persentase</th>
                 <th class="text-right">
                     {{ number_format($total/($total_w*5)*100, 1); }}%
                 </th>
             </tr>
             <tr>
-                <th>Additional Comments</th>
+                <th>Catatan/Komentar</th>
                 <th class="text-danger text-right">{{ $s->remark }}</th>
             </tr>
             <tr>
@@ -239,12 +242,14 @@
             <tr>
                 <td width="50%" style="text-align: center;">
                     Mengetahui,<br>Kepala LPM<br><br><br><br>
-                    <b>( ARIEP JAENUL )</b>
+                    <b>( ARIEP JAENUL )</b><br>
+                <small>NIK. </small>
                 </td>
                 <td width="50%" style="text-align: center;">
                     Depok, {{ Date::createFromDate($s->updated_at)->format('j F Y') }}
                     <br>Auditor<br><br><br><br>
-                    <b>( {{ $s->auditor->name }} )</b>
+                    <b>( {{ $s->auditor->name }} )</b><br>
+                <small>NIK. {{ $s->auditor->username }}</small>
                 </td>
             </tr>
         </thead>
@@ -267,7 +272,8 @@
     <p style="font-size: 10pt">Dokumentasi: </p>
     @foreach($survey as $key => $s)
     <center>
-        <img src="{{ public_path($s->image_path) }}" style="max-width: 500px; max-height: 300px;" alt="">
+        <img src="{{ public_path($s->image_path) }}" style="width: 400px;" alt=""><br>
+        <small>Dokumentasi Auditor {{$key+1}}</small>
     </center><br>
     @endforeach
     @if($data->remark != null || $data->remark != "")
@@ -293,7 +299,8 @@
     <p style="font-size: 10pt">Dokumentasi: </p>
     @if($follow_up->image_path != null)
     <center>
-        <img src="{{ public_path($follow_up->image_path) }}" style="max-width: 500px; max-height: 300px;" alt="">
+        <img src="{{ public_path($follow_up->image_path) }}" style="width: 400px;" alt=""><br>
+        <small>Dokumentasi Dekan</small>
     </center><br>
     @else
     <center>
@@ -308,12 +315,14 @@
             <tr>
                 <td width="50%" style="text-align: center;">
                     Mengetahui,<br>Kepala LPM<br><br><br><br>
-                    <b>( ARIEP JAENUL )</b>
+                    <b>( ARIEP JAENUL )</b><br>
+                <small>NIK. </small>
                 </td>
                 <td width="50%" style="text-align: center;">
                     Depok, {{ Date::createFromDate($follow_up->updated_at)->format('j F Y') }}
                     <br>Dekan<br><br><br><br>
-                    <b>( {{ $follow_up->dean->name }} )</b>
+                    <b>( {{ $follow_up->dean->name }} )</b><br>
+                <small>NIK. {{ $follow_up->dean->username }}</small>
                 </td>
             </tr>
         </thead>

@@ -75,19 +75,6 @@
                                     <input class="form-control" type="text" value="{{ $data->auditor->name }}" disabled>
                                 </div>
                                 <div class="mb-3 mb-2 col-lg-6 col-md-12">
-                                    <label>Study Program {{old('study_program')}}</label>
-                                    <select class="form-control input-sm select2" name="study_program"
-                                        title="Study Program" data-placeholder="Select Study Program" required>
-                                        @foreach($study_program as $d)
-                                        <option value="{{ $d->study_program }}"
-                                            {{ ($d->study_program==$data->study_program ? "selected": "") }}
-                                            {{ ($d->study_program==old('study_program') ? "selected": "") }}>
-                                            {{ $d->study_program }}
-                                        </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="mb-3 mb-2 col-lg-6 col-md-12">
                                     <label>Class Type</label>
                                     <select class="form-control input-sm select2" name="class_type"
                                         title="Select Class type" data-placeholder="Select Class type" required>

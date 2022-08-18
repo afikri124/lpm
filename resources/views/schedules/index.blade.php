@@ -86,9 +86,9 @@
                                     <th scope="col" data-priority="2" >Lecturer Name</th>
                                     <th scope="col">Date Start</th>
                                     <th scope="col">Date End</th>
-                                    <th scope="col" data-priority="3" >Status</th>
+                                    <th scope="col" data-priority="4" >Status</th>
                                     <th scope="col">Auditor</th>
-                                    <th scope="col" data-priority="4" width="65px">Action</th>
+                                    <th scope="col" data-priority="3" width="65px">Action</th>
                                 </tr>
                             </thead>
                         </table>
