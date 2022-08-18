@@ -11,6 +11,7 @@ use App\Models\Criteria_category;
 use App\Models\Observation_category;
 use App\Models\Schedule;
 use App\Models\Locations;
+use App\Models\Setting;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Crypt;
@@ -202,13 +203,14 @@ class ObservationController extends Controller
         } else {
             $data = Observation::with('auditor')->with('schedule')->findOrFail($o_id);
             $lecturer = User::find($data->schedule->lecturer_id);
+            $CONTACT = Setting::findOrFail('CONTACT');
             if($data->attendance == false){                             //belum hadir/belum dinilai
                 if(Carbon::now() < $data->schedule->date_start){        //Belum waktunya audit
                     return view('observations.view', compact('data', 'lecturer'))
-                    ->withErrors(['msg' => 'Sorry, it\'s not time to make observations, please contact admin for schedule changes.']);
+                    ->withErrors(['msg' => 'Sorry, it\'s not time to make observations, please contact admin for schedule changes. '.$CONTACT->title.": ".$CONTACT->content ]);
                 } else if(Carbon::now() > $data->schedule->date_end){   //Sudah kelewat waktunya
                     return view('observations.view', compact('data', 'lecturer'))
-                    ->withErrors(['msg' => 'Sorry, you have missed the specified schedule, please contact admin for rescheduling.']);
+                    ->withErrors(['msg' => 'Sorry, you have missed the specified schedule, please contact admin for rescheduling. '.$CONTACT->title.": ".$CONTACT->content]);
                 } else {
                     $locations = Locations::orderBy('title')->get();
                     $survey = Criteria_category::with('criterias')->get();

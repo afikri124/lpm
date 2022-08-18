@@ -10,6 +10,7 @@ use App\Models\Schedule;
 use App\Models\Observation;
 use App\Models\Follow_up;
 use App\Models\Schedule_history;
+use App\Models\Setting;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Jenssegers\Date\Date;
@@ -42,7 +43,7 @@ class PdfController extends Controller
 
         $link = route('pdf.report', $id );
         Date::setLocale('id');
-        $qrcode = base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate($link));
+        $qr = base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate($link));
         $survey = Observation::with('observation_categories')
             ->with('auditor')
             ->with('observation_categories.criteria_category')
@@ -51,8 +52,9 @@ class PdfController extends Controller
             ->where('schedule_id',$s_id)->get();
 
         $follow_up = Follow_up::with('dean')->where('schedule_id',$s_id)->first();
-        $pdf = PDF::loadview('pdf.report',['data'=>$data, 'qr' => $qrcode, 'survey' => $survey, 'follow_up' => $follow_up]);
-
+        $hod = Setting::findOrFail('HODLPM');
+        $MINSCORE = Setting::findOrFail('MINSCORE');
+        $pdf = PDF::loadview('pdf.report', compact('data','qr', 'survey', 'follow_up', 'hod', 'MINSCORE'));
 	    return $pdf->stream("PO Report - ".$data->lecturer->name." - ".date('d-m-Y', strtotime($data->date_start)).".pdf");
     }
 }

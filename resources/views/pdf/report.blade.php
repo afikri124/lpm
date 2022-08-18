@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>PO Report | {{ $data->lecturer->name }} - {{date('d/m/Y', strtotime($data->date_start)) }}
+    <title>PO Report | {{ $data->lecturer->name_with_title }} - {{date('d/m/Y', strtotime($data->date_start)) }}
     </title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -67,20 +67,20 @@
         <tr>
             <td colspan="2">
                 <p style="text-align: justify;padding-top:15px">Telah diselenggarakan kegiatan <i>Peer Observation</i>
-                    di lingkungan Program Studi <b>{{ $data->lecturer->study_program }}</b>, sebagaimana
+                    di lingkungan Program Studi <b>{{ ($data->study_program==null ? $data->lecturer->study_program : $data->study_program) }}</b>, sebagaimana
                     tercantum dalam daftar hadir terlampir. Unsur kegiatan pada hari ini antara lain:</p>
             </td>
         </tr>
         @foreach($data->observations as $key => $o)
         <tr>
             <td width="30%" valign="top">Auditor {{ $key+1 }}</td>
-            <td width="70%" valign="top">: {{ $o->auditor->name }}
+            <td width="70%" valign="top">: {{ $o->auditor->name_with_title }}
             </td>
         </tr>
         @endforeach
         <tr>
             <td width="30%" valign="top">Auditee</td>
-            <td width="70%" valign="top">: {{ $data->lecturer->name }} </td>
+            <td width="70%" valign="top">: {{ $data->lecturer->name_with_title }} </td>
         </tr>
         <tr>
             <td colspan="2">
@@ -99,7 +99,7 @@
             @foreach($data->observations as $key => $o)
             <td width="50%" style="text-align: center;">
                 Auditor {{ $key+1 }}<br><br><br><br>
-                <b>( {{ $o->auditor->name }} )</b><br>
+                <b>( {{ $o->auditor->name_with_title }} )</b><br>
                 <small>NIK. {{ $o->auditor->username }}</small>
             </td>
             @endforeach
@@ -110,12 +110,12 @@
         <tr>
             <td width="50%" style="text-align: center;">
                 Mengetahui,<br>Kepala LPM<br><br><br><br>
-                <b>( ARIEP JAENUL )</b><br>
-                <small>NIK. </small>
+                <b>( {{ $hod->title }} )</b><br>
+                <small>NIK. {{ $hod->content }} </small>
             </td>
             <td width="50%" style="text-align: center;">
                 <br>Auditee<br><br><br><br>
-                <b>( {{ $data->lecturer->name }} )</b><br>
+                <b>( {{ $data->lecturer->name_with_title }} )</b><br>
                 <small>NIK. {{ $data->lecturer->username }}</small>
             </td>
         </tr>
@@ -142,7 +142,7 @@
     <table width="100%" style="font-size: 10pt">
         <tr>
             <th>Nama Dosen</th>
-            <td>{{ $data->lecturer->name }}</td>
+            <td>{{ $data->lecturer->getNameWithTitleAttribute() }}</td>
             <th>Hari/Tanggal</th>
             <td>{{ Date::createFromDate($s->updated_at)->format('l, j F Y') }}</td>
         </tr>
@@ -160,7 +160,7 @@
         </tr>
         <tr>
             <th>Auditor</th>
-            <td>{{ $s->auditor->name }}</td>
+            <td>{{ $s->auditor->getNameWithTitleAttribute() }}</td>
             <th>Jumlah Mahasiswa</th>
             <td>{{ $s->total_students }}</td>
         </tr>
@@ -220,7 +220,7 @@
         </tbody>
     </table>
     <br>
-    <table  width="100%" style="font-size: 10pt">
+    <table width="100%" style="font-size: 10pt">
         <thead valign="top">
             <tr>
                 <th>Penilaian Keseluruhan</th>
@@ -228,13 +228,13 @@
             </tr>
             <tr>
                 <th>Persentase</th>
-                <th class="text-right">
+                <th class="text-right @if(($total/($total_w*5)*100) < $MINSCORE->content) text-danger @endif">
                     {{ number_format($total/($total_w*5)*100, 1); }}%
                 </th>
             </tr>
             <tr>
                 <th>Catatan/Komentar</th>
-                <th class="text-danger text-right">{{ $s->remark }}</th>
+                <th class="text-right"><i>{{ $s->remark }}</i></th>
             </tr>
             <tr>
                 <td colspan="2"><br></td>
@@ -242,20 +242,20 @@
             <tr>
                 <td width="50%" style="text-align: center;">
                     Mengetahui,<br>Kepala LPM<br><br><br><br>
-                    <b>( ARIEP JAENUL )</b><br>
-                <small>NIK. </small>
+                    <b>( {{ $hod->title }} )</b><br>
+                    <small>NIK. {{ $hod->content }} </small>
                 </td>
                 <td width="50%" style="text-align: center;">
                     Depok, {{ Date::createFromDate($s->updated_at)->format('j F Y') }}
                     <br>Auditor<br><br><br><br>
-                    <b>( {{ $s->auditor->name }} )</b><br>
-                <small>NIK. {{ $s->auditor->username }}</small>
+                    <b>( {{ $s->auditor->getNameWithTitleAttribute() }} )</b><br>
+                    <small>NIK. {{ $s->auditor->username }}</small>
                 </td>
             </tr>
         </thead>
     </table>
     @endforeach
-    <div class="page-break"></div>    
+    <div class="page-break"></div>
     <table width="100%">
         <tr>
             <td width="50%" valign="top"></td>
@@ -277,12 +277,13 @@
     </center><br>
     @endforeach
     @if($data->remark != null || $data->remark != "")
-    <br><p style="font-size: 10pt">Catatan dari LPM: </p>
-    <i class="text-danger"  style="font-size: 10pt">{{ $data->remark }}</i>
+    <br>
+    <p style="font-size: 10pt">Catatan dari LPM: </p>
+    <i class="text-danger" style="font-size: 10pt">{{ $data->remark }}</i>
     @endif
 
     @if($follow_up != null)
-    <div class="page-break"></div>    
+    <div class="page-break"></div>
     <table width="100%">
         <tr>
             <td width="50%" valign="top"></td>
@@ -304,25 +305,26 @@
     </center><br>
     @else
     <center>
-    <i class="text-danger" style="font-size: 10pt" >Dekan Belum Melakukan Pemanggilan Tindak Lanjut</i>
+        <i class="text-danger" style="font-size: 10pt">Dekan Belum Melakukan Pemanggilan Tindak Lanjut</i>
     </center><br>
     @endif
-    <br><p style="font-size: 10pt">Catatan dari Dekan: </p>
-    <i class="text-danger" style="font-size: 10pt" >{{ $follow_up->remark }}</i>
+    <br>
+    <p style="font-size: 10pt">Catatan dari Dekan: </p>
+    <i class="text-danger" style="font-size: 10pt">{{ $follow_up->remark }}</i>
     <br><br><br>
-    <table  width="100%" style="font-size: 10pt">
+    <table width="100%" style="font-size: 10pt">
         <thead valign="top">
             <tr>
                 <td width="50%" style="text-align: center;">
                     Mengetahui,<br>Kepala LPM<br><br><br><br>
-                    <b>( ARIEP JAENUL )</b><br>
-                <small>NIK. </small>
+                    <b>( {{ $hod->title }} )</b><br>
+                    <small>NIK. {{ $hod->content }} </small>
                 </td>
                 <td width="50%" style="text-align: center;">
                     Depok, {{ Date::createFromDate($follow_up->updated_at)->format('j F Y') }}
                     <br>Dekan<br><br><br><br>
-                    <b>( {{ $follow_up->dean->name }} )</b><br>
-                <small>NIK. {{ $follow_up->dean->username }}</small>
+                    <b>( {{ $follow_up->dean->getNameWithTitleAttribute() }} )</b><br>
+                    <small>NIK. {{ $follow_up->dean->username }}</small>
                 </td>
             </tr>
         </thead>

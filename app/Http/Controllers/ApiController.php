@@ -16,6 +16,7 @@ use App\Models\Observation_criteria;
 use App\Models\Schedule;
 use App\Models\Role;
 use App\Models\User_role;
+use App\Models\Setting;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Crypt;
@@ -204,16 +205,8 @@ class ApiController extends Controller
 
     public function tes(Request $request)
     {
-        // $data = User::select('id','email','name')->whereHas('roles', function($q){
-        //     $q->where('role_id', "AU");
-        // })->get();
-        // $data = Schedule::with('lecturer')->with('status')->with('observations')->with('observations.auditor')->findOrFail(15);
-        // $oids = array();
-        // foreach($data->observations as $idx)
-        // {
-        //     array_push($oids, $idx->id);
-        // }
-        $data = Follow_up::with('dean')->where('schedule_id',15)->first();
+
+        $data = Setting::get();
 
         return response()->json( $data );
 

@@ -39,7 +39,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-12 col-md-12">
+                        <div class="col-lg-6 col-md-12">
                             <div class="form-group mb-2">
                                 <label class="col-form-label">Select the lecturer to be observed<i class="text-danger">*</i></label>
                                 <select
@@ -54,6 +54,26 @@
                                     @endforeach
                                 </select>
                                 @error('lecturer_id')
+                                <span class="invalid-feedback d-block" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <div class="form-group mb-2">
+                                <label class="col-form-label">Select Study Program<i class="text-danger">*</i></label>
+                                <select
+                                    class="form-select digits select2 @error('study_program') is-invalid @enderror"
+                                    name="study_program" id="study_program" data-placeholder="Select">
+                                    <option value="" selected disabled>Select</option>
+                                    @foreach($study_program as $p)
+                                    <option value="{{ $p->study_program }}">
+                                        {{ $p->study_program }}
+                                    </option>
+                                    @endforeach
+                                </select>
+                                @error('study_program')
                                 <span class="invalid-feedback d-block" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

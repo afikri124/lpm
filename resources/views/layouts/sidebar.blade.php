@@ -79,6 +79,8 @@
                                     href="{{route('settings.categories')}}">Question Categories</a></li>
                             <li><a class="lan-4 {{ Route::currentRouteName()=='settings.criterias' ? 'active' : '' }}"
                                     href="{{route('settings.criterias')}}">Question Criteria</a></li>
+                            <li><a class="lan-4 {{ Route::currentRouteName()=='settings.general' ? 'active' : '' }}"
+                                    href="{{route('settings.general')}}">General Settings</a></li>
                         </ul>
                     </li>
                     @endif

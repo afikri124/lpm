@@ -35,7 +35,7 @@
                             <h6 class="form-label">Name</h6>
                         </label>
                         <div class="col-sm-6">
-                            <span>{{ $data->name }}</span>
+                            <span>{{ $data->name_with_title }}</span>
                         </div>
                     </div>
                     <div class="mb-1 row">
@@ -145,6 +145,18 @@
                             <div class="mb-3">
                                 <label class="form-label">Name</label>
                                 <input class="form-control" type="text" name="name" value="{{ $data->name }}" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="mb-3">
+                                <label class="form-label">Front title</label>
+                                <input class="form-control" type="text" name="front_title" value="{{ $data->front_title }}" >
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="mb-3">
+                                <label class="form-label">Back title</label>
+                                <input class="form-control" type="text" name="back_title" value="{{ $data->back_title }}" >
                             </div>
                         </div>
                         <div class="col-sm-12">

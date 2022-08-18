@@ -45,7 +45,8 @@
                                 <tr>
                                     <th scope="col" width="60px" class="text-center">Code ID</th>
                                     <th scope="col">Title</th>
-                                    <th scope="col" width="50%">Description</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col" width="50px">Required</th>
                                     <th scope="col" width="65px">Action</th>
                                 </tr>
                             </thead>
@@ -100,6 +101,16 @@
                     render: function (data, type, row, meta) {
                         return row.description;
                     },
+                },
+                {
+                    render: function (data, type, row, meta) {
+                        var x = "";
+                        if (row.is_required == true) {
+                            x = '<i class="fa fa-check"></i>';
+                        } 
+                        return x;
+                    },
+                    className: "text-center"
                 },
                 {
                     render: function (data, type, row, meta) {

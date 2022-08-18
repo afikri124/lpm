@@ -11,7 +11,7 @@ class Criteria_category extends Model
     public $timestamps = false;
     public $incrementing = false;
     protected $fillable = [
-        'id', 'title', 'description',
+        'id', 'title', 'description', 'is_required',
     ];
 
     public function criterias()

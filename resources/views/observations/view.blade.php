@@ -27,7 +27,7 @@
                 <div class="card-body">
                     @foreach ($errors->all() as $error)
                     <div class="alert alert-light alert-dismissible fade show text-danger" role="alert">
-                        <strong><i class="fa fa-exclamation-triangle"></i></strong> {{ $error }}
+                        <strong><i class="fa fa-exclamation-triangle"></i></strong> {!! $error !!}
                         <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                     @endforeach

@@ -10,6 +10,7 @@ use App\Models\Schedule_history;
 use App\Models\Observation;
 use App\Models\Observation_category;
 use App\Models\Follow_up;
+use App\Models\Setting;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Crypt;
@@ -51,12 +52,14 @@ class ScheduleController extends Controller
         if ($request->isMethod('post')) {
             $this->validate($request, [ 
                 'lecturer_id'=> ['required'],
+                'study_program'=> ['required'],
                 'date_start' => ['required', 'date'],
                 'date_end' => ['required', 'date'],
             ]);
            
             $schedule = Schedule::create([
                 'lecturer_id' => $request->lecturer_id,
+                'study_program' => $request->study_program,
                 'date_start' => date('Y-m-d H:i', strtotime($request->date_start)),
                 'date_end' => date('Y-m-d H:i', strtotime($request->date_end)),
                 'status_id' => "S00",
@@ -69,7 +72,8 @@ class ScheduleController extends Controller
             $lecturer = User::select('id','email','name')->whereHas('roles', function($q){
                             $q->where('role_id', "LE");
                         })->where('username','!=', 'admin')->orderBy('name')->get();
-            return view('schedules.add', compact('lecturer'));
+            $study_program = User::select('study_program')->groupBy('study_program')->get();
+            return view('schedules.add', compact('lecturer','study_program'));
         }
     }
 
@@ -170,7 +174,8 @@ class ScheduleController extends Controller
             $dean = User::select('id','email','name','department')->whereHas('roles', function($q){
                 $q->where('role_id', "DE");
             })->where('username','!=', 'admin')->where('id','!=', $data->lecturer_id)->get();
-            return view('schedules.review_observations', compact('id','data', 'survey', 'dean'));
+            $MINSCORE = Setting::findOrFail('MINSCORE');
+            return view('schedules.review_observations', compact('id','data', 'survey', 'dean', 'MINSCORE'));
         }
     }
 }

@@ -59,6 +59,20 @@
                             </div>
                         </div>
 
+                        <div class="col-lg-12 col-md-12">
+                            <div class="form-group">
+                                <div class="form-check checkbox checkbox-default mb-0">
+                                    @if($data->is_required)
+                                    <input class="form-check-input" id="is_required" type="checkbox" value="1" checked
+                                        name="is_required">
+                                    @else
+                                    <input class="form-check-input" id="is_required" type="checkbox" value="0" name="is_required">
+                                    @endif
+                                    <label class="form-check-label" for="is_required">Comments are required for this
+                                        category.</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="card-footer text-end">
@@ -77,5 +91,14 @@
 <script src="{{asset('assets/js/select2/select2.full.min.js')}}"></script>
 <script type="text/javascript">
     $('.select2').select2({});
+</script>
+<script>
+    $(document).ready(function () {
+        const selectElement = document.querySelector('#is_required');
+        selectElement.addEventListener('change', (event) => {
+            selectElement.value = selectElement.checked ? 1 : 0;
+            // alert(selectElement.value);
+        });
+    });
 </script>
 @endsection

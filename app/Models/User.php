@@ -29,9 +29,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'job',
         'gender',
         'google_id',
+        'front_title',
+        'back_title',
     ];
 
-    protected $appends = ['user_avatar'];
+    protected $appends = ['user_avatar','name_with_title'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -51,6 +53,12 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getNameWithTitleAttribute()
+    { 
+      $name_with_title = ($this->front_title==null?"":$this->front_title." ").$this->name.($this->back_title==null?"":", ".$this->back_title);
+      return $name_with_title;
+    }
 
     public function getUserAvatarAttribute()
     { 

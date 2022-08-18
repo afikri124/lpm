@@ -16,8 +16,9 @@ class SettingSeeder extends Seeder
     {
         //
         $data = [
-            ["id" => "HODLPM", "title" => "ARIEP JAENUL", "content" => "12345"],
+            ["id" => "HODLPM", "title" => "ARIEP JAENUL S.Lebew.", "content" => "12345"],
             ["id" => "CONTACT", "title" => "WhatsApp", "content" => "12345"],
+            ["id" => "MINSCORE", "title" => "KKM", "content" => "70"],
         ];
 
         foreach ($data as $x) {

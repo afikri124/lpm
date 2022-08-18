@@ -17,6 +17,7 @@ class Schedule extends Model
         'status_id',
         'remark',
         'created_by',
+        'study_program',
     ];
     public function status()
     {

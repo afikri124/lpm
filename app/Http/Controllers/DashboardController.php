@@ -50,6 +50,8 @@ class DashboardController extends Controller
         User::where('id', Auth::user()->id)->update([
             'name' => $data->name,
             'username' => $data->username,
+            'front_title' => $data->front_title,
+            'back_title' => $data->back_title,
             'email' => $data->email,
             'nidn' => $data->nidn,
             'phone' => $data->phone,

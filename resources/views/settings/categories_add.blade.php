@@ -32,7 +32,7 @@
                                 class="fe fe-x"></i></a></div>
                 </div>
                 <div class="card-body">
-                     <div class="row">
+                    <div class="row">
                         <div class="col-lg-6 col-md-12">
                             <div class="form-group">
                                 <label class="col-form-label">Code ID<i class="text-danger">*</i></label>
@@ -64,7 +64,16 @@
                                     name="description">{{ old('description') }}</textarea>
                             </div>
                         </div>
-
+                        <div class="col-lg-12 col-md-12">
+                            <div class="form-group">
+                                <div class="form-check checkbox checkbox-default mb-0">
+                                    <input class="form-check-input" id="is_required" type="checkbox" value="0"
+                                        name="is_required">
+                                    <label class="form-check-label" for="is_required">Comments are required for this
+                                        category.</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="card-footer text-end">
@@ -81,4 +90,13 @@
 
 @section('script')
 <script src="{{asset('assets/js/select2/select2.full.min.js')}}"></script>
+<script>
+    $(document).ready(function () {
+        const selectElement = document.querySelector('#is_required');
+        selectElement.addEventListener('change', (event) => {
+            selectElement.value = selectElement.checked ? 1 : 0;
+            // alert(selectElement.value);
+        });
+    });
+</script>
 @endsection

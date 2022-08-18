@@ -120,7 +120,7 @@
                                         value="{{ (old('subject_course')==null ? $data->subject_course : old('subject_course')) }}"
                                         required>
                                 </div>
-                                <div class="mb-3 mb-2 col-lg-6 col-md-12">
+                                <div class="mb-3 mb-2 col-lg-12 col-md-12">
                                     <label>Topic</label>
                                     <input class="form-control" type="text" name="topic" title="Topic"
                                         value="{{ (old('topic')==null ? $data->topic : old('topic')) }}">
@@ -178,8 +178,8 @@
                                     <tr valign="top">
                                         <td></td>
                                         <td colspan="2">
-                                            <label><i>Remark for {{ $q->id }} (Additional Comments)</i></label>
-                                            <textarea class="form-control mb-4" rows="2"
+                                            <label><i>Remark for {{ $q->id }} (@if( $q->is_required ) Required @else Additional @endif Comments )</i></label>
+                                            <textarea class="form-control mb-4" rows="2" @if( $q->is_required ) required @endif
                                                 name="categories[{{ $q->id }}]">{{ old('categories.'.$q->id)}}</textarea>
                                         </td>
                                     </tr>
@@ -200,7 +200,7 @@
                                         required>
                                 </div>
                                 <div class="mb-3 col-lg-12 col-md-12">
-                                    <label>Remark <i>(Mandatory Comment)</i></label>
+                                    <label>Overall Comment <i>( Required Comments )</i></label>
                                     <textarea class="form-control" name="remark" title="Overall comment" required
                                         rows="3">{{ (old('remark')==null ? $data->remark : old('remark')) }}</textarea>
                                 </div>
@@ -285,7 +285,7 @@
         });
         $('.f1 fieldset:first').fadeIn('slow');
 
-        $('.f1 input[required], select[required]').on('focus', function () {
+        $('.f1 input[required], select[required], textarea[required]').on('focus', function () {
             $(this).removeClass('input-error');
         });
         $('select.select2').on('select2:closing', function (e) {
@@ -296,7 +296,7 @@
             var next_step = true;
             var current_active_step = $(this).parents('.f1').find('.f1-step.active');
             var progress_line = $(this).parents('.f1').find('.f1-progress-line');
-            parent_fieldset.find('input[required], select[required]').each(function () {
+            parent_fieldset.find('input[required], select[required], textarea[required]').each(function () {
                 if ($(this).val() == "") {
                     $(this).addClass('input-error');
                     next_step = false;
@@ -351,7 +351,7 @@
             });
         });
         $('.f1').on('submit', function (e) {
-            $(this).find('input[required], select[required]').each(function () {
+            $(this).find('input[required], select[required], textarea[required]').each(function () {
                 if ($(this).val() == "") {
                     e.preventDefault();
                     $(this).addClass('input-error');

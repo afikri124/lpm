@@ -35,6 +35,7 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 Route::group(['prefix' => 'settings', 'middleware' => ['auth', 'role:AD']], function() {
+    Route::any('general', [App\Http\Controllers\SettingController::class, 'general'])->name('settings.general');
     Route::get('users', [App\Http\Controllers\SettingController::class, 'users'])->name('settings.users');
     Route::get('syncKlas2', [App\Http\Controllers\SettingController::class, 'syncKlas2'])->name('settings.syncKlas2');
     Route::any('user/add', [App\Http\Controllers\SettingController::class, 'user_add'])->name('settings.user_add');

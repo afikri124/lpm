@@ -35,7 +35,7 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-12">
                             <div class="form-group">
-                                <label class="col-form-label">Name<i class="text-danger">*</i></label>
+                                <label class="col-form-label">Full Name<i class="text-danger">*</i></label>
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
                                     name="name" value="{{ old('name') }}" autocomplete="name" autofocus>
                                 @error('name')
@@ -45,10 +45,20 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label class="col-form-label">NIDN</label>
-                                <input class="form-control @error('nidn') is-invalid @enderror" type="number" id="nidn"
-                                    name="nidn" value="{{ old('nidn') }}">
-                                @error('nidn')
+                                <label class="col-form-label">Front title</label>
+                                <input class="form-control @error('front_title') is-invalid @enderror" type="text" id="front_title"
+                                    name="front_title" value="{{ old('front_title') }}">
+                                @error('front_title')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label">Back title</label>
+                                <input class="form-control @error('back_title') is-invalid @enderror" type="text" id="back_title"
+                                    name="back_title" value="{{ old('back_title') }}">
+                                @error('back_title')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -81,6 +91,16 @@
                                 <input class="form-control @error('username') is-invalid @enderror" type="text"
                                     id="username" name="username" value="{{ old('username') }}">
                                 @error('username')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label">NIDN</label>
+                                <input class="form-control @error('nidn') is-invalid @enderror" type="number" id="nidn"
+                                    name="nidn" value="{{ old('nidn') }}">
+                                @error('nidn')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

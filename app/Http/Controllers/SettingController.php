@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\User_role;
 use App\Models\Criteria_category;
 use App\Models\Criteria;
+use App\Models\Setting;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Crypt;
@@ -31,6 +32,19 @@ class SettingController extends Controller
         $roles = Role::get();
         $study_program = User::select('study_program')->groupBy('study_program')->get();
         return view('settings.users', ['roles'=> $roles, 'study_program' => $study_program]);
+    }
+
+    public function general(Request $request) {
+        if ($request->isMethod('post')) {
+            $this->validate($request, [ 
+                'id'=> ['required'],
+                'title'=> ['required'],
+                'content'=> ['required'],
+            ]);
+            $up = Setting::find($request->id)->update(request()->all());
+        }
+        $data = Setting::get();
+        return view('settings.general', ['data'=> $data]);
     }
 
     public function syncKlas2(Request $request)
@@ -152,6 +166,8 @@ class SettingController extends Controller
                 'email' => $request->email,
                 'username' => $request->username,
                 'nidn' => $request->nidn,
+                'front_title' => $request->front_title,
+                'back_title' => $request->back_title,
                 'department' => $request->department,
                 'study_program' => $request->study_program,
                 'phone' => $request->phone,
@@ -247,8 +263,14 @@ class SettingController extends Controller
                 'id'=> ['required', 'string', 'max:255', Rule::unique('criteria_categories')->ignore($id, 'id')],
                 'title'=> ['required', 'string', 'max:255'],
             ]);
-            $data = Criteria_category::find($id)->update(request()->all());
+            $data = Criteria_category::find($id)->update([
+                'id' => $request->id,
+                'title' => $request->title,
+                'description' => $request->description,
+                'is_required' => ($request->is_required == null ? 0:$request->is_required ),
+            ]);
             return redirect()->route('settings.categories');
+
         }
         $data = Criteria_category::find($id);
         if($data == null){

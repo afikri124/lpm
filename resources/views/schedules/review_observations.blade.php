@@ -45,6 +45,12 @@
                                 </div>
                             </div>
                             <div class="mb-3 row">
+                                <label class="col-sm-4">Study Program</label>
+                                <div class="col-sm-8">
+                                    <strong>{{ ($data->study_program==null ? $data->lecturer->study_program : $data->study_program) }}</strong>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
                                 <label class="col-sm-4">Lecturer</label>
                                 <div class="col-sm-8">
                                     <strong>{{ $data->lecturer->name }}</strong>
@@ -88,12 +94,6 @@
                                         <th>Attendance Date</th>
                                         @foreach($data->observations as $no => $o)
                                         <td>{{ date('l, d M Y H:i', strtotime($o->updated_at)) }}</td>
-                                        @endforeach
-                                    </tr>
-                                    <tr>
-                                        <th>Study Program</th>
-                                        @foreach($data->observations as $no => $o)
-                                        <td>{{ $o->study_program }}</td>
                                         @endforeach
                                     </tr>
                                     <tr>
@@ -143,7 +143,7 @@
                                         @endforeach
                                     </tr>
                                     <tr>
-                                        <th>Observation Results</th>
+                                        <th></th>
                                         @foreach($data->observations as $no => $o)
                                         <td>
                                             <a target="_blank"
@@ -224,8 +224,9 @@
                                     <tr>
                                         <td colspan="2">Percentage</td>
                                         @foreach($total as $k => $p )
-                                        <td class='text-center'>
-                                            {{ number_format($p/($total_w/$jumlah_auditor*5)*100,1); }}%</td>
+                                        <td class='text-center @if(($p/($total_w/$jumlah_auditor*5)*100) < $MINSCORE->content) text-danger @endif'>
+                                            {{ number_format($p/($total_w/$jumlah_auditor*5)*100,1); }}%
+                                        </td>
                                         @endforeach
                                     </tr>
                                     <tr>
@@ -235,9 +236,14 @@
                                         foreach($total as $k => $p ){
                                         $total_point += $p;
                                         }
+                                        $final = $total_point/($total_w*5)*100;
                                         @endphp
-                                        <td class='text-center' colspan="2">
-                                            {{ number_format($total_point/($total_w*5)*100, 1); }}%</td>
+                                        <td class='text-center @if($final < $MINSCORE->content) text-danger @endif' colspan="2">
+                                            {{ number_format($final, 1); }}%
+                                            @if($final < $MINSCORE->content)
+                                             <br><i class="fa fa-exclamation-circle"></i> Score below the {{ $MINSCORE->title }}
+                                            @endif
+                                        </td>
                                     </tr>
                                 </tfoot>
                             </table>
