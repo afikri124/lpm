@@ -76,7 +76,7 @@ Route::group(['prefix' => 'follow_up', 'middleware' => ['auth', 'role:DE']], fun
 });
 //RECAP ROLE ADMIN
 Route::group(['prefix' => 'recap', 'middleware' => ['auth', 'role:AD']], function() {
-    Route::get('/', [App\Http\Controllers\ScheduleController::class, 'recap'])->name('recap');
+    Route::get('/', [App\Http\Controllers\RecapController::class, 'index'])->name('recap');
 });
 //PDF
 Route::group(['prefix' => 'pdf', 'middleware' => ['auth']], function() {
@@ -94,4 +94,5 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth']], function() {
     Route::get('observations_by_schedule_id', [App\Http\Controllers\ApiController::class, 'observations_by_schedule_id'])->name('api.observations_by_schedule_id');
     Route::get('observations_by_auditor_id', [App\Http\Controllers\ApiController::class, 'observations_by_auditor_id'])->name('api.observations_by_auditor_id');
     Route::get('follow_up_by_dean_id', [App\Http\Controllers\ApiController::class, 'follow_up_by_dean_id'])->name('api.follow_up_by_dean_id');
+    Route::get('recap', [App\Http\Controllers\ApiController::class, 'recap'])->name('api.recap');
 });

@@ -253,6 +253,37 @@ class ApiController extends Controller
         return response()->json($data);
     }
 
+    public function recap(Request $request)
+    {
+        $data = Schedule::with('observations')
+        ->with('status')->with('lecturer')
+        ->with('observations.auditor')
+        ->select('*')->orderBy("status_id");
+            return Datatables::of($data)
+                    ->filter(function ($instance) use ($request) {
+                        if (!empty($request->get('lecturer_id'))) {
+                            $instance->where('lecturer_id', $request->get('lecturer_id'));
+                        }
+                        if (!empty($request->get('status_id'))) {
+                            $instance->where('status_id', $request->get('status_id'));
+                        }
+                        if (!empty($request->get('study_program'))) {
+                            $instance->where('study_program', $request->get('study_program'));
+                        }
+                        if (!empty($request->get('range'))) {
+                            if($request->get('range') != "" || $request->get('range') != null){
+                                $x = explode(" - ",$request->get('range'));
+                                $instance->whereDate('date_start', '<=', date('Y-m-d 23:59',strtotime($x[1])));
+                                $instance->whereDate('date_end', '>=', date('Y-m-d H:i',strtotime($x[0])));
+                            }
+                        }
+                    })
+                    ->addColumn('link', function($x){
+                        return Crypt::encrypt($x['id']);
+                      })
+                    ->rawColumns(['link'])
+                    ->make(true);
+    }
 
 
 
@@ -263,12 +294,14 @@ class ApiController extends Controller
     public function tes(Request $request)
     {
 
-        $data = Schedule::with('lecturer')->with('status')->with('follow_ups')
-        ->with('created_user')->with('histories')->findOrFail(15);
+        $data = Schedule::with('observations')
+        ->with('status')->with('lecturer')
+        ->with('observations.auditor')
+        ->select('*')->orderBy("status_id");
 
-        return response()->json( $data );
+        // return response()->json( $data );
 
-        // return Datatables::of($data)->make(true);
+        return Datatables::of($data)->make(true);
     }
 
 }
