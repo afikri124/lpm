@@ -48,11 +48,20 @@
                         </a>
                     </li>
                     @endif
+                    @if(Auth::user()->hasRole('LE'))
+                    <li class="sidebar-list">
+                    <label class="badge rounded-pill badge-primary" id="notif_mypo" title="Observation Task"></label>
+                        <a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='observations.me' ? 'active' : '' }} "
+                            href="{{route('observations.me')}}">
+                            <i data-feather="award"> </i><span>My PO</span>
+                        </a>
+                    </li>
+                    @endif
                     @if(Auth::user()->hasRole('DE'))
                     <li class="sidebar-list">
                     <label class="badge rounded-pill badge-primary" id="notif_follow_ups"></label>
-                        <a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='follow_ups' ? 'active' : '' }} "
-                            href="{{route('follow_ups')}}">
+                        <a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='follow_up' ? 'active' : '' }} "
+                            href="{{route('follow_up')}}">
                             <i data-feather="user-check"> </i><span>Follow-Up</span>
                         </a>
                     </li>
@@ -80,7 +89,7 @@
                             <li><a class="lan-4 {{ Route::currentRouteName()=='settings.criterias' ? 'active' : '' }}"
                                     href="{{route('settings.criterias')}}">Question Criteria</a></li>
                             <li><a class="lan-4 {{ Route::currentRouteName()=='settings.general' ? 'active' : '' }}"
-                                    href="{{route('settings.general')}}">General Settings</a></li>
+                                    href="{{route('settings.general')}}">General Setting</a></li>
                         </ul>
                     </li>
                     @endif

@@ -43,4 +43,9 @@ class Schedule extends Model
     {
         return $this->hasMany(Schedule_history::class);
     }
+
+    public function follow_ups()
+    {
+        return $this->hasMany(Follow_up::class);
+    }
 }

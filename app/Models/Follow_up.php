@@ -22,4 +22,20 @@ class Follow_up extends Model
     {
         return $this->belongsTo(User::class, 'dean_id');
     }
+
+    public function schedule()
+    {
+        return $this->belongsTo(Schedule::class, 'schedule_id');
+    }
+
+    protected $appends = ['color'];
+
+    public function getColorAttribute(){
+        if($this->remark != null){
+            return "success";
+        } else {
+            return "danger";
+        }
+    }
+
 }

@@ -34,6 +34,11 @@ class ObservationController extends Controller
                     })->where('username','!=', 'admin')->get();
         return view('observations.index', compact('lecturer'));
     }
+
+    public function me(Request $request) {
+        $status = Status::get();
+        return view('observations.me', compact('status'));
+    }
     
     public function delete(Request $request) {
         $data = Observation::find($request->id);

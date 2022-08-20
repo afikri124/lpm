@@ -169,6 +169,14 @@
                         var x = document.getElementById("notif_follow_ups");
                         if (x) x.innerHTML = "";
                     }
+
+                    if (data['mypo'] != null) {
+                        if (data['mypo'] != 0) document.getElementById(
+                            "notif_mypo").innerHTML = data['mypo'].notif;
+                    } else {
+                        var x = document.getElementById("notif_mypo");
+                        if (x) x.innerHTML = "";
+                    }
                 }
             });
             var t = setTimeout(notifications, 30 * 1000);

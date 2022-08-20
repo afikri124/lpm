@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Schedules')
+@section('title', 'My PO')
 
 @section('css')
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/select2.css')}}">
@@ -16,20 +16,16 @@
     }
 
     table.dataTable td:nth-child(2) {
-        max-width: 120px;
-    }
-
-    table.dataTable td:nth-child(3) {
         max-width: 100px;
     }
 
-    table.dataTable td:nth-child(5) {
-        max-width: 75px;
+    table.dataTable td:nth-child(4) {
+        max-width: 100px;
+    }
+    table.dataTable td:nth-child(6) {
+        max-width: 100px;
     }
 
-    table.dataTable td:nth-child(6) {
-        max-width: 75px;
-    }
 
     table.dataTable td {
         white-space: nowrap;
@@ -56,25 +52,12 @@
             <div class="card">
                 <div class="row">
                     <div class="col-md-3">
-                        <select id="Select_1" class="form-control input-sm select2" data-placeholder="Lecturer">
-                            <option value="">Lecturer</option>
-                            @foreach($lecturer as $d)
-                            <option value="{{ $d->id }}">{{ $d->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="col-md-3">
                         <select id="Select_2" class="form-control input-sm select2" data-placeholder="Status">
                             <option value="">Status</option>
                             @foreach($status as $d)
                             <option value="{{ $d->id }}">{{ $d->title }}</option>
                             @endforeach
                         </select>
-                    </div>
-                    <div class="col-md-6 d-flex justify-content-center justify-content-md-end">
-                        <a class="btn btn-primary btn-block btn-mail" title="Add new" href="{{ route('schedules.add')}}">
-                            <i data-feather="plus"></i>New
-                        </a>
                     </div>
                 </div>
             </div>
@@ -87,11 +70,11 @@
                             <thead>
                                 <tr>
                                     <th scope="col" data-priority="1" width="20px">No</th>
-                                    <th scope="col" data-priority="2" >Lecturer Name</th>
-                                    <th scope="col">Date Start</th>
-                                    <th scope="col">Date End</th>
+                                    <th scope="col" data-priority="2">Auditor</th>
+                                    <th scope="col">Schedule</th>
+                                    <th scope="col">Program</th>
+                                    <th scope="col">Contact</th>
                                     <th scope="col" data-priority="4" >Status</th>
-                                    <th scope="col">Auditor</th>
                                     <th scope="col" data-priority="3" width="65px">Action</th>
                                 </tr>
                             </thead>
@@ -133,16 +116,13 @@
             ordering: false,
             bFilter: false,
             language: {
-                searchPlaceholder: 'Search by remark..',
                 sSearch: '_INPUT_ &nbsp;',
                 lengthMenu: '<span>Show:</span> _MENU_',
             },
             ajax: {
-                url: "{{ route('api.schedules') }}",
+                url: "{{ route('api.schedules_by_lectrurer_id') }}",
                 data: function (d) {
-                    d.lecturer_id = $('#Select_1').val(),
-                        d.status_id = $('#Select_2').val(),
-                        d.search = $('input[type="search"]').val()
+                        d.status_id = $('#Select_2').val()
                 },
             },
             columns: [
@@ -156,18 +136,40 @@
                 },
                 {
                     render: function (data, type, row, meta) {
-                        var x = "<span title='"+ row.lecturer['name'] + "'>"+ row.lecturer['name'] + "</span>";
+                        var x = "";
+                        row.observations.forEach((e) => {
+                            x += '<i class="badge rounded-pill badge-' + e.color +
+                                '">' + e.auditor['name'] + '</i><br>';
+                        });
                         return x;
                     },
                 },
                 {
                     render: function (data, type, row, meta) {
-                        return moment(row.date_start).format("DD MMM YYYY HH:mm");
+                        // return moment(row.date_start).format("DD MMM YYYY HH:mm");
+                        var x = moment(row.date_start).format("DD MMM YY HH:mm") +
+                            " - ";
+                        if (moment(row.date_start).format("DD/MM/YY") == moment(row
+                                .date_end).format("DD/MM/YY")) {
+                            x += moment(row.date_end).format("HH:mm");
+                        } else {
+                            x += moment(row.date_end).format("DD MMM YY HH:mm");
+                        }
+                        return x;
                     },
                 },
                 {
                     render: function (data, type, row, meta) {
-                        return moment(row.date_end).format("DD MMM YYYY HH:mm");
+                        return row.study_program;
+                    },
+                },
+                {
+                    render: function (data, type, row, meta) {
+                        var x = "";
+                        row.observations.forEach((e) => {
+                            x += '<a target="_blank" href="https://wa.me/' + e.auditor['phone'] + '"><small>' + e.auditor['phone'] + '</small></a><br>';
+                        });
+                        return x;
                     },
                 },
                 {
@@ -178,70 +180,23 @@
                 },
                 {
                     render: function (data, type, row, meta) {
-                        var x = "";
-                        // x = row.observations;
-                        row.observations.forEach((e) => {
-                            x += '<i class="badge rounded-pill badge-' + e.color +
-                                '">' + e.auditor['name'] + '</i><br>';
-                        });
-                        return x;
-                    },
-                },
-                {
-                    render: function (data, type, row, meta) {
                         var x = row.id;
-                        var html =
-                            `<a class="btn btn-success btn-sm px-2" title="Edit" href="{{ url('schedules/` +
-                            row.link + `') }}"><i class="fa fa-pencil-square-o"></i></a> <a class="btn btn-danger btn-sm px-2" title="Delete" onclick="DeleteId(` + x + `)" ><i class="fa fa-trash"></i></a>`;
-                            return html;
+                        var html = "";
+                        if(row.status_id == "S05" || row.status_id == "S06"){
+                            html = `<a class="btn btn-info btn-sm px-2" title="View Report" href="{{ url('pdf/report/` +
+                            row.link + `') }}" target="_blank"><i class="fa fa-eye"></i></a>`;
+                        }   
+                        return html;
                     },
                     orderable: false,
                     className: "text-end"
                 }
             ]
         });
-        $('#Select_1').change(function () {
-            table.draw();
-        });
         $('#Select_2').change(function () {
             table.draw();
         });
     });
-
-    function DeleteId(id) {
-        swal({
-                title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this!",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-            .then((willDelete) => {
-                if (willDelete) {
-                    $.ajax({
-                        url: "{{ route('schedules.delete') }}",
-                        type: "DELETE",
-                        data: {
-                            "id": id,
-                            "_token": $("meta[name='csrf-token']").attr("content"),
-                        },
-                        success: function (data) {
-                            if (data['success']) {
-                                swal(data['message'], {
-                                    icon: "success",
-                                });
-                                $('#datatable').DataTable().ajax.reload();
-                            } else {
-                                swal(data['message'], {
-                                    icon: "error",
-                                });
-                            }
-                        }
-                    })
-
-                }
-            })
-    }
 
 </script>
 @endsection

@@ -28,6 +28,7 @@
         text-overflow: ellipsis;
         overflow: hidden;
     }
+
 </style>
 @endsection
 
@@ -56,29 +57,62 @@
                         <div class="col-lg-6 col-md-12">
                             <div class="form-group mb-2">
                                 <label class="col-form-label">Lecturer</label>
-                                <input class="form-control" type="text" value="{{ $data->lecturer->name }}" disabled>
+                                <br><strong>{{ $data->lecturer->name }}</strong>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-12">
                             <div class="form-group mb-2">
                                 <label class="col-form-label">Status</label>
-                                <input class="form-control" type="text" value="{{ $data->status->title }}" disabled>
+                                <br><strong>
+                                    <i class="text-{{ $data->status->color }}">
+                                        <strong>{{ $data->status->title }}</strong>
+                                    </i>
+                                </strong>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-12">
                             <div class="form-group mb-2">
-                                <label class="col-form-label">Start</label>
-                                <input class="form-control" type="text"
-                                    value="{{ date('l, d M Y H:i', strtotime($data->date_start)) }}" disabled>
+                                <label class="col-form-label">Observation Start</label>
+                                <br><strong>
+                                    {{ date('l, d M Y H:i', strtotime($data->date_start)) }}
+                                </strong>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-12">
                             <div class="form-group mb-2">
-                                <label class="col-form-label">End</label>
-                                <input class="form-control" type="text"
-                                    value="{{ date('l, d M Y H:i', strtotime($data->date_end)) }}" disabled>
+                                <label class="col-form-label">Observation End</label>
+                                <br><strong>
+                                    {{ date('l, d M Y H:i', strtotime($data->date_end)) }}
+                                </strong>
                             </div>
                         </div>
+                        @if(count($data->follow_ups) > 0)
+                        <div class="col-lg-6 col-md-12">
+                            <div class="form-group mb-2">
+                                <label class="col-form-label">Follow Up Start</label>
+                                <br><strong>
+                                    {{ date('l, d M Y H:i', strtotime($data->follow_ups[0]->date_start)) }}
+                                </strong>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <div class="form-group mb-2">
+                                <label class="col-form-label">Follow Up End</label>
+                                <br><strong>
+                                    {{ date('l, d M Y H:i', strtotime($data->follow_ups[0]->date_end)) }}
+                                </strong>
+                            </div>
+                        </div>
+                            @if(now() > $data->follow_ups[0]->date_end)
+                            <div class="col-lg-12 col-md-12">
+                                <div class="alert alert-light alert-dismissible fade show text-danger" role="alert">
+                                    <strong><i class="fa fa-exclamation-triangle"></i></strong> The follow-up date has passed the specified schedule, please remind the dean manually!
+                                    <button class="btn-close" type="button" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                            </div>
+                            @endif
+                        @endif
                     </div>
                 </div>
             </div>
@@ -365,8 +399,9 @@
                             `<a class="btn btn-danger btn-sm px-2" title="Delete" onclick="DeleteId(` +
                             x + `)" ><i class="fa fa-trash"></i></a>`;
                         if (row.attendance == true) {
-                            html = `<a class="btn btn-info btn-sm px-2" target="_blank" href="{{ url('observations/results/` +
-                            row.link + `') }}"><i class="fa fa-eye"></i></a>  ` + html;
+                            html =
+                                `<a class="btn btn-info btn-sm px-2" target="_blank" href="{{ url('observations/results/` +
+                                row.link + `') }}"><i class="fa fa-eye"></i></a>  ` + html;
                         }
                         return html;
                     },

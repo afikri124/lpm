@@ -125,6 +125,26 @@ class ApiController extends Controller
                     ->make(true);
     }
 
+    public function schedules_by_lectrurer_id(Request $request)
+    {
+        $data = Schedule::with('observations')
+        ->with('status')
+        ->with('observations.auditor')
+        ->where('lecturer_id', Auth::user()->id)
+        ->select('*')->orderBy("status_id");
+            return Datatables::of($data)
+                    ->filter(function ($instance) use ($request) {
+                        if (!empty($request->get('status_id'))) {
+                            $instance->where('status_id', $request->get('status_id'));
+                        }
+                    })
+                    ->addColumn('link', function($x){
+                        return Crypt::encrypt($x['id']);
+                      })
+                    ->rawColumns(['link'])
+                    ->make(true);
+    }
+
     public function observations_by_schedule_id(Request $request)
     {
         $data = Observation::with('auditor')
@@ -156,14 +176,45 @@ class ApiController extends Controller
                                 $q->where('lecturer_id', $request->get('lecturer_id'));
                             });
                         }
+
                         if (!empty($request->get('attendance'))) {
-                            $instance->where('attendance', $request->get('attendance'));
+                            if($request->get('attendance') == "1"){
+                                $instance->where('attendance', $request->get('attendance'));
+                            } elseif($request->get('attendance') == "2") {
+                                $instance->where('attendance', false);
+                            }
                         }
                         if (!empty($request->get('search'))) {
                              $instance->where(function($w) use($request){
                                 $search = $request->get('search');
                                     $w->orWhere('remark', 'LIKE', "%$search%");
                             });
+                        }
+                    })
+                    ->addColumn('link', function($x){
+                        return Crypt::encrypt($x['id']);
+                      })
+                    ->rawColumns(['link'])
+                    ->make(true);
+    }
+
+    public function follow_up_by_dean_id(Request $request)
+    {
+        $data = Follow_up::with('schedule')->with('schedule.lecturer')
+        ->where('dean_id', Auth::user()->id)->select('*')->orderBy('remark');
+            return Datatables::of($data)
+                    ->filter(function ($instance) use ($request) {
+                        if (!empty($request->get('lecturer_id'))) {
+                            $instance->whereHas('schedule', function($q) use($request){
+                                $q->where('lecturer_id', $request->get('lecturer_id'));
+                            });
+                        }
+                        if (!empty($request->get('attendance'))) {
+                            if($request->get('attendance') == "1"){
+                                $instance->where('image_path','!=', null);
+                            } elseif($request->get('attendance') == "2") {
+                                $instance->whereNull('image_path');
+                            }
                         }
                     })
                     ->addColumn('link', function($x){
@@ -193,6 +244,12 @@ class ApiController extends Controller
             ->groupBy('dean_id')
             ->first();
         }
+        if(Auth::user()->hasRole('LE')){
+            $data['mypo'] = Schedule::where("lecturer_id", Auth::user()->id)->where("status_id", "S05")
+                ->select('status_id',DB::raw('COUNT(status_id) as notif'))
+                ->groupBy('status_id')
+                ->first();
+        }
         return response()->json($data);
     }
 
@@ -206,7 +263,8 @@ class ApiController extends Controller
     public function tes(Request $request)
     {
 
-        $data = Setting::get();
+        $data = Schedule::with('lecturer')->with('status')->with('follow_ups')
+        ->with('created_user')->with('histories')->findOrFail(15);
 
         return response()->json( $data );
 

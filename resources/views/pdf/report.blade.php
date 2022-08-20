@@ -272,7 +272,7 @@
     <p style="font-size: 10pt">Dokumentasi: </p>
     @foreach($survey as $key => $s)
     <center>
-        <img src="{{ public_path($s->image_path) }}" style="width: 400px;" alt=""><br>
+        <img src="{{ public_path($s->image_path) }}" style="width: 400px;max-height:500px;"><br>
         <small>Dokumentasi Auditor {{$key+1}}</small>
     </center><br>
     @endforeach

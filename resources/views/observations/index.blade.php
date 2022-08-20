@@ -62,7 +62,7 @@
                         <select id="Select_2" class="form-control input-sm select2"
                             data-placeholder="Attendance Status">
                             <option value="">Attendance Status</option>
-                            <option value=0>Not Yet</option>
+                            <option value=2>Not Yet</option>
                             <option value=1>Attend</option>
                         </select>
                     </div>
@@ -147,15 +147,16 @@
                 },
                 {
                     render: function (data, type, row, meta) {
-                        var x = "<span title='" + row.schedule.lecturer['name'] + "'>" + row
-                            .schedule.lecturer['name'] + "</span>";
+                        var x = "<span title='" + row.schedule.lecturer['name'] + "'>" 
+                        + row.schedule.lecturer['name'] + "</span><br><a target='_blank' href='https://wa.me/" + row.schedule.lecturer['phone'] + "'><small>"
+                        + row.schedule.lecturer['phone'] + "</small></a>";
                         return x;
                     },
                 },
                 {
                     render: function (data, type, row, meta) {
                         var x = moment(row.schedule.date_start).format("DD MMM YY HH:mm") +
-                            " to ";
+                            " - ";
                         if (moment(row.schedule.date_start).format("DD/MM/YY") == moment(row
                                 .schedule.date_end).format("DD/MM/YY")) {
                             x += moment(row.schedule.date_end).format("HH:mm");
