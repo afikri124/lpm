@@ -147,13 +147,13 @@
                                 <input class="form-control" type="text" name="name" value="{{ $data->name }}" required>
                             </div>
                         </div>
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
                             <div class="mb-3">
                                 <label class="form-label">Front title</label>
                                 <input class="form-control" type="text" name="front_title" value="{{ $data->front_title }}" >
                             </div>
                         </div>
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
                             <div class="mb-3">
                                 <label class="form-label">Back title</label>
                                 <input class="form-control" type="text" name="back_title" value="{{ $data->back_title }}" >

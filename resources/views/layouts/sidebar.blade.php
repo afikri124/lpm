@@ -85,9 +85,9 @@
                             <li><a class="lan-4 {{ Route::currentRouteName()=='settings.users' ? 'active' : '' }}"
                                     href="{{route('settings.users')}}">Manage Users</a></li>
                             <li><a class="lan-4 {{ Route::currentRouteName()=='settings.categories' ? 'active' : '' }}"
-                                    href="{{route('settings.categories')}}">Question Categories</a></li>
+                                    href="{{route('settings.categories')}}">Assessment Categories</a></li>
                             <li><a class="lan-4 {{ Route::currentRouteName()=='settings.criterias' ? 'active' : '' }}"
-                                    href="{{route('settings.criterias')}}">Question Criteria</a></li>
+                                    href="{{route('settings.criterias')}}">Assessment Criteria</a></li>
                             <li><a class="lan-4 {{ Route::currentRouteName()=='settings.general' ? 'active' : '' }}"
                                     href="{{route('settings.general')}}">General Setting</a></li>
                         </ul>

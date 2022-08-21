@@ -23,9 +23,14 @@ class Observation_criteria extends Model
         return $this->belongsTo(Criteria::class, 'criteria_id');
     }
 
-    public function observations()
+    // public function observations()
+    // {
+    //     return $this->hasMany(Observation::class);
+    // }
+
+    public function observation()
     {
-        return $this->hasMany(Observation::class);
+        return $this->belongsTo(Observation::class, 'observation_id');
     }
 
 }

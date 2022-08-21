@@ -255,9 +255,14 @@ class ApiController extends Controller
 
     public function recap(Request $request)
     {
-        $data = Schedule::with('observations')
-        ->with('status')->with('lecturer')
+        $data = Schedule::query()
+        ->with('status')
+        ->with(['lecturer' => function ($query) {
+            $query->select('id','name');
+        }])
+        ->with('observations')
         ->with('observations.auditor')
+        ->with('observations.observation_criterias')
         ->select('*')->orderBy("status_id");
             return Datatables::of($data)
                     ->filter(function ($instance) use ($request) {
@@ -294,9 +299,14 @@ class ApiController extends Controller
     public function tes(Request $request)
     {
 
-        $data = Schedule::with('observations')
-        ->with('status')->with('lecturer')
+        $data = Schedule::query()
+        ->with('status')
+        ->with(['lecturer' => function ($query) {
+            $query->select('id','name');
+        }])
+        ->with('observations')
         ->with('observations.auditor')
+        ->with('observations.observation_criterias')
         ->select('*')->orderBy("status_id");
 
         // return response()->json( $data );

@@ -37,6 +37,11 @@ class Observation extends Model
         return $this->hasMany(Observation_category::class);
     }
 
+    public function observation_criterias()
+    {
+        return $this->hasMany(Observation_criteria::class);
+    }
+
     protected $appends = ['color'];
 
     public function getColorAttribute(){

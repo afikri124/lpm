@@ -145,6 +145,7 @@
                         var x = row.weight;
                         return x;
                     },
+                    className: "text-center"
                 },
                 {
                     render: function (data, type, row, meta) {
@@ -155,6 +156,7 @@
                         }
                         return x;
                     },
+                    className: "text-center"
                 },
                 {
                     render: function (data, type, row, meta) {

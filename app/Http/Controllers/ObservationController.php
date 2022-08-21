@@ -140,7 +140,6 @@ class ObservationController extends Controller
             try {
                 $updatePO = DB::table('observations')->where('id',$o_id)
                     ->update([
-                        'study_program'=> $request->study_program,
                         'total_students'=> $request->total_students,
                         'class_type'=> $request->class_type,
                         'location'=> $request->location,

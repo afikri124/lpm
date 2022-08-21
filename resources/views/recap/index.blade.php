@@ -19,8 +19,8 @@
         max-width: 120px;
     }
 
-    table.dataTable td:nth-child(4) {
-        max-width: 100px;
+    table.dataTable td:nth-child(6) {
+        max-width: 60px;
     }
 
     table.dataTable td:nth-child(5) {
@@ -92,11 +92,12 @@
                             <thead>
                                 <tr>
                                     <th scope="col" data-priority="1" width="20px">No</th>
-                                    <th scope="col" data-priority="2">Lecturer Name</th>
+                                    <th scope="col" data-priority="2">Auditee</th>
                                     <th scope="col">Schedule</th>
-                                    <th scope="col" data-priority="4">Status</th>
                                     <th scope="col">Auditor</th>
-                                    <th scope="col" data-priority="3" width="65px">Action</th>
+                                    <th scope="col" data-priority="3">Score (%)</th>
+                                    <th scope="col" data-priority="4">Status</th>
+                                    <th scope="col" width="65px" class="text-end">Action</th>
                                 </tr>
                             </thead>
                         </table>
@@ -182,15 +183,7 @@
                 },
                 {
                     render: function (data, type, row, meta) {
-                        var x = '<span title="' + row.remark + '" class="text-' + row.status[
-                            'color'] + '">' + row.status['title'] + '</span>';
-                        return x;
-                    },
-                },
-                {
-                    render: function (data, type, row, meta) {
                         var x = "";
-                        // x = row.observations;
                         row.observations.forEach((e) => {
                             x += '<i class="badge rounded-pill badge-' + e.color +
                                 '">' + e.auditor['name'] + '</i><br>';
@@ -198,14 +191,41 @@
                         return x;
                     },
                 },
+
+                {
+                    render: function (data, type, row, meta) {
+                        var x = 0;
+                        var score = 0;
+                        var weight = 0;
+                        row.observations.forEach((e) => {
+                            e.observation_criterias.forEach((q) => {
+                                score += (q.score * parseFloat(q.weight));
+                                weight += parseFloat(q.weight);
+                            });
+                        });
+                        x = (score / (weight * 5) * 100);
+                        return "<b>" + x.toFixed(1) + "</b>";
+                    },
+                    className: "text-center"
+                },
+                {
+                    render: function (data, type, row, meta) {
+                        var x = '<span title="' + row.remark + '" class="text-' + row.status[
+                            'color'] + '">' + row.status['title'] + '</span>';
+                        return x;
+                    },
+                },
                 {
                     render: function (data, type, row, meta) {
                         var x = row.id;
                         var html = "";
-                        if(row.status_id == "S04" || row.status_id == "S05" || row.status_id == "S06"){
-                            html = `<a class="btn btn-info btn-sm px-2" title="View Report" href="{{ url('pdf/report/` +
-                            row.link + `') }}" target="_blank"><i class="fa fa-eye"></i></a>`;
-                        }   
+                        if (row.status_id == "S04" || row.status_id == "S05" || row.status_id ==
+                            "S06") {
+                            html =
+                                `<a class="btn btn-info btn-sm px-2" title="View Report" href="{{ url('pdf/report/` +
+                                row.link +
+                                `') }}" target="_blank"><i class="fa fa-eye"></i></a>`;
+                        }
                         return html;
                     },
                     orderable: false,

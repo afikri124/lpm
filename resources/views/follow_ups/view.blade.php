@@ -43,7 +43,7 @@
                                 </div>
                             </div>
                             <div class="mb-3 row">
-                                <label class="col-sm-4">Schedule</label>
+                                <label class="col-sm-4">Follow-Up Schedule</label>
                                 <div class="col-sm-8">
                                     <strong>
                                         {{ date('l, d M Y H:i', strtotime($follow_up->date_start)) }} -

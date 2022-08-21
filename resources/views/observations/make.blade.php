@@ -75,7 +75,7 @@
                                     <input class="form-control" type="text" value="{{ $data->auditor->name }}" disabled>
                                 </div>
                                 <div class="mb-3 mb-2 col-lg-6 col-md-12">
-                                    <label>Class Type</label>
+                                    <label>Class Type<i class="text-danger">*</i></label>
                                     <select class="form-control input-sm select2" name="class_type"
                                         title="Select Class type" data-placeholder="Select Class type" required>
                                         <option value="" selected></option>
@@ -89,7 +89,7 @@
                                     </select>
                                 </div>
                                 <div class="mb-3 mb-2 col-lg-6 col-md-12">
-                                    <label>Room/Location</label>
+                                    <label>Room/Location<i class="text-danger">*</i></label>
                                     <select class="form-control input-sm select2" name="location"
                                         title="Select Room/Location" data-placeholder="Select Room/Location" required>
                                         <option value="" selected></option>
@@ -108,14 +108,14 @@
                                     </select>
                                 </div>
                                 <div class="mb-3 mb-2 col-lg-6 col-md-12">
-                                    <label>Total Students</label>
+                                    <label>Total Students<i class="text-danger">*</i></label>
                                     <input class="form-control" type="number" name="total_students"
                                         title="Total Students"
                                         value="{{ (old('total_students')==null ? $data->total_students : old('total_students')) }}"
                                         required>
                                 </div>
                                 <div class="mb-3 mb-2 col-lg-6 col-md-12">
-                                    <label>Subject Course</label>
+                                    <label>Subject Course<i class="text-danger">*</i></label>
                                     <input class="form-control" type="text" name="subject_course" title="Subject Course"
                                         value="{{ (old('subject_course')==null ? $data->subject_course : old('subject_course')) }}"
                                         required>
@@ -178,8 +178,8 @@
                                     <tr valign="top">
                                         <td></td>
                                         <td colspan="2">
-                                            <label><i>Remark for {{ $q->id }} (@if( $q->is_required ) Required @else Additional @endif Comments )</i></label>
-                                            <textarea class="form-control mb-4" rows="2" @if( $q->is_required ) required @endif
+                                            <label><i>Remark for {{ $q->id }}</i>@if( $q->is_required ) <i class="text-danger">*</i>@endif</label>
+                                            <textarea class="form-control mb-4" placeholder="@if( $q->is_required ) Required @else Additional @endif Comments" rows="2" @if( $q->is_required ) required @endif
                                                 name="categories[{{ $q->id }}]">{{ old('categories.'.$q->id)}}</textarea>
                                         </td>
                                     </tr>
@@ -194,13 +194,13 @@
                         <fieldset>
                             <div class="row">
                                 <div class="mb-3 col-lg-12 col-md-12">
-                                    <label>Photo documentation</label>
+                                    <label>Photo documentation<i class="text-danger">*</i></label>
                                     <input class="form-control" name="image_path" type="file" accept="image/*"
                                         title="Photo documentation" data-bs-original-title="" title="only accept image"
                                         required>
                                 </div>
                                 <div class="mb-3 col-lg-12 col-md-12">
-                                    <label>Overall Comment <i>( Required Comments )</i></label>
+                                    <label>Overall Comment<i class="text-danger">*</i></label>
                                     <textarea class="form-control" name="remark" title="Overall comment" required
                                         rows="3">{{ (old('remark')==null ? $data->remark : old('remark')) }}</textarea>
                                 </div>

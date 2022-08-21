@@ -15,7 +15,7 @@
         vertical-align: middle;
     }
 
-    table.dataTable td:nth-child(2) {
+    table.dataTable td:nth-child(3) {
         max-width: 100px;
     }
 
@@ -25,7 +25,6 @@
     table.dataTable td:nth-child(6) {
         max-width: 100px;
     }
-
 
     table.dataTable td {
         white-space: nowrap;
@@ -70,11 +69,11 @@
                             <thead>
                                 <tr>
                                     <th scope="col" data-priority="1" width="20px">No</th>
-                                    <th scope="col" data-priority="2">Auditor</th>
                                     <th scope="col">Schedule</th>
                                     <th scope="col">Program</th>
+                                    <th scope="col" data-priority="2">Auditor</th>
                                     <th scope="col">Contact</th>
-                                    <th scope="col" data-priority="4" >Status</th>
+                                    <th scope="col" data-priority="4">Status</th>
                                     <th scope="col" data-priority="3" width="65px">Action</th>
                                 </tr>
                             </thead>
@@ -136,16 +135,6 @@
                 },
                 {
                     render: function (data, type, row, meta) {
-                        var x = "";
-                        row.observations.forEach((e) => {
-                            x += '<i class="badge rounded-pill badge-' + e.color +
-                                '">' + e.auditor['name'] + '</i><br>';
-                        });
-                        return x;
-                    },
-                },
-                {
-                    render: function (data, type, row, meta) {
                         // return moment(row.date_start).format("DD MMM YYYY HH:mm");
                         var x = moment(row.date_start).format("DD MMM YY HH:mm") +
                             " - ";
@@ -161,6 +150,16 @@
                 {
                     render: function (data, type, row, meta) {
                         return row.study_program;
+                    },
+                },
+                {
+                    render: function (data, type, row, meta) {
+                        var x = "";
+                        row.observations.forEach((e) => {
+                            x += '<i class="badge rounded-pill badge-' + e.color +
+                                '">' + e.auditor['name'] + '</i><br>';
+                        });
+                        return x;
                     },
                 },
                 {

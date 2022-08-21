@@ -39,7 +39,7 @@
                                     <p>{{ ucfirst(Auth::user()->level) }}</p>
                                     <p class="text-danger"><i>Disclaimer!</i><br>
                                         Password changes on this form only apply to this system, will not affect users
-                                        who log in using the Single Sign-On Klas2 system.</p>
+                                        who log in using the Single Sign-On Klas2 system or Google.</p>
                                 </div>
                             </div>
                         </div>
@@ -64,6 +64,12 @@
                                 <label class="form-label">Current Password <i class="fa fa-info-circle" title="If you forget, please contact the administrator or press forgot password on the login page"></i></label>
                                 <input id="password" type="password" class="form-control" name="current_password"
                                     autocomplete="current-password" required>
+                                    
+                                @if (Route::has('password.request'))
+                                <a class="link" href="{{ route('password.request') }}">
+                                    {{ __('Forgot Password?') }}
+                                </a>
+                                @endif
                             </div>
                         </div>
                         <div class="col-md-12">
