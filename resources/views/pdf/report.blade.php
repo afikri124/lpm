@@ -33,7 +33,7 @@
     <center>
         <h5><u>BERITA ACARA <i>PEER OBSERVATION</i></u></h5>
     </center>
-    <table width="100%">
+    <table width="100%" style="font-size: 10pt">
         <tr>
             <td colspan="2">
                 <p style="text-align: justify; margin-top:20px">Dalam rangka Pelaksanaan Penjaminan Mutu di lingkungan
@@ -67,7 +67,9 @@
         <tr>
             <td colspan="2">
                 <p style="text-align: justify;padding-top:15px">Telah diselenggarakan kegiatan <i>Peer Observation</i>
-                    di lingkungan Program Studi <b>{{ ($data->study_program==null ? $data->lecturer->study_program : $data->study_program) }}</b>, sebagaimana
+                    di lingkungan Program Studi
+                    <b>{{ ($data->study_program==null ? $data->lecturer->study_program : $data->study_program) }}</b>,
+                    sebagaimana
                     tercantum dalam daftar hadir terlampir. Unsur kegiatan pada hari ini antara lain:</p>
             </td>
         </tr>
@@ -89,7 +91,7 @@
             </td>
         </tr>
     </table>
-    <table width="100%">
+    <table width="100%" style="font-size: 10pt">
         <tr>
             <td width="50%"></td>
             <td width="50%" style="text-align: center;">Depok,
@@ -120,6 +122,7 @@
             </td>
         </tr>
     </table>
+    @php $total_persentase = 0; @endphp
     @foreach($survey as $key => $s)
     <div class="page-break"></div>
     <table width="100%">
@@ -230,11 +233,14 @@
                 <th>Persentase</th>
                 <th class="text-right @if(($total/($total_w*5)*100) < $MINSCORE->content) text-danger @endif">
                     {{ number_format($total/($total_w*5)*100, 1); }}%
+                    @php $total_persentase += number_format($total/($total_w*5)*100, 1); @endphp
                 </th>
             </tr>
             <tr>
-                <th>Catatan/Komentar</th>
-                <th class="text-right"><i>{{ $s->remark }}</i></th>
+                <th colspan="2">Catatan/Komentar</th>
+            </tr>
+            <tr style="border: 1px solid; text-align: justify;">
+                <td colspan="2"><i class="text-danger">{{ $s->remark }}</i></td>
             </tr>
             <tr>
                 <td colspan="2"><br></td>
@@ -269,18 +275,22 @@
         <h5><u>LAMPIRAN</u></h5>
     </center>
     <br>
+    <p style="font-size: 10pt">Persentase Keseluruhan:
+        <br><i style="font-size: 10pt">{{ ($total_persentase/count($survey)) }}%</i>
+    </p>
+    @if($data->remark != null || $data->remark != "")
+    <p style="font-size: 10pt">Catatan dari LPM:
+        <br><i class="text-danger" style="font-size: 10pt">{{ $data->remark }}</i>
+    </p>
+    @endif
     <p style="font-size: 10pt">Dokumentasi: </p>
     @foreach($survey as $key => $s)
     <center>
-        <img src="{{ public_path($s->image_path) }}" style="width: 400px;max-height:500px;"><br>
+        <img src="{{ public_path($s->image_path) }}" style="max-width: 400px;max-height:300px;"><br>
         <small>Dokumentasi Auditor {{$key+1}}</small>
     </center><br>
     @endforeach
-    @if($data->remark != null || $data->remark != "")
-    <br>
-    <p style="font-size: 10pt">Catatan dari LPM: </p>
-    <i class="text-danger" style="font-size: 10pt">{{ $data->remark }}</i>
-    @endif
+
 
     @if($follow_up != null)
     <div class="page-break"></div>
@@ -297,20 +307,21 @@
         <h5><u>HASIL TINDAK LANJUT</u></h5>
     </center>
     <br>
-    <p style="font-size: 10pt">Dokumentasi: </p>
     @if($follow_up->image_path != null)
+    <p style="font-size: 10pt">Dokumentasi: </p>
     <center>
-        <img src="{{ public_path($follow_up->image_path) }}" style="width: 400px;" alt=""><br>
+        <img src="{{ public_path($follow_up->image_path) }}" style="max-width: 400px;max-height:300px;" alt=""><br>
         <small>Dokumentasi Dekan</small>
     </center><br>
+    <br>
+    <p style="font-size: 10pt">Catatan dari Dekan: <br>
+        <i class="text-danger" style="font-size: 10pt">{{ $follow_up->remark }}</i>
+    </p>
     @else
     <center>
         <i class="text-danger" style="font-size: 10pt">Dekan Belum Melakukan Pemanggilan Tindak Lanjut</i>
     </center><br>
     @endif
-    <br>
-    <p style="font-size: 10pt">Catatan dari Dekan: </p>
-    <i class="text-danger" style="font-size: 10pt">{{ $follow_up->remark }}</i>
     <br><br><br>
     <table width="100%" style="font-size: 10pt">
         <thead valign="top">

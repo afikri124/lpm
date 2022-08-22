@@ -46,8 +46,8 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-form-label">Front title</label>
-                                <input class="form-control @error('front_title') is-invalid @enderror" type="text" id="front_title"
-                                    name="front_title" value="{{ old('front_title') }}">
+                                <input class="form-control @error('front_title') is-invalid @enderror" type="text"
+                                    id="front_title" name="front_title" value="{{ old('front_title') }}">
                                 @error('front_title')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -56,8 +56,8 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-form-label">Back title</label>
-                                <input class="form-control @error('back_title') is-invalid @enderror" type="text" id="back_title"
-                                    name="back_title" value="{{ old('back_title') }}">
+                                <input class="form-control @error('back_title') is-invalid @enderror" type="text"
+                                    id="back_title" name="back_title" value="{{ old('back_title') }}">
                                 @error('back_title')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -72,8 +72,16 @@
 
                             <div class="form-group">
                                 <label class="col-form-label">Program Study</label>
-                                <input class="form-control" type="text" name="study_program"
-                                    value="{{ old('study_program') }}">
+                                <select class="form-select digits select2 @error('study_program') is-invalid @enderror"
+                                    name="study_program" id="study_program" data-placeholder="Select">
+                                    <option value="" selected disabled>Select</option>
+                                    @foreach($study_program as $p)
+                                    <option {{ ($p->study_program == old('study_program') ? "selected": "") }}
+                                        value="{{ $p->study_program }}">
+                                        {{ $p->study_program }}
+                                    </option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label class="col-form-label">Job Title</label>

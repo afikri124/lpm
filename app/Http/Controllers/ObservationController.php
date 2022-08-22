@@ -126,7 +126,7 @@ class ObservationController extends Controller
             $this->validate($request, [ 
                 'questions'=> ['required'],
                 'image_path' => ['required','image'],
-                'remark'=> ['required'],
+                'remark'=> ['required','string', 'min:350'],
             ]);
 
             $imageName = Carbon::now()->format('Ym').'_'.md5($o_id).'.'.$request->image_path->extension(); 

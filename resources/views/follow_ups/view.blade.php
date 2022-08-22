@@ -274,8 +274,7 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group mb-2">
-                                <label class="col-form-label">Photo documentation
-                                    <i class="text-danger">*</i>
+                                <label class="col-form-label">Photo documentation<i class="text-danger">*</i>
                                 </label>
                                 <input class="form-control" name="image_path" type="file" accept="image/*"
                                     title="Photo documentation" data-bs-original-title="" title="only accept image"
@@ -284,15 +283,15 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group mb-2">
-                                <label class="col-form-label">Remark or Recommendation
-                                    <i class="text-danger">*</i>
+                                <label class="col-form-label">Remark or Recommendation<i class="text-danger">*</i>
+                                    <i id="count" class="text-danger">(0/500)</i>
                                 </label>
-                                <textarea class="form-control" rows="2" name="remark"
+                                <textarea class="form-control" rows="5" id="remark" name="remark" minlength="500"
                                     required>{{ old('remark') }}</textarea>
                             </div>
                         </div>
                         <span class="invalid-feedback d-block" role="alert">
-                            <i>Note: give messages to increase the score.</i>
+                            <i>Note: <br>- Give messages to increase the score.<br>- The remark must be at least 500 characters.</i>
                         </span>
                     </div>
                 </div>
@@ -310,4 +309,9 @@
 <script src="{{asset('assets/js/select2/select2.full.min.js')}}"></script>
 <script src="{{asset('assets/js/dropzone/dropzone.js')}}"></script>
 <script src="{{asset('assets/js/dropzone/dropzone-script.js')}}"></script>
+<script>
+    $("#remark").keyup(function(){
+        $("#count").text("(" + $(this).val().length + "/500)");
+    });
+</script>
 @endsection

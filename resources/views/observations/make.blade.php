@@ -178,8 +178,12 @@
                                     <tr valign="top">
                                         <td></td>
                                         <td colspan="2">
-                                            <label><i>Remark for {{ $q->id }}</i>@if( $q->is_required ) <i class="text-danger">*</i>@endif</label>
-                                            <textarea class="form-control mb-4" placeholder="@if( $q->is_required ) Required @else Additional @endif Comments" rows="2" @if( $q->is_required ) required @endif
+                                            <label><i>Remark for {{ $q->id }}</i>@if( $q->is_required ) <i
+                                                    class="text-danger">*</i>@endif</label>
+                                            <textarea class="form-control mb-4"
+                                                placeholder="@if( $q->is_required ) Required @else Additional @endif Comments"
+                                                rows="2" @if(
+                                                $q->is_required ) required @endif
                                                 name="categories[{{ $q->id }}]">{{ old('categories.'.$q->id)}}</textarea>
                                         </td>
                                     </tr>
@@ -200,9 +204,10 @@
                                         required>
                                 </div>
                                 <div class="mb-3 col-lg-12 col-md-12">
-                                    <label>Overall Comment<i class="text-danger">*</i></label>
-                                    <textarea class="form-control" name="remark" title="Overall comment" required
-                                        rows="3">{{ (old('remark')==null ? $data->remark : old('remark')) }}</textarea>
+                                    <label>Overall Comment<i class="text-danger">*</i> <i id="count" class="text-danger">(0/350)</i></label>
+                                    <textarea class="form-control" id="remark" name="remark" title="Overall comment" minlength="350" required
+                                        rows="4">{{ (old('remark')==null ? $data->remark : old('remark')) }}</textarea>
+                                    <i class="invalid-feedback d-block">Note: The remark must be at least 350 characters.</i>
                                 </div>
                             </div>
                             <div class="f1-buttons">
@@ -231,7 +236,9 @@
             });
         })(jQuery);
     }, 350);
-
+    $("#remark").keyup(function(){
+        $("#count").text("(" + $(this).val().length + "/350)");
+    });
 </script>
 <script src="{{asset('assets/js/form-wizard/jquery.backstretch.min.js')}}"></script>
 <script src="{{asset('assets/js/rating/jquery.barrating.js')}}"></script>

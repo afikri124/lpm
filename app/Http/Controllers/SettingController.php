@@ -186,7 +186,8 @@ class SettingController extends Controller
             return redirect()->route('settings.users');
         }
         $roles=Role::all();
-        return view('settings.users_add', compact('roles'));
+        $study_program = User::select('study_program')->groupBy('study_program')->get();
+        return view('settings.users_add', compact('roles','study_program'));
     }
 
     public function user_edit($id, Request $request) {

@@ -57,6 +57,14 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getNameWithTitleAttribute()
     { 
       $name_with_title = ($this->front_title==null?"":$this->front_title." ").$this->name.($this->back_title==null?"":", ".$this->back_title);
+      if(strlen($name_with_title) > 36){
+        $nama = explode(" ",$this->name);
+        if(count($nama) > 1){ 
+          $nama[count($nama)-1] = substr($nama[count($nama)-1],0,1)."."; //singkat nama belakang
+          $nick = implode(" ",$nama);
+          $name_with_title = ($this->front_title==null?"":$this->front_title." ").$nick.($this->back_title==null?"":", ".$this->back_title);
+        }
+      }
       return $name_with_title;
     }
 
