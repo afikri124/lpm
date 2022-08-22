@@ -46,7 +46,7 @@
                         <input class="form-control" type="hidden" name="id" value="{{ $id }}" required>
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label class="form-label">HoD name with title</label>
+                                <label class="form-label">Full name with title</label>
                                 <input class="form-control" type="text" name="title" value="{{ $title }}" required>
                             </div>
                         </div>

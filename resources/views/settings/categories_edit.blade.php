@@ -6,6 +6,11 @@
 @endsection
 
 @section('style')
+<style>
+    .checkbox label::before {
+        border: 1px solid #333;
+    }
+</style>
 @endsection
 
 @section('breadcrumb-title')
