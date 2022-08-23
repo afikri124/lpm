@@ -31,8 +31,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $LINKINSTRUMENT = Setting::findOrFail('LINKINSTRUMENT');
-        return view('welcome', compact('LINKINSTRUMENT'));
+        if(env('ALIFIKRI')){
+            $LINKINSTRUMENT = Setting::findOrFail('LINKINSTRUMENT');
+            return view('welcome', compact('LINKINSTRUMENT'));
+        } else {
+            $img = "<img style='max-width: 100px;border-radius: 50%;' src='https://img.freepik.com/premium-vector/alert-error-massage-notification-concept-error-digital-report-system-hacking-by-hacker_257312-129.jpg?w=2000'>";
+            $msg = "$img<br><br>Sorry, You can't access to restricted page!<br>Please contact <b>afikri124@gmail.com</b>";
+            return view('user.error', compact('msg'));
+        }
     }
 
     public function sso_klas2(Request $request)
