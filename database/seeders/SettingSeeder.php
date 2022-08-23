@@ -16,9 +16,11 @@ class SettingSeeder extends Seeder
     {
         //
         $data = [
-            ["id" => "HODLPM", "title" => "ARIEP JAENUL S.Lebew.", "content" => "12345"],
+            ["id" => "HODLPM", "title" => "ARIEP JAENUL S.Lebew.", "content" => "1234567982172"],
             ["id" => "CONTACT", "title" => "WhatsApp", "content" => "12345"],
             ["id" => "MINSCORE", "title" => "KKM", "content" => "70"],
+            ["id" => "TOTALAUDITOR", "title" => "Total Auditor", "content" => "2"],
+            ["id" => "LINKINSTRUMENT", "title" => "Klik Disini", "content" => "https://www.banpt.or.id/wp-content/uploads/2019/10/Lampiran-5-PerBAN-PT-5-2019-tentang-IAPS-Pedoman-Penilaian.pdf"],
         ];
 
         foreach ($data as $x) {

@@ -75,10 +75,11 @@ class ObservationController extends Controller
             ]);
             $count_auditor = Observation::where('schedule_id', $request->schedule_id)->count();
             $check_auditor = Observation::where('schedule_id', $request->schedule_id)->where('auditor_id', $request->auditor_id)->count();
-            if($count_auditor >= 2){
+            $TOTALAUDITOR = Setting::findOrFail('TOTALAUDITOR');
+            if($count_auditor >= $TOTALAUDITOR->content ){
                 return response()->json([
                     'success' => false,
-                    'message' => 'Not allowed! maximum of 2 auditors.'
+                    'message' => 'Not allowed! maximum of '.$TOTALAUDITOR->content.' auditors.'
                 ]);
             } else if($check_auditor > 0){
                 return response()->json([

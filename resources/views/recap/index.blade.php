@@ -52,8 +52,6 @@
             <div class="card">
                 <div class="row">
                     <div class="col-md-3">
-                        <!-- <input class="form-control digits" id="select_date" type="text" onfocus="(this.type='date')"
-                            data-language="en" name="date" autocomplete="off" placeholder="Select Date"> -->
                         <input class="form-control" id="select_range" type="text" placeholder="Select Date">
                     </div>
                     <div class="col-md-3">
@@ -95,7 +93,7 @@
                                     <th scope="col" data-priority="2">Auditee</th>
                                     <th scope="col">Schedule</th>
                                     <th scope="col">Auditor</th>
-                                    <th scope="col" data-priority="3">Score (%)</th>
+                                    <th scope="col" data-priority="3">Score</th>
                                     <th scope="col" data-priority="4">Status</th>
                                     <th scope="col" width="65px" class="text-end">Action</th>
                                 </tr>
@@ -204,7 +202,13 @@
                             });
                         });
                         x = (score / (weight * 5) * 100);
-                        return "<b>" + x.toFixed(1) + "</b>";
+                        if (x < "{{ $MINSCORE->content }}") {
+                            return "<b class='text-danger'>" + x.toFixed(1) + "%</b>";
+                        } else if (x >= "{{ $MINSCORE->content }}") {
+                            return "<b>" + x.toFixed(1) + "%</b>";
+                        } else {
+                            return "<i class='text-light'>" + x.toFixed(1) + "</i>";
+                        }
                     },
                     className: "text-center"
                 },

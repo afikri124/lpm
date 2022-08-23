@@ -175,25 +175,25 @@
                             <div class="media-body text-center">
                                 <p>Tujuan</p>
                                 <div class="media">
-                                    <div class="activity-dot-primary mx-2"></div>
+                                    <div class="activity-dot-primary mx-2 d-none d-lg-block"></div>
                                     Terwujudnya sistem penjaminan mutu internal di lingkungan JGU yang meliputi
                                     penetapan standar, pelaksanaan, evaluasi, peningkatan, dan pengendalian standar.
                                 </div>
                                 </br>
                                 <div class="media">
-                                    <div class="activity-dot-primary mx-2"></div>
+                                    <div class="activity-dot-primary mx-2 d-none d-lg-block"></div>
                                     Menjamin terlaksananya pelayanan dan pelatihan penjaminan mutu internal dan
                                     eksternal pada semua unit di lingkungan JGU.
                                 </div>
                                 </br>
                                 <div class="media">
-                                    <div class="activity-dot-primary mx-2"></div>
+                                    <div class="activity-dot-primary mx-2 d-none d-lg-block"></div>
                                     Terbentuknya budaya mutu bagi civitas akademika dan tenaga kependidikan di
                                     lingkungan JGU.
                                 </div>
                                 </br>
                                 <div class="media">
-                                    <div class="activity-dot-primary mx-2"></div>
+                                    <div class="activity-dot-primary mx-2 d-none d-lg-block"></div>
                                     Mempermudah akses data perguruan tinggi yang terintegrasi bagi semua unit di
                                     lingkungan JGU.
                                 </div>
@@ -231,34 +231,31 @@
                     <div class="text-left">
                         <h3>Misi</h3>
                         <div class="media">
-                            <div class="activity-dot-dark mx-2"></div>
+                            <div class="activity-dot-dark mx-2 d-none d-lg-block"></div>
                             <div class="media"><span>Menyusun, menerapkan, dan melakukan perbaikan secara
-                                    berkelanjutan terhadap Sistem Penjaminan Mutu Internal (SPMI)..</span>
+                                    berkelanjutan terhadap Sistem Penjaminan Mutu Internal (SPMI).</span>
                             </div>
                         </div>
                         <div class="media">
-                            <div class="activity-dot-dark mx-2"></div>
+                            <div class="activity-dot-dark mx-2 d-none d-lg-block"></div>
                             <div class="media"><span>Membangun dan mengembangkan pelayanan dan pelatihan sistem
                                     penjaminan mutu internal dan eksternal pada semua unit di lingkungan JGU.
                                 </span>
                             </div>
                         </div>
                         <div class="media">
-                            <div class="activity-dot-dark mx-2"></div>
+                            <div class="activity-dot-dark mx-2 d-none d-lg-block"></div>
                             <div class="media"><span>Mendorong terbentuknya budaya mutu tridharma perguruan tinggi
                                     bagi civitas akademika dan tenaga kependidikan di lingkungan JGU.</span>
                             </div>
                         </div>
                         <div class="media">
-                            <div class="activity-dot-dark mx-2"></div>
+                            <div class="activity-dot-dark mx-2 d-none d-lg-block"></div>
                             <div class="media"><span>Membangun pangkalan data perguruan tinggi JGU yang
                                     terintegrasi untuk semua unit di lingkungan JGU.</span>
                             </div>
-
                         </div>
-
                     </div>
-
                 </div>
             </div>
         </section>
@@ -301,8 +298,7 @@
                         <h1>Bagi Perguruan Tinggi/Ketua Program Studi yang ingin mengunduh Instrumen Akreditasi,</h1>
                         <h1>silahkan klik tautan berikut :</h1>
                         <a class="btn mrl5 btn-lg btn-secondary default-view" target="_blank"
-                            href="https://www.banpt.or.id/wp-content/uploads/2019/10/Lampiran-5-PerBAN-PT-5-2019-tentang-IAPS-Pedoman-Penilaian.pdf">Klik
-                            Disini</a>
+                            href="{{ $LINKINSTRUMENT->content }}">{{ $LINKINSTRUMENT->title }}</a>
                     </div>
                 </div>
             </div>
@@ -323,8 +319,6 @@
             </div>
             <div class="container container-modify">
                 <div class="row component_responsive">
-
-
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
                         <div class="component-hover-effect">
                             <i class="fa fa-spin fa-star h2 text-warning"></i>
@@ -438,7 +432,6 @@
                     <a target="_blank" class="text-warning"
                         href="https://pddikti.kemdikbud.go.id/data_pt/QUEzRUM1NjktQjI0NS00ODA3LTlGMkYtOERDRkNGMUI2MkNC">Klik
                         disini untuk Informasi Lebih Lanjut</a>
-
                 </div>
             </div>
         </section>
@@ -521,20 +514,6 @@
             Copyright ©2022 ITIC JGU. All rights reserved.
         </footer>
     </div>
-    <!-- @if (Route::has('login'))
-        <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-            @auth
-                                                                                        <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
-@else
-    <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
-
-                                                                                        @if (Route::has('register'))
-    <a href="{{ route('register') }}"
-                                                                                            class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
-    @endif
-            @endauth
-        </div>
-        @endif -->
     <script src="{{ asset('assets/js/jquery-3.5.1.min.js') }}"></script>
     <!-- Bootstrap js-->
     <script src="{{ asset('assets/js/bootstrap/bootstrap.bundle.min.js') }}"></script>

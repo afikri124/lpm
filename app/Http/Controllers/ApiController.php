@@ -245,7 +245,7 @@ class ApiController extends Controller
             ->first();
         }
         if(Auth::user()->hasRole('LE')){
-            $data['mypo'] = Schedule::where("lecturer_id", Auth::user()->id)->where("status_id", "S05")
+            $data['mypo'] = Schedule::where("lecturer_id", Auth::user()->id)->where("status_id","!=", "S06")
                 ->select('status_id',DB::raw('COUNT(status_id) as notif'))
                 ->groupBy('status_id')
                 ->first();

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Setting;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
@@ -30,7 +31,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('welcome');
+        $LINKINSTRUMENT = Setting::findOrFail('LINKINSTRUMENT');
+        return view('welcome', compact('LINKINSTRUMENT'));
     }
 
     public function sso_klas2(Request $request)

@@ -87,7 +87,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col" data-priority="1" width="20px">No</th>
-                                    <th scope="col" data-priority="2" >Lecturer Name</th>
+                                    <th scope="col" data-priority="2" >Lecturer</th>
                                     <th scope="col">Date Start</th>
                                     <th scope="col">Date End</th>
                                     <th scope="col" data-priority="4" >Status</th>
@@ -156,7 +156,11 @@
                 },
                 {
                     render: function (data, type, row, meta) {
-                        var x = "<span title='"+ row.lecturer['name'] + "'>"+ row.lecturer['name'] + "</span>";
+                        // var x = "<span title='"+ row.lecturer['name'] + "'>"+ row.lecturer['name'] + "</span>";
+                        // return x;
+                        var x = "<span title='" + row.lecturer['name'] + "'>" 
+                        + row.lecturer['name'] + "</span><br><a target='_blank' href='https://wa.me/" + row.lecturer['phone'] + "'><small>"
+                        + row.lecturer['phone'] + "</small></a>";
                         return x;
                     },
                 },

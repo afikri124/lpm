@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Status;
-use App\Models\Schedule;
+use App\Models\Setting;
 
 class RecapController extends Controller
 {
@@ -21,6 +21,7 @@ class RecapController extends Controller
                         $q->where('role_id', "LE");
                     })->where('username','!=', 'admin')->orderBy('name')->get();
         $study_program = User::select('study_program')->groupBy('study_program')->get();
-        return view('recap.index', compact('status','lecturer','study_program'));
+        $MINSCORE = Setting::findOrFail('MINSCORE');
+        return view('recap.index', compact('status','lecturer','study_program','MINSCORE'));
     }
 }

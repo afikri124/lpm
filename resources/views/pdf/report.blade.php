@@ -98,6 +98,7 @@
                 {{ Date::createFromDate($data->observations[0]->updated_at)->format('j F Y') }}</td>
         </tr>
         <tr>
+            @if(count($data->observations) <= 2)
             @foreach($data->observations as $key => $o)
             <td width="50%" style="text-align: center;">
                 Auditor {{ $key+1 }}<br><br><br><br>
@@ -105,6 +106,7 @@
                 <small>NIK. {{ $o->auditor->username }}</small>
             </td>
             @endforeach
+            @endif
         </tr>
         <tr>
             <td colspan="2"><br></td>
