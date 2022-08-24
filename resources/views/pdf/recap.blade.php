@@ -139,7 +139,6 @@
     </table>
     <small style="font-size: 6pt;">
         @php
-        echo "<hr><b>Catatan</b><br>Data di atas terfilter oleh:<br>";
         if (!empty($request->get('range'))) {
             if($request->get('range') != "" || $request->get('range') != null){
                 $x = explode(" - ",$request->get('range'));

@@ -50,7 +50,7 @@
     <div class="row">
         <div class="col-md-12 project-list">
             <div class="card">
-                <form method="POST" class="row" action="{{ route('pdf.recap') }}">
+                <form method="GET" class="row" action="{{ route('pdf.recap') }}">
                     @csrf
                     <div class="col-md-3">
                         <input class="form-control" name="range" id="select_range" type="text" placeholder="Select Date">
