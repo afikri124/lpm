@@ -50,36 +50,42 @@
     <div class="row">
         <div class="col-md-12 project-list">
             <div class="card">
-                <div class="row">
+                <form method="POST" class="row" action="{{ route('pdf.recap') }}">
+                    @csrf
                     <div class="col-md-3">
-                        <input class="form-control" id="select_range" type="text" placeholder="Select Date">
+                        <input class="form-control" name="range" id="select_range" type="text" placeholder="Select Date">
                     </div>
-                    <div class="col-md-3">
-                        <select id="Select_program" class="form-control input-sm select2"
-                            data-placeholder="Study Program">
-                            <option value="">Study Program</option>
+                    <div class="col-md-2">
+                        <select id="Select_program" name="study_program" class="form-control input-sm select2"
+                            data-placeholder="Program">
+                            <option value="">Program</option>
                             @foreach($study_program as $d)
                             <option value="{{ $d->study_program }}">{{ $d->study_program }}</option>
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-md-3">
-                        <select id="Select_1" class="form-control input-sm select2" data-placeholder="Lecturer">
+                    <div class="col-md-2">
+                        <select id="Select_1" name="lecturer_id" class="form-control input-sm select2" data-placeholder="Lecturer">
                             <option value="">Lecturer</option>
                             @foreach($lecturer as $d)
                             <option value="{{ $d->id }}">{{ $d->name }}</option>
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-md-3">
-                        <select id="Select_2" class="form-control input-sm select2" data-placeholder="Status">
+                    <div class="col-md-2">
+                        <select id="Select_2" name="status_id" class="form-control input-sm select2" data-placeholder="Status">
                             <option value="">Status</option>
                             @foreach($status as $d)
                             <option value="{{ $d->id }}">{{ $d->title }}</option>
                             @endforeach
                         </select>
                     </div>
-                </div>
+                    <div class="col-md-3 justify-content-center justify-content-md-end">
+                        <button class="btn btn-primary btn-block btn-mail" title="Pdf" type="submit">
+                            <i data-feather="printer"></i>Print
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
         <div class="col-sm-12">

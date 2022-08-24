@@ -81,6 +81,7 @@ Route::group(['prefix' => 'recap', 'middleware' => ['auth', 'role:AD']], functio
 //PDF
 Route::group(['prefix' => 'pdf', 'middleware' => ['auth']], function() {
     Route::get('report/{id}', [App\Http\Controllers\PdfController::class, 'report'])->name('pdf.report');
+    Route::post('recap', [App\Http\Controllers\PdfController::class, 'recap'])->name('pdf.recap')->middleware('role:AD');
 });
 //API
 Route::group(['prefix' => 'api', 'middleware' => ['auth']], function() {

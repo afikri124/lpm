@@ -288,7 +288,7 @@
     <p style="font-size: 10pt">Dokumentasi: </p>
     @foreach($survey as $key => $s)
     <center>
-        <img src="{{ public_path($s->image_path) }}" style="max-width: 400px;max-height:300px;"><br>
+        <img src="{{ public_path($s->image_path) }}" style="width: 400px;max-height:300px;"><br>
         <small>Dokumentasi Auditor {{$key+1}}</small>
     </center><br>
     @endforeach
@@ -312,7 +312,7 @@
     @if($follow_up->image_path != null)
     <p style="font-size: 10pt">Dokumentasi: </p>
     <center>
-        <img src="{{ public_path($follow_up->image_path) }}" style="max-width: 400px;max-height:300px;" alt=""><br>
+        <img src="{{ public_path($follow_up->image_path) }}" style="width: 400px;max-height:300px;" alt=""><br>
         <small>Dokumentasi Dekan</small>
     </center><br>
     <br>

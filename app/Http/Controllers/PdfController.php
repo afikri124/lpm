@@ -57,4 +57,43 @@ class PdfController extends Controller
         $pdf = PDF::loadview('pdf.report', compact('data','qr', 'survey', 'follow_up', 'hod', 'MINSCORE'));
 	    return $pdf->stream("PO Report - ".$data->lecturer->name." - ".date('d-m-Y', strtotime($data->date_start)).".pdf");
     }
+
+    public function recap(Request $request)
+    {
+        Date::setLocale('id');
+        $link = route('pdf.recap');
+        $qr = base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate($link));
+        $MINSCORE = Setting::findOrFail('MINSCORE');
+        $hod = Setting::findOrFail('HODLPM');
+        $data = Schedule::query()
+                ->with('status')
+                ->with(['lecturer' => function ($query) {
+                    $query->select('id','name');
+                }])
+                ->with('observations')
+                ->with('observations.auditor')
+                ->with('observations.observation_criterias')
+                ->select('*')->orderBy("status_id");
+
+        if (!empty($request->get('lecturer_id'))) {
+            $data->where('lecturer_id', $request->get('lecturer_id'));
+        }
+        if (!empty($request->get('status_id'))) {
+            $data->where('status_id', $request->get('status_id'));
+        }
+        if (!empty($request->get('study_program'))) {
+            $data->where('study_program', $request->get('study_program'));
+        }
+        if (!empty($request->get('range'))) {
+            if($request->get('range') != "" || $request->get('range') != null){
+                $x = explode(" - ",$request->get('range'));
+                $data->whereDate('date_start', '<=', date('Y-m-d 23:59',strtotime($x[1])));
+                $data->whereDate('date_end', '>=', date('Y-m-d H:i',strtotime($x[0])));
+            }
+        }
+        $data = $data->get();
+
+        $pdf = PDF::loadview('pdf.recap', compact('qr','MINSCORE','data','hod','request'));
+	    return $pdf->stream("PO Recap - ".Date::now()->format('j F Y').".pdf");
+    }
 }
