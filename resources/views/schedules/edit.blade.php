@@ -103,7 +103,7 @@
                                 </strong>
                             </div>
                         </div>
-                            @if(now() > $data->follow_ups[0]->date_end)
+                            @if($data->status_id == "S04" && now() > $data->follow_ups[0]->date_end)
                             <div class="col-lg-12 col-md-12">
                                 <div class="alert alert-light alert-dismissible fade show text-danger" role="alert">
                                     <strong><i class="fa fa-exclamation-triangle"></i></strong> The follow-up date has passed the specified schedule, please remind the dean manually!
