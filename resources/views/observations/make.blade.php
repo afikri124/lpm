@@ -206,7 +206,7 @@
                                 <div class="mb-3 col-lg-12 col-md-12">
                                     <label>Overall Comment<i class="text-danger">*</i> <i id="count" class="text-danger">(0/350)</i></label>
                                     <textarea class="form-control" id="remark" name="remark" title="Overall comment" minlength="350" required
-                                        rows="4">{{ (old('remark')==null ? $data->remark : old('remark')) }}</textarea>
+                                        rows="5">{{ (old('remark')==null ? $data->remark : old('remark')) }}</textarea>
                                     <i class="invalid-feedback d-block">Note: The remark must be at least 350 characters.</i>
                                 </div>
                             </div>
@@ -238,6 +238,11 @@
     }, 350);
     $("#remark").keyup(function(){
         $("#count").text("(" + $(this).val().length + "/350)");
+        if($(this).val().length >= 350){
+            $("#count").removeClass('text-danger');
+        } else {
+            $("#count").addClass('text-danger');
+        }
     });
 </script>
 <script src="{{asset('assets/js/form-wizard/jquery.backstretch.min.js')}}"></script>

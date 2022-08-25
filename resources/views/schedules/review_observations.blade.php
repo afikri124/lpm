@@ -83,9 +83,9 @@
                             <table class="table table-hover" width="100%">
                                 <thead>
                                     <tr>
-                                        <th width="50%"></th>
+                                        <th width="40%"></th>
                                         @foreach($data->observations as $no => $o)
-                                        <th>Auditor {{ $no + 1 }}</th>
+                                        <th width="30%">Auditor {{ $no + 1 }}</th>
                                         @endforeach
                                     </tr>
                                 </thead>
@@ -127,17 +127,11 @@
                                         @endforeach
                                     </tr>
                                     <tr>
-                                        <th>Remark</th>
-                                        @foreach($data->observations as $no => $o)
-                                        <td>{{ $o->remark }}</td>
-                                        @endforeach
-                                    </tr>
-                                    <tr>
                                         <th>Photo / Documentation</th>
                                         @foreach($data->observations as $no => $o)
                                         <td>
                                             <a target="_blank" href="{{ asset($o->image_path) }}">
-                                                <img class="chat-user-img img-50" src="{{ asset($o->image_path) }}">
+                                                <img class="chat-user-img img-100" src="{{ asset($o->image_path) }}">
                                             </a>
                                         </td>
                                         @endforeach
@@ -148,11 +142,37 @@
                                         <td>
                                             <a target="_blank"
                                                 href="{{ route('observations.results',  ['id' => Crypt::encrypt($o->id)]) }}">
-                                                View details
+                                                <span>view details</span>
                                             </a>
                                         </td>
                                         @endforeach
                                     </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col mb-3">
+                            <table class="table table-hover" width="100%">
+                                
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Remark / Overall Comments</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($data->observations as $no => $o)
+                                    <tr>
+                                        <th>Auditor {{ $no + 1 }}</th>
+                                        <td><i>{{ $o->remark }}</i></td>
+                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -224,7 +244,8 @@
                                     <tr>
                                         <td colspan="2">Percentage</td>
                                         @foreach($total as $k => $p )
-                                        <td class='text-center @if(($p/($total_w/$jumlah_auditor*5)*100) < $MINSCORE->content) text-danger @endif'>
+                                        <td
+                                            class='text-center @if(($p/($total_w/$jumlah_auditor*5)*100) < $MINSCORE->content) text-danger @endif'>
                                             {{ number_format($p/($total_w/$jumlah_auditor*5)*100,1); }}%
                                         </td>
                                         @endforeach
@@ -238,11 +259,13 @@
                                         }
                                         $final = $total_point/($total_w*5)*100;
                                         @endphp
-                                        <td class='text-center @if($final < $MINSCORE->content) text-danger @endif' colspan="2">
+                                        <td class='text-center @if($final < $MINSCORE->content) text-danger @endif'
+                                            colspan="2">
                                             {{ number_format($final, 1); }}%
                                             @if($final < $MINSCORE->content)
-                                             <br><i class="fa fa-exclamation-circle"></i> Score below the {{ $MINSCORE->title }}
-                                            @endif
+                                                <br><i class="fa fa-exclamation-circle"></i> Score below the
+                                                {{ $MINSCORE->title }}
+                                                @endif
                                         </td>
                                     </tr>
                                 </tfoot>
@@ -359,7 +382,8 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group mb-2">
-                                <label class="col-form-label">Remark or Recommendation<i class="text-danger">*</i></label>
+                                <label class="col-form-label">Remark or Recommendation<i
+                                        class="text-danger">*</i></label>
                                 <textarea class="form-control" rows="2" name="remark" required></textarea>
                             </div>
                         </div>
@@ -386,5 +410,6 @@
             dropdownParent: $("#modalFolowUp")
         });
     });
+
 </script>
 @endsection

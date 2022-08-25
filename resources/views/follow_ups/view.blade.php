@@ -111,7 +111,7 @@
                                 <thead>
                                     <tr>
                                         <th>Code</th>
-                                        <th>Criteria Category</th>
+                                        <th>Accessment Category</th>
                                         @foreach($data->observations as $no => $o)
                                         <th class='text-center'>Auditor {{ $no + 1 }}</th>
                                         @php
@@ -312,6 +312,11 @@
 <script>
     $("#remark").keyup(function(){
         $("#count").text("(" + $(this).val().length + "/500)");
+        if($(this).val().length >= 500){
+            $("#count").removeClass('text-danger');
+        } else {
+            $("#count").addClass('text-danger');
+        }
     });
 </script>
 @endsection

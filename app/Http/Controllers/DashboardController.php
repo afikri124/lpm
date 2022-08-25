@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\User;
+use App\Models\Setting;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Illuminate\Validation\Rule;
 
@@ -23,8 +24,10 @@ class DashboardController extends Controller
         if(Auth::user()->password == null || Auth::user()->email == null){
             return redirect()->route('update_account');
         } else {
+            $INFO = Setting::findOrFail('INFO');
             return view('dashboard', [
-                'data' => ''
+                'data' => '',
+                'INFO' => $INFO,
             ]);
         }
     }

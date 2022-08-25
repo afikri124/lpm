@@ -271,6 +271,60 @@
             </form>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-xl-12">
+            <form class="card" method="POST" action="">
+                @csrf
+                <div class="card-header">
+                    <h4 class="card-title mb-0">Info on Dashboard</h4>
+                    <div class="card-options"><a class="card-options-collapse" href="#"
+                            data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a
+                            class="card-options-remove" href="#" data-bs-toggle="card-remove"><i
+                                class="fe fe-x"></i></a></div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        @php
+                        $id = null;
+                        $title = null;
+                        $content = null;
+                        foreach($data as $d){
+                        if($d->id == 'INFO'){
+                        $id = $d->id;
+                        $title = $d->title;
+                        $content = $d->content;
+                        }
+                        }
+                        @endphp
+                        <input class="form-control" type="hidden" name="id" value="{{ $id }}" required>
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label class="form-label">Status</label>
+                                <select id="Select_2" class="form-control input-sm select2" name="title"        data-placeholder="Status" required>
+                                    <option value="Y" @if($title=="Y") selected @endif>Active</option>
+                                    <option value="N" @if($title=="N") selected @endif>Non Active</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label class="form-label">Text Info</label>
+                                <textarea class="form-control" name="content" required>{{ $content }}</textarea>
+                            </div>
+                        </div>
+                        @foreach ($errors->all() as $error)
+                        <p class="text-danger m-0">{{ $error }}</p>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="card-footer text-end">
+                    <button class="btn btn-primary" type="submit">Update Info</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 @endsection
 

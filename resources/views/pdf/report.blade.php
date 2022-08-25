@@ -241,8 +241,8 @@
             <tr>
                 <th colspan="2">Catatan/Komentar</th>
             </tr>
-            <tr style="border: 1px solid; text-align: justify;">
-                <td colspan="2"><i class="text-danger">{{ $s->remark }}</i></td>
+            <tr style="border: 1px solid #999; text-align: justify;">
+                <td colspan="2"><i class="text-danger p-1">{{ $s->remark }}</i></td>
             </tr>
             <tr>
                 <td colspan="2"><br></td>
@@ -264,41 +264,33 @@
     </table>
     @endforeach
     <div class="page-break"></div>
-    <table width="100%">
-        <tr>
-            <td width="50%" valign="top"></td>
-            <td width="50%" style="text-align: right;">
-                <img src="{{ public_path('assets/images/logo.png') }}" style="height: 60px;" alt="">
-            </td>
-        </tr>
-    </table>
     <br>
     <center>
         <h5><u>LAMPIRAN</u></h5>
     </center>
     <br>
+    <p style="font-size: 10pt">Dokumentasi: </p>
+    @foreach($survey as $key => $s)
+    <center>
+        <img src="{{ public_path($s->image_path) }}" style="width: 400px;max-height:300px;"><br>
+        <small style="font-size: 8pt">Dokumentasi Auditor {{$key+1}}</small>
+    </center><br>
+    @endforeach
     <p style="font-size: 10pt">Persentase Keseluruhan:
-        <br><i style="font-size: 10pt">{{ ($total_persentase/count($survey)) }}%</i>
+        <br><i style="font-size: 10pt" class="@if(($total_persentase/count($survey)) < $MINSCORE->content) text-danger @endif"><b>{{ ($total_persentase/count($survey)) }}</b>%</i>
     </p>
     @if($data->remark != null || $data->remark != "")
     <p style="font-size: 10pt">Catatan dari LPM:
         <br><i class="text-danger" style="font-size: 10pt">{{ $data->remark }}</i>
     </p>
     @endif
-    <p style="font-size: 10pt">Dokumentasi: </p>
-    @foreach($survey as $key => $s)
-    <center>
-        <img src="{{ public_path($s->image_path) }}" style="width: 400px;max-height:300px;"><br>
-        <small>Dokumentasi Auditor {{$key+1}}</small>
-    </center><br>
-    @endforeach
-
 
     @if($follow_up != null)
     <div class="page-break"></div>
     <table width="100%">
         <tr>
-            <td width="50%" valign="top"></td>
+            <td width="50%" valign="top">
+                <img src="data:image/png;base64, {!! $qr !!}" style="height: 85px;"></td>
             <td width="50%" style="text-align: right;">
                 <img src="{{ public_path('assets/images/logo.png') }}" style="height: 60px;" alt="">
             </td>
@@ -313,7 +305,7 @@
     <p style="font-size: 10pt">Dokumentasi: </p>
     <center>
         <img src="{{ public_path($follow_up->image_path) }}" style="width: 400px;max-height:300px;" alt=""><br>
-        <small>Dokumentasi Dekan</small>
+        <small style="font-size: 8pt">Dokumentasi Dekan</small>
     </center><br>
     <br>
     <p style="font-size: 10pt">Catatan dari Dekan: <br>

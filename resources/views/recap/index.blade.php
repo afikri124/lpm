@@ -50,7 +50,7 @@
     <div class="row">
         <div class="col-md-12 project-list">
             <div class="card">
-                <form method="GET" class="row" action="{{ route('pdf.recap') }}">
+                <form method="GET" class="row" target="_blank" action="{{ route('pdf.recap') }}">
                     @csrf
                     <div class="col-md-3">
                         <input class="form-control" name="range" id="select_range" type="text" placeholder="Select Date">
@@ -80,8 +80,10 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-md-3 justify-content-center justify-content-md-end">
-                        <button class="btn btn-primary btn-block btn-mail" title="Pdf" type="submit">
+                    <div class="col-md-1">
+                    </div>
+                    <div class="col-md-2 justify-content-center justify-content-md-end">
+                        <button class="btn btn-primary w-100 btn-block btn-mail h-100" title="Pdf" type="submit">
                             <i data-feather="printer"></i>Print
                         </button>
                     </div>
