@@ -21,7 +21,7 @@ class SettingSeeder extends Seeder
             ["id" => "MINSCORE", "title" => "KKM", "content" => "70"],
             ["id" => "TOTALAUDITOR", "title" => "Total Auditor", "content" => "2"],
             ["id" => "LINKINSTRUMENT", "title" => "Klik Disini", "content" => "https://www.banpt.or.id/wp-content/uploads/2019/10/Lampiran-5-PerBAN-PT-5-2019-tentang-IAPS-Pedoman-Penilaian.pdf"],
-            ["id" => "INFO", "title" => "Y", "content" => "This system is under development. Any information and designs on this system are not final and LPM will not be responsible for any loss or damage caused by the use of information obtained from this system."],
+            ["id" => "INFO", "title" => "Y", "content" => "This system is under development."],
         ];
 
         foreach ($data as $x) {

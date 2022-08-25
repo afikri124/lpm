@@ -299,19 +299,11 @@ class ApiController extends Controller
     public function tes(Request $request)
     {
 
-        $data = Schedule::query()
-        ->with('status')
-        ->with(['lecturer' => function ($query) {
-            $query->select('id','name');
-        }])
-        ->with('observations')
-        ->with('observations.auditor')
-        ->with('observations.observation_criterias')
-        ->select('*')->orderBy("status_id");
+        $data = User::find(724);
 
-        // return response()->json( $data );
+        return response()->json( $data );
 
-        return Datatables::of($data)->make(true);
+        // return Datatables::of($data)->make(true);
     }
 
 }

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Jenssegers\Date\Date;
 
 /*
 |--------------------------------------------------------------------------
@@ -96,4 +97,18 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth']], function() {
     Route::get('observations_by_auditor_id', [App\Http\Controllers\ApiController::class, 'observations_by_auditor_id'])->name('api.observations_by_auditor_id');
     Route::get('follow_up_by_dean_id', [App\Http\Controllers\ApiController::class, 'follow_up_by_dean_id'])->name('api.follow_up_by_dean_id');
     Route::get('recap', [App\Http\Controllers\ApiController::class, 'recap'])->name('api.recap');
+});
+
+Route::get('/email', function () {
+    $data['email'] = "afikri124@gmail.com";
+    $data['subject'] = "Undangan Sebagai Auditor";
+    $data['name'] = "Ali Fikri";
+    $data['messages'] = "Anda mendapatkan tugas sebagai Auditor <i><a href='".url('/dashboard')."'>Peer-Observation</a> </i>yang dilaksanakan oleh LPM JGU dan mendapatan jadwal sebagaimana yang tertera dalam tabel berikut:";
+    $data['study_program'] = "Teknik Informatika";
+    $data['auditee'] = "Ali Fikri";
+    $data['auditee_hp'] = "081233933313";
+    $data['auditee_email'] = "fikri@jgu.ac.id";
+    $data['start'] = Date::createFromDate(Date::now())->format('l, j F Y (H:i)');
+    $data['end'] = Date::createFromDate(Date::now())->format('l, j F Y (H:i)');
+    return new App\Mail\MailNotification($data);
 });

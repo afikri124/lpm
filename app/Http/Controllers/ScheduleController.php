@@ -15,6 +15,8 @@ use Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
+use Jenssegers\Date\Date;
+use App\Jobs\JobNotification;
 
 class ScheduleController extends Controller
 {
@@ -67,6 +69,22 @@ class ScheduleController extends Controller
             ]);
             
             //TODO : SEND EMAIL TO LECTURER
+            $auditee = User::find($request->lecturer_id);
+            if($auditee->email != null || $auditee->email != ""){
+                $data['email'] = $auditee->email;
+                $data['subject'] = "Pemberitahuan Peer-Observation";
+                $data['name'] = $auditee->name_with_title;
+                // $data['messages'] = "Anda mendapatkan tugas sebagai Auditor <i><a href='".url('/dashboard')."'>Peer-Observation</a> </i>yang dilaksanakan oleh LPM JGU dan mendapatan jadwal sebagaimana yang tertera dalam tabel berikut:";
+                $data['messages'] = "Anda mendapatkan jadwal <i><a href='".url('/dashboard')."'>Peer-Observation</a> </i>yang dilaksanakan oleh LPM JGU sebagaimana yang tertera dalam tabel berikut:";
+                $data['study_program'] = $request->study_program;
+                $data['auditee'] = $auditee->name_with_title;
+                $data['auditee_hp'] = $auditee->phone;
+                $data['auditee_email'] = $auditee->email;
+                $data['start'] = Date::createFromDate($request->date_start)->format('l, j F Y (H:i)');
+                $data['end'] = Date::createFromDate($request->date_end)->format('l, j F Y (H:i)');
+    
+                dispatch(new JobNotification($data)); //send Email
+            }
             return redirect()->route('schedules.edit', Crypt::encrypt($schedule->id));
         } else {
             $lecturer = User::select('id','email','name')->whereHas('roles', function($q){

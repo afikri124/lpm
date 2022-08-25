@@ -19,6 +19,7 @@ use DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Contracts\Encryption\DecryptException;
 use phpDocumentor\Reflection\Location;
+use Jenssegers\Date\Date;
 
 class ObservationController extends Controller
 {
