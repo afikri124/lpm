@@ -298,19 +298,19 @@
                         <h6>Bagi Perguruan Tinggi/Ketua Program Studi yang ingin mengunduh<br>Sistem Penjaminan Mutu Internal (SPMI)<br>Jakarta Global University</h6>
                         <h6>silahkan klik tautan berikut :</h6>
                         @if($LINKINSTRUMENT->content != null || $LINKINSTRUMENT->content != "")
-                        <a class="btn mrl5 btn-lg btn-primary default-view" target="_blank"
+                        <a class="btn mrl5 btn-lg btn-secondary default-view" target="_blank"
                             href="{{ $LINKINSTRUMENT->content }}">{{ $LINKINSTRUMENT->title }}</a>
                         @endif
                         @if($LINKINSTRUMENT2->content != null || $LINKINSTRUMENT2->content != "")
-                        <a class="btn mrl5 btn-lg btn-primary default-view" target="_blank"
+                        <a class="btn mrl5 btn-lg btn-secondary default-view" target="_blank"
                             href="{{ $LINKINSTRUMENT2->content }}">{{ $LINKINSTRUMENT2->title }}</a>
                         @endif
                         @if($LINKINSTRUMENT3->content != null || $LINKINSTRUMENT3->content != "")
-                        <a class="btn mrl5 btn-lg btn-primary default-view" target="_blank"
+                        <a class="btn mrl5 btn-lg btn-secondary default-view" target="_blank"
                             href="{{ $LINKINSTRUMENT3->content }}">{{ $LINKINSTRUMENT3->title }}</a>
                         @endif
                         @if($LINKINSTRUMENT4->content != null || $LINKINSTRUMENT4->content != "")
-                        <a class="btn mrl5 btn-lg btn-primary default-view" target="_blank"
+                        <a class="btn mrl5 btn-lg btn-secondary default-view" target="_blank"
                             href="{{ $LINKINSTRUMENT4->content }}">{{ $LINKINSTRUMENT4->title }}</a>
                         @endif
                     </div>
