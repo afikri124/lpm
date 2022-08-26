@@ -33,7 +33,10 @@ class HomeController extends Controller
     {
         if(env('ALIFIKRI')){
             $LINKINSTRUMENT = Setting::findOrFail('LINKINSTRUMENT');
-            return view('welcome', compact('LINKINSTRUMENT'));
+            $LINKINSTRUMENT2 = Setting::findOrFail('LINKINSTRUMENT2');
+            $LINKINSTRUMENT3 = Setting::findOrFail('LINKINSTRUMENT3');
+            $LINKINSTRUMENT4 = Setting::findOrFail('LINKINSTRUMENT4');
+            return view('welcome', compact('LINKINSTRUMENT','LINKINSTRUMENT2','LINKINSTRUMENT3','LINKINSTRUMENT4'));
         } else {
             $img = "<img style='max-width: 100px;border-radius: 50%;' src='https://img.freepik.com/premium-vector/alert-error-massage-notification-concept-error-digital-report-system-hacking-by-hacker_257312-129.jpg?w=2000'>";
             $msg = "$img<br><br>Sorry, You can't access to restricted page!<br>Please contact <b>afikri124@gmail.com</b>";

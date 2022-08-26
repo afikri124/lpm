@@ -223,8 +223,7 @@
 
     <div class="row">
         <div class="col-xl-12">
-            <form class="card" method="POST" action="">
-                @csrf
+            <div class="card">
                 <div class="card-header">
                     <h4 class="card-title mb-0">Instrument Link</h4>
                     <div class="card-options"><a class="card-options-collapse" href="#"
@@ -233,42 +232,164 @@
                                 class="fe fe-x"></i></a></div>
                 </div>
                 <div class="card-body">
-                    <div class="row">
-                        @php
-                        $id = null;
-                        $title = null;
-                        $content = null;
-                        foreach($data as $d){
-                        if($d->id == 'LINKINSTRUMENT'){
-                        $id = $d->id;
-                        $title = $d->title;
-                        $content = $d->content;
-                        }
-                        }
-                        @endphp
-                        <input class="form-control" type="hidden" name="id" value="{{ $id }}" required>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label class="form-label">Button name</label>
-                                <input class="form-control" type="text" name="title" value="{{ $title }}" required>
+                    <form method="POST" action="">
+                        <div class="row">
+                            @csrf
+                            @php
+                            $id = null;
+                            $title = null;
+                            $content = null;
+                            foreach($data as $d){
+                            if($d->id == 'LINKINSTRUMENT'){
+                            $id = $d->id;
+                            $title = $d->title;
+                            $content = $d->content;
+                            }
+                            }
+                            @endphp
+                            <input class="form-control" type="hidden" name="id" value="{{ $id }}" required>
+                            <div class="col-md-5">
+                                <div class="mb-3">
+                                    <label class="form-label">Button name 1</label>
+                                    <input class="form-control" type="text" name="title" value="{{ $title }}" required>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label class="form-label">Link</label>
-                                <input class="form-control" type="text" name="content" value="{{ $content }}"
-                                    required>
+                            <div class="col-md-5">
+                                <div class="mb-3">
+                                    <label class="form-label">Link</label>
+                                    <input class="form-control" type="text" name="content" value="{{ $content }}"
+                                        required>
+                                </div>
                             </div>
+                            <div class="col-md-2">
+                                <div class="mb-3 pt-2">
+                                    <button class="btn btn-primary" type="submit">Update Instrument</button>
+                                </div>
+                            </div>
+                            @foreach ($errors->all() as $error)
+                            <p class="text-danger m-0">{{ $error }}</p>
+                            @endforeach
                         </div>
-                        @foreach ($errors->all() as $error)
-                        <p class="text-danger m-0">{{ $error }}</p>
-                        @endforeach
-                    </div>
+                    </form>
+                    <form method="POST" action="">
+                        <div class="row">
+                            @csrf
+                            @php
+                            $id = null;
+                            $title = null;
+                            $content = null;
+                            foreach($data as $d){
+                            if($d->id == 'LINKINSTRUMENT2'){
+                            $id = $d->id;
+                            $title = $d->title;
+                            $content = $d->content;
+                            }
+                            }
+                            @endphp
+                            <input class="form-control" type="hidden" name="id" value="{{ $id }}" required>
+                            <div class="col-md-5">
+                                <div class="mb-3">
+                                    <label class="form-label">Button name 2</label>
+                                    <input class="form-control" type="text" name="title" value="{{ $title }}" required>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="mb-3">
+                                    <label class="form-label">Link</label>
+                                    <input class="form-control" type="text" name="content" value="{{ $content }}"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="mb-3 pt-2">
+                                    <button class="btn btn-primary" type="submit">Update Instrument</button>
+                                </div>
+                            </div>
+                            @foreach ($errors->all() as $error)
+                            <p class="text-danger m-0">{{ $error }}</p>
+                            @endforeach
+                        </div>
+                    </form>
+                    <form method="POST" action="">
+                        <div class="row">
+                            @csrf
+                            @php
+                            $id = null;
+                            $title = null;
+                            $content = null;
+                            foreach($data as $d){
+                            if($d->id == 'LINKINSTRUMENT3'){
+                            $id = $d->id;
+                            $title = $d->title;
+                            $content = $d->content;
+                            }
+                            }
+                            @endphp
+                            <input class="form-control" type="hidden" name="id" value="{{ $id }}" required>
+                            <div class="col-md-5">
+                                <div class="mb-3">
+                                    <label class="form-label">Button name 3</label>
+                                    <input class="form-control" type="text" name="title" value="{{ $title }}" required>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="mb-3">
+                                    <label class="form-label">Link</label>
+                                    <input class="form-control" type="text" name="content" value="{{ $content }}"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="mb-3 pt-2">
+                                    <button class="btn btn-primary" type="submit">Update Instrument</button>
+                                </div>
+                            </div>
+                            @foreach ($errors->all() as $error)
+                            <p class="text-danger m-0">{{ $error }}</p>
+                            @endforeach
+                        </div>
+                    </form>
+                    <form method="POST" action="">
+                        <div class="row">
+                            @csrf
+                            @php
+                            $id = null;
+                            $title = null;
+                            $content = null;
+                            foreach($data as $d){
+                            if($d->id == 'LINKINSTRUMENT4'){
+                            $id = $d->id;
+                            $title = $d->title;
+                            $content = $d->content;
+                            }
+                            }
+                            @endphp
+                            <input class="form-control" type="hidden" name="id" value="{{ $id }}" required>
+                            <div class="col-md-5">
+                                <div class="mb-3">
+                                    <label class="form-label">Button name 4</label>
+                                    <input class="form-control" type="text" name="title" value="{{ $title }}" required>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="mb-3">
+                                    <label class="form-label">Link</label>
+                                    <input class="form-control" type="text" name="content" value="{{ $content }}"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="mb-3 pt-2">
+                                    <button class="btn btn-primary" type="submit">Update Instrument</button>
+                                </div>
+                            </div>
+                            @foreach ($errors->all() as $error)
+                            <p class="text-danger m-0">{{ $error }}</p>
+                            @endforeach
+                        </div>
+                    </form>
                 </div>
-                <div class="card-footer text-end">
-                    <button class="btn btn-primary" type="submit">Update Instrument</button>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 
@@ -301,13 +422,14 @@
                         <div class="col-md-12">
                             <div class="mb-3">
                                 <label class="form-label">Status</label>
-                                <select id="Select_2" class="form-control input-sm select2" name="title"        data-placeholder="Status" required>
-                                    <option value="Y" @if($title=="Y") selected @endif>Active</option>
-                                    <option value="N" @if($title=="N") selected @endif>Non Active</option>
+                                <select id="Select_2" class="form-control input-sm select2" name="title"
+                                    data-placeholder="Status" required>
+                                    <option value="Y" @if($title=="Y" ) selected @endif>Active</option>
+                                    <option value="N" @if($title=="N" ) selected @endif>Non Active</option>
                                 </select>
                             </div>
                         </div>
-                        
+
                         <div class="col-md-12">
                             <div class="mb-3">
                                 <label class="form-label">Text Info</label>
