@@ -161,7 +161,7 @@
             <tr>
                 <td style="padding: 30px;">
                     <p style="font-size:10pt; margin:0;">
-                        Butuh bantuan? silahkan hubungi <a href="{{ url('/#contact') }}" target="_blank">LPM Jakarta Global University</a> 
+                        Butuh bantuan? silahkan hubungi <a href="{{ url('/#contact') }}" target="_blank">LPM JGU</a> 
                     </p>
                     <div style="border-top: 1px solid #ddd; margin: 20px auto 0;"></div>
                     <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin: 20px auto 0;">

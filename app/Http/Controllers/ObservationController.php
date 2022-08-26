@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Contracts\Encryption\DecryptException;
 use phpDocumentor\Reflection\Location;
 use Jenssegers\Date\Date;
+use App\Jobs\JobNotification;
 
 class ObservationController extends Controller
 {
@@ -54,7 +55,23 @@ class ObservationController extends Controller
                     'created_by' => Auth::user()->id,
                     'created_at' => Carbon::now(),
                 ]);
-            //TODO : SEND EMAIL cancelled TO AUDITOR
+                //TODO : SEND EMAIL cancelled TO AUDITOR
+                $schedule = Schedule::with('lecturer')->find($data->schedule_id);
+                    if($auditor->email != null || $auditor->email != ""){
+                        $d['email'] = $auditor->email;
+                        $d['subject'] = "Pembatalan Auditor";
+                        $d['name'] = $auditor->name_with_title;
+                        $d['messages'] = "Anda telah <b>dibatalkan sebagai Auditor</b> pada jadwal berikut:";
+                        $d['study_program'] = $schedule->study_program;
+                        $d['auditee'] = $schedule->lecturer->name_with_title;
+                        $d['auditee_hp'] = $schedule->lecturer->phone;
+                        $d['auditee_email'] = $schedule->lecturer->email;
+                        $d['start'] = Date::createFromDate($schedule->date_start)->format('l, j F Y (H:i)');
+                        $d['end'] = Date::createFromDate($schedule->date_end)->format('l, j F Y (H:i)');
+            
+                        dispatch(new JobNotification($d)); //send Email using queue job
+                    }
+                    //--------------------end email--------------
 
             return response()->json([
                 'success' => true,
@@ -103,6 +120,22 @@ class ObservationController extends Controller
                         'created_at' => Carbon::now(),
                     ]);
                     //TODO : SEND EMAIL notif TO AUDITOR
+                    $schedule = Schedule::with('lecturer')->find($request->schedule_id);
+                    if($auditor->email != null || $auditor->email != ""){
+                        $d['email'] = $auditor->email;
+                        $d['subject'] = "Auditor Peer-Observation";
+                        $d['name'] = $auditor->name_with_title;
+                        $d['messages'] = "Anda mendapatkan tugas sebagai Auditor <i><a href='".url('/dashboard')."'>Peer-Observation</a> </i>yang dilaksanakan oleh LPM JGU dan mendapatan jadwal sebagaimana yang tertera dalam tabel berikut:";
+                        $d['study_program'] = $schedule->study_program;
+                        $d['auditee'] = $schedule->lecturer->name_with_title;
+                        $d['auditee_hp'] = $schedule->lecturer->phone;
+                        $d['auditee_email'] = $schedule->lecturer->email;
+                        $d['start'] = Date::createFromDate($schedule->date_start)->format('l, j F Y (H:i)');
+                        $d['end'] = Date::createFromDate($schedule->date_end)->format('l, j F Y (H:i)');
+            
+                        dispatch(new JobNotification($d)); //send Email using queue job
+                    }
+                    //--------------------end email--------------
     
                     return response()->json([
                         'success' => true,
@@ -223,8 +256,11 @@ class ObservationController extends Controller
                     return view('observations.make', compact('data', 'lecturer', 'survey', 'locations'));
                 }
             } else {
-                $survey = Observation_category::with('criteria_category')->with('observation_criterias')->with('observation_criterias.criteria')
-                        ->where('observation_id', $o_id)->orderBy('criteria_category_id')->get();
+                $survey = Observation_category::with('criteria_category')
+                        ->with('observation_criterias')
+                        ->with('observation_criterias.criteria')
+                        ->where('observation_id', $o_id)
+                        ->orderBy('criteria_category_id')->get();
                 return view('observations.view', compact('data', 'lecturer', 'survey'));
             }
         }
@@ -238,8 +274,11 @@ class ObservationController extends Controller
         }
             $data = Observation::with('auditor')->with('schedule')->findOrFail($o_id);
             $lecturer = User::find($data->schedule->lecturer_id);
-            $survey = Observation_category::with('criteria_category')->with('observation_criterias')->with('observation_criterias.criteria')
-                        ->where('observation_id', $o_id)->orderBy('criteria_category_id')->get();
+            $survey = Observation_category::with('criteria_category')
+                        ->with('observation_criterias')
+                        ->with('observation_criterias.criteria')
+                        ->where('observation_id', $o_id)
+                        ->orderBy('criteria_category_id')->get();
             return view('observations.view', compact('data', 'lecturer', 'survey'));
     }
 

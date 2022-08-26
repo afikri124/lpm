@@ -101,11 +101,11 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth']], function() {
 
 Route::get('/email', function () {
     $data['email'] = "afikri124@gmail.com";
-    $data['subject'] = "Undangan Sebagai Auditor";
+    $data['subject'] = "Hasil PO";
     $data['name'] = "Ali Fikri";
-    $data['messages'] = "Anda mendapatkan tugas sebagai Auditor <i><a href='".url('/dashboard')."'>Peer-Observation</a> </i>yang dilaksanakan oleh LPM JGU dan mendapatan jadwal sebagaimana yang tertera dalam tabel berikut:";
+    $data['messages'] = "Menginformasikan bahwa, hasil audit <i>Peer-Observation</i> anda sudah dapat dilihat melalui tautan sistem berikut ini <a href='".url('/pdf/report/'.Crypt::encrypt(1))."'>lpm.jgu.ac.id/observations/me</a>";
     $data['study_program'] = "Teknik Informatika";
-    $data['auditee'] = "Ali Fikri";
+    // $data['auditee'] = "Ali Fikri";
     $data['auditee_hp'] = "081233933313";
     $data['auditee_email'] = "fikri@jgu.ac.id";
     $data['start'] = Date::createFromDate(Date::now())->format('l, j F Y (H:i)');

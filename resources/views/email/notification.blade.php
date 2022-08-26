@@ -12,6 +12,7 @@
         </tr>
     </tbody>
 </table>
+@if(isset($data['auditee']))
 <table class="order-detail" border="0" cellpadding="0" cellspacing="0" align="left"
     style="width: 100%; font-size:10pt;">
     <tbody>
@@ -53,6 +54,7 @@
         </tr>
     </tbody>
 </table>
+@endif
 <table align="left" border="0" cellpadding="0" cellspacing="0" style="text-align: left; margin-bottom:50px;"
     width="100%">
     <tbody>

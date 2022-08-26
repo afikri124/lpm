@@ -71,20 +71,20 @@ class ScheduleController extends Controller
             //TODO : SEND EMAIL TO LECTURER
             $auditee = User::find($request->lecturer_id);
             if($auditee->email != null || $auditee->email != ""){
-                $data['email'] = $auditee->email;
-                $data['subject'] = "Pemberitahuan Peer-Observation";
-                $data['name'] = $auditee->name_with_title;
-                // $data['messages'] = "Anda mendapatkan tugas sebagai Auditor <i><a href='".url('/dashboard')."'>Peer-Observation</a> </i>yang dilaksanakan oleh LPM JGU dan mendapatan jadwal sebagaimana yang tertera dalam tabel berikut:";
-                $data['messages'] = "Anda mendapatkan jadwal <i><a href='".url('/dashboard')."'>Peer-Observation</a> </i>yang dilaksanakan oleh LPM JGU sebagaimana yang tertera dalam tabel berikut:";
-                $data['study_program'] = $request->study_program;
-                $data['auditee'] = $auditee->name_with_title;
-                $data['auditee_hp'] = $auditee->phone;
-                $data['auditee_email'] = $auditee->email;
-                $data['start'] = Date::createFromDate($request->date_start)->format('l, j F Y (H:i)');
-                $data['end'] = Date::createFromDate($request->date_end)->format('l, j F Y (H:i)');
+                $d['email'] = $auditee->email;
+                $d['subject'] = "Pemberitahuan Peer-Observation";
+                $d['name'] = $auditee->name_with_title;
+                $d['messages'] = "Anda mendapatkan jadwal <i><a href='".url('/dashboard')."'>Peer-Observation</a> </i>yang dilaksanakan oleh LPM JGU sebagaimana yang tertera dalam tabel berikut:";
+                $d['study_program'] = $request->study_program;
+                $d['auditee'] = $auditee->name_with_title;
+                $d['auditee_hp'] = $auditee->phone;
+                $d['auditee_email'] = $auditee->email;
+                $d['start'] = Date::createFromDate($request->date_start)->format('l, j F Y (H:i)');
+                $d['end'] = Date::createFromDate($request->date_end)->format('l, j F Y (H:i)');
     
-                dispatch(new JobNotification($data)); //send Email
+                dispatch(new JobNotification($d)); //send Email using queue job
             }
+            //--------------------end email--------------
             return redirect()->route('schedules.edit', Crypt::encrypt($schedule->id));
         } else {
             $lecturer = User::select('id','email','name')->whereHas('roles', function($q){
@@ -117,9 +117,42 @@ class ScheduleController extends Controller
                     'created_by' => Auth::user()->id,
                     'created_at' => Carbon::now(),
                 ]);
-            
-            //TODO : SEND EMAIL RESCHEDULE TO AUDITOR
-
+                //TODO : SEND EMAIL RESCHEDULE TO AUDITEE & AUDITOR
+                $schedule = Schedule::with('lecturer')
+                    ->with('observations')
+                    ->with('observations.auditor')
+                    ->find($id);
+                    if($schedule->lecturer->email != null || $schedule->lecturer->email != ""){
+                        $d['email'] = $schedule->lecturer->email;
+                        $d['subject'] = "Perubahan Jadwal Peer-Observation";
+                        $d['name'] = $schedule->lecturer->name_with_title;
+                        $d['messages'] = "Di informasikan bahwa terdapat <b>Perubahan jadwal</b> dari jadwal yang sebelumnya menjadi berikut ini:";
+                        $d['study_program'] = $schedule->study_program;
+                        $d['auditee'] = $schedule->lecturer->name_with_title;
+                        $d['auditee_hp'] = $schedule->lecturer->phone;
+                        $d['auditee_email'] = $schedule->lecturer->email;
+                        $d['start'] = Date::createFromDate($request->date_start)->format('l, j F Y (H:i)');
+                        $d['end'] = Date::createFromDate($request->date_end)->format('l, j F Y (H:i)');
+                        dispatch(new JobNotification($d)); //send Email using queue job
+                    }
+                if($schedule->observations != null){
+                    foreach($schedule->observations as $o){
+                        if($o->auditor->email != null || $o->auditor->email != ""){
+                            $d['email'] = $o->auditor->email;
+                            $d['subject'] = "Perubahan Jadwal Peer-Observation";
+                            $d['name'] = $o->auditor->name_with_title;
+                            $d['messages'] = "Di informasikan bahwa terdapat <b>perubahan jadwal</b> dari jadwal yang sebelumnya menjadi berikut:";
+                            $d['study_program'] = $schedule->study_program;
+                            $d['auditee'] = $schedule->lecturer->name_with_title;
+                            $d['auditee_hp'] = $schedule->lecturer->phone;
+                            $d['auditee_email'] = $schedule->lecturer->email;
+                            $d['start'] = Date::createFromDate($request->date_start)->format('l, j F Y (H:i)');
+                            $d['end'] = Date::createFromDate($request->date_end)->format('l, j F Y (H:i)');
+                            dispatch(new JobNotification($d)); //send Email using queue job
+                        }
+                    }
+                }
+                //--------------------end email--------------
             }
             return redirect()->route('schedules.edit', Crypt::encrypt($id));
         }
@@ -160,6 +193,23 @@ class ScheduleController extends Controller
                         'created_at' => Carbon::now(),
                     ]);
                     //TODO : SEND EMAIL TO DEAN folow up
+                    $schedule = Schedule::with('lecturer')->find($s_id);
+                    $dean = User::find($request->dean_id);
+                    if($dean->email != null || $dean->email != ""){
+                        $d['email'] = $dean->email;
+                        $d['subject'] = "Tindak Lanjut Peer-Observation";
+                        $d['name'] = $dean->name_with_title;
+                        $d['messages'] = "Anda dijadwalkan untuk melakukan <b>Tindak Lanjut</b> <i><a href='".url('/dashboard')."'>Peer-Observation</a></i> kepada dosen berikut:";
+                        $d['study_program'] = $schedule->study_program;
+                        $d['auditee'] = $schedule->lecturer->name_with_title;
+                        $d['auditee_hp'] = $schedule->lecturer->phone;
+                        $d['auditee_email'] = $schedule->lecturer->email;
+                        $d['start'] = Date::createFromDate($request->date_start)->format('l, j F Y (H:i)');
+                        $d['end'] = Date::createFromDate($request->date_end)->format('l, j F Y (H:i)');
+                        dispatch(new JobNotification($d)); //send Email using queue job
+                    }
+                    //--------------------end email--------------
+
                     return redirect()->route('schedules.review_observations', $id);
                 }
 
@@ -172,12 +222,21 @@ class ScheduleController extends Controller
                 if($data){
                     $x = Schedule_history::insert([
                         'schedule_id' => $s_id,
-                        'description' => "<b>".Auth::user()->name."</b> has upgraded observation status to <u>Result and Recommendation</u>.",
+                        'description' => "<b>".Auth::user()->name."</b> has updated observation status to <u>Result and Recommendation</u>.",
                         'remark' => $request->remark,
                         'created_by' => Auth::user()->id,
                         'created_at' => Carbon::now(),
                     ]);
                     //TODO : SEND EMAIL TO LECTURER (result)
+                    $schedule = Schedule::with('lecturer')->find($s_id);
+                    if($schedule->lecturer->email != null || $schedule->lecturer->email != ""){
+                        $d['email'] = $schedule->lecturer->email;
+                        $d['subject'] = "Hasil Peer-Observation";
+                        $d['name'] = $schedule->lecturer->name_with_title;
+                        $d['messages'] = "Menginformasikan bahwa, hasil audit <i>Peer-Observation</i> anda sudah dapat dilihat melalui tautan sistem berikut ini <a href='".url('/pdf/report/'.Crypt::encrypt($s_id))."'>lpm.jgu.ac.id/observations/me</a>";
+                        dispatch(new JobNotification($d)); //send Email using queue job
+                    }
+                    //--------------------end email--------------
                     return redirect()->route('schedules.edit', $id);
                 }
             }

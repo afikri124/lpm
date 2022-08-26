@@ -100,9 +100,9 @@ class ApiController extends Controller
     public function schedules(Request $request)
     {
         $data = Schedule::with('observations')
-        ->with('status')->with('lecturer')
-        ->with('observations.auditor')
-        ->select('*')->orderBy("status_id");
+                ->with('status')->with('lecturer')
+                ->with('observations.auditor')
+                ->select('*')->orderBy("status_id");
             return Datatables::of($data)
                     ->filter(function ($instance) use ($request) {
                         if (!empty($request->get('lecturer_id'))) {
@@ -128,10 +128,10 @@ class ApiController extends Controller
     public function schedules_by_lectrurer_id(Request $request)
     {
         $data = Schedule::with('observations')
-        ->with('status')
-        ->with('observations.auditor')
-        ->where('lecturer_id', Auth::user()->id)
-        ->select('*')->orderBy("status_id");
+                ->with('status')
+                ->with('observations.auditor')
+                ->where('lecturer_id', Auth::user()->id)
+                ->select('*')->orderBy("status_id");
             return Datatables::of($data)
                     ->filter(function ($instance) use ($request) {
                         if (!empty($request->get('status_id'))) {
@@ -148,8 +148,8 @@ class ApiController extends Controller
     public function observations_by_schedule_id(Request $request)
     {
         $data = Observation::with('auditor')
-        ->where('schedule_id', $request->get('schedule_id'))
-        ->select('*');
+                ->where('schedule_id', $request->get('schedule_id'))
+                ->select('*');
             return Datatables::of($data)
                     ->filter(function ($instance) use ($request) {
                         if (!empty($request->get('search'))) {
@@ -168,7 +168,10 @@ class ApiController extends Controller
 
     public function observations_by_auditor_id(Request $request)
     {
-        $data = Observation::with('schedule')->with('schedule.lecturer')->where('auditor_id', Auth::user()->id)->select('*')->orderBy('attendance');
+        $data = Observation::with('schedule')
+                ->with('schedule.lecturer')
+                ->where('auditor_id', Auth::user()->id)
+                ->select('*')->orderBy('attendance');
             return Datatables::of($data)
                     ->filter(function ($instance) use ($request) {
                         if (!empty($request->get('lecturer_id'))) {
@@ -200,8 +203,10 @@ class ApiController extends Controller
 
     public function follow_up_by_dean_id(Request $request)
     {
-        $data = Follow_up::with('schedule')->with('schedule.lecturer')
-        ->where('dean_id', Auth::user()->id)->select('*')->orderBy('remark');
+        $data = Follow_up::with('schedule')
+                ->with('schedule.lecturer')
+                ->where('dean_id', Auth::user()->id)
+                ->select('*')->orderBy('remark');
             return Datatables::of($data)
                     ->filter(function ($instance) use ($request) {
                         if (!empty($request->get('lecturer_id'))) {
@@ -234,15 +239,15 @@ class ApiController extends Controller
         }
         if(Auth::user()->hasRole('AU')){
             $data['observations'] = Observation::where("auditor_id", Auth::user()->id)->where("attendance", false)
-            ->select('attendance',DB::raw('COUNT(attendance) as notif'))
-            ->groupBy('attendance')
-            ->first();
+                ->select('attendance',DB::raw('COUNT(attendance) as notif'))
+                ->groupBy('attendance')
+                ->first();
         }
         if(Auth::user()->hasRole('DE')){
             $data['follow_ups'] = Follow_up::where("dean_id", Auth::user()->id)->where("remark", null)
-            ->select(DB::raw('COUNT(dean_id) as notif'))
-            ->groupBy('dean_id')
-            ->first();
+                ->select(DB::raw('COUNT(dean_id) as notif'))
+                ->groupBy('dean_id')
+                ->first();
         }
         if(Auth::user()->hasRole('LE')){
             $data['mypo'] = Schedule::where("lecturer_id", Auth::user()->id)->where("status_id","!=", "S06")
@@ -256,14 +261,14 @@ class ApiController extends Controller
     public function recap(Request $request)
     {
         $data = Schedule::query()
-        ->with('status')
-        ->with(['lecturer' => function ($query) {
-            $query->select('id','name');
-        }])
-        ->with('observations')
-        ->with('observations.auditor')
-        ->with('observations.observation_criterias')
-        ->select('*')->orderBy("status_id");
+                ->with('status')
+                ->with(['lecturer' => function ($query) {
+                    $query->select('id','name');
+                }])
+                ->with('observations')
+                ->with('observations.auditor')
+                ->with('observations.observation_criterias')
+                ->select('*')->orderBy("status_id");
             return Datatables::of($data)
                     ->filter(function ($instance) use ($request) {
                         if (!empty($request->get('lecturer_id'))) {
@@ -299,8 +304,7 @@ class ApiController extends Controller
     public function tes(Request $request)
     {
 
-        $data = User::find(724);
-
+        $data = Schedule::with('lecturer')->with('observations')->with('observations.auditor')->find(14);
         return response()->json( $data );
 
         // return Datatables::of($data)->make(true);
