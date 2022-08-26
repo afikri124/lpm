@@ -295,7 +295,7 @@
                         <p>(SPMI)</p>
                     </div>
                     <div class="footer-content">
-                        <h1>Bagi Perguruan Tinggi/Ketua Program Studi yang ingin mengunduh<br>Sistem Penjaminan Mutu Internal (SPMI)<br>Jakarta Global University,</h1>
+                        <h1>Bagi Perguruan Tinggi/Ketua Program Studi yang ingin mengunduh<br>Sistem Penjaminan Mutu Internal (SPMI)<br>Jakarta Global University</h1>
                         <h1>silahkan klik tautan berikut :</h1>
                         @if($LINKINSTRUMENT->content != null || $LINKINSTRUMENT->content != "")
                         <a class="btn mrl5 btn-lg btn-secondary default-view" target="_blank"
@@ -459,7 +459,7 @@
                                 <h2>Kontak</h2>
                             </div>
                             <div class="footer_bottom-item footer_social-media penci-col-3">
-                                <div class="block-title mb-4"><span>Ikuti Sosial Media</span></div>
+                                <div class="block-title mb-4"><br><span>Butuh bantuan? silahkan hubungi LPM<br>{{ $CONTACT->title }} : {{ $CONTACT->content }}</span></div>
                                 <a class="social-media-item socail_media_facebook mx-3" target="_blank"
                                     href="https://www.facebook.com/jakartaglobaluniversity" title="Facebook"
                                     rel="noopener"><span class="socail-media-itemcontent"><i
