@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'General Settings')
+@section('title', 'General')
 
 @section('css')
 @endsection
@@ -62,7 +62,7 @@
                     </div>
                 </div>
                 <div class="card-footer text-end">
-                    <button class="btn btn-primary" type="submit">Update HoD</button>
+                    <button class="btn btn-primary" type="submit">Update</button>
                 </div>
             </form>
         </div>
@@ -113,7 +113,7 @@
                     </div>
                 </div>
                 <div class="card-footer text-end">
-                    <button class="btn btn-primary" type="submit">Update Contact</button>
+                    <button class="btn btn-primary" type="submit">Update</button>
                 </div>
             </form>
         </div>
@@ -164,7 +164,7 @@
                     </div>
                 </div>
                 <div class="card-footer text-end">
-                    <button class="btn btn-primary" type="submit">Update Minimum Score</button>
+                    <button class="btn btn-primary" type="submit">Update</button>
                 </div>
             </form>
         </div>
@@ -215,7 +215,7 @@
                     </div>
                 </div>
                 <div class="card-footer text-end">
-                    <button class="btn btn-primary" type="submit">Update Auditor</button>
+                    <button class="btn btn-primary" type="submit">Update</button>
                 </div>
             </form>
         </div>
@@ -225,7 +225,7 @@
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title mb-0">Instrument Link</h4>
+                    <h4 class="card-title mb-0">SPMI Link</h4>
                     <div class="card-options"><a class="card-options-collapse" href="#"
                             data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a
                             class="card-options-remove" href="#" data-bs-toggle="card-remove"><i
@@ -248,13 +248,13 @@
                             }
                             @endphp
                             <input class="form-control" type="hidden" name="id" value="{{ $id }}" required>
-                            <div class="col-md-5">
+                            <div class="col-md-3">
                                 <div class="mb-3">
                                     <label class="form-label">Button name 1</label>
                                     <input class="form-control" type="text" name="title" value="{{ $title }}" required>
                                 </div>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-7">
                                 <div class="mb-3">
                                     <label class="form-label">Link</label>
                                     <input class="form-control" type="text" name="content" value="{{ $content }}"
@@ -262,8 +262,8 @@
                                 </div>
                             </div>
                             <div class="col-md-2">
-                                <div class="mb-3 pt-2">
-                                    <button class="btn btn-primary" type="submit">Update Instrument</button>
+                                <div class="mb-3 text-end">
+                                    <button class="btn btn-primary mt-lg-4" type="submit">Update</button>
                                 </div>
                             </div>
                             @foreach ($errors->all() as $error)
@@ -287,13 +287,13 @@
                             }
                             @endphp
                             <input class="form-control" type="hidden" name="id" value="{{ $id }}" required>
-                            <div class="col-md-5">
+                            <div class="col-md-3">
                                 <div class="mb-3">
                                     <label class="form-label">Button name 2</label>
                                     <input class="form-control" type="text" name="title" value="{{ $title }}" required>
                                 </div>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-7">
                                 <div class="mb-3">
                                     <label class="form-label">Link</label>
                                     <input class="form-control" type="text" name="content" value="{{ $content }}"
@@ -301,8 +301,8 @@
                                 </div>
                             </div>
                             <div class="col-md-2">
-                                <div class="mb-3 pt-2">
-                                    <button class="btn btn-primary" type="submit">Update Instrument</button>
+                                <div class="mb-3 text-end">
+                                    <button class="btn btn-primary mt-lg-4" type="submit">Update</button>
                                 </div>
                             </div>
                             @foreach ($errors->all() as $error)
@@ -326,13 +326,13 @@
                             }
                             @endphp
                             <input class="form-control" type="hidden" name="id" value="{{ $id }}" required>
-                            <div class="col-md-5">
+                            <div class="col-md-3">
                                 <div class="mb-3">
                                     <label class="form-label">Button name 3</label>
                                     <input class="form-control" type="text" name="title" value="{{ $title }}" required>
                                 </div>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-7">
                                 <div class="mb-3">
                                     <label class="form-label">Link</label>
                                     <input class="form-control" type="text" name="content" value="{{ $content }}"
@@ -340,8 +340,8 @@
                                 </div>
                             </div>
                             <div class="col-md-2">
-                                <div class="mb-3 pt-2">
-                                    <button class="btn btn-primary" type="submit">Update Instrument</button>
+                                <div class="mb-3 text-end">
+                                    <button class="btn btn-primary mt-lg-4" type="submit">Update</button>
                                 </div>
                             </div>
                             @foreach ($errors->all() as $error)
@@ -365,13 +365,13 @@
                             }
                             @endphp
                             <input class="form-control" type="hidden" name="id" value="{{ $id }}" required>
-                            <div class="col-md-5">
+                            <div class="col-md-3">
                                 <div class="mb-3">
                                     <label class="form-label">Button name 4</label>
                                     <input class="form-control" type="text" name="title" value="{{ $title }}" required>
                                 </div>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-7">
                                 <div class="mb-3">
                                     <label class="form-label">Link</label>
                                     <input class="form-control" type="text" name="content" value="{{ $content }}"
@@ -379,8 +379,8 @@
                                 </div>
                             </div>
                             <div class="col-md-2">
-                                <div class="mb-3 pt-2">
-                                    <button class="btn btn-primary" type="submit">Update Instrument</button>
+                                <div class="mb-3 text-end">
+                                    <button class="btn btn-primary mt-lg-4" type="submit">Update</button>
                                 </div>
                             </div>
                             @foreach ($errors->all() as $error)
@@ -442,7 +442,7 @@
                     </div>
                 </div>
                 <div class="card-footer text-end">
-                    <button class="btn btn-primary" type="submit">Update Info</button>
+                    <button class="btn btn-primary" type="submit">Update</button>
                 </div>
             </form>
         </div>
