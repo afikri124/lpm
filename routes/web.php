@@ -102,14 +102,9 @@ Route::group(['prefix' => 'web/api', 'middleware' => ['auth']], function() {
 
 Route::get('/email', function () {
     $data['email'] = "afikri124@gmail.com";
-    $data['subject'] = "Hasil PO";
+    $data['subject'] = "Peer-Observation Reminder!";
     $data['name'] = "Ali Fikri";
-    $data['messages'] = "Menginformasikan bahwa, hasil audit <i>Peer-Observation</i> anda sudah dapat dilihat melalui tautan sistem berikut ini <a href='".url('/pdf/report/'.Crypt::encrypt(1))."'>lpm.jgu.ac.id/observations/me</a>";
-    $data['study_program'] = "Teknik Informatika";
-    // $data['auditee'] = "Ali Fikri";
-    $data['auditee_hp'] = "081233933313";
-    $data['auditee_email'] = "fikri@jgu.ac.id";
-    $data['start'] = Date::createFromDate(Date::now())->format('l, j F Y (H:i)');
-    $data['end'] = Date::createFromDate(Date::now())->format('l, j F Y (H:i)');
-    return new App\Mail\MailNotification($data);
+    $data['messages'] = "observasi hari ini";
+    $data['username'] = "S000000";
+    return new App\Mail\MailReminder($data);
 })->middleware(['auth', 'role:AD']);
