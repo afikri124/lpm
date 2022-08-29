@@ -86,7 +86,7 @@ Route::group(['prefix' => 'pdf', 'middleware' => ['auth']], function() {
     Route::get('recap', [App\Http\Controllers\PdfController::class, 'recap'])->name('pdf.recap');
 });
 //API
-Route::group(['prefix' => 'api', 'middleware' => ['auth']], function() {
+Route::group(['prefix' => 'web/api', 'middleware' => ['auth']], function() {
     Route::get('tes', [App\Http\Controllers\ApiController::class, 'tes'])->name('api.tes')->middleware('role:AD');
     Route::get('users', [App\Http\Controllers\ApiController::class, 'users'])->name('api.users')->middleware('role:AD');
     Route::get('notifications', [App\Http\Controllers\ApiController::class, 'notifications'])->name('api.notifications');
@@ -112,4 +112,4 @@ Route::get('/email', function () {
     $data['start'] = Date::createFromDate(Date::now())->format('l, j F Y (H:i)');
     $data['end'] = Date::createFromDate(Date::now())->format('l, j F Y (H:i)');
     return new App\Mail\MailNotification($data);
-});
+})->middleware(['auth', 'role:AD']);
