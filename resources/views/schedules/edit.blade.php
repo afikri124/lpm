@@ -103,15 +103,16 @@
                                 </strong>
                             </div>
                         </div>
-                            @if($data->status_id == "S04" && now() > $data->follow_ups[0]->date_end)
-                            <div class="col-lg-12 col-md-12">
-                                <div class="alert alert-light alert-dismissible fade show text-danger" role="alert">
-                                    <strong><i class="fa fa-exclamation-triangle"></i></strong> The follow-up date has passed the specified schedule, please remind the dean manually!
-                                    <button class="btn-close" type="button" data-bs-dismiss="alert"
-                                        aria-label="Close"></button>
-                                </div>
+                        @if($data->status_id == "S04" && now() > $data->follow_ups[0]->date_end)
+                        <div class="col-lg-12 col-md-12">
+                            <div class="alert alert-light alert-dismissible fade show text-danger" role="alert">
+                                <strong><i class="fa fa-exclamation-triangle"></i></strong> The follow-up date has
+                                passed the specified schedule, please remind the dean manually!
+                                <button class="btn-close" type="button" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
                             </div>
-                            @endif
+                        </div>
+                        @endif
                         @endif
                     </div>
                 </div>
@@ -121,6 +122,11 @@
             <div class="card">
                 <div class="row">
                     <div class="col-md-12 d-flex justify-content-center justify-content-md-end">
+                        @if($data->status_id == "S04")
+                        <a type="button" data-bs-toggle="modal" data-bs-target="#modalRescheduleFollowUp">
+                            <span class="btn btn-info" title="Reschedule Follow-Up">Reschedule</span>
+                        </a>
+                        @endif
                         @if($data->status_id == "S04" || $data->status_id == "S05" || $data->status_id == "S06")
                         <a href="{{ route('pdf.report', ['id' => Crypt::encrypt($data->id)]) }}" target="_blank">
                             <span class="btn btn-success btn-block" title="Print Pdf">Report</span>
@@ -128,12 +134,12 @@
                         @endif
                         @if($data->status_id == "S00" || $data->status_id == "S01" || $data->status_id == "S02")
                         <a type="button" id="buttonAddObserver" data-bs-toggle="modal"
-                            data-bs-target="#modalAddObserver" title="Add Observer">
-                            <span class="btn btn-primary">Add</span>
+                            data-bs-target="#modalAddObserver">
+                            <span class="btn btn-primary" title="Add Auditor">Add</span>
                         </a>
                         @if($data->status_id != "S02")
                         <a type="button" data-bs-toggle="modal" data-bs-target="#modalReschedule">
-                            <span class="btn btn-info">Reschedule</span>
+                            <span class="btn btn-info" title="Reschedule Observations">Reschedule</span>
                         </a>
                         @endif
                         @else
@@ -149,6 +155,7 @@
             </div>
         </div>
     </div>
+    @if($data->status_id == "S00" || $data->status_id == "S01" || $data->status_id == "S02")
     <div class="modal fade" id="modalAddObserver" tabindex="-1" role="dialog" aria-labelledby="modalAddObserver"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -184,6 +191,7 @@
             </div>
         </div>
     </div>
+    @if($data->status_id != "S02")
     <div class="modal fade" id="modalReschedule" tabindex="-1" role="dialog" aria-labelledby="modalReschedule"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -232,6 +240,47 @@
             </div>
         </div>
     </div>
+    @endif
+    @endif
+    @if(count($data->follow_ups) > 0)
+    <div class="modal fade" id="modalRescheduleFollowUp" tabindex="-1" role="dialog"
+        aria-labelledby="modalRescheduleFollowUp" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel1">Reschedule Follow-Up</h5>
+                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="POST" action="{{ route('reschedule_follow_up', ['id' => Crypt::encrypt($data->id)] ) }}">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <div class="col-md-12">
+                                <div class="form-group mb-2">
+                                    <label class="col-form-label">Start<i class="text-danger">*</i></label>
+                                    <input class="form-control digits" autocomplete="off" type="datetime-local"
+                                        id="date_start" name="date_start"
+                                        value="{{ date('Y-m-d\TH:i', strtotime($data->follow_ups[0]->date_start)) }}">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group mb-2">
+                                    <label class="col-form-label">End<i class="text-danger">*</i></label>
+                                    <input class="form-control digits" autocomplete="off" type="datetime-local"
+                                        id="date_end" name="date_end"
+                                        value="{{ date('Y-m-d\TH:i', strtotime($data->follow_ups[0]->date_end)) }}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-info" type="submit">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @endif
     <div class="row">
         <div class="col-sm-12">
             <div class="card">

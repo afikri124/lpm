@@ -199,7 +199,7 @@ class ScheduleController extends Controller
                         $d['email'] = $dean->email;
                         $d['subject'] = "Tindak Lanjut Peer-Observation";
                         $d['name'] = $dean->name_with_title;
-                        $d['messages'] = "Anda dijadwalkan untuk melakukan <b>Tindak Lanjut</b> <i><a href='".url('/dashboard')."'>Peer-Observation</a></i> kepada dosen berikut:";
+                        $d['messages'] = "Anda dijadwalkan untuk melakukan <b>tindak lanjut</b> <i><a href='".url('/dashboard')."'>Peer-Observation</a></i> kepada auditee berikut ini, silahkan hubungi auditee dan berikan laporan melalui sistem sesuai jadwal yang telah ditentukan.";
                         $d['study_program'] = $schedule->study_program;
                         $d['auditee'] = $schedule->lecturer->name_with_title;
                         $d['auditee_hp'] = $schedule->lecturer->phone;

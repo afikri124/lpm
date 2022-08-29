@@ -57,6 +57,7 @@ Route::group(['prefix' => 'schedules', 'middleware' => ['auth', 'role:AD']], fun
     Route::any('add', [App\Http\Controllers\ScheduleController::class, 'add'])->name('schedules.add');
     Route::any('/{id}', [App\Http\Controllers\ScheduleController::class, 'edit'])->name('schedules.edit');
     Route::any('/review/{id}', [App\Http\Controllers\ScheduleController::class, 'review_observations'])->name('schedules.review_observations');
+    Route::post('/reschedule/{id}', [App\Http\Controllers\FollowUpController::class, 'reschedule'])->name('reschedule_follow_up');
 });
 //OBSERVATIONS ROLE AUTH
 Route::group(['prefix' => 'observations', 'middleware' => ['auth']], function() {
@@ -82,7 +83,7 @@ Route::group(['prefix' => 'recap', 'middleware' => ['auth', 'role:AD']], functio
 //PDF
 Route::group(['prefix' => 'pdf', 'middleware' => ['auth']], function() {
     Route::get('report/{id}', [App\Http\Controllers\PdfController::class, 'report'])->name('pdf.report');
-    Route::get('recap', [App\Http\Controllers\PdfController::class, 'recap'])->name('pdf.recap')->middleware('role:AD');
+    Route::get('recap', [App\Http\Controllers\PdfController::class, 'recap'])->name('pdf.recap');
 });
 //API
 Route::group(['prefix' => 'api', 'middleware' => ['auth']], function() {

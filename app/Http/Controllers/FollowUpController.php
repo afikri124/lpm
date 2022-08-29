@@ -84,7 +84,7 @@ class FollowUpController extends Controller
                         $d['email'] = $schedule->lecturer->email;
                         $d['subject'] = "Hasil Peer-Observation";
                         $d['name'] = $schedule->lecturer->name_with_title;
-                        $d['messages'] = "Menginformasikan bahwa, hasil audit <i>Peer-Observation</i> anda sudah dapat dilihat melalui tautan sistem berikut ini <a href='".url('/pdf/report/'.Crypt::encrypt($follow_up->schedule_id))."'>lpm.jgu.ac.id/observations/me</a>";
+                        $d['messages'] = "Menginformasikan bahwa, hasil audit <i>Peer-Observation</i> anda sudah dapat dilihat melalui tautan berikut ini <a href='".url('/pdf/report/'.Crypt::encrypt($follow_up->schedule_id))."'>lpm.jgu.ac.id/observations/me</a>";
                         dispatch(new JobNotification($d)); //send Email using queue job
                     }
                     //--------------------end email--------------
@@ -123,6 +123,24 @@ class FollowUpController extends Controller
                     ->where('id','!=', $data->lecturer_id)->get();
             $MINSCORE = Setting::findOrFail('MINSCORE');
             return view('follow_ups.view', compact('id', 'follow_up', 'data', 'survey', 'dean', 'MINSCORE'));
+        }
+    }
+
+    public function reschedule($id, Request $request){
+        $this->validate($request, [ 
+            'date_start' => ['required', 'date'],
+            'date_end' => ['required', 'date'],
+        ]);
+        $s_id = Crypt::decrypt($id);
+        $data = Follow_up::where('schedule_id',$s_id)
+            ->update([ 
+                'date_start'=> $request->date_start,
+                'date_end'=> $request->date_end
+            ]);
+        if($data){
+            return redirect()->route('schedules.edit', $id);
+        } else {
+            abort(403, "Cannot access to restricted page!");
         }
     }
 }
