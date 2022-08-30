@@ -140,7 +140,7 @@
     <small style="font-size: 6pt;">
         @php
         if (!empty($request->get('range'))) {
-            if($request->get('range') != "" || $request->get('range') != null){
+            if($request->get('range') != "" && $request->get('range') != null && $request->get('range') != "Invalid date - Invalid date"){
                 $x = explode(" - ",$request->get('range'));
                 echo "- Tanggal (".date('d/m/Y 23:59',strtotime($x[1]))." - ".date('d/m/Y H:i',strtotime($x[0])).")<br>";
             }

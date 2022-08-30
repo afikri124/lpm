@@ -53,7 +53,8 @@
                 <form method="GET" class="row" target="_blank" action="{{ route('pdf.recap') }}">
                     @csrf
                     <div class="col-md-3">
-                        <input class="form-control" name="range" id="select_range" type="text" placeholder="Select Date">
+                        <input class="form-control" name="range" id="select_range" type="text" placeholder="Select Date"
+                            autocomplete="off">
                     </div>
                     <div class="col-md-2">
                         <select id="Select_program" name="study_program" class="form-control input-sm select2"
@@ -65,7 +66,8 @@
                         </select>
                     </div>
                     <div class="col-md-2">
-                        <select id="Select_1" name="lecturer_id" class="form-control input-sm select2" data-placeholder="Lecturer">
+                        <select id="Select_1" name="lecturer_id" class="form-control input-sm select2"
+                            data-placeholder="Lecturer">
                             <option value="">Lecturer</option>
                             @foreach($lecturer as $d)
                             <option value="{{ $d->id }}">{{ $d->name }}</option>
@@ -73,7 +75,8 @@
                         </select>
                     </div>
                     <div class="col-md-2">
-                        <select id="Select_2" name="status_id" class="form-control input-sm select2" data-placeholder="Status">
+                        <select id="Select_2" name="status_id" class="form-control input-sm select2"
+                            data-placeholder="Status">
                             <option value="">Status</option>
                             @foreach($status as $d)
                             <option value="{{ $d->id }}">{{ $d->title }}</option>
@@ -263,27 +266,43 @@
 <script>
     //DateRange Picker
     (function ($) {
-        $(function () {
-            var start = moment("2021-01-01", 'YYYY-MM-DD');
-            var end = moment();
-
-            function cb(start, end) {
+        $(function () {        
+            var start = null;
+            var end = null;
+            function cb() {
                 document.getElementById("select_range").value = null;
             }
             $('#select_range').daterangepicker({
                 startDate: start,
                 endDate: end,
+                locale: {
+                    format: 'YYYY-MM-DD'
+                },
+                showCustomRangeLabel: false,
                 ranges: {
-                    'All': [moment("2021-01-01", 'YYYY-MM-DD'), moment()],
+                    'All': [start, end],
                     'Today': [moment(), moment()],
                     'This Month': [moment().startOf('month'), moment().endOf('month')],
                     'Last Month': [moment().subtract(1, 'month').startOf('month'), moment()
                         .subtract(1, 'month').endOf('month')
-                    ]
+                    ],
+                    'This Year': [moment().startOf('year'), moment().endOf('year')],
                 }
             }, cb);
-            cb(start, end);
+            cb();
+            document.getElementById("select_range").value = null;
+            $('#select_range').on('apply.daterangepicker', function (ev, picker) {
+                if ($(this).val() == "Invalid date - Invalid date") {
+                    $(this).val(null);
+                }
+            });
+            $('#select_range').on('cancel.daterangepicker', function (ev, picker) {
+                if ($(this).val() == "Invalid date - Invalid date") {
+                    $(this).val(null);
+                }
+            });
         });
+
         // alert($('#select_range').val());
     })(jQuery);
 

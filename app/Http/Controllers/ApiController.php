@@ -281,10 +281,10 @@ class ApiController extends Controller
                             $instance->where('study_program', $request->get('study_program'));
                         }
                         if (!empty($request->get('range'))) {
-                            if($request->get('range') != "" || $request->get('range') != null){
+                            if($request->get('range') != "" && $request->get('range') != null && $request->get('range') != "Invalid date - Invalid date"){
                                 $x = explode(" - ",$request->get('range'));
                                 $instance->whereDate('date_start', '<=', date('Y-m-d 23:59',strtotime($x[1])));
-                                $instance->whereDate('date_end', '>=', date('Y-m-d H:i',strtotime($x[0])));
+                                $instance->whereDate('date_end', '>=', date('Y-m-d 00:00',strtotime($x[0])));
                             }
                         }
                     })

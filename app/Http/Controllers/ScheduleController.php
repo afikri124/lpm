@@ -126,7 +126,7 @@ class ScheduleController extends Controller
                         $d['email'] = $schedule->lecturer->email;
                         $d['subject'] = "Perubahan Jadwal Peer-Observation";
                         $d['name'] = $schedule->lecturer->name_with_title;
-                        $d['messages'] = "Di informasikan bahwa terdapat <b>Perubahan jadwal</b> dari jadwal yang sebelumnya menjadi berikut ini:";
+                        $d['messages'] = "Diinformasikan bahwa terdapat <b>perubahan jadwal</b> Peer-Observation dari jadwal yang sebelumnya menjadi berikut ini:";
                         $d['study_program'] = $schedule->study_program;
                         $d['auditee'] = $schedule->lecturer->name_with_title;
                         $d['auditee_hp'] = $schedule->lecturer->phone;
@@ -141,7 +141,7 @@ class ScheduleController extends Controller
                             $d['email'] = $o->auditor->email;
                             $d['subject'] = "Perubahan Jadwal Peer-Observation";
                             $d['name'] = $o->auditor->name_with_title;
-                            $d['messages'] = "Di informasikan bahwa terdapat <b>perubahan jadwal</b> dari jadwal yang sebelumnya menjadi berikut:";
+                            $d['messages'] = "Diinformasikan bahwa terdapat <b>perubahan jadwal</b> Peer-Observation dari jadwal yang sebelumnya menjadi berikut ini:";
                             $d['study_program'] = $schedule->study_program;
                             $d['auditee'] = $schedule->lecturer->name_with_title;
                             $d['auditee_hp'] = $schedule->lecturer->phone;
@@ -199,7 +199,7 @@ class ScheduleController extends Controller
                         $d['email'] = $dean->email;
                         $d['subject'] = "Tindak Lanjut Peer-Observation";
                         $d['name'] = $dean->name_with_title;
-                        $d['messages'] = "Anda dijadwalkan untuk melakukan <b>tindak lanjut</b> <i><a href='".url('/dashboard')."'>Peer-Observation</a></i> kepada auditee berikut ini, silahkan hubungi auditee dan berikan laporan melalui sistem sesuai jadwal yang telah ditentukan.";
+                        $d['messages'] = "Anda dijadwalkan untuk melakukan <b>tindak lanjut</b> <i><a href='".url('/dashboard')."'>Peer-Observation</a></i> kepada auditee berikut ini, dimohon agar segera menghubungi auditee dan memberikan laporan melalui sistem ini sesuai jadwal yang telah ditentukan.";
                         $d['study_program'] = $schedule->study_program;
                         $d['auditee'] = $schedule->lecturer->name_with_title;
                         $d['auditee_hp'] = $schedule->lecturer->phone;
@@ -233,7 +233,7 @@ class ScheduleController extends Controller
                         $d['email'] = $schedule->lecturer->email;
                         $d['subject'] = "Hasil Peer-Observation";
                         $d['name'] = $schedule->lecturer->name_with_title;
-                        $d['messages'] = "Menginformasikan bahwa, hasil audit <i>Peer-Observation</i> anda sudah dapat dilihat melalui tautan sistem berikut ini <a href='".url('/pdf/report/'.Crypt::encrypt($s_id))."'>lpm.jgu.ac.id/observations/me</a>";
+                        $d['messages'] = "Menginformasikan bahwa, hasil audit <i>Peer-Observation</i> anda sudah dapat dilihat melalui tautan berikut ini <a href='".url('/pdf/report/'.Crypt::encrypt($s_id))."'>lpm.jgu.ac.id/observations/me</a>";
                         dispatch(new JobNotification($d)); //send Email using queue job
                     }
                     //--------------------end email--------------

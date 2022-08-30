@@ -125,7 +125,7 @@ class ObservationController extends Controller
                         $d['email'] = $auditor->email;
                         $d['subject'] = "Auditor Peer-Observation";
                         $d['name'] = $auditor->name_with_title;
-                        $d['messages'] = "Anda mendapatkan tugas sebagai Auditor <i><a href='".url('/dashboard')."'>Peer-Observation</a> </i>yang dilaksanakan oleh LPM JGU dan mendapatan jadwal sebagaimana yang tertera dalam tabel berikut:";
+                        $d['messages'] = "Anda mendapatkan tugas sebagai Auditor <i><a href='".url('/dashboard')."'>Peer-Observation</a> </i>yang dilaksanakan oleh LPM JGU dan mendapatkan jadwal sebagaimana yang tertera dalam tabel berikut:";
                         $d['study_program'] = $schedule->study_program;
                         $d['auditee'] = $schedule->lecturer->name_with_title;
                         $d['auditee_hp'] = $schedule->lecturer->phone;
