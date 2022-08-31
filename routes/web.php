@@ -108,3 +108,5 @@ Route::get('/email', function () {
     $data['username'] = "S000000";
     return new App\Mail\MailReminder($data);
 })->middleware(['auth', 'role:AD']);
+
+Route::get('update-dosen', [App\Http\Controllers\ApiController::class, 'update_dosen'])->middleware(['auth', 'role:AD']);

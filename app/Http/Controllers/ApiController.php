@@ -20,6 +20,7 @@ use App\Models\Setting;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Crypt;
+use File;
 
 class ApiController extends Controller
 {
@@ -295,7 +296,30 @@ class ApiController extends Controller
                     ->make(true);
     }
 
-
+    public function update_dosen(Request $request)
+    {
+        $json = File::get(database_path() . "/data/dosen.json");
+        $loc = json_decode($json);
+  
+        foreach ($loc as $key => $v) {
+            $user = User::where('username', $v->id)->first();
+            if($user != null){
+                $f = (isset($v->front) ? $v->front: null);
+                $b = (isset($v->back) ? $v->back: null);
+                $h = (isset($v->hp) ? $v->hp: null);
+                $e = (isset($v->email) ? $v->email: null);
+                $user->update([
+                'front_title' => $f,
+                'back_title' => $b,
+                'email' => ($user->email == null ? $e:$user->email),
+                'phone' => ($user->phone == null ? $h:$user->phone),
+                'updated_at' => Carbon::now()
+                ]);
+                
+                echo $user->name."<br>";
+            }
+        }
+    }
 
 
 
