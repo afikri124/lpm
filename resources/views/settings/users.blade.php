@@ -163,7 +163,7 @@
                 },
                 {
                     render: function (data, type, row, meta) {
-                        var x = row.name + "<br><small class='text-muted'>" + (row.nidn==null?'':row.nidn) +
+                        var x = row.name_with_title + "<br><small class='text-muted'>" + (row.nidn==null?'':row.nidn) +
                             "</small>";
                         return x;
                     },
