@@ -94,7 +94,7 @@ class DashboardController extends Controller
                 'email_verified_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ]);
-            return redirect()->route('dashboard');
+            return redirect()->route('my_profile');
         }
         if(Auth::user()->password == null || Auth::user()->email == null){
             return view('user.update');

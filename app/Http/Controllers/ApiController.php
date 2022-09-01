@@ -312,7 +312,7 @@ class ApiController extends Controller
                 'front_title' => $f,
                 'back_title' => $b,
                 'email' => ($user->email == null ? $e:$user->email),
-                'phone' => ($user->phone == null ? $h:$user->phone),
+                'phone' => ($h != null ? $h:$user->phone),
                 'updated_at' => Carbon::now()
                 ]);
                 
