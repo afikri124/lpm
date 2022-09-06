@@ -27,7 +27,8 @@
                                     <div class="form-group">
                                         <label class="col-form-label">Name</label>
                                         <input class="form-control @error('name') is-invalid @enderror" type="text"
-                                            id="name" name="name" value="{{ old('name') }}"  required="" autocomplete="off">
+                                            id="name" name="name" value="{{ old('name') }}" required=""
+                                            autocomplete="off">
                                         @error('name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -38,7 +39,8 @@
                                     <div class="form-group">
                                         <label class="col-form-label">Username</label>
                                         <input class="form-control @error('username') is-invalid @enderror" type="text"
-                                            id="username" name="username" value="{{ old('username') }}" required="" autocomplete="off">
+                                            id="username" name="username" value="{{ old('username') }}" required=""
+                                            autocomplete="off">
                                         @error('username')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -72,8 +74,13 @@
                                         <input id="password-confirm" type="password" class="form-control"
                                             name="password_confirmation" required autocomplete="new-password">
                                     </div>
+                                    <div class="form-group text-center">
+                                        <label class="col-form-label"></label>
+                                        {!! htmlFormSnippet() !!}
+                                    </div>
                                     <div class="form-group mb-0 mt-4">
-                                        <button class="btn btn-primary btn-block w-100" type="submit">Create Account</button>
+                                        <button class="btn btn-primary btn-block w-100" type="submit">Create
+                                            Account</button>
                                     </div>
                                     <p class="mt-4 mb-0">Already have an account?<a class="ms-2"
                                             href="{{ route('login') }}">Login here</a></p>
@@ -89,4 +96,3 @@
 @endsection
 @section('script')
 @endsection
-
