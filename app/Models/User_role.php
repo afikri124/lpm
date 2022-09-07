@@ -24,6 +24,6 @@ class User_role extends Pivot
     }
 
     public function role(){
-        return $this->hasOne('App\Models\Role', 'id', 'user_id');
+        return $this->hasOne('App\Models\Role', 'id', 'role_id');
     }
 }

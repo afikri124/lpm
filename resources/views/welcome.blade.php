@@ -71,7 +71,7 @@
                     <header>
                         <nav class="navbar navbar-b navbar-trans navbar-expand-xl fixed-top nav-padding"
                             id="sidebar-menu"><a class="navbar-brand p-0" href="{{ route('home') }}"><img
-                                    class="img-fluid" src="{{ asset('assets/images/logo.png') }}" alt=""></a>
+                                    class="img-fluid" src="{{ asset('assets/images/logo-white.png') }}" alt="JGU"></a>
                             <button class="navbar-toggler navabr_btn-set custom_nav" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#navbarDefault" aria-controls="navbarDefault"
                                 aria-expanded="false"
@@ -129,8 +129,8 @@
                                                         Observation</a>
                                                     @endauth
                                                     @endif
-                                                    <!-- <a href="https://lpm.jgu.ac.id/old">PO-Old</a>
-                                                    <a href="#">Coming soon..</a> -->
+                                                    <a href="https://bkd.jgu.ac.id/">Beban Kerja Dosen</a>
+                                                    <!-- <a href="#">Coming soon..</a> -->
                                                 </div>
                                             </div>
                                         </div>
@@ -525,7 +525,8 @@
             </div>
         </footer>
         <footer class="section-space bg-secondary py-1">
-            Copyright ©2022 ITIC JGU. All rights reserved.
+        <hr>
+            Copyright © 2022 made with ❤️ by <a href="https://itic.jgu.ac.id">ITIC JGU</a>.<br>All rights reserved.
         </footer>
     </div>
     <script src="{{ asset('assets/js/jquery-3.5.1.min.js') }}"></script>

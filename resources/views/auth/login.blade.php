@@ -65,7 +65,7 @@
                                 <button class="btn btn-primary btn-block w-100" type="submit">Login</button>
                             </div>
                         </form>
-                        <h6 class="text-muted mt-4 or">Or sign in with</h6>
+                        <h6 class="text-muted my-4 or">Or sign in with</h6>
                         <div class="row">
                             <div class="col-lg-6 col-sm-12 mb-4">
                                 <div class="btn-showcase">
