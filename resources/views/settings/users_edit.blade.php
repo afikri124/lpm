@@ -25,7 +25,7 @@
             <form class="card" method="POST" action="">
                 @csrf
                 <div class="card-header">
-                    <h4 class="card-title mb-0">Edit Profile</h4>
+                    <h4 class="card-title mb-0"><img class="img-70 rounded-circle" src="{{Auth::user()->user_avatar}}"> Edit Profile</h4>
                     <div class="card-options"><a class="card-options-collapse" href="#"
                             data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a
                             class="card-options-remove" href="#" data-bs-toggle="card-remove"><i

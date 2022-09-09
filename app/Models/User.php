@@ -70,10 +70,14 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getUserAvatarAttribute()
     { 
-      $hash = md5(strtolower(trim($this->email)));
       $has_valid_avatar = false;
       if(env('APP_ENV') != 'local'){
-        $uri = "https://www.gravatar.com/avatar/$hash".'?d=404';
+        $hash = md5(strtolower(trim($this->email)));
+        $uri = "https://klas.jgu.ac.id/employee_profile/image.php?id=".$this->username;
+        if(!@getimagesize($uri)){
+            $hash = md5(strtolower(trim($this->email)));
+            $uri = "https://www.gravatar.com/avatar/$hash".'?d=404';
+        }
         $headers = @get_headers($uri);
         if($headers != false){
           if (preg_match("|200|", $headers[0])) {

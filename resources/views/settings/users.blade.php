@@ -94,7 +94,7 @@
                         <table class="table table-hover table-sm" id="datatable" width="100%">
                             <thead>
                                 <tr>
-                                    <th scope="col" width="80px" class="text-center">#</th>
+                                    <th scope="col" width="20px" class="text-center">#</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Contact</th>
                                     <th scope="col">Prog.</th>
@@ -155,9 +155,8 @@
             columns: [{
                     render: function (data, type, row, meta) {
                         var x =
-                            '<span title="Click to copy Username to Clipboard" onclick=navigator.clipboard.writeText("' + row.username + '")><img class="rounded-circle float-start chat-user-img img-30" src="' +
-                            row.user_avatar + '"> <code title="' + row.username + '">' + row
-                            .username + '</code></span>';
+                            '<span title="' + row.username + '" onclick=navigator.clipboard.writeText("' + row.username + '")><img class="rounded-circle float-start chat-user-img " src="' +
+                            row.user_avatar + '" style="width: 30px;height: 30px; object-fit: cover;"></span>';
                         return x;
                     },
                 },
