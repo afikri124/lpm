@@ -46,7 +46,7 @@
                         </div>
                     </div>
                     <ul class="profile-dropdown onhover-show-div" style="width: 200px;">
-                        <li><a href="{{ route('my_profile') }}"><i data-feather="user"></i><span>My Profile </span></a>
+                        <li  class="active"><a href="{{ route('my_profile') }}"><i data-feather="user"></i><span>My Profile </span></a>
                         </li>
                         <li><a href="{{ route('change_password') }}"><i data-feather="unlock"></i><span>Change
                                     Password</span></a></li>

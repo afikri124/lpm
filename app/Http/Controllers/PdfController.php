@@ -43,9 +43,13 @@ class PdfController extends Controller
 
         $link = route('pdf.report', $id );
         Date::setLocale('id');
-        $qr = base64_encode(QrCode::format('svg')
-        // ->merge(public_path('/assets/images/logo-jgu-white.png'), .3, true)
-                                ->size(350)->errorCorrection('H')->generate($link));
+        if (!extension_loaded('imagick')){
+            $qr = base64_encode(QrCode::format('svg')->size(350)->errorCorrection('H')->generate($link));
+        } else {
+            $qr = base64_encode(QrCode::format('png')
+                        ->merge(public_path('/assets/images/logo-jgu-white.png'), .3, true)
+                        ->size(350)->errorCorrection('H')->generate($link));
+        }
         $survey = Observation::with('observation_categories')
             ->with('auditor')
             ->with('observation_categories.criteria_category')
@@ -64,9 +68,13 @@ class PdfController extends Controller
     {
         Date::setLocale('id');
         $link = route('pdf.recap');
-        $qr = base64_encode(QrCode::format('svg')
-        // ->merge(public_path('/assets/images/logo-jgu-white.png'), .3, true)
+        if (!extension_loaded('imagick')){
+            $qr = base64_encode(QrCode::format('svg')->size(350)->errorCorrection('H')->generate($link));
+        } else {
+            $qr = base64_encode(QrCode::format('png')
+                        ->merge(public_path('/assets/images/logo-jgu-white.png'), .3, true)
                         ->size(350)->errorCorrection('H')->generate($link));
+        }
         $MINSCORE = Setting::findOrFail('MINSCORE');
         $hod = Setting::findOrFail('HODLPM');
         $data = Schedule::query()
