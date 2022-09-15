@@ -34,7 +34,6 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     protected $appends = ['user_avatar','name_with_title'];
-
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -68,7 +67,7 @@ class User extends Authenticatable implements MustVerifyEmail
       return $name_with_title;
     }
 
-    public function getUserAvatarAttribute()
+    function image()
     { 
       $has_valid_avatar = false;
       if(env('APP_ENV') != 'local'){
@@ -89,11 +88,16 @@ class User extends Authenticatable implements MustVerifyEmail
       if($has_valid_avatar){
         return $uri;
       } else {
-        if($this->gender == 'F'){
-          return asset('assets/images/user/user-f.png');
-        } else {
-          return asset('assets/images/user/user.png');
-        }
+        return $this->user_avatar;
+      }
+    }
+
+    protected function getUserAvatarAttribute()
+    { 
+      if($this->gender == 'F'){
+        return asset('assets/images/user/user-f.png');
+      } else {
+        return asset('assets/images/user/user.png');
       }
     }
 

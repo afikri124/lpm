@@ -147,7 +147,7 @@
     <table width="100%" style="font-size: 10pt">
         <tr>
             <th>Nama Dosen</th>
-            <td>{{ $data->lecturer->getNameWithTitleAttribute() }}</td>
+            <td>{{ $data->lecturer->name_with_title }}</td>
             <th>Hari/Tanggal</th>
             <td>{{ Date::createFromDate($s->updated_at)->format('l, j F Y') }}</td>
         </tr>
@@ -165,7 +165,7 @@
         </tr>
         <tr>
             <th>Auditor</th>
-            <td>{{ $s->auditor->getNameWithTitleAttribute() }}</td>
+            <td>{{ $s->auditor->name_with_title }}</td>
             <th>Jumlah Mahasiswa</th>
             <td>{{ $s->total_students }}</td>
         </tr>
@@ -256,7 +256,7 @@
                 <td width="50%" style="text-align: center;">
                     Depok, {{ Date::createFromDate($s->updated_at)->format('j F Y') }}
                     <br>Auditor<br><br><br><br>
-                    <b>( {{ $s->auditor->getNameWithTitleAttribute() }} )</b><br>
+                    <b>( {{ $s->auditor->name_with_title }} )</b><br>
                     <small>NIK. {{ $s->auditor->username }}</small>
                 </td>
             </tr>
@@ -328,7 +328,7 @@
                 <td width="50%" style="text-align: center;">
                     Depok, {{ Date::createFromDate($follow_up->updated_at)->format('j F Y') }}
                     <br>Dekan<br><br><br><br>
-                    <b>( {{ $follow_up->dean->getNameWithTitleAttribute() }} )</b><br>
+                    <b>( {{ $follow_up->dean->name_with_title }} )</b><br>
                     <small>NIK. {{ $follow_up->dean->username }}</small>
                 </td>
             </tr>

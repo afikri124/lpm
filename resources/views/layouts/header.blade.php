@@ -32,7 +32,7 @@
                 <li class="maximize" id="maximize"><a class="text-dark" href="#!"><i data-feather="maximize"></i></a></li>
                 <li class="profile-nav onhover-dropdown p-0 me-0">
                     <div class="media profile-media">
-                        <img class="b-r-10" src="{{Auth::user()->user_avatar}}" style="width: 40px;height: 40px; object-fit: cover;" alt="">
+                        <img class="rounded-circle" src="{{Auth::user()->image()}}" style="width: 40px;height: 40px; object-fit: cover;" alt="">
                         <div class="media-body">
                         @php
                          $first_name = explode(" ", ucfirst(Auth::user()->name));

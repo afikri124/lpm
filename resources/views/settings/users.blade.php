@@ -155,8 +155,8 @@
             columns: [{
                     render: function (data, type, row, meta) {
                         var x =
-                            '<span title="' + row.username + '" onclick=navigator.clipboard.writeText("' + row.username + '")><img class="rounded-circle float-start chat-user-img " src="' +
-                            row.user_avatar + '" style="width: 30px;height: 30px; object-fit: cover;"></span>';
+                            '<span title="' + row.username + '" onclick=navigator.clipboard.writeText("' + row.username + '")><code>'+
+                            row.username + '</code></span>';
                         return x;
                     },
                 },
