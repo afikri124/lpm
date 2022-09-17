@@ -81,7 +81,7 @@ Route::group(['prefix' => 'recap', 'middleware' => ['auth', 'role:AD']], functio
     Route::get('/', [App\Http\Controllers\RecapController::class, 'index'])->name('recap');
 });
 //PDF
-Route::group(['prefix' => 'pdf', 'middleware' => ['auth']], function() {
+Route::group(['prefix' => 'pdf'], function() {
     Route::get('report/{id}', [App\Http\Controllers\PdfController::class, 'report'])->name('pdf.report');
     Route::get('recap', [App\Http\Controllers\PdfController::class, 'recap'])->name('pdf.recap');
 });
@@ -100,6 +100,7 @@ Route::group(['prefix' => 'web/api', 'middleware' => ['auth']], function() {
     Route::get('recap', [App\Http\Controllers\ApiController::class, 'recap'])->name('api.recap');
 });
 
+//tes email
 Route::get('/email', function () {
     $data['email'] = "afikri124@gmail.com";
     $data['subject'] = "Peer-Observation Reminder!";
@@ -109,4 +110,5 @@ Route::get('/email', function () {
     return new App\Mail\MailReminder($data);
 })->middleware(['auth', 'role:AD']);
 
+//update gelar dosen
 Route::get('update-dosen', [App\Http\Controllers\ApiController::class, 'update_dosen'])->middleware(['auth', 'role:AD']);
