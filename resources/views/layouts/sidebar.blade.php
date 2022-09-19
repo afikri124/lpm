@@ -1,9 +1,9 @@
 <div class="sidebar-wrapper">
     <div>
         <div class="logo-wrapper">
-            <a href="{{ url('/') }}"><img class="img-fluid for-light" src="{{asset('assets/images/logo/logo.png')}}"
-                    alt=""><img class="img-fluid for-dark"
-                    src="{{asset('assets/images/logo/logo_dark.png')}}" alt=""></a>
+            <a href="{{ url('/') }}"><img class="img-fluid for-light" src="{{asset('assets/images/logo_po.png')}}"
+                    alt="" style="height: 50px;"><img class="img-fluid for-dark"
+                    src="{{asset('assets/images/logo_po.png')}}" alt="" style="height: 50px;"></a>
             <div class="back-btn"><i class="fa fa-angle-left"></i></div>
             <div class="toggle-sidebar" id="toggle-sidebar-desktop"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i></div>
         </div>
