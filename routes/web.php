@@ -26,6 +26,7 @@ Route::get('/login/google', [App\Http\Controllers\GoogleController::class, 'redi
 Route::get('/login/google/callback', [App\Http\Controllers\GoogleController::class, 'handleCallback']);
 //DASHBOARD
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'dashboard'])->name('dashboard'); 
+Route::get('/documentation', [App\Http\Controllers\DashboardController::class, 'documentation'])->name('documentation'); 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('profile', [App\Http\Controllers\DashboardController::class, 'my_profile'])->name('my_profile');
     Route::post('update-profile', [App\Http\Controllers\DashboardController::class, 'update_profile'])->name('update_profile');

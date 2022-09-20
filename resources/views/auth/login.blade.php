@@ -114,5 +114,6 @@ $url."?login_to=".route('login')."&login_name=$login_name&api_key=$api_key&callb
         window.open("{!!$link!!}", "LOGIN SSO JGU",
             "location=no, titlebar=no, toolbar=no, fullscreen='yes', resizable=no, scrollbars=yes");
     }
+
 </script>
 @endsection

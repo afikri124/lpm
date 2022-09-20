@@ -22,7 +22,7 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title mb-0"><a target="_blank" href="https://id.gravatar.com/"><img class="img-70 rounded-circle" alt="" title="Click to change gravatar"
-                            src="{{Auth::user()->user_avatar}}"></a> My Profile</h4>
+                            src="{{Auth::user()->image()}}"></a> My Profile</h4>
                     <div class="card-options"><a class="card-options-collapse" href="#"
                             data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a
                             class="card-options-remove" href="#" data-bs-toggle="card-remove"><i

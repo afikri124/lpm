@@ -93,6 +93,12 @@
                         </ul>
                     </li>
                     @endif
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='documentation' ? 'active' : '' }} "
+                            href="{{route('documentation')}}">
+                            <i data-feather="file-text"> </i><span>Documentation</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>

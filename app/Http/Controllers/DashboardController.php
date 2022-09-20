@@ -32,6 +32,11 @@ class DashboardController extends Controller
         }
     }
 
+    public function documentation()
+    {
+        return view('documentation');
+    }
+
     public function my_profile()
     {
         $data = User::where('id', Auth::user()->id)
