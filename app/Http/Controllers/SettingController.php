@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Crypt;
 use Yajra\DataTables\DataTables;
 use DB;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Log;
 
 class SettingController extends Controller
 {
@@ -229,6 +230,7 @@ class SettingController extends Controller
     public function user_delete(Request $request) {
         $user = User::find($request->id);
         if($user){
+            Log::warning(Auth::user()->username." deleted user #".$user->id.", username : ".$user->username);
             $user->delete();
             return response()->json([
                 'success' => true,
@@ -283,6 +285,7 @@ class SettingController extends Controller
     public function category_delete(Request $request) {
         $data = Criteria_category::find($request->id);
         if($data){
+            Log::warning(Auth::user()->username." deleted Category #".$data->id.", title : ".$data->title);
             $data->delete();
             return response()->json([
                 'success' => true,
@@ -338,6 +341,7 @@ class SettingController extends Controller
     public function criteria_delete(Request $request) {
         $data = Criteria::find($request->id);
         if($data){
+            Log::warning(Auth::user()->username." deleted Criteria #".$data->id.", title : ".$data->title);
             $data->delete();
             return response()->json([
                 'success' => true,

@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Jenssegers\Date\Date;
 use App\Jobs\JobNotification;
+use Illuminate\Support\Facades\Log;
 
 class ScheduleController extends Controller
 {
@@ -37,6 +38,7 @@ class ScheduleController extends Controller
     public function delete(Request $request) {
         $data = Schedule::find($request->id);
         if($data){
+            Log::warning(Auth::user()->username." deleted Schedule #".$data->id.", created by : ".$data->created_by);
             $data->delete();
             return response()->json([
                 'success' => true,
