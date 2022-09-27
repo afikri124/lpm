@@ -189,8 +189,8 @@
             @foreach($s->observation_categories as $key => $q)
             <tr valign="top">
                 <th><strong>{{ $q->criteria_category_id }}</strong></th>
-                <th colspan="4">{{ $q->criteria_category->title }}
-                    <u>{{ $q->criteria_category->description }}</u></th>
+                <th colspan="4">{{ ($q->criteria_category == null ? "" : $q->criteria_category->title) }}
+                    <u>{{ ($q->criteria_category == null ? "" : $q->criteria_category->description) }}</u></th>
             </tr>
             @php
             $point = 0;
@@ -198,7 +198,7 @@
             @foreach($q->observation_criterias as $no => $c)
             <tr valign="top">
                 <td>{{ $q->criteria_category_id }}.{{ $no + 1 }}</td>
-                <td>{{ $c->criteria->title }}</td>
+                <td>{{ ($c->criteria == null ? "" : $c->criteria->title) }}</td>
                 <td class="text-center">{{ $c->score }}</td>
                 <td class="text-center">{{ $c->weight }}</td>
                 <td class="text-center">{{ $c->score*$c->weight }}</td>
