@@ -113,3 +113,5 @@ Route::get('/email', function () {
 
 //update gelar dosen
 Route::get('update-dosen', [App\Http\Controllers\ApiController::class, 'update_dosen'])->middleware(['auth', 'role:AD']);
+//log-viewers
+Route::get('log-viewers', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index'])->middleware(['auth', 'role:AD']);
