@@ -2,7 +2,7 @@
 	  <div class="container-fluid">
 		    <div class="row">
 			      <div class="col-md-12 footer-copyright text-center">
-			        	<p class="mb-0">© {{ (date('Y')=="2022"?date('Y'):"2022-".date('Y')) }} made with ❤️ by ITIC JGU</p>
+			        	<p class="mb-0"><a href="{{ url('log-viewers') }}" target="_blank">©</a> {{ (date('Y')=="2022"?date('Y'):"2022-".date('Y')) }} made with ❤️ by ITIC JGU</p>
 			      </div>
 		    </div>
 	  </div>
