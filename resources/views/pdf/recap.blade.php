@@ -40,6 +40,7 @@
             white-space: nowrap;
             text-overflow: ellipsis;
             overflow: hidden;
+            vertical-align: top;
         }
 
     </style>
@@ -50,7 +51,8 @@
         <tr>
             <td width="50%" valign="top">
                 <!-- <small>FM/JGU/L.122</small><br> -->
-                <img src="data:image/png;base64, {!! $qr !!}" style="height: 85px;">
+                <!-- <img src="data:image/png;base64, {!! $qr !!}" style="height: 85px;"> -->
+                <img src="{{ $qr }}" style="height: 85px;">
             </td>
             <td width="50%" style="text-align: right;">
                 <img src="{{ public_path('assets/images/logo.png') }}" style="height: 60px;" alt="">

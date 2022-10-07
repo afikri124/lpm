@@ -22,7 +22,8 @@
         <tr>
             <td width="50%" valign="top">
                 <small>FM/JGU/L.122</small><br>
-                <img src="data:image/png;base64, {!! $qr !!}" style="height: 85px;">
+                <!-- <img src="data:image/png;base64, {!! $qr !!}" style="height: 85px;"> -->
+                <img src="{!! $qr !!}" style="height: 85px;">
             </td>
             <td width="50%" style="text-align: right;">
                 <img src="{{ public_path('assets/images/logo.png') }}" style="height: 60px;" alt="">
@@ -131,7 +132,8 @@
         <tr>
             <td width="50%" valign="top">
                 <small>FM/JGU/L.079</small><br>
-                <img src="data:image/png;base64, {!! $qr !!}" style="height: 85px;">
+                <!-- <img src="data:image/png;base64, {!! $qr !!}" style="height: 85px;"> -->
+                <img src="{!! $qr !!}" style="height: 85px;">
             </td>
             <td width="50%" style="text-align: right;">
                 <img src="{{ public_path('assets/images/logo.png') }}" style="height: 60px;" alt="">
@@ -290,7 +292,8 @@
     <table width="100%">
         <tr>
             <td width="50%" valign="top">
-                <img src="data:image/png;base64, {!! $qr !!}" style="height: 85px;"></td>
+                <!-- <img src="data:image/png;base64, {!! $qr !!}" style="height: 85px;"> -->
+                <img src="{!! $qr !!}" style="height: 85px;">
             <td width="50%" style="text-align: right;">
                 <img src="{{ public_path('assets/images/logo.png') }}" style="height: 60px;" alt="">
             </td>
