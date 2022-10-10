@@ -18,7 +18,7 @@
                 <div>
                     <div class="">
                         <a class="logo" href="{{ route('home') }}">
-                            <img class="img-fluid" style="max-height: 50px;" src="{{asset('assets/images/logo.png')}}"
+                            <img class="img-fluid" style="max-height: 50px;" src="{{asset('assets/images/logo_po.png')}}"
                                 alt="looginpage">
                         </a>
                     </div>
@@ -67,16 +67,16 @@
                         </form>
                         <h6 class="text-muted my-4 or">Or sign in with</h6>
                         <div class="row">
-                            <div class="col-lg-6 col-sm-12 mb-4">
+                            <div class="col-6 mb-4">
                                 <div class="btn-showcase">
                                     <button class="btn btn-light btn-block w-100" onclick="Klas2Login()">
                                         <img style="max-height: 20px;"
                                             src="{{asset('assets/images/logo/logo-icon.png')}}">
-                                        <span>SSO Klas2</span>
+                                        <span>SSO JGU</span>
                                     </button>
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-sm-12 mb-4">
+                            <div class="col-6 mb-4">
                                 <div class="btn-showcase">
                                     <a class="btn btn-light btn-block w-100" href="{{ url('login/google') }}">
                                         <img style="max-height: 20px;"
