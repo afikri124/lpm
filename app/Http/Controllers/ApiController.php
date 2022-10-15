@@ -255,6 +255,8 @@ class ApiController extends Controller
                 ->select('status_id',DB::raw('COUNT(status_id) as notif'))
                 ->groupBy('status_id')
                 ->first();
+        } else {
+            $data['notifications'] = null;
         }
         return response()->json($data);
     }
