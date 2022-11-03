@@ -98,7 +98,7 @@
 @endsection
 @php
 $login_name = "Peer%20Observation";
-$api_key = Crypt::encrypt("PO".gmdate('Y/m/d'));
+$api_key = Crypt::encrypt(env('APP_KEY').gmdate('Y/m/d'));
 Session::put('klas2_api_key', $api_key);
 $callback_url = route('sso_klas2');
 $token = md5($api_key.$callback_url);
@@ -110,11 +110,7 @@ $url."?login_to=".route('login')."&login_name=$login_name&api_key=$api_key&callb
 @section('script')
 <script>
     function Klas2Login() {
-        // alert("SSO");
-        // window.open("{!!$link!!}", "LOGIN SSO JGU",
-        //     "location=no, titlebar=no, toolbar=no, fullscreen='yes', resizable=no, scrollbars=yes");
         window.location.href = "{!!$link!!}";
     }
-
 </script>
 @endsection

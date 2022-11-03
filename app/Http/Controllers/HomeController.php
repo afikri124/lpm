@@ -53,7 +53,7 @@ class HomeController extends Controller
                 return redirect()->route('login')->withErrors(['msg' => 'API key expired, please try again!']);
             }
             Session::put('klas2_api_key', null);
-            if($request->token == md5($request->api_key.$request->id) && "PO".gmdate('Y/m/d') == Crypt::decrypt($request->api_key)){
+            if($request->token == md5($request->api_key.$request->id) && env('APP_KEY').gmdate('Y/m/d') == Crypt::decrypt($request->api_key)){
                 $user = User::where('username', $request->id)->first();
                 if ($user != null) { //login
                     Auth::loginUsingId($user->id);
