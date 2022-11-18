@@ -38,7 +38,7 @@ class JobReminder implements ShouldQueue
         //Kirim email reminder ke dekan yang belum mengisi remark
         $dea = Follow_up::with('dean')
         ->whereNull('remark')
-        ->whereDate('date_start', '<=', Carbon::today())
+        ->whereDate('date_start', '<=', Carbon::now()->endOfDay())
         // ->whereDate('date_end', '>=', Carbon::today())
         ->groupBy("dean_id")
         ->select("dean_id")->get();
@@ -56,8 +56,8 @@ class JobReminder implements ShouldQueue
         //Kirim email reminder hari ini ke auditor yang belum hadir
         $audi = Observation::join('schedules as s', 's.id', '=', 'observations.schedule_id')->with('auditor')
         ->where('attendance', false)
-        ->whereDate('s.date_start', '<=', Carbon::today())
-        ->whereDate('s.date_end', '>=', Carbon::today())
+        ->whereDate('s.date_start', '<=', Carbon::now()->endOfDay())
+        // ->whereDate('s.date_end', '>=', Carbon::today())
         ->groupBy("auditor_id")
         ->select("auditor_id")->get();
         if($audi != null){
@@ -65,7 +65,7 @@ class JobReminder implements ShouldQueue
                 $this->data['email'] = $a->auditor->email;
                 $this->data['subject'] = "Peer-Observation Reminder!";
                 $this->data['name'] = $a->auditor->name_with_title;
-                $this->data['messages'] = "observasi hari ini";
+                $this->data['messages'] = "Peer-Observation (PO)";
                 $this->data['username'] = $a->auditor->username;
                 Mail::to($this->data['email'])->queue(new MailReminder($this->data));
             }

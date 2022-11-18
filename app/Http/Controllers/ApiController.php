@@ -332,10 +332,17 @@ class ApiController extends Controller
 
         $data = Observation::join('schedules as s', 's.id', '=', 'observations.schedule_id')->with('auditor')
         ->where('attendance', false)
-        ->whereDate('s.date_start', '<=', Carbon::today())
-        ->whereDate('s.date_end', '>=', Carbon::today())
+        ->whereDate('s.date_start', '<=', Carbon::now()->endOfDay())
+        // ->whereDate('s.date_end', '>=', Carbon::today())
         ->groupBy("auditor_id")
         ->select("auditor_id")->get();
+        
+        // Observation::join('schedules as s', 's.id', '=', 'observations.schedule_id')->with('auditor')
+        // // ->where('attendance', false)
+        // ->whereDate('s.date_start', '<=', Carbon::today())
+        // ->whereDate('s.date_end', '>=', Carbon::today())
+        // ->groupBy("auditor_id")
+        // ->select("auditor_id")->get();
 
         return response()->json( $data );
 
