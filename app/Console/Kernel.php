@@ -17,7 +17,10 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
-        $schedule->job(new JobReminder)->dailyAt('08:00');
+        $schedule->command('queue:retry all')
+        ->twiceDaily(11, 23)
+        ->withoutOverlapping();
+        $schedule->job(new JobReminder)->dailyAt('08:00')->withoutOverlapping();
     }
 
     /**
