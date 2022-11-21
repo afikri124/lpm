@@ -189,7 +189,7 @@ class ScheduleController extends Controller
                     ]);
                     $x = Schedule_history::insert([
                         'schedule_id' => $s_id,
-                        'description' => "<b>".Auth::user()->name."</b> changed the observation status to <u>follow-up</u> dean.",
+                        'description' => "<b>".Auth::user()->name."</b> changed the observation status to <u>follow-up</u>.",
                         'remark' => $request->remark,
                         'created_by' => Auth::user()->id,
                         'created_at' => Carbon::now(),

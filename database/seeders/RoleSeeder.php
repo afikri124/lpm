@@ -17,7 +17,7 @@ class RoleSeeder extends Seeder
         //
         $data = [
             ["id" => "AD", "title" => "Admin"],
-            ["id" => "DE", "title" => "Dean"],
+            ["id" => "DE", "title" => "Follow-Up"],
             ["id" => "AU", "title" => "Auditor"],
             ["id" => "LE", "title" => "Lecturer"],
             ["id" => "ST", "title" => "Staff"],

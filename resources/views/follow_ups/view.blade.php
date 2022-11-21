@@ -37,7 +37,7 @@
                         <div class="col px-4">
 
                             <div class="mb-3 row">
-                                <label class="col-sm-4">Dean</label>
+                                <label class="col-sm-4">Follow-Up by</label>
                                 <div class="col-sm-8">
                                     <strong>{{ $follow_up->dean->name }}</strong>
                                 </div>
@@ -130,8 +130,8 @@
                                         <td class='text-center'><strong>{{ $key }}</strong></td>
                                         @php
                                         foreach($category as $cat){
-                                        $title = $cat->criteria_category->title."
-                                        <u>".$cat->criteria_category->description."</u>";
+                                        $title = ($cat->criteria_category == null ? "" : $cat->criteria_category->title)."
+                                        <u>".($cat->criteria_category == null ? "" : $cat->criteria_category->description)."</u>";
                                         $p_temp = 0;
                                         $w_temp = 0;
                                         foreach($cat->observation_criterias as $criterias ){
@@ -213,7 +213,7 @@
                                 <table class="table table-hover" width="100%">
                                     <thead valign="top">
                                         <tr>
-                                            <th colspan="2">Remark by Dean<br><br>
+                                            <th colspan="2">Remark Follow-Up<br><br>
                                                 <textarea class="form-control mb-4 disabled"
                                                     rows="7">{{ $follow_up->remark }}</textarea>
                                             </th>

@@ -308,15 +308,15 @@
     <p style="font-size: 10pt">Dokumentasi: </p>
     <center>
         <img src="{{ public_path($follow_up->image_path) }}" style="width: 400px;max-height:300px;" alt=""><br>
-        <small style="font-size: 8pt">Dokumentasi Dekan</small>
+        <small style="font-size: 8pt">Dokumentasi Hasil Tindak Lanjut</small>
     </center><br>
     <br>
-    <p style="font-size: 10pt">Catatan dari Dekan: <br>
+    <p style="font-size: 10pt">Catatan dari hasiil tindak lanjut: <br>
         <i class="text-danger" style="font-size: 10pt">{{ $follow_up->remark }}</i>
     </p>
     @else
     <center>
-        <i class="text-danger" style="font-size: 10pt">Dekan Belum Melakukan Pemanggilan Tindak Lanjut</i>
+        <i class="text-danger" style="font-size: 10pt">Belum Dilakukan Pemanggilan Tindak Lanjut</i>
     </center><br>
     @endif
     <br><br><br>
@@ -330,7 +330,7 @@
                 </td>
                 <td width="50%" style="text-align: center;">
                     Depok, {{ Date::createFromDate($follow_up->updated_at)->format('j F Y') }}
-                    <br>Dekan<br><br><br><br>
+                    <br>Yang Menindaklanjuti<br><br><br><br>
                     <b>( {{ $follow_up->dean->name_with_title }} )</b><br>
                     <small>NIK. {{ $follow_up->dean->username }}</small>
                 </td>

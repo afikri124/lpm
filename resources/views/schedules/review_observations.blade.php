@@ -212,8 +212,8 @@
                                         <td class='text-center'><strong>{{ $key }}</strong></td>
                                         @php
                                         foreach($category as $cat){
-                                        $title = $cat->criteria_category->title."
-                                        <u>".$cat->criteria_category->description."</u>";
+                                        $title = ($cat->criteria_category == null ? "" : $cat->criteria_category->title)."
+                                        <u>".($cat->criteria_category == null ? "" : $cat->criteria_category->description)."</u>";
                                         $p_temp = 0;
                                         $w_temp = 0;
                                         foreach($cat->observation_criterias as $criterias ){
@@ -301,7 +301,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel1">Folow Up to Dean</h5>
+                <h5 class="modal-title" id="exampleModalLabel1">Folow Up</h5>
                 <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form method="POST" action="">
@@ -310,10 +310,10 @@
                     <div class="mb-3">
                         <div class="col-md-12">
                             <div class="form-group mb-2">
-                                <label class="col-form-label">Select Dean<i class="text-danger">*</i></label>
+                                <label class="col-form-label">Select User<i class="text-danger">*</i></label>
                                 <select class="form-select digits select2 @error('dean_id') is-invalid @enderror"
                                     name="dean_id" id="dean_id" data-placeholder="Select" required>
-                                    <option value="" selected disabled>Select Dean</option>
+                                    <option value="" selected disabled>Select</option>
                                     @foreach($dean as $p)
                                     <option value="{{ $p->id }}" {{ ($p->id==old('dean_id') ? "selected": "") }}>
                                         {{ $p->name }} ({{ $p->department }})
@@ -349,7 +349,7 @@
                             </div>
                         </div>
                         <span class="invalid-feedback d-block" role="alert">
-                            <i>Note: explain why the dean should follow up.</i>
+                            <i>Note: explain why it should be followed up.</i>
                         </span>
                     </div>
                 </div>

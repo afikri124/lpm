@@ -107,7 +107,7 @@
                         <div class="col-lg-12 col-md-12">
                             <div class="alert alert-light alert-dismissible fade show text-danger" role="alert">
                                 <strong><i class="fa fa-exclamation-triangle"></i></strong> The follow-up date has
-                                passed the specified schedule, please remind the dean manually!
+                                passed the specified schedule, please remind manually!
                                 <button class="btn-close" type="button" data-bs-dismiss="alert"
                                     aria-label="Close"></button>
                             </div>
@@ -124,7 +124,7 @@
                     <div class="col-md-12 d-flex justify-content-center justify-content-md-end">
                         @if($data->status_id == "S04")
                         <a type="button" data-bs-toggle="modal" data-bs-target="#modalRescheduleFollowUp">
-                            <span class="btn btn-info" title="Reschedule Follow-Up">Reschedule</span>
+                            <span class="btn btn-info" title="Reschedule Follow-Up">Reschedule Follow-Up</span>
                         </a>
                         @endif
                         @if($data->status_id == "S04" || $data->status_id == "S05" || $data->status_id == "S06")
