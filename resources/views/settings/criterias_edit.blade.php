@@ -40,9 +40,9 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="mb-3">
-                                <label class="form-label">Criteria Title<i class="text-danger">*</i></label>
+                                <label class="form-label">Criteria Title (Max. 191 char)<i class="text-danger">*</i></label>
                                 <textarea class="form-control" rows="2"
-                                    name="title">{{ $data->title }}</textarea>
+                                    name="title"  placeholder="Note: Maximum 191 char.">{{ $data->title }}</textarea>
                             </div>
                         </div>
                         <div class="col-sm-6 col-md-6">

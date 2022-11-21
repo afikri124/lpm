@@ -77,7 +77,7 @@
                             <div class="form-group mb-2">
                                 <label class="col-form-label">Criteria Title<i class="text-danger">*</i></label>
                                 <textarea class="form-control @error('title') is-invalid @enderror" rows="2"
-                                    name="title">{{ old('title') }}</textarea>
+                                    name="title" placeholder="Note: Maximum 191 char.">{{ old('title') }}</textarea>
                                 @error('title')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
