@@ -65,7 +65,7 @@ class JobReminder implements ShouldQueue
                 $this->data['email'] = $a->auditor->email;
                 $this->data['subject'] = "Peer-Observation Reminder!";
                 $this->data['name'] = $a->auditor->name_with_title;
-                $this->data['messages'] = "Peer-Observation (PO)";
+                $this->data['messages'] = "PO yang perlu Anda kerjakan hari ini";
                 $this->data['username'] = $a->auditor->username;
                 Mail::to($this->data['email'])->queue(new MailReminder($this->data));
             }
