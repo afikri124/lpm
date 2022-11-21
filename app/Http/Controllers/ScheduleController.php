@@ -105,9 +105,9 @@ class ScheduleController extends Controller
                 'date_end' => ['required', 'date'],
                 'reschedule_reason' => ['required'],
             ]);
-            $data = Schedule::find($id)
-            ->update([ 
-                'status_id'=> 'S01',
+            $data = Schedule::find($id);
+            $data->update([ 
+                'status_id'=> ($data->status_id == 'S02' ? $data->status_id : 'S01'),
                 'date_start'=> $request->date_start,
                 'date_end'=> $request->date_end
             ]);
