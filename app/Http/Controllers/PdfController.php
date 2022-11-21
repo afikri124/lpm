@@ -82,12 +82,12 @@ class PdfController extends Controller
         $data = Schedule::query()
                 ->with('status')
                 ->with(['lecturer' => function ($query) {
-                    $query->select('id','name');
+                    $query->select('id','name','front_title','back_title');
                 }])
                 ->with('observations')
                 ->with('observations.auditor')
                 ->with('observations.observation_criterias')
-                ->select('*')->orderBy("status_id");
+                ->select('*')->orderBy("date_start");
 
         if (!empty($request->get('lecturer_id'))) {
             $data->where('lecturer_id', $request->get('lecturer_id'));

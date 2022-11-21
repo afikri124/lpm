@@ -278,7 +278,7 @@
                 locale: {
                     format: 'YYYY-MM-DD'
                 },
-                showCustomRangeLabel: false,
+                // showCustomRangeLabel: false,
                 ranges: {
                     'All': [start, end],
                     'Today': [moment(), moment()],

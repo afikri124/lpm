@@ -21,26 +21,30 @@
         }
 
         td:nth-child(2) {
-            max-width: 120px;
+            width: 170px;
+            word-wrap: break-word;
+            word-break: break-word;
         }
 
         td:nth-child(3) {
-            max-width: 175px;
+           width: 150px;
         }
 
         td:nth-child(4) {
-            max-width: 120px;
+           width: 180px;
         }
 
         td:nth-child(6) {
-            max-width: 50px;
-        }
-
-        td {
+            width: 50px;
             white-space: nowrap;
             text-overflow: ellipsis;
             overflow: hidden;
+        }
+
+        td {
             vertical-align: top;
+            word-wrap: break-word;
+            word-break: break-word;
         }
 
     </style>
@@ -129,9 +133,9 @@
     </table>
     <table width="100%" style="font-size: 10pt;">
         <tr>
-            <td width="50%" style="text-align: center;">
+            <td width="200px" style="text-align: center;">
             </td>
-            <td width="50%" style="text-align: center;">
+            <td width="" style="text-align: center;">
                 Depok, {{ Date::now()->format('j F Y') }}<br>
                 Mengetahui,<br>Kepala LPM<br><br><br><br>
                 <b>( {{ $hod->title }} )</b><br>
