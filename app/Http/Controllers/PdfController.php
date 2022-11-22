@@ -61,7 +61,7 @@ class PdfController extends Controller
         $follow_up = Follow_up::with('dean')->where('schedule_id',$s_id)->first();
         $hod = Setting::findOrFail('HODLPM');
         $MINSCORE = Setting::findOrFail('MINSCORE');
-        $pdf = PDF::loadview('pdf.report', compact('data','qr', 'survey', 'follow_up', 'hod', 'MINSCORE'));
+        $pdf = PDF::loadview('pdf.report', compact('data','qr', 'survey', 'follow_up', 'hod', 'MINSCORE'))->set_option("enable_php", true);
 	    return $pdf->stream("PO Report - ".$data->lecturer->name." - ".date('d-m-Y', strtotime($data->date_start)).".pdf");
     }
 
@@ -107,7 +107,7 @@ class PdfController extends Controller
         }
         $data = $data->get();
 
-        $pdf = PDF::loadview('pdf.recap', compact('qr','MINSCORE','data','hod','request'));
+        $pdf = PDF::loadview('pdf.recap', compact('qr','MINSCORE','data','hod','request'))->set_option("enable_php", true);
 	    return $pdf->stream("PO Recap - ".Date::now()->format('j F Y').".pdf");
     }
 }
