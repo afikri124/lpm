@@ -109,7 +109,7 @@ class ApiController extends Controller
                         if (!empty($request->get('lecturer_id'))) {
                             $instance->where('lecturer_id', $request->get('lecturer_id'));
                         }
-                        if (!empty($request->get('status_id'))) {
+                        if (!empty($request->get('status_id')) && $request->get('status_id') != null) {
                             $instance->where('status_id', $request->get('status_id'));
                         }
                         if (!empty($request->get('search'))) {
@@ -181,7 +181,7 @@ class ApiController extends Controller
                             });
                         }
 
-                        if (!empty($request->get('attendance'))) {
+                        if (!empty($request->get('attendance')) && $request->get('attendance') != null) {
                             if($request->get('attendance') == "1"){
                                 $instance->where('attendance', $request->get('attendance'));
                             } elseif($request->get('attendance') == "2") {

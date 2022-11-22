@@ -25,7 +25,7 @@
     @if($INFO->title == "Y")
     <div class="row">
         <div class="col-12">
-            <div class="alert alert-warning inverse alert-dismissible fade show" role="alert" style="font-size: 10pt;">
+            <div class="alert alert-primary inverse alert-dismissible fade show" role="alert" style="font-size: 10pt;">
                 <strong><i class="fa fa-info-circle"></i></strong>{{ $INFO->content }}
                 <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -33,7 +33,7 @@
     </div>
     @endif
     <div class="row">
-        <div class="col-xl-4 col-lg-12 xl-50 morning-sec box-col-12">
+        <div class="col-xl-6 col-lg-12 xl-50 morning-sec box-col-12">
             <div class="card profile-greeting">
                 <div class="card-body pb-0">
                     <div class="media">
@@ -64,7 +64,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-4 col-lg-12 xl-50 calendar-sec box-col-6">
+        <div class="col-xl-6 col-lg-12 xl-50 calendar-sec box-col-6">
             <div class="card gradient-primary o-hidden">
                 <div class="card-body">
                     <div class="default-datepicker">
