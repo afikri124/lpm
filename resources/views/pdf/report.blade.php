@@ -14,6 +14,11 @@
             page-break-after: always;
         }
 
+        body {
+            font-size: 11pt;
+            font-family: "Times New Roman", Times, serif;
+        }
+
     </style>
 </head>
 
@@ -34,7 +39,7 @@
     <center>
         <h5><u>BERITA ACARA <i>PEER OBSERVATION</i></u></h5>
     </center>
-    <table width="100%" style="font-size: 10pt">
+    <table width="100%">
         <tr>
             <td colspan="2">
                 <p style="text-align: justify; margin-top:20px">Dalam rangka Pelaksanaan Penjaminan Mutu di lingkungan
@@ -92,7 +97,7 @@
             </td>
         </tr>
     </table>
-    <table width="100%" style="font-size: 10pt">
+    <table width="100%">
         <tr>
             <td width="50%"></td>
             <td width="50%" style="text-align: center;">Depok,
@@ -146,7 +151,7 @@
         <h6>( Auditor {{ $key+1 }} )</h6>
     </center>
     <br>
-    <table width="100%" style="font-size: 10pt">
+    <table width="100%">
         <tr>
             <th>Nama Dosen</th>
             <td>{{ $data->lecturer->name_with_title }}</td>
@@ -173,7 +178,7 @@
         </tr>
     </table>
     <br>
-    <table class="table table-sm" width="100%" style="font-size: 10pt">
+    <table class="table table-sm" width="100%" >
         <thead>
             <tr>
                 <th>Kode</th>
@@ -227,7 +232,7 @@
         </tbody>
     </table>
     <br>
-    <table width="100%" style="font-size: 10pt">
+    <table width="100%">
         <thead valign="top">
             <tr>
                 <th>Penilaian Keseluruhan</th>
@@ -267,22 +272,23 @@
     @endforeach
     <div class="page-break"></div>
     <br>
+
     <center>
         <h5><u>LAMPIRAN</u></h5>
     </center>
     <br>
-    <p style="font-size: 10pt">Dokumentasi: </p>
+    <p>Dokumentasi: </p>
     @foreach($survey as $key => $s)
     <center>
         <img src="{{ public_path($s->image_path) }}" style="width: 400px;max-height:300px;"><br>
         <small style="font-size: 8pt">Dokumentasi Auditor {{$key+1}}</small>
     </center><br>
     @endforeach
-    <p style="font-size: 10pt">Persentase Keseluruhan:
-        <br><i style="font-size: 10pt" class="@if(($total_persentase/count($survey)) < $MINSCORE->content) text-danger @endif"><b>{{ ($total_persentase/count($survey)) }}</b>%</i>
+    <p >Persentase Keseluruhan:
+        <br><i class="@if(($total_persentase/count($survey)) < $MINSCORE->content) text-danger @endif"><b>{{ ($total_persentase/count($survey)) }}</b>%</i>
     </p>
     @if($data->remark != null || $data->remark != "")
-    <p style="font-size: 10pt">Catatan dari LPM:
+    <p>Catatan dari LPM:
         <br><i class="text-danger" style="font-size: 10pt">{{ $data->remark }}</i>
     </p>
     @endif
@@ -305,13 +311,13 @@
     </center>
     <br>
     @if($follow_up->image_path != null)
-    <p style="font-size: 10pt">Dokumentasi: </p>
+    <p>Dokumentasi: </p>
     <center>
         <img src="{{ public_path($follow_up->image_path) }}" style="width: 400px;max-height:300px;" alt=""><br>
         <small style="font-size: 8pt">Dokumentasi Hasil Tindak Lanjut</small>
     </center><br>
     <br>
-    <p style="font-size: 10pt">Catatan dari hasiil tindak lanjut: <br>
+    <p>Catatan dari hasiil tindak lanjut: <br>
         <i class="text-danger" style="font-size: 10pt">{{ $follow_up->remark }}</i>
     </p>
     @else
@@ -320,7 +326,7 @@
     </center><br>
     @endif
     <br><br><br>
-    <table width="100%" style="font-size: 10pt">
+    <table width="100%">
         <thead valign="top">
             <tr>
                 <td width="50%" style="text-align: center;">

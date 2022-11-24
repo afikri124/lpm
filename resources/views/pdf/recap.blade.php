@@ -18,20 +18,24 @@
     <style>
         tbody td {
             vertical-align: middle;
+            padding: 1px;
         }
 
         td:nth-child(2) {
-            width: 170px;
+            width: 180px;
             word-wrap: break-word;
             word-break: break-word;
         }
 
         td:nth-child(3) {
-           width: 150px;
+           width: 115px;
         }
 
         td:nth-child(4) {
-           width: 180px;
+           width: 210px;
+           white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
         }
 
         td:nth-child(6) {
@@ -47,6 +51,11 @@
             word-break: break-word;
         }
 
+        body {
+            font-size: 11pt;
+            font-family: "Times New Roman", Times, serif;
+        }
+
     </style>
 </head>
 
@@ -58,7 +67,7 @@
                 <!-- <img src="data:image/png;base64, {!! $qr !!}" style="height: 85px;"> -->
                 <img src="{{ $qr }}" style="height: 85px;">
             </td>
-            <td width="50%" style="text-align: right;">
+            <td width="50%" style="text-align: right;vertical-align: top;">
                 <img src="{{ public_path('assets/images/logo.png') }}" style="height: 60px;" alt="">
             </td>
         </tr>
@@ -68,15 +77,15 @@
         <h5><u>REKAP HASIL <i>PEER OBSERVATION</i></u></h5>
     </center>
     </br>
-    <table class="table table-bordered table-sm" width="100%" style="font-size: 10pt;">
+    <table class="table table-bordered table-sm mb-0" width="100%" style="font-size: 11pt;border:1px solid #000">
         <thead>
             <tr>
                 <th scope="col" width="20px" class="text-center">No</th>
-                <th scope="col">Dosen</th>
-                <th scope="col">Jadwal</th>
-                <th scope="col">Auditor</th>
+                <th scope="col" class="text-center">Dosen</th>
+                <th scope="col" class="text-center">Jadwal</th>
+                <th scope="col" class="text-center">Auditor</th>
                 <th scope="col" class="text-center">Skor</th>
-                <th scope="col">Status</th>
+                <th scope="col" class="text-center">Status</th>
             </tr>
         </thead>
         <tbody>
@@ -131,18 +140,6 @@
             @endforeach
         </tbody>
     </table>
-    <table width="100%" style="font-size: 10pt;">
-        <tr>
-            <td width="200px" style="text-align: center;">
-            </td>
-            <td width="" style="text-align: center;">
-                Depok, {{ Date::now()->format('j F Y') }}<br>
-                Mengetahui,<br>Kepala LPM<br><br><br><br>
-                <b>( {{ $hod->title }} )</b><br>
-                <small>NIK. {{ $hod->content }} </small>
-            </td>
-        </tr>
-    </table>
     <small style="font-size: 6pt;">
         @php
         if (!empty($request->get('range'))) {
@@ -162,6 +159,19 @@
         }
         @endphp
     </small>
+    <table width="100%">
+        <tr>
+            <td width="200px" style="text-align: center;">
+            </td>
+            <td width="" style="text-align: center;">
+                Depok, {{ Date::now()->format('j F Y') }}<br>
+                Mengetahui,<br>Kepala LPM<br><br><br><br>
+                <b>( {{ $hod->title }} )</b><br>
+                <small>NIK. {{ $hod->content }} </small>
+            </td>
+        </tr>
+    </table>
+
     <script type="text/php">
         if (isset($pdf)) {
             $x = 505;
