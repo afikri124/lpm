@@ -20,7 +20,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('queue:retry all')
         ->twiceDaily(9, 15)
         ->withoutOverlapping();
-        $schedule->job(new JobReminder)->dailyAt('07:00')->withoutOverlapping();
+        $schedule->job(new JobReminder)->days([1,2,3,4,5,6])->at('07:00')->withoutOverlapping();
     }
 
     /**
