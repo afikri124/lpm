@@ -41,7 +41,7 @@
     <tbody>
         <tr>
             <td style="font-size: 10pt;">
-                <p style="text-align: justify;">Anda dapat masuk menggunakan <i>Single Sign-On</i> Klas2 dengan memasukkan <i>username</i> dan <i>password</i> yang sama dengan yang digunakan dalam sistem Klas2 atau masuk menggunakan Akun Google yang terdaftar. Jika terdapat kendala atau ingin melakukan perubahan jadwal harap menghubungi tim LPM JGU.</p>
+                <p style="text-align: justify;">Anda dapat masuk menggunakan <i>Single Sign-On</i> Klas2 dengan memasukkan <i>username</i> dan <i>password</i> yang sama dengan yang digunakan dalam sistem Klas2 atau masuk menggunakan Akun Google yang terdaftar. Jika terdapat kendala atau ingin melakukan <b>perubahan jadwal</b> harap menghubungi tim LPM JGU.</p>
                 <br>
                 <p>Terima Kasih,</p>
                 <p><i>Wassalamu'alaikum Warahmatullaahi Wabarakaatuh.</i></p>

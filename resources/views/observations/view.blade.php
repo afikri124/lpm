@@ -53,8 +53,11 @@
                         </div>
                         <div class="col-lg-6 col-md-12">
                             <div class="form-group mb-2">
-                                <label class="col-form-label">Auditor</label>
-                                <br><strong>{{ $data->auditor->name }}</strong>
+                                <label class="col-form-label">Auditor</label> <br>
+                                @foreach($auditor as $no => $o)
+                                    ({{ $no + 1 }}) <strong>{{ $o->auditor->name }}</strong> 
+                                @endforeach
+                                <!-- <br><strong>{{ $data->auditor->name }}</strong> -->
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-12">

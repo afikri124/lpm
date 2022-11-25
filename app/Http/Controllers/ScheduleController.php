@@ -32,7 +32,10 @@ class ScheduleController extends Controller
         $lecturer = User::select('id','name')->whereHas('roles', function($q){
                         $q->where('role_id', "LE");
                     })->where('username','!=', 'admin')->orderBy('name')->get();
-        return view('schedules.index', compact('status','lecturer'));
+        $auditor = User::select('id','email','name')->whereHas('roles', function($q){
+                        $q->where('role_id', "AU");
+                    })->where('username','!=', 'admin')->orderBy('name')->get();
+        return view('schedules.index', compact('status','lecturer','auditor'));
     }
 
     public function delete(Request $request) {
@@ -139,7 +142,7 @@ class ScheduleController extends Controller
                     }
                 if($schedule->observations != null){
                     foreach($schedule->observations as $o){
-                        if($o->auditor->email != null || $o->auditor->email != ""){
+                        if($o->auditor->email != null || $o->auditor->email != "" || $o->attendance != 1){
                             $d['email'] = $o->auditor->email;
                             $d['subject'] = "Perubahan Jadwal Peer-Observation";
                             $d['name'] = $o->auditor->name_with_title;

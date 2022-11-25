@@ -56,7 +56,7 @@
             <div class="card">
                 <div class="row">
                     <div class="col-md-3">
-                        <select id="Select_1" class="form-control input-sm select2" data-placeholder="Lecturer">
+                        <select id="Select_lecturer" name="select1" class="form-control input-sm select2" data-placeholder="Lecturer">
                             <option value="">Lecturer</option>
                             @foreach($lecturer as $d)
                             <option value="{{ $d->id }}">{{ $d->name }}</option>
@@ -64,14 +64,22 @@
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <select id="Select_2" class="form-control input-sm select2" data-placeholder="Status">
+                        <select id="Select_auditor" name="select3" class="form-control input-sm select2" data-placeholder="Auditor">
+                            <option value="">Auditor</option>
+                            @foreach($auditor as $d)
+                            <option value="{{ $d->id }}">{{ $d->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <select id="Select_status" name="select2" class="form-control input-sm select2" data-placeholder="Status">
                             <option value="">Status</option>
                             @foreach($status as $d)
                             <option value="{{ $d->id }}">{{ $d->title }}</option>
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-md-6 d-flex justify-content-center justify-content-md-end">
+                    <div class="col-md-3 d-flex justify-content-center justify-content-md-end">
                         <a class="btn btn-primary btn-block btn-mail" title="Add new" href="{{ route('schedules.add')}}">
                             <i data-feather="plus"></i>New
                         </a>
@@ -140,8 +148,9 @@
             ajax: {
                 url: "{{ route('api.schedules') }}",
                 data: function (d) {
-                    d.lecturer_id = $('#Select_1').val(),
-                        d.status_id = $('#Select_2').val(),
+                    d.lecturer_id = $('#Select_lecturer').val(),
+                        d.auditor_id = $('#Select_auditor').val(),
+                        d.status_id = $('#Select_status').val(),
                         d.search = $('input[type="search"]').val()
                 },
             },
@@ -204,10 +213,13 @@
                 }
             ]
         });
-        $('#Select_1').change(function () {
+        $('#Select_status').change(function () {
             table.draw();
         });
-        $('#Select_2').change(function () {
+        $('#Select_lecturer').change(function () {
+            table.draw();
+        });
+        $('#Select_auditor').change(function () {
             table.draw();
         });
     });

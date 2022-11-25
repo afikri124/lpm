@@ -241,19 +241,20 @@ class ObservationController extends Controller
             }
         } else {
             $data = Observation::with('auditor')->with('schedule')->findOrFail($o_id);
+            $auditor = Observation::with('auditor')->where('schedule_id', $data->schedule_id)->get();
             $lecturer = User::find($data->schedule->lecturer_id);
             $CONTACT = Setting::findOrFail('CONTACT');
             if($data->attendance == false){                             //belum hadir/belum dinilai
                 if(Carbon::now() < $data->schedule->date_start){        //Belum waktunya audit
-                    return view('observations.view', compact('data', 'lecturer'))
+                    return view('observations.view', compact('data', 'lecturer','auditor'))
                     ->withErrors(['msg' => 'Sorry, it\'s not time to make observations, please contact admin for schedule changes. '.$CONTACT->title.": ".$CONTACT->content ]);
                 } else if(Carbon::now() > $data->schedule->date_end){   //Sudah kelewat waktunya
-                    return view('observations.view', compact('data', 'lecturer'))
+                    return view('observations.view', compact('data', 'lecturer','auditor'))
                     ->withErrors(['msg' => 'Sorry, you have missed the specified schedule, please contact admin for rescheduling. '.$CONTACT->title.": ".$CONTACT->content]);
                 } else {
                     $locations = Locations::orderBy('title')->get();
                     $survey = Criteria_category::with('criterias')->get();
-                    return view('observations.make', compact('data', 'lecturer', 'survey', 'locations'));
+                    return view('observations.make', compact('data', 'lecturer', 'survey', 'locations','auditor'));
                 }
             } else {
                 $survey = Observation_category::with('criteria_category')
@@ -261,7 +262,7 @@ class ObservationController extends Controller
                         ->with('observation_criterias.criteria')
                         ->where('observation_id', $o_id)
                         ->orderBy('criteria_category_id')->get();
-                return view('observations.view', compact('data', 'lecturer', 'survey'));
+                return view('observations.view', compact('data', 'lecturer', 'survey','auditor'));
             }
         }
     }
