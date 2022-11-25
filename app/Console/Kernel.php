@@ -18,7 +18,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command('queue:retry all')
-        ->twiceDaily(11, 23)
+        ->twiceDaily(9, 15)
         ->withoutOverlapping();
         $schedule->job(new JobReminder)->dailyAt('07:00')->withoutOverlapping();
     }
