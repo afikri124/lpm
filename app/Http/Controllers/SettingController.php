@@ -251,8 +251,8 @@ class SettingController extends Controller
     public function category_add(Request $request) {
         if ($request->isMethod('post')) {
             $this->validate($request, [ 
-                'id'=> ['required', 'string', 'max:255', Rule::unique('criteria_categories')],
-                'title'=> ['required', 'string', 'max:255'],
+                'id'=> ['required', 'string', 'max:191', Rule::unique('criteria_categories')],
+                'title'=> ['required', 'string', 'max:191'],
             ]);
             Criteria_category::insert(request()->except(['_token']));
             return redirect()->route('settings.categories');
@@ -263,8 +263,8 @@ class SettingController extends Controller
     public function category_edit($id, Request $request) {
         if ($request->isMethod('post')) {
             $this->validate($request, [ 
-                'id'=> ['required', 'string', 'max:255', Rule::unique('criteria_categories')->ignore($id, 'id')],
-                'title'=> ['required', 'string', 'max:255'],
+                'id'=> ['required', 'string', 'max:191', Rule::unique('criteria_categories')->ignore($id, 'id')],
+                'title'=> ['required', 'string', 'max:191'],
             ]);
             $data = Criteria_category::find($id)->update([
                 'id' => $request->id,
@@ -308,7 +308,7 @@ class SettingController extends Controller
         if ($request->isMethod('post')) {
             $this->validate($request, [ 
                 'criteria_category_id'=> ['required'],
-                'title'=> ['required', 'string', 'max:255'],
+                'title'=> ['required', 'string', 'max:191'],
                 'weight'=> ['required', 'numeric'],
             ]);
             Criteria::insert(request()->except(['_token']));
@@ -323,7 +323,7 @@ class SettingController extends Controller
         if ($request->isMethod('post')) {
             $this->validate($request, [ 
                 'criteria_category_id'=> ['required'],
-                'title'=> ['required', 'string', 'max:255'],
+                'title'=> ['required', 'string', 'max:191'],
                 'weight'=> ['required', 'numeric'],
             ]);
             $data = Criteria::find($id)->update(request()->all());

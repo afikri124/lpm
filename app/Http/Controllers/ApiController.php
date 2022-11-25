@@ -278,7 +278,7 @@ class ApiController extends Controller
                 ->with('observations')
                 ->with('observations.auditor')
                 ->with('observations.observation_criterias')
-                ->select('*')->orderBy("date_start");
+                ->select('*')->orderByDesc("date_start");
             return Datatables::of($data)
                     ->filter(function ($instance) use ($request) {
                         if (!empty($request->get('lecturer_id'))) {

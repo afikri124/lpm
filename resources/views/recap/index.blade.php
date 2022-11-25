@@ -216,7 +216,7 @@
                         if (x < "{{ $MINSCORE->content }}") {
                             return "<b class='text-danger'>" + x.toFixed(1) + "%</b>";
                         } else if (x >= "{{ $MINSCORE->content }}") {
-                            return "<b>" + x.toFixed(1) + "%</b>";
+                            return "<b>" + x.toFixed(1) + "</b>%";
                         } else {
                             return "<i class='text-light'>" + x.toFixed(1) + "</i>";
                         }
