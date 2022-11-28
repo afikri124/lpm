@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Crypt;
 use File;
+use Jenssegers\Date\Date;
 
 class ApiController extends Controller
 {
@@ -337,7 +338,7 @@ class ApiController extends Controller
     public function tes(Request $request)
     {
 
-        $data =  Observation::with('auditor')->with('schedule')->findOrFail(27);
+        $data = Date::createFromDate(Carbon::now())->format('l, j F Y (H:i)');
         
         // Observation::join('schedules as s', 's.id', '=', 'observations.schedule_id')->with('auditor')
         // // ->where('attendance', false)

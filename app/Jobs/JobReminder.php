@@ -13,6 +13,7 @@ use App\Models\Follow_up;
 use App\Models\Observation;
 use Carbon\Carbon;
 use App\Mail\MailReminder;
+use Jenssegers\Date\Date;
 
 class JobReminder implements ShouldQueue
 {
@@ -47,7 +48,7 @@ class JobReminder implements ShouldQueue
                 $this->data['email'] = $a->dean->email;
                 $this->data['subject'] = "Peer-Observation Reminder!";
                 $this->data['name'] = $a->dean->name_with_title;
-                $this->data['messages'] = "tindak lanjut (follow-up) yang belum diselesaikan";
+                $this->data['messages'] = "tindak lanjut (follow-up) yang belum diselesaikan (".Date::createFromDate(Carbon::now())->format('l, j F Y').")";;
                 $this->data['username'] = $a->dean->username;
                 Mail::to($this->data['email'])->queue(new MailReminder($this->data));
             }
@@ -65,7 +66,7 @@ class JobReminder implements ShouldQueue
                 $this->data['email'] = $a->auditor->email;
                 $this->data['subject'] = "Peer-Observation Reminder!";
                 $this->data['name'] = $a->auditor->name_with_title;
-                $this->data['messages'] = "PO yang perlu Anda kerjakan hari ini";
+                $this->data['messages'] = "PO yang perlu Anda kerjakan hari ini (".Date::createFromDate(Carbon::now())->format('l, j F Y').")";
                 $this->data['username'] = $a->auditor->username;
                 Mail::to($this->data['email'])->queue(new MailReminder($this->data));
             }

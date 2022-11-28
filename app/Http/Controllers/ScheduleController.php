@@ -131,7 +131,7 @@ class ScheduleController extends Controller
                         $d['email'] = $schedule->lecturer->email;
                         $d['subject'] = "Perubahan Jadwal Peer-Observation";
                         $d['name'] = $schedule->lecturer->name_with_title;
-                        $d['messages'] = "Diinformasikan bahwa terdapat <b>perubahan jadwal</b> Peer-Observation dari jadwal yang sebelumnya menjadi berikut ini:";
+                        $d['messages'] = "Diinformasikan bahwa terdapat <b>perubahan jadwal</b> Peer-Observation dari jadwal yang sebelumnya menjadi berikut ini:<br><br>Catatan: <i>".$request->reschedule_reason."</i>";
                         $d['study_program'] = $schedule->study_program;
                         $d['auditee'] = $schedule->lecturer->name_with_title;
                         $d['auditee_hp'] = $schedule->lecturer->phone;
@@ -142,11 +142,11 @@ class ScheduleController extends Controller
                     }
                 if($schedule->observations != null){
                     foreach($schedule->observations as $o){
-                        if($o->auditor->email != null || $o->auditor->email != "" || $o->attendance != 1){
+                        if(($o->auditor->email != null || $o->auditor->email != "") && $o->attendance != true){
                             $d['email'] = $o->auditor->email;
                             $d['subject'] = "Perubahan Jadwal Peer-Observation";
                             $d['name'] = $o->auditor->name_with_title;
-                            $d['messages'] = "Diinformasikan bahwa terdapat <b>perubahan jadwal</b> Peer-Observation dari jadwal yang sebelumnya menjadi berikut ini:";
+                            $d['messages'] = "Diinformasikan bahwa terdapat <b>perubahan jadwal</b> Peer-Observation dari jadwal yang sebelumnya menjadi berikut ini:<br><br>Catatan: <i>".$request->reschedule_reason."</i>";
                             $d['study_program'] = $schedule->study_program;
                             $d['auditee'] = $schedule->lecturer->name_with_title;
                             $d['auditee_hp'] = $schedule->lecturer->phone;
