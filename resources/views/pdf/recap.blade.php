@@ -89,9 +89,10 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($data as $key => $d)
+            @php $nokey = 0; @endphp
+            @foreach($data->sortBy('lecturer.name') as $key => $d)
             <tr>
-                <td class="text-center">{{ $key+1 }}</td>
+                <td class="text-center">{{ ++$nokey }}</td>
                 <td>{{ $d->lecturer->name_with_title }}</td>
                 <td>
                     {{ Date::createFromDate($d->date_start)->format('j/m/Y H:i') }}
