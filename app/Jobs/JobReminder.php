@@ -36,6 +36,8 @@ class JobReminder implements ShouldQueue
      */
     public function handle()
     {
+        $date = Date::now()->format('l, j F Y');
+
         //Kirim email reminder ke dekan yang belum mengisi remark
         $dea = Follow_up::with('dean')
         ->whereNull('remark')
@@ -46,9 +48,9 @@ class JobReminder implements ShouldQueue
         if($dea != null){
             foreach($dea as $a){
                 $this->data['email'] = $a->dean->email;
-                $this->data['subject'] = "Peer-Observation Reminder!";
+                $this->data['subject'] = "Peer-Observation Reminder! ".$date;
                 $this->data['name'] = $a->dean->name_with_title;
-                $this->data['messages'] = "tindak lanjut (follow-up) yang belum diselesaikan (".Date::createFromDate(Carbon::now())->format('l, j F Y').")";;
+                $this->data['messages'] = "tindak lanjut (follow-up) yang belum diselesaikan (".$date.")";;
                 $this->data['username'] = $a->dean->username;
                 Mail::to($this->data['email'])->queue(new MailReminder($this->data));
             }
@@ -64,9 +66,9 @@ class JobReminder implements ShouldQueue
         if($audi != null){
             foreach($audi as $a){
                 $this->data['email'] = $a->auditor->email;
-                $this->data['subject'] = "Peer-Observation Reminder!";
+                $this->data['subject'] = "Peer-Observation Reminder! ".$date;
                 $this->data['name'] = $a->auditor->name_with_title;
-                $this->data['messages'] = "PO yang perlu Anda kerjakan hari ini (".Date::createFromDate(Carbon::now())->format('l, j F Y').")";
+                $this->data['messages'] = "PO yang perlu Anda kerjakan hari ini (".$date.")";
                 $this->data['username'] = $a->auditor->username;
                 Mail::to($this->data['email'])->queue(new MailReminder($this->data));
             }

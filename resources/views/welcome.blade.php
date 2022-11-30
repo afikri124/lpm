@@ -129,7 +129,8 @@
                                                         Observation</a>
                                                     @endauth
                                                     @endif
-                                                    <a href="https://bkd.jgu.ac.id/">Beban Kerja Dosen</a>
+                                                    <a href="https://bkd.jgu.ac.id/">BKD</a>
+                                                    <a href="https://s.jgu.ac.id/">S.JGU</a>
                                                     <!-- <a href="#">Coming soon..</a> -->
                                                 </div>
                                             </div>
@@ -142,10 +143,11 @@
                 </div>
 
                 <!-- EDIT HOME MULAI DARI SINI -->
+                
                 <div class="row">
                     <div class="col-xl-5 col-lg-6">
-                        <div class="content">
-                            <div>
+                        <div class="content ">
+                            <div class="container">
                                 <h1 class="wow fadeIn">Lembaga </h1>
                                 <h1 class="wow fadeIn">Penjamin Mutu (LPM)</h1>
                                 <h2 class="txt-secondary wow fadeIn">Quality Assurance & Control</h2>
@@ -156,7 +158,7 @@
                     </div>
 
                     <div class="col-xl-7 col-lg-6">
-                        <div class="wow fadeIn"><img class="screen2"
+                        <div class="wow fadeIn"><img class="screen2" style="margin-top: 10vh;"
                                 src="{{ asset('assets/images/landing/screen2.jpg') }}" alt=""></div>
                     </div>
                 </div>
