@@ -28,18 +28,18 @@
         }
 
         td:nth-child(3) {
-           width: 115px;
+           max-width: 95px;
         }
 
         td:nth-child(4) {
-           width: 210px;
+           max-width: 150px;
            white-space: nowrap;
             text-overflow: ellipsis;
             overflow: hidden;
         }
 
         td:nth-child(6) {
-            width: 50px;
+            max-width: 50px;
             white-space: nowrap;
             text-overflow: ellipsis;
             overflow: hidden;
@@ -97,9 +97,9 @@
                 <td>
                     {{ Date::createFromDate($d->date_start)->format('j/m/Y H:i') }}
                     @if(date('d F Y', strtotime($d->date_start)) == date('d F Y', strtotime($d->date_end)))
-                    - {{ Date::createFromDate($d->date_end)->format('H:i') }}
+                    <br>s.d. {{ Date::createFromDate($d->date_end)->format('H:i') }}
                     @else
-                    - {{ Date::createFromDate($d->date_end)->format('j/m/Y H:i') }}
+                    <br>s.d. {{ Date::createFromDate($d->date_end)->format('j/m/Y H:i') }}
                     @endif
                 </td>
                 <td>

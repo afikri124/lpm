@@ -26,7 +26,7 @@
     <table width="100%">
         <tr>
             <td width="50%" valign="top">
-                <small>FM/JGU/L.122</small><br>
+                <code style="color: black;font-size:9pt">FM/JGU/L.122</code><br>
                 <!-- <img src="data:image/png;base64, {!! $qr !!}" style="height: 85px;"> -->
                 <a href="{{$link}}"><img src="{!! $qr !!}" style="height: 85px;"></a>
             </td>
@@ -136,7 +136,7 @@
     <table width="100%">
         <tr>
             <td width="50%" valign="top">
-                <small>FM/JGU/L.079</small><br>
+                <code style="color: black;font-size:9pt">FM/JGU/L.079</code><br>
                 <!-- <img src="data:image/png;base64, {!! $qr !!}" style="height: 85px;"> -->
                 <img src="{!! $qr !!}" style="height: 85px;">
             </td>
