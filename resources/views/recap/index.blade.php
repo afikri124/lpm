@@ -84,10 +84,14 @@
                         </select>
                     </div>
                     <div class="col-md-1">
+                        <select name="export" class="form-control input-sm select2">
+                            <option>Pdf</option>
+                            <option>Xlsx</option>
+                        </select>
                     </div>
                     <div class="col-md-2 justify-content-center justify-content-md-end">
-                        <button class="btn btn-primary w-100 btn-block btn-mail h-100" title="Pdf" type="submit">
-                            <i data-feather="printer"></i>Print
+                        <button class="btn btn-primary btn-mail w-100 h-100" type="submit">
+                            <i data-feather="download"></i>Export
                         </button>
                     </div>
                 </form>
@@ -266,9 +270,10 @@
 <script>
     //DateRange Picker
     (function ($) {
-        $(function () {        
+        $(function () {
             var start = null;
             var end = null;
+
             function cb() {
                 document.getElementById("select_range").value = null;
             }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\RecapExport;
 use Illuminate\Http\Request;
 use PDF;
 use QrCode;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Jenssegers\Date\Date;
 use Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PdfController extends Controller
 {
@@ -107,7 +109,12 @@ class PdfController extends Controller
         }
         $data = $data->get();
 
-        $pdf = PDF::loadview('pdf.recap', compact('qr','MINSCORE','data','hod','request'))->set_option("enable_php", true);
-	    return $pdf->stream("PO Recap - ".Date::now()->format('j F Y').".pdf");
+        if($request->get('export') == "Xlsx"){
+            return Excel::download(new RecapExport($MINSCORE,$data,$hod), 'PO Recap - '.Date::now()->format('j F Y').'.xlsx');
+        } else{
+            $pdf = PDF::loadview('pdf.recap', compact('qr','MINSCORE','data','hod','request'))->set_option("enable_php", true);
+            return $pdf->stream("PO Recap - ".Date::now()->format('j F Y').".pdf");
+        }
     }
+
 }
