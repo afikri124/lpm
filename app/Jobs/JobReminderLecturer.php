@@ -47,12 +47,14 @@ class JobReminderLecturer implements ShouldQueue
         ->select("lecturer_id")->get();
         if($lc != null){
             foreach($lc as $a){
-                $this->data['email'] = $a->lecturer->email;
-                $this->data['subject'] = "Peer-Observation Schedule!";
-                $this->data['name'] = $a->lecturer->name_with_title;
-                $this->data['messages'] = "PO yang sudah terlewat, Segera hubungi auditor dan Tim LPM JGU untuk melakukan perubahan jadwal";
-                $this->data['username'] = $a->lecturer->username;
-                Mail::to($this->data['email'])->queue(new MailReminder($this->data));
+                if($a->lecturer->email != null) {
+                    $this->data['email'] = $a->lecturer->email;
+                    $this->data['subject'] = "Peer-Observation Schedule!";
+                    $this->data['name'] = $a->lecturer->name_with_title;
+                    $this->data['messages'] = "PO yang sudah terlewat, Segera hubungi auditor dan Tim LPM JGU untuk melakukan perubahan jadwal";
+                    $this->data['username'] = $a->lecturer->username;
+                    Mail::to($this->data['email'])->queue(new MailReminder($this->data));
+                }
             }
         }
     }
