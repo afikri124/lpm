@@ -120,12 +120,14 @@ class ApiController extends Controller
                         if (!empty($request->get('status_id'))) {
                             $instance->where('status_id', $request->get('status_id'));
                         }
-                        // if (!empty($request->get('search'))) {
-                        //      $instance->where(function($w) use($request){
-                        //         $search = $request->get('search');
-                        //             $w->orWhere('remark', 'LIKE', "%$search%");
-                        //     });
-                        // }
+                        
+                        if (!empty($request->get('range'))) {
+                            if($request->get('range') != "" && $request->get('range') != null && $request->get('range') != "Invalid date - Invalid date"){
+                                $x = explode(" - ",$request->get('range'));
+                                $instance->whereDate('date_start', '<=', date('Y-m-d 23:59',strtotime($x[1])));
+                                $instance->whereDate('date_end', '>=', date('Y-m-d 00:00',strtotime($x[0])));
+                            }
+                        }
                     })
                     ->addColumn('link', function($x){
                         return Crypt::encrypt($x['id']);

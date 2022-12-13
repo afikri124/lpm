@@ -52,18 +52,9 @@
             <div class="card">
                 <form method="GET" class="row" target="_blank" action="{{ route('pdf.recap') }}">
                     @csrf
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <input class="form-control" name="range" id="select_range" type="text" placeholder="Select Date"
                             autocomplete="off">
-                    </div>
-                    <div class="col-md-2">
-                        <select id="Select_program" name="study_program" class="form-control input-sm select2"
-                            data-placeholder="Program">
-                            <option value="">Program</option>
-                            @foreach($study_program as $d)
-                            <option value="{{ $d->study_program }}">{{ $d->study_program }}</option>
-                            @endforeach
-                        </select>
                     </div>
                     <div class="col-md-2">
                         <select id="Select_1" name="lecturer_id" class="form-control input-sm select2"
@@ -71,6 +62,15 @@
                             <option value="">Lecturer</option>
                             @foreach($lecturer as $d)
                             <option value="{{ $d->id }}">{{ $d->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <select id="Select_program" name="study_program" class="form-control input-sm select2"
+                            data-placeholder="Program">
+                            <option value="">Program</option>
+                            @foreach($study_program as $d)
+                            <option value="{{ $d->study_program }}">{{ $d->study_program }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -83,7 +83,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-md-1">
+                    <div class="col-md-2">
                         <select name="export" class="form-control input-sm select2">
                             <option>Pdf</option>
                             <option>Xlsx</option>
@@ -273,6 +273,28 @@
         $(function () {
             var start = null;
             var end = null;
+            var start_prev = null;
+            var end_prev = null;
+            
+            if(moment().format('M') >= 3 && moment().format('M') <= 8){ //genap
+                start = moment().month(2).startOf('month'); //1 mar
+                end = moment().month(7).endOf('month'); //31 aug
+                start_prev = moment().month(8).subtract(1, 'year').startOf('month');
+                end_prev = moment().month(1).endOf('month');
+            } else { // ganjil
+                if(moment().format('M') > 8){
+                    start = moment().month(8).startOf('month'); //1 Sep
+                    end = moment().month(1).add(1, 'Y').endOf('month'); //28 feb
+                    start_prev = moment().month(2).startOf('month'); //1 mar
+                    end_prev = moment().month(7).endOf('month'); //31 aug
+                } else {
+                    start = moment().month(8).subtract(1, 'year').startOf('month'); //1 Sep
+                    end = moment().month(1).endOf('month'); //28 feb
+                    start_prev = moment().month(2).subtract(1, 'year').startOf('month'); //1 mar
+                    end_prev = moment().month(7).subtract(1, 'year').endOf('month'); //31 aug
+                }
+            };
+            // console.log(end);
 
             function cb() {
                 document.getElementById("select_range").value = null;
@@ -285,13 +307,9 @@
                 },
                 // showCustomRangeLabel: false,
                 ranges: {
-                    'All': [start, end],
                     'Today': [moment(), moment()],
-                    'This Month': [moment().startOf('month'), moment().endOf('month')],
-                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment()
-                        .subtract(1, 'month').endOf('month')
-                    ],
-                    'This Year': [moment().startOf('year'), moment().endOf('year')],
+                    'This Semester': [start, end],
+                    'Previous semester': [start_prev, end_prev],
                 }
             }, cb);
             cb();

@@ -7,6 +7,7 @@
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/datatables.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/datatable-extension.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/sweetalert2.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/daterange-picker.css')}}">
 @endsection
 
 @section('style')
@@ -55,7 +56,11 @@
         <div class="col-md-12 project-list">
             <div class="card">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-2">
+                        <input class="form-control" name="range" id="select_range" type="text" placeholder="Select Date"
+                            autocomplete="off">
+                    </div>
+                    <div class="col-md-2">
                         <select id="Select_lecturer" name="select1" class="form-control input-sm select2" data-placeholder="Lecturer">
                             <option value="">Lecturer</option>
                             @foreach($lecturer as $d)
@@ -63,7 +68,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <select id="Select_auditor" name="select3" class="form-control input-sm select2" data-placeholder="Auditor">
                             <option value="">Auditor</option>
                             @foreach($auditor as $d)
@@ -71,7 +76,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <select id="Select_status" name="select2" class="form-control input-sm select2" data-placeholder="Status">
                             <option value="">Status</option>
                             @foreach($status as $d)
@@ -79,7 +84,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-md-3 d-flex justify-content-center justify-content-md-end">
+                    <div class="col-md-4 d-flex justify-content-center justify-content-md-end">
                         <a class="btn btn-primary btn-block btn-mail" title="Add new" href="{{ route('schedules.add')}}">
                             <i data-feather="plus"></i>New
                         </a>
@@ -119,6 +124,8 @@
 <script src="{{asset('assets/js/datatable/datatable-extension/dataTables.responsive.min.js')}}"></script>
 <script src="{{asset('assets/js/select2/select2.full.min.js')}}"></script>
 <script src="{{asset('assets/js/sweet-alert/sweetalert.min.js')}}"></script>
+<script src="{{asset('assets/js/datepicker/daterange-picker/moment.min.js')}}"></script>
+<script src="{{asset('assets/js/datepicker/daterange-picker/daterangepicker.js')}}"></script>
 <script>
     "use strict";
     setTimeout(function () {
@@ -151,6 +158,7 @@
                     d.lecturer_id = $('#Select_lecturer').val(),
                         d.auditor_id = $('#Select_auditor').val(),
                         d.status_id = $('#Select_status').val(),
+                        d.range = $('#select_range').val(),
                         d.search = $('input[type="search"]').val()
                 },
             },
@@ -222,6 +230,9 @@
         $('#Select_auditor').change(function () {
             table.draw();
         });
+        $('#select_range').change(function () {
+            table.draw();
+        });
     });
 
     function DeleteId(id) {
@@ -258,6 +269,69 @@
                 }
             })
     }
+
+</script>
+<script>
+    //DateRange Picker
+    (function ($) {
+        $(function () {
+            var start = null;
+            var end = null;
+            var start_prev = null;
+            var end_prev = null;
+            
+            if(moment().format('M') >= 3 && moment().format('M') <= 8){ //genap
+                start = moment().month(2).startOf('month'); //1 mar
+                end = moment().month(7).endOf('month'); //31 aug
+                start_prev = moment().month(8).subtract(1, 'year').startOf('month');
+                end_prev = moment().month(1).endOf('month');
+            } else { // ganjil
+                if(moment().format('M') > 8){
+                    start = moment().month(8).startOf('month'); //1 Sep
+                    end = moment().month(1).add(1, 'Y').endOf('month'); //28 feb
+                    start_prev = moment().month(2).startOf('month'); //1 mar
+                    end_prev = moment().month(7).endOf('month'); //31 aug
+                } else {
+                    start = moment().month(8).subtract(1, 'year').startOf('month'); //1 Sep
+                    end = moment().month(1).endOf('month'); //28 feb
+                    start_prev = moment().month(2).subtract(1, 'year').startOf('month'); //1 mar
+                    end_prev = moment().month(7).subtract(1, 'year').endOf('month'); //31 aug
+                }
+            };
+            // console.log(end);
+
+            function cb() {
+                document.getElementById("select_range").value = null;
+            }
+            $('#select_range').daterangepicker({
+                startDate: start,
+                endDate: end,
+                locale: {
+                    format: 'YYYY-MM-DD'
+                },
+                // showCustomRangeLabel: false,
+                ranges: {
+                    'Today': [moment(), moment()],
+                    'This Semester': [start, end],
+                    'Previous semester': [start_prev, end_prev],
+                }
+            }, cb);
+            cb();
+            document.getElementById("select_range").value = null;
+            $('#select_range').on('apply.daterangepicker', function (ev, picker) {
+                if ($(this).val() == "Invalid date - Invalid date") {
+                    $(this).val(null);
+                }
+            });
+            $('#select_range').on('cancel.daterangepicker', function (ev, picker) {
+                if ($(this).val() == "Invalid date - Invalid date") {
+                    $(this).val(null);
+                }
+            });
+        });
+
+        // alert($('#select_range').val());
+    })(jQuery);
 
 </script>
 @endsection
