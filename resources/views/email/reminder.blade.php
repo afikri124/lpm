@@ -43,7 +43,7 @@
             <td style="font-size: 10pt;">
                 <p style="text-align: justify;">Anda dapat masuk menggunakan <i>Single Sign-On</i> (SSO JGU) dengan memasukkan <i>username</i> dan <i>password</i> yang sama dengan yang digunakan dalam sistem Klas2 atau masuk menggunakan email Akun Google yang terdaftar. Jika terdapat kendala atau ingin melakukan <b>perubahan jadwal</b> harap menghubungi tim LPM JGU.</p>
                 <br>
-                <p style="text-align: justify;"><b>Catatan:</b> Email ini akan Anda terima setiap hari sampai statusnya berubah.</p><br>
+                <p style="text-align: justify;"><b>Catatan:</b> <i style="color: red;">Email ini akan Anda terima secara berkala sampai statusnya berubah!</i></p><br>
                 <p>Terima Kasih,</p>
                 <p><i>Wassalamu'alaikum Warahmatullaahi Wabarakaatuh.</i></p>
                 <br>

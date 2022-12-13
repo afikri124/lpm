@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Jobs\JobReminder;
+use App\Jobs\JobReminderLecturer;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -21,6 +22,7 @@ class Kernel extends ConsoleKernel
         ->twiceDaily(9, 15)
         ->withoutOverlapping();
         $schedule->job(new JobReminder)->days([1,2,3,4,5,6])->at('07:00')->withoutOverlapping();
+        $schedule->job(new JobReminderLecturer)->days([1,3,5])->at('13:00')->withoutOverlapping();
     }
 
     /**

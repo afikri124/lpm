@@ -347,24 +347,27 @@ class ApiController extends Controller
     public function tes(Request $request)
     {
 
-        $data = Observation::join('schedules as s', 's.id', '=', 'observations.schedule_id')->with('auditor')
-        ->where('attendance', false)
+        $data = Schedule::with('lecturer')
         ->where(function ($query) {
-            $query->where('s.status_id', '=', 'S00')
-                  ->orWhere('s.status_id', '=', 'S01')
-                  ->orWhere('s.status_id', '=', 'S02');
+            $query->where('status_id', '=', 'S00')
+                  ->orWhere('status_id', '=', 'S01')
+                  ->orWhere('status_id', '=', 'S02');
         })
-        ->whereDate('s.date_start', '<=', Carbon::now()->endOfDay())
-        // ->whereDate('s.date_end', '>=', Carbon::today())
-        ->groupBy("auditor_id")
-        ->select("auditor_id")->get();
-        
+        ->whereDate('date_end', '<=', Carbon::now()->endOfDay())
+        ->groupBy("lecturer_id")
+        ->select("lecturer_id")->get();
         // Observation::join('schedules as s', 's.id', '=', 'observations.schedule_id')->with('auditor')
-        // // ->where('attendance', false)
-        // ->whereDate('s.date_start', '<=', Carbon::today())
-        // ->whereDate('s.date_end', '>=', Carbon::today())
+        // ->where('attendance', false)
+        // ->where(function ($query) {
+        //     $query->where('s.status_id', '=', 'S00')
+        //           ->orWhere('s.status_id', '=', 'S01')
+        //           ->orWhere('s.status_id', '=', 'S02');
+        // })
+        // ->whereDate('s.date_start', '<=', Carbon::now()->endOfDay())
+        // // ->whereDate('s.date_end', '>=', Carbon::today())
         // ->groupBy("auditor_id")
         // ->select("auditor_id")->get();
+
 
         return response()->json( $data );
 
