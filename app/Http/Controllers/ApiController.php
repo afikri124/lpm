@@ -350,8 +350,7 @@ class ApiController extends Controller
         $data = Schedule::with('lecturer')
         ->where(function ($query) {
             $query->where('status_id', '=', 'S00')
-                  ->orWhere('status_id', '=', 'S01')
-                  ->orWhere('status_id', '=', 'S02');
+                  ->orWhere('status_id', '=', 'S01');
         })
         ->whereDate('date_end', '<=', Carbon::now()->endOfDay())
         ->groupBy("lecturer_id")

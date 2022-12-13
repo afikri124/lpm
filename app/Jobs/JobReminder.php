@@ -61,8 +61,7 @@ class JobReminder implements ShouldQueue
         ->where('attendance', false)
         ->where(function ($query) {
             $query->where('s.status_id', '=', 'S00')
-                  ->orWhere('s.status_id', '=', 'S01')
-                  ->orWhere('s.status_id', '=', 'S02');
+                  ->orWhere('s.status_id', '=', 'S01');
         })
         ->whereDate('s.date_start', '<=', Carbon::now()->endOfDay())
         // ->whereDate('s.date_end', '>=', Carbon::today())
