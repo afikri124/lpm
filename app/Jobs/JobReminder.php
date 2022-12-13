@@ -59,6 +59,11 @@ class JobReminder implements ShouldQueue
         //Kirim email reminder hari ini ke auditor yang belum hadir
         $audi = Observation::join('schedules as s', 's.id', '=', 'observations.schedule_id')->with('auditor')
         ->where('attendance', false)
+        ->where(function ($query) {
+            $query->where('s.status_id', '=', 'S00')
+                  ->orWhere('s.status_id', '=', 'S01')
+                  ->orWhere('s.status_id', '=', 'S02');
+        })
         ->whereDate('s.date_start', '<=', Carbon::now()->endOfDay())
         // ->whereDate('s.date_end', '>=', Carbon::today())
         ->groupBy("auditor_id")

@@ -68,7 +68,14 @@
         </tr>
         <tr>
             <td width="30%" valign="top">Tempat</td>
-            <td width="70%" valign="top">: {{ $data->observations[0]->location }}</td>
+            <td width="70%" valign="top">: 
+                @if(count($survey) != 0)
+                {{ $data->observations[0]->location }}
+                @else
+                -
+                @endif
+                
+            </td>
         </tr>
         <tr>
             <td colspan="2">
@@ -101,7 +108,12 @@
         <tr>
             <td width="50%"></td>
             <td width="50%" style="text-align: center;">Depok,
-                {{ Date::createFromDate($data->observations[0]->updated_at)->format('j F Y') }}</td>
+                @if(count($survey) != 0)
+                {{ Date::createFromDate($data->observations[0]->updated_at)->format('j F Y') }}
+                @else
+                {{ Date::now()->format('j F Y') }}
+                @endif
+            </td>
         </tr>
         <tr>
             @if(count($data->observations) <= 2)
@@ -131,7 +143,9 @@
         </tr>
     </table>
     @php $total_persentase = 0; @endphp
+    @if(count($survey) != 0)
     @foreach($survey as $key => $s)
+    @if(count($s->observation_categories) != 0)
     <div class="page-break"></div>
     <table width="100%">
         <tr>
@@ -240,10 +254,14 @@
             </tr>
             <tr>
                 <th>Persentase</th>
+                @if($total != 0)
                 <th class="text-right @if(($total/($total_w*5)*100) < $MINSCORE->content) text-danger @endif">
                     {{ number_format($total/($total_w*5)*100, 1); }}%
                     @php $total_persentase += number_format($total/($total_w*5)*100, 1); @endphp
                 </th>
+                @else
+                <th></th>
+                @endif
             </tr>
             <tr>
                 <th colspan="2">Catatan/Komentar</th>
@@ -269,6 +287,7 @@
             </tr>
         </thead>
     </table>
+    @endif
     @endforeach
     <div class="page-break"></div>
     <br>
@@ -277,6 +296,7 @@
         <h5><u>LAMPIRAN</u></h5>
     </center>
     <br>
+    @if($total_persentase != 0)
     <p>Dokumentasi: </p>
     @foreach($survey as $key => $s)
     <center>
@@ -284,9 +304,12 @@
         <small style="font-size: 8pt">Dokumentasi Auditor {{$key+1}}</small>
     </center><br>
     @endforeach
+    @endif
     <p >Persentase Keseluruhan:
         <br><i class="@if(($total_persentase/count($survey)) < $MINSCORE->content) text-danger @endif"><b>{{ ($total_persentase/count($survey)) }}</b>%</i>
     </p>
+    
+    @endif
     @if($data->remark != null || $data->remark != "")
     <p>Catatan dari LPM:
         <br><i class="text-danger" style="font-size: 10pt">{{ $data->remark }}</i>

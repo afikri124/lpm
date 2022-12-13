@@ -130,9 +130,11 @@
                                         <th>Photo / Documentation</th>
                                         @foreach($data->observations as $no => $o)
                                         <td>
+                                            @if($o->image_path != null)
                                             <a target="_blank" href="{{ asset($o->image_path) }}">
                                                 <img class="chat-user-img img-100" src="{{ asset($o->image_path) }}">
                                             </a>
+                                            @endif
                                         </td>
                                         @endforeach
                                     </tr>
@@ -243,12 +245,16 @@
                                     </tr>
                                     <tr>
                                         <td colspan="2">Percentage</td>
+                                        @if($total_w != 0)
                                         @foreach($total as $k => $p )
                                         <td
                                             class='text-center @if(($p/($total_w/$jumlah_auditor*5)*100) < $MINSCORE->content) text-danger @endif'>
                                             {{ number_format($p/($total_w/$jumlah_auditor*5)*100,1); }}%
                                         </td>
                                         @endforeach
+                                        @else
+                                        <td></td>
+                                        @endif
                                     </tr>
                                     <tr>
                                         <td colspan="2">Final Results</td>
@@ -257,8 +263,11 @@
                                         foreach($total as $k => $p ){
                                         $total_point += $p;
                                         }
+                                        if($total_w != 0) {
                                         $final = $total_point/($total_w*5)*100;
+                                        }
                                         @endphp
+                                        @if($total_w != 0)
                                         <td class='text-center @if($final < $MINSCORE->content) text-danger @endif'
                                             colspan="2">
                                             {{ number_format($final, 1); }}%
@@ -267,6 +276,9 @@
                                                 {{ $MINSCORE->title }}
                                                 @endif
                                         </td>
+                                        @else
+                                        <td></td>
+                                        @endif
                                     </tr>
                                 </tfoot>
                             </table>
@@ -279,7 +291,7 @@
             <div class="card project-list">
                 <div class="row">
                     <div class="col-md-12 d-flex justify-content-center">
-                        @if($data->status_id == "S03")
+                        @if($data->status_id == "S03" || (($data->status_id == "S00" || $data->status_id == "S01") && now() > $data->date_end))
                         <a type="button" data-bs-toggle="modal" data-bs-target="#modalFolowUp">
                             <span class="btn btn-primary">Follow-Up</span>
                         </a>
@@ -296,7 +308,7 @@
         </div>
     </div>
 </div>
-@if($data->status_id == "S03")
+@if($data->status_id == "S03" || (($data->status_id == "S00" || $data->status_id == "S01") && now() > $data->date_end))
 <div class="modal fade" id="modalFolowUp" tabindex="-1" role="dialog" aria-labelledby="modalFolowUp" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

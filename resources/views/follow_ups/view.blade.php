@@ -186,8 +186,11 @@
                                         foreach($total as $k => $p ){
                                         $total_point += $p;
                                         }
+                                        if($total_w != 0){
                                         $final = $total_point/($total_w*5)*100;
+                                        }
                                         @endphp
+                                        @if($total_w != 0)
                                         <td class='text-center @if($final < $MINSCORE->content) text-danger @endif'
                                             colspan="2">
                                             {{ number_format($final, 1); }}%
@@ -196,6 +199,7 @@
                                                 {{ $MINSCORE->title }}
                                                 @endif
                                         </td>
+                                        @endif
                                     </tr>
                                 </tfoot>
                             </table>

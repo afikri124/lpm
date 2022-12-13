@@ -147,6 +147,11 @@
                             <span class="btn btn-primary" title="Review Results">Results</span>
                         </a>
                         @endif
+                        @if(($data->status_id == "S00" || $data->status_id == "S01") && now() > $data->date_end)
+                        <a href="{{ route('schedules.review_observations', ['id' => Crypt::encrypt($data->id)]) }}">
+                            <span class="btn btn-primary" title="Review Results">Results</span>
+                        </a>
+                        @endif
                         <a href="{{ route('schedules') }}">
                             <span class="btn btn-secondary">Back</span>
                         </a>

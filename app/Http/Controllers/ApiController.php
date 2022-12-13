@@ -340,7 +340,17 @@ class ApiController extends Controller
     public function tes(Request $request)
     {
 
-        $data = Date::createFromDate(Carbon::now())->format('l, j F Y (H:i)');
+        $data = Observation::join('schedules as s', 's.id', '=', 'observations.schedule_id')->with('auditor')
+        ->where('attendance', false)
+        ->where(function ($query) {
+            $query->where('s.status_id', '=', 'S00')
+                  ->orWhere('s.status_id', '=', 'S01')
+                  ->orWhere('s.status_id', '=', 'S02');
+        })
+        ->whereDate('s.date_start', '<=', Carbon::now()->endOfDay())
+        // ->whereDate('s.date_end', '>=', Carbon::today())
+        ->groupBy("auditor_id")
+        ->select("auditor_id")->get();
         
         // Observation::join('schedules as s', 's.id', '=', 'observations.schedule_id')->with('auditor')
         // // ->where('attendance', false)
