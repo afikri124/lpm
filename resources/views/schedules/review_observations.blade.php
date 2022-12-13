@@ -93,7 +93,7 @@
                                     <tr>
                                         <th>Attendance Date</th>
                                         @foreach($data->observations as $no => $o)
-                                        <td>{{ date('l, d M Y H:i', strtotime($o->updated_at)) }}</td>
+                                        <td>{{ ($o->updated_at == null ? "":date('l, d M Y H:i', strtotime($o->updated_at))) }}</td>
                                         @endforeach
                                     </tr>
                                     <tr>
@@ -295,9 +295,11 @@
                         <a type="button" data-bs-toggle="modal" data-bs-target="#modalFolowUp">
                             <span class="btn btn-primary">Follow-Up</span>
                         </a>
+                        @if($data->status_id == "S03" && $total_w != 0)
                         <a type="button" data-bs-toggle="modal" data-bs-target="#modalSendResult">
                             <span class="btn btn-success">Send Result</span>
                         </a>
+                        @endif
                         @endif
                         <a href="{{ route('schedules.edit', ['id'=> $id]) }}">
                             <span class="btn btn-secondary">Back</span>

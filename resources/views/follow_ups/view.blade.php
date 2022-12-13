@@ -90,8 +90,8 @@
                             </div>
                             <div class="mb-3 row">
                                 <label class="col-sm-4">Remark by LPM</label>
-                                <div class="col-sm-8">
-                                    <i>{{ $follow_up->schedule->remark }}</i>
+                                <div class="col-sm-8 text-danger">
+                                    <strong><i>{{ $follow_up->schedule->remark }}</i></strong>
                                 </div>
                             </div>
                         </div>
@@ -172,12 +172,15 @@
                                     </tr>
                                     <tr>
                                         <td colspan="2">Percentage</td>
+                                        @if($total_w != 0)
                                         @foreach($total as $k => $p )
                                         <td
                                             class='text-center @if(($p/($total_w/$jumlah_auditor*5)*100) < $MINSCORE->content) text-danger @endif'>
                                             {{ number_format($p/($total_w/$jumlah_auditor*5)*100,1); }}%
                                         </td>
                                         @endforeach
+
+                                        @endif
                                     </tr>
                                     <tr>
                                         <td colspan="2">Final Results</td>

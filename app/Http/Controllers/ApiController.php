@@ -249,7 +249,14 @@ class ApiController extends Controller
                 ->first();
         }
         if(Auth::user()->hasRole('AU')){
-            $data['observations'] = Observation::where("auditor_id", Auth::user()->id)->where("attendance", false)
+            $data['observations'] = Observation::join('schedules as s', 's.id', '=', 'observations.schedule_id')
+                ->where("auditor_id", Auth::user()->id)
+                ->where("attendance", false)
+                ->where(function ($query) {
+                    $query->where('s.status_id', '=', 'S00')
+                        ->orWhere('s.status_id', '=', 'S01')
+                        ->orWhere('s.status_id', '=', 'S02');
+                })
                 ->select('attendance',DB::raw('COUNT(attendance) as notif'))
                 ->groupBy('attendance')
                 ->first();

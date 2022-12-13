@@ -25,12 +25,19 @@
                     <h5>Observation {{ ($data->attendance ? "results" : "") }}</h5>
                 </div>
                 <div class="card-body">
+                    
+                    @if($data->attendance == 0 && ($data->schedule->status_id == "S04" || $data->schedule->status_id == "S05" || $data->schedule->status_id == "S06"))
+                    <div class="alert alert-light alert-dismissible fade show text-danger" role="alert">
+                        <strong><i class="fa fa-exclamation-triangle"></i></strong> {{ $data->schedule->remark}}
+                    </div>
+                    @else
                     @foreach ($errors->all() as $error)
                     <div class="alert alert-light alert-dismissible fade show text-danger" role="alert">
                         <strong><i class="fa fa-exclamation-triangle"></i></strong> {!! $error !!}
                         <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                     @endforeach
+                    @endif
                     <div class="row">
                         <div class="col-lg-6 col-md-12">
                             <div class="form-group mb-2">
@@ -56,7 +63,7 @@
                                 <label class="col-form-label">Auditor</label> <br>
                                 @if(isset($auditor))
                                 @foreach($auditor as $no => $o)
-                                    ({{ $no + 1 }}) <strong>{{ $o->auditor->name }}</strong> 
+                                    ({{ $no + 1 }}) <strong>{{ $o->auditor->name }}</strong><br> 
                                 @endforeach
                                 @else
                                 <strong>{{ $data->auditor->name }}</strong>
