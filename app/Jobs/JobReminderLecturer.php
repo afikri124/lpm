@@ -42,7 +42,7 @@ class JobReminderLecturer implements ShouldQueue
                   ->orWhere('status_id', '=', 'S01')
                   ->orWhere('status_id', '=', 'S02');
         })
-        ->whereDate('date_end', '<=', Carbon::now())
+        ->whereDate('date_end', '<', Carbon::now()->startOfDay())
         ->groupBy("lecturer_id")
         ->select("lecturer_id")->get();
         if($lc != null){
