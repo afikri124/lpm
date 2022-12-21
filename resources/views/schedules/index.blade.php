@@ -176,7 +176,7 @@
                         // var x = "<span title='"+ row.lecturer['name'] + "'>"+ row.lecturer['name'] + "</span>";
                         // return x;
                         var x = "<span title='" + row.lecturer['name'] + "'>" 
-                        + row.lecturer['name'] + "</span><br><a target='_blank' href='https://wa.me/" + row.lecturer['phone'] + "'><small>"
+                        + row.lecturer['name'] + "</span><br><a target='_blank' href='https://wa.me/" + row.lecturer['phone'] + "'><small>+"
                         + row.lecturer['phone'] + "</small></a>";
                         return x;
                     },

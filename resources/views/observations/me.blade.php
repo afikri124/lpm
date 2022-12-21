@@ -166,7 +166,7 @@
                     render: function (data, type, row, meta) {
                         var x = "";
                         row.observations.forEach((e) => {
-                            x += '<a target="_blank" href="https://wa.me/' + e.auditor['phone'] + '"><small>' + e.auditor['phone'] + '</small></a><br>';
+                            x += '<a target="_blank" href="https://wa.me/' + e.auditor['phone'] + '"><small>+' + e.auditor['phone'] + '</small></a><br>';
                         });
                         return x;
                     },

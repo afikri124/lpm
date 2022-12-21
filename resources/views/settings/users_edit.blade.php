@@ -100,7 +100,7 @@
                         <div class="col-sm-6 col-md-6">
                             <div class="mb-3">
                                 <label class="form-label">Phone</label>
-                                <input class="form-control" type="number" name="phone" value="{{ $data->phone }}">
+                                <input class="form-control" type="number" name="phone" value="{{ $data->phone }}" placeholder="62xxxxxxxxxx">
                             </div>
                         </div>
                         <div class="col-sm-6 col-md-6">

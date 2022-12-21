@@ -21,8 +21,7 @@
         <div class="col-xl-6">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title mb-0"><a target="_blank" href="https://id.gravatar.com/"><img class="img-70 rounded-circle" alt="" title="Edit image on Klas2 or click to change gravatar"
-                            src="{{Auth::user()->image()}}"></a> My Profile</h4>
+                    <h4 class="card-title mb-0"><a target="_blank" href="{{Auth::user()->image()}}"><img class="img-70 rounded-circle" src="{{Auth::user()->image()}}"></a> My Profile</h4>
                     <div class="card-options"><a class="card-options-collapse" href="#"
                             data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a
                             class="card-options-remove" href="#" data-bs-toggle="card-remove"><i
@@ -59,7 +58,7 @@
                             <h6 class="form-label">Phone</h6>
                         </label>
                         <div class="col-sm-6">
-                            <span>{{ $data->phone }}</span>
+                            <span>+{{ $data->phone }}</span>
                         </div>
                     </div>
                     <div class="mb-1 row">
@@ -169,7 +168,7 @@
                         <div class="col-sm-12">
                             <div class="mb-3">
                                 <label class="form-label">Phone</label>
-                                <input class="form-control" type="number" name="phone" value="{{ $data->phone }}">
+                                <input class="form-control" type="number" name="phone" value="{{ $data->phone }}" placeholder="62xxxxxxxxxx">
                             </div>
                         </div>
                         <div class="col-sm-12">

@@ -25,7 +25,7 @@
     @if($INFO->title == "Y")
     <div class="row">
         <div class="col-12">
-            <div class="alert alert-primary inverse alert-dismissible fade show" role="alert" style="font-size: 10pt;">
+            <div class="alert alert-warning inverse alert-dismissible fade show" role="alert" style="font-size: 10pt;">
                 <strong><i class="fa fa-info-circle"></i></strong>{{ $INFO->content }}
                 <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>

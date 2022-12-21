@@ -139,7 +139,7 @@
                 {
                     render: function (data, type, row, meta) {
                         var x = "<span title='" + row.schedule.lecturer['name'] + "'>" 
-                        + row.schedule.lecturer['name'] + "</span><br><a target='_blank' href='https://wa.me/" + row.schedule.lecturer['phone'] + "'><small>"
+                        + row.schedule.lecturer['name'] + "</span><br><a target='_blank' href='https://wa.me/" + row.schedule.lecturer['phone'] + "'><small>+"
                         + row.schedule.lecturer['phone'] + "</small></a>";
                         return x;
                     },

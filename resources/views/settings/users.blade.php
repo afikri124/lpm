@@ -174,7 +174,7 @@
                             x = "<i style='color:red' title='Email not verified'>" + row.email +
                                 "</i>";
                         }
-                        x = x + "<br><small class='text-muted'>" + row.phone + "</small>";
+                        x = x + "<br><small class='text-muted'>+" + row.phone + "</small>";
                         return x;
                     },
                 },

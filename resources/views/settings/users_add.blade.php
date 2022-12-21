@@ -89,7 +89,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-form-label">Phone</label>
-                                <input class="form-control" type="number" name="phone" value="{{ old('phone') }}">
+                                <input class="form-control" type="number" name="phone" value="{{ old('phone') }}" placeholder="62xxxxxxxxxx">
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-12">
