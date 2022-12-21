@@ -230,7 +230,7 @@ class SettingController extends Controller
     public function user_delete(Request $request) {
         $user = User::find($request->id);
         if($user){
-            Log::warning(Auth::user()->username." deleted user #".$user->id.", username : ".$user->username);
+            Log::warning(Auth::user()->username." deleted User #".$user->id.", username : ".$user->username.", email : ".$user->email);
             $user->delete();
             return response()->json([
                 'success' => true,
