@@ -75,8 +75,18 @@
                             <div class="mb-3 row">
                                 <label class="col-sm-4">Auditor</label>
                                 <div class="col-sm-8">
+                                @php 
+                                    $jumlah_auditor = 0;
+                                    @endphp
                                     @foreach($data->observations as $no => $o)
+                                    @if(!$o->attendance)
+                                    <del class="text-danger">{{ $no + 1 }}) {{ $o->auditor->name }}</del><br>
+                                    @else
+                                    @php 
+                                    $jumlah_auditor++;
+                                    @endphp
                                     <strong>{{ $no + 1 }}) {{ $o->auditor->name }}</strong><br>
+                                    @endif
                                     @endforeach
                                 </div>
                             </div>
@@ -105,7 +115,6 @@
                             <table class="table table-hover" width="100%">
                                 @php
                                 $total_w = 0;
-                                $jumlah_auditor = count($data->observations);
                                 $total = array();
                                 @endphp
                                 <thead>

@@ -166,7 +166,8 @@ class ScheduleController extends Controller
         $auditors = User::select('id','email','name')->whereHas('roles', function($q){
                         $q->where('role_id', "AU");
                     })->where('username','!=', 'admin')->where('id','!=', $data->lecturer_id)->get();
-        return view('schedules.edit', compact('data','auditors'));
+        $hod = Setting::findOrFail('HODLPM');
+        return view('schedules.edit', compact('data','auditors','hod'));
     }
 
     public function review_observations($id, Request $request){
@@ -258,7 +259,8 @@ class ScheduleController extends Controller
                 $q->where('role_id', "DE");
             })->where('username','!=', 'admin')->where('id','!=', $data->lecturer_id)->get();
             $MINSCORE = Setting::findOrFail('MINSCORE');
-            return view('schedules.review_observations', compact('id','data', 'survey', 'dean', 'MINSCORE'));
+            $hod = Setting::findOrFail('HODLPM');
+            return view('schedules.review_observations', compact('id','data', 'survey', 'dean', 'MINSCORE','hod'));
         }
     }
 }

@@ -149,7 +149,11 @@
                         @endif
                         @if(($data->status_id == "S00" || $data->status_id == "S01") && now() > $data->date_end)
                         <a href="{{ route('schedules.review_observations', ['id' => Crypt::encrypt($data->id)]) }}">
-                            <span class="btn btn-warning" title="Review Results">Results</span>
+                            <span class="btn btn-danger" title="Review Results">Failed Results</span>
+                        </a>
+                        @elseif($data->status_id == "S02" && Auth::user()->username == $hod->content && now() > $data->date_end)
+                        <a href="{{ route('schedules.review_observations', ['id' => Crypt::encrypt($data->id)]) }}">
+                            <span class="btn btn-danger" title="Review Results">Special Results</span>
                         </a>
                         @endif
                         <a href="{{ route('schedules') }}">

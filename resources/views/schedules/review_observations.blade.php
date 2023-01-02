@@ -59,8 +59,18 @@
                             <div class="mb-3 row">
                                 <label class="col-sm-4">Auditor</label>
                                 <div class="col-sm-8">
+                                    @php 
+                                    $jumlah_auditor = 0;
+                                    @endphp
                                     @foreach($data->observations as $no => $o)
+                                    @if(!$o->attendance)
+                                    <del class="text-danger">{{ $no + 1 }}) {{ $o->auditor->name }}</del><br>
+                                    @else
+                                    @php 
+                                    $jumlah_auditor++;
+                                    @endphp
                                     <strong>{{ $no + 1 }}) {{ $o->auditor->name }}</strong><br>
+                                    @endif
                                     @endforeach
                                 </div>
                             </div>
@@ -189,7 +199,6 @@
                             <table class="table table-hover" width="100%">
                                 @php
                                 $total_w = 0;
-                                $jumlah_auditor = count($data->observations);
                                 $total = array();
                                 @endphp
                                 <thead>
@@ -291,11 +300,11 @@
             <div class="card project-list">
                 <div class="row">
                     <div class="col-md-12 d-flex justify-content-center">
-                        @if($data->status_id == "S03" || (($data->status_id == "S00" || $data->status_id == "S01") && now() > $data->date_end))
+                        @if(($data->status_id == "S03" || (($data->status_id == "S00" || $data->status_id == "S01") && now() > $data->date_end)) || ($data->status_id == "S02" && Auth::user()->username == $hod->content))
                         <a type="button" data-bs-toggle="modal" data-bs-target="#modalFolowUp">
                             <span class="btn btn-primary">Follow-Up</span>
                         </a>
-                        @if($data->status_id == "S03" && $total_w != 0)
+                        @if(($data->status_id == "S03" && $total_w != 0) || ($data->status_id == "S02" && Auth::user()->username == $hod->content))
                         <a type="button" data-bs-toggle="modal" data-bs-target="#modalSendResult">
                             <span class="btn btn-success">Send Result</span>
                         </a>
@@ -310,7 +319,7 @@
         </div>
     </div>
 </div>
-@if($data->status_id == "S03" || (($data->status_id == "S00" || $data->status_id == "S01") && now() > $data->date_end))
+@if(($data->status_id == "S03" || (($data->status_id == "S00" || $data->status_id == "S01") && now() > $data->date_end))|| ($data->status_id == "S02" && Auth::user()->username == $hod->content))
 <div class="modal fade" id="modalFolowUp" tabindex="-1" role="dialog" aria-labelledby="modalFolowUp" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

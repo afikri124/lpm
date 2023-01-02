@@ -89,7 +89,12 @@
         @foreach($data->observations as $key => $o)
         <tr>
             <td width="30%" valign="top">Auditor {{ $key+1 }}</td>
-            <td width="70%" valign="top">: {{ $o->auditor->name_with_title }}
+            <td width="70%" valign="top">: 
+                @if($o->attendance)
+                {{ $o->auditor->name_with_title }}
+                @else
+                <del>{{ $o->auditor->name_with_title }}</del>
+                @endif
             </td>
         </tr>
         @endforeach
@@ -120,7 +125,11 @@
             @foreach($data->observations as $key => $o)
             <td width="50%" style="text-align: center;">
                 Auditor {{ $key+1 }}<br><br><br><br>
+                @if($o->attendance)
                 <b>( {{ $o->auditor->name_with_title }} )</b><br>
+                @else
+                <del><b>( {{ $o->auditor->name_with_title }} )</b></del><br>
+                @endif
                 <small>NIK. {{ $o->auditor->username }}</small>
             </td>
             @endforeach
@@ -300,8 +309,10 @@
     <p>Dokumentasi: </p>
     @foreach($survey as $key => $s)
     <center>
+        @if($s->image_path != null)
         <img src="{{ public_path($s->image_path) }}" style="width: 400px;max-height:300px;"><br>
         <small style="font-size: 8pt">Dokumentasi Auditor {{$key+1}}</small>
+        @endif
     </center><br>
     @endforeach
     @endif
