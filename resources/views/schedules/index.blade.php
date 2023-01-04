@@ -214,7 +214,13 @@
                         var html =
                             `<a class="btn btn-success btn-sm px-2" title="Edit" href="{{ url('schedules/` +
                             row.link + `') }}"><i class="fa fa-pencil-square-o"></i></a> <a class="btn btn-danger btn-sm px-2" title="Delete" onclick="DeleteId(` + x + `)" ><i class="fa fa-trash"></i></a>`;
-                            return html;
+ 
+                        if(row.status_id == "S06" || row.status_id == "S05"){
+                            html =
+                            `<a class="btn btn-success btn-sm px-2" title="Edit" href="{{ url('schedules/` +
+                            row.link + `') }}"><i class="fa fa-pencil-square-o"></i></a> <a class="btn btn-secondary disabled btn-sm px-2"><i class="fa fa-trash"></i></a>`;
+                        }
+                        return html;
                     },
                     orderable: false,
                     className: "text-end"

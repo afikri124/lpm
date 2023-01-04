@@ -453,13 +453,14 @@
                 {
                     render: function (data, type, row, meta) {
                         var x = row.id;
-                        var html =
-                            `<a class="btn btn-danger btn-sm px-2" title="Delete" onclick="DeleteId(` +
-                            x + `)" ><i class="fa fa-trash"></i></a>`;
+                        var html = '';
                         if (row.attendance == true) {
                             html =
-                                `<a class="btn btn-info btn-sm px-2" target="_blank" href="{{ url('observations/results/` +
-                                row.link + `') }}"><i class="fa fa-eye"></i></a>  ` + html;
+                                `<a class="btn btn-info btn-sm px-2" title="View" target="_blank" href="{{ url('observations/results/` +
+                                row.link + `') }}"><i class="fa fa-eye"></i></a>`;
+                        } else {
+                            html = `<a class="btn btn-danger btn-sm px-2" title="Delete" onclick="DeleteId(` +
+                            x + `)" ><i class="fa fa-trash"></i></a>`
                         }
                         return html;
                     },
