@@ -21,10 +21,10 @@
                 <th style="text-align: center;font-weight: bold;width:50px">No</th>
                 <th style="text-align: center;font-weight: bold;width:200px">Dosen</th>
                 <th style="text-align: center;font-weight: bold;" colspan="2">Jadwal</th>
+                <th style="text-align: center;font-weight: bold;">Skor (%)</th>
+                <th style="text-align: center;font-weight: bold;">Status</th>
                 <th style="text-align: center;font-weight: bold;width:200px">Auditor 1</th>
                 <th style="text-align: center;font-weight: bold;width:200px">Auditor 2</th>
-                <th style="text-align: center;font-weight: bold;">Skor</th>
-                <th style="text-align: center;font-weight: bold;">Status</th>
             </tr>
         </thead>
         <tbody>
@@ -39,9 +39,6 @@
                 <td style="vertical-align: top;width:110px">
                     {{ Date::createFromDate($d->date_end)->format('d/m/Y H:i') }}
                 </td>
-                @foreach($d->observations as $o)
-                <td>{{ $o->auditor->name_with_title }}</td>
-                @endforeach
                 <td style="vertical-align: top;text-align:center">
                     @php
                     $x = 0;
@@ -64,14 +61,17 @@
                     @endphp
                     @endif
                     @if($x == 0)
-                    <b>-</b>
+                    <b>0</b>
                     @elseif($x < $MINSCORE->content)
-                        <b style="color:red">{{ number_format($x,1) }}%</b>
+                        <b style="color:red">{{ number_format($x,1) }}</b>
                         @else
-                        <b>{{ number_format($x,1) }}%</b>
+                        <b>{{ number_format($x,1) }}</b>
                         @endif
                 </td>
                 <td style="vertical-align: top;">{{ $d->status->title }}</td>
+                @foreach($d->observations as $o)
+                <td>{{ $o->auditor->name_with_title }}</td>
+                @endforeach
             </tr>
             @endforeach
         </tbody>
