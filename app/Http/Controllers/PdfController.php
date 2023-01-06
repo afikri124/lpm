@@ -28,7 +28,7 @@ class PdfController extends Controller
             return abort(404);
         }
         $data = Schedule::with('lecturer')->with('status')->with('observations')->with('observations.auditor')->findOrFail($s_id);
-        if($data->lecturer->id == Auth::user()->id && $data->status_id == "S05"){
+        if(Auth::check() && ($data->lecturer->id == Auth::user()->id && $data->status_id == "S05")){
             $d = Schedule::findOrFail($s_id)
                 ->update([ 
                     'status_id'=> 'S06',
