@@ -528,7 +528,8 @@
         </footer>
         <footer class="section-space bg-secondary py-1">
         <hr>
-            Copyright © {{ (date('Y')=="2022"?date('Y'):"2022-".date('Y')) }} made with ❤️ by <a href="https://itic.jgu.ac.id">ITIC JGU</a>.<br>All rights reserved.
+            Copyright © {{ (date('Y')=="2022"?date('Y'):"2022-".date('Y')) }} made with ❤️ by <a href="https://itic.jgu.ac.id">ITIC JGU</a>.<br><small class="ml-4 text-center text-sm text-light sm:text-right sm:ml-0">
+                    v{{ Illuminate\Foundation\Application::VERSION }}p{{ PHP_VERSION }} - All rights reserved.</small>
         </footer>
     </div>
     <script src="{{ asset('assets/js/jquery-3.5.1.min.js') }}"></script>
