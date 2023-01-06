@@ -19,10 +19,9 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command('queue:retry all')
-        ->twiceDaily(9, 15)
-        ->withoutOverlapping()->runInBackground();
-        $schedule->job(new JobReminder)->days([1,2,3,4,5,6])->at('07:00')->runInBackground()->withoutOverlapping();
-        $schedule->job(new JobReminderLecturer)->days([1,3,5])->at('13:00')->runInBackground()->withoutOverlapping();
+        ->twiceDaily(9, 15)->runInBackground();
+        $schedule->job(new JobReminder)->days([1,2,3,4,5,6])->at('07:00')->runInBackground();
+        $schedule->job(new JobReminderLecturer)->days([1,3,5])->at('13:00')->runInBackground();
     }
 
     /**
