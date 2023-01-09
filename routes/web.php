@@ -14,7 +14,7 @@ use Jenssegers\Date\Date;
 |
 */
 
-Auth::routes();
+// Auth::routes();
 Auth::routes(['verify' => true]);
 Route::get('/', function () {
     return redirect()->route('index');

@@ -151,7 +151,7 @@
             </td>
         </tr>
     </table>
-    @php $total_persentase = 0; @endphp
+    @php $total_persentase = 0; $jumlah_auditor = 0; @endphp
     @if(count($survey) != 0)
     @foreach($survey as $key => $s)
     @if(count($s->observation_categories) != 0)
@@ -310,6 +310,7 @@
     @foreach($survey as $key => $s)
     <center>
         @if($s->image_path != null)
+        @php $jumlah_auditor++; @endphp
         <img src="{{ public_path($s->image_path) }}" style="width: 400px;max-height:300px;"><br>
         <small style="font-size: 8pt">Dokumentasi Auditor {{$key+1}}</small>
         @endif
@@ -317,7 +318,7 @@
     @endforeach
     @endif
     <p >Persentase Keseluruhan:
-        <br><i class="@if(($total_persentase/count($survey)) < $MINSCORE->content) text-danger @endif"><b>{{ ($total_persentase/count($survey)) }}</b>%</i>
+        <br><i class="@if(($total_persentase/$jumlah_auditor) < $MINSCORE->content) text-danger @endif"><b>{{ ($total_persentase/$jumlah_auditor) }}</b>%</i>
     </p>
     
     @endif
