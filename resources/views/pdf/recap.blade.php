@@ -104,7 +104,11 @@
                 </td>
                 <td>
                     @foreach($d->observations as $o)
+                    @if($o->attendance)
                     {{ $o->auditor->name_with_title }}<br>
+                    @else
+                    <del>{{ $o->auditor->name_with_title }}</del><br>
+                    @endif
                     @endforeach
                 </td>
                 <td class="text-center">
@@ -129,7 +133,7 @@
                     @endphp
                     @endif
                     @if($x == 0)
-                    <b>-</b>
+                    <b class="text-danger">-</b>
                     @elseif($x < $MINSCORE->content)
                         <b class="text-danger">{{ number_format($x,1) }}%</b>
                         @else
