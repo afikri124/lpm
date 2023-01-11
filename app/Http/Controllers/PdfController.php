@@ -63,7 +63,7 @@ class PdfController extends Controller
     public function recap(Request $request)
     {
         Date::setLocale('id');
-        $link = url()->full();
+        $link = urlencode(url()->full());
         $qr = "https://s.jgu.ac.id/qrcode?data=".$link;
         $MINSCORE = Setting::findOrFail('MINSCORE');
         $hod = Setting::findOrFail('HODLPM');

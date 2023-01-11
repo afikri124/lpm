@@ -72,7 +72,7 @@ class User extends Authenticatable implements MustVerifyEmail
       $has_valid_avatar = false;
       if(env('APP_ENV') != 'local'){
         $hash = md5(strtolower(trim($this->email)));
-        $uri = "https://klas.jgu.ac.id/employee_profile/image.php?id=".$this->username;
+        $uri = "https://klas2.jgu.ac.id/sso/getImage.php?id=".$this->username;
         if(!@getimagesize($uri)){
             $hash = md5(strtolower(trim($this->email)));
             $uri = "https://www.gravatar.com/avatar/$hash".'?d=404';
