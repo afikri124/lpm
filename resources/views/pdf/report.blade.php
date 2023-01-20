@@ -328,7 +328,8 @@
         @foreach($data->histories as $p)
             @if($p->remark != null)
             <li>
-                {{ date('d M Y H:i', strtotime($p->created_at)) }}<br><i class="text-danger" style="font-size: 10pt">{{ $p->remark }}</i>
+                {{ Date::createFromDate($p->created_at)->format('j M Y H:i') }}
+                <br><i class="text-danger" style="font-size: 10pt">{{ $p->remark }}</i>
             </li>
             @endif
         @endforeach
