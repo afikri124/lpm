@@ -322,22 +322,23 @@
     @endif
     
     @endif
-    @if($data->remark != null || $data->remark != "")
-    <p>Catatan dari LPM:
-        <br><i class="text-danger" style="font-size: 10pt">{{ $data->remark }}</i>
-    </p>
-    @endif
-
     @if($total_persentase == 0)
+    <p>Catatan dari LPM:</p>
     <ul>
         @foreach($data->histories as $p)
             @if($p->remark != null)
             <li>
-                {{ date('d M Y H:i', strtotime($p->created_at)) }} <i class="text-danger" style="font-size: 10pt">{{ $p->remark }}</i>
+                {{ date('d M Y H:i', strtotime($p->created_at)) }}<br><i class="text-danger" style="font-size: 10pt">{{ $p->remark }}</i>
             </li>
             @endif
         @endforeach
     </ul>
+    @else
+        @if($data->remark != null || $data->remark != "")
+        <p>Catatan dari LPM:
+            <br><i class="text-danger" style="font-size: 10pt">{{ $data->remark }}</i>
+        </p>
+        @endif
     @endif
 
     @if($follow_up != null)
