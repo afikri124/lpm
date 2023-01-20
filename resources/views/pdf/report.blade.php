@@ -328,6 +328,18 @@
     </p>
     @endif
 
+    @if($total_persentase == 0)
+    <ul>
+        @foreach($data->histories as $p)
+            @if($p->remark != null)
+            <li>
+                {{ date('d M Y H:i', strtotime($p->created_at)) }} <i class="text-danger" style="font-size: 10pt">{{ $p->remark }}</i>
+            </li>
+            @endif
+        @endforeach
+    </ul>
+    @endif
+
     @if($follow_up != null)
     <div class="page-break"></div>
     <table width="100%">

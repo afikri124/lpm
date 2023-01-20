@@ -27,7 +27,7 @@ class PdfController extends Controller
         } catch (DecryptException $e) {
             return abort(404);
         }
-        $data = Schedule::with('lecturer')->with('status')->with('observations')->with('observations.auditor')->findOrFail($s_id);
+        $data = Schedule::with('lecturer')->with('status')->with('observations')->with('observations.auditor')->with('histories')->findOrFail($s_id);
         if(Auth::check() && ($data->lecturer->id == Auth::user()->id && $data->status_id == "S05")){
             $d = Schedule::findOrFail($s_id)
                 ->update([ 
