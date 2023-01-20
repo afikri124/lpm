@@ -316,10 +316,10 @@
         @endif
     </center><br>
     @endforeach
-    @endif
     <p >Persentase Keseluruhan:
         <br><i class="@if(($total_persentase/$jumlah_auditor) < $MINSCORE->content) text-danger @endif"><b>{{ ($total_persentase/$jumlah_auditor) }}</b>%</i>
     </p>
+    @endif
     
     @endif
     @if($data->remark != null || $data->remark != "")
