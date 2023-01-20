@@ -84,7 +84,7 @@ class FollowUpController extends Controller
                         $d['email'] = $schedule->lecturer->email;
                         $d['subject'] = "Hasil Peer-Observation";
                         $d['name'] = $schedule->lecturer->name_with_title;
-                        $d['messages'] = "Menginformasikan bahwa, hasil audit <i>Peer-Observation</i> anda sudah dapat dilihat melalui tautan berikut ini <a href='".url('/pdf/report/'.Crypt::encrypt($follow_up->schedule_id))."'>lpm.jgu.ac.id/observations/me</a>";
+                        $d['messages'] = "Menginformasikan bahwa hasil audit & tindak lanjut <i>Peer-Observation</i> anda sudah dapat dilihat melalui tautan berikut ini <a href='".url('/pdf/report/'.Crypt::encrypt($follow_up->schedule_id))."'>lpm.jgu.ac.id/observations/me</a>";
                         dispatch(new JobNotification($d)); //send Email using queue job
                     }
                     //--------------------end email--------------
@@ -103,6 +103,7 @@ class FollowUpController extends Controller
                     ->with('status')
                     ->with('observations')
                     ->with('observations.auditor')
+                    ->with('histories')
                     ->findOrFail($follow_up->schedule_id);
             $oids = array();
             foreach($data->observations as $idx)

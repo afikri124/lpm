@@ -75,14 +75,14 @@
                             <div class="mb-3 row">
                                 <label class="col-sm-4">Auditor</label>
                                 <div class="col-sm-8">
-                                @php 
+                                    @php
                                     $jumlah_auditor = 0;
                                     @endphp
                                     @foreach($data->observations as $no => $o)
                                     @if(!$o->attendance)
                                     <del class="text-danger">{{ $no + 1 }}) {{ $o->auditor->name }}</del><br>
                                     @else
-                                    @php 
+                                    @php
                                     $jumlah_auditor++;
                                     @endphp
                                     <strong>{{ $no + 1 }}) {{ $o->auditor->name }}</strong><br>
@@ -139,8 +139,10 @@
                                         <td class='text-center'><strong>{{ $key }}</strong></td>
                                         @php
                                         foreach($category as $cat){
-                                        $title = ($cat->criteria_category == null ? "" : $cat->criteria_category->title)."
-                                        <u>".($cat->criteria_category == null ? "" : $cat->criteria_category->description)."</u>";
+                                        $title = ($cat->criteria_category == null ? "" :
+                                        $cat->criteria_category->title)."
+                                        <u>".($cat->criteria_category == null ? "" :
+                                            $cat->criteria_category->description)."</u>";
                                         $p_temp = 0;
                                         $w_temp = 0;
                                         foreach($cat->observation_criterias as $criterias ){
@@ -219,6 +221,30 @@
                     </div>
                 </div>
             </div>
+            @if($jumlah_auditor == 0)
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <h4>Timeline Histories</h4>
+                        <div class="activity-timeline">
+                            @foreach($data->histories as $p)
+                            @if($p->remark != null)
+                            <div class="media my-0">
+                                <div class="media-body my-0">
+                                    <p class="font-roboto my-0"><i class="icofont icofont-clock-time"></i>
+                                        {{ date('d M Y H:i', strtotime($p->created_at)) }}
+                                    </p>
+                                    <blockquote class="my-0"><i>{{ $p->remark }}</i></blockquote>
+                                </div>
+                            </div>
+
+                            @endif
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
 
             @if($follow_up->remark != null)
             <div class="card">
@@ -257,7 +283,7 @@
                         </a>
                         @endif
                         <a href="{{ route('pdf.report', ['id' => Crypt::encrypt($data->id)]) }}" target="_blank">
-                            <span class="btn btn-success btn-block" title="Print Pdf">Report</span>
+                            <span class="btn btn-success btn-block" title="View Pdf">Report</span>
                         </a>
                         <a href="{{ route('follow_up') }}">
                             <span class="btn btn-secondary">Back</span>
@@ -307,7 +333,8 @@
                             </div>
                         </div>
                         <span class="invalid-feedback d-block" role="alert">
-                            <i>Note: <br>- Give messages to increase the score.<br>- The remark must be at least 500 characters.</i>
+                            <i>Note: <br>- Please review the report in its entirety before doing this.<br>- Give messages to increase the score.<br>- The remark must be at least 500
+                                characters.</i>
                         </span>
                     </div>
                 </div>
@@ -326,13 +353,14 @@
 <script src="{{asset('assets/js/dropzone/dropzone.js')}}"></script>
 <script src="{{asset('assets/js/dropzone/dropzone-script.js')}}"></script>
 <script>
-    $("#remark").keyup(function(){
+    $("#remark").keyup(function () {
         $("#count").text("(" + $(this).val().length + "/500)");
-        if($(this).val().length >= 500){
+        if ($(this).val().length >= 500) {
             $("#count").removeClass('text-danger');
         } else {
             $("#count").addClass('text-danger');
         }
     });
+
 </script>
 @endsection

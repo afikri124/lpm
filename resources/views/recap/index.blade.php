@@ -137,7 +137,7 @@
             "use strict";
             $(".select2").select2({
                 allowClear: true,
-                minimumResultsForSearch: 7
+                minimumResultsForSearch: 9
             });
         })(jQuery);
     }, 350);
