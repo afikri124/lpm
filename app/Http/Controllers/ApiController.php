@@ -347,14 +347,12 @@ class ApiController extends Controller
     public function tes(Request $request)
     {
 
-        $data = Schedule::with('lecturer')
-        ->where(function ($query) {
-            $query->where('status_id', '=', 'S00')
-                  ->orWhere('status_id', '=', 'S01');
-        })
-        ->whereDate('date_end', '<', Carbon::now()->startOfDay())
-        ->groupBy("lecturer_id")
-        ->select("lecturer_id")->get();
+        $data = Follow_up::with('dean')
+        ->whereNull('remark')
+        ->whereDate('date_start', '<=', Carbon::now()->endOfDay())
+        ->whereDate('date_end', '>=', Carbon::today())
+        ->groupBy("dean_id")
+        ->select("dean_id")->get();
         // Observation::join('schedules as s', 's.id', '=', 'observations.schedule_id')->with('auditor')
         // ->where('attendance', false)
         // ->where(function ($query) {

@@ -138,7 +138,7 @@
                             <tr>
                                 <td style="text-align: center;">
                                     <a target="_blank" href="{{ url('/dashboard') }}">
-                                        <img src="https://lpm.jgu.ac.id/public/assets/images/logo.png" alt="PO JGU"
+                                        <img src="{{asset('assets/images/logo_po.png')}}" alt="PO JGU"
                                             style="margin: 20px 0; width:150px;">
                                     </a>
                                 </td>

@@ -42,7 +42,7 @@ class JobReminder implements ShouldQueue
         $dea = Follow_up::with('dean')
         ->whereNull('remark')
         ->whereDate('date_start', '<=', Carbon::now()->endOfDay())
-        // ->whereDate('date_end', '>=', Carbon::today())
+        ->whereDate('date_end', '>=', Carbon::today())
         ->groupBy("dean_id")
         ->select("dean_id")->get();
         if($dea != null){
@@ -64,7 +64,7 @@ class JobReminder implements ShouldQueue
                   ->orWhere('s.status_id', '=', 'S01');
         })
         ->whereDate('s.date_start', '<=', Carbon::now()->endOfDay())
-        // ->whereDate('s.date_end', '>=', Carbon::today())
+        ->whereDate('s.date_end', '>=', Carbon::today())
         ->groupBy("auditor_id")
         ->select("auditor_id")->get();
         if($audi != null){
