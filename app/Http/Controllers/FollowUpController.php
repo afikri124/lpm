@@ -50,7 +50,7 @@ class FollowUpController extends Controller
                 'remark'=> ['required', 'string', 'min:500'],
             ]);
             $imageName = Carbon::now()->format('Ym').'_'.md5($f_id).'.'.$request->image_path->extension(); 
-            $folderName =  "images/follow_up";
+            $folderName =  "storage/images/follow_up";
             $path = public_path()."/".$folderName;
             if (!File::exists($path)) {
                 File::makeDirectory($path, 0755, true); //create folder
