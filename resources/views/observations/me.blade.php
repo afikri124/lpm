@@ -185,8 +185,8 @@
                             html = `<a class="btn btn-info btn-sm px-2" title="View Report" href="{{ url('pdf/report/` +
                             row.link + `') }}" target="_blank"><i class="fa fa-eye"></i></a>`;
                         } 
-                        if(row.status_id == "S03"){
-                            html += ` <a class="btn btn-success btn-sm px-2" title="Review/Validation" onclick="alert('On Development :)')"><i class="fa fa-edit"></i></a>`;
+                        if(row.status_id == "S03" || row.status_id == "S02"){
+                            html += ` <a class="btn btn-warning btn-sm px-2" title="PO Validation" onclick="alert('On Development :)')"><i class="fa fa-legal"></i></a>`;
                         }   
                         return html;
                     },

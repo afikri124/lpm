@@ -56,7 +56,7 @@
                     @endforeach
                     @php
                     if($weight != 0){
-                    $x = ($score / ($weight * $data->max_score) * 100);
+                    $x = ($score / ($weight * $d->max_score) * 100);
                     }
                     @endphp
                     @endif

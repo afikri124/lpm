@@ -216,7 +216,7 @@
                                 weight += parseFloat(q.weight);
                             });
                         });
-                        x = (score / (weight * 5) * 100);
+                        x = (score / (weight * row.max_score) * 100);
                         if (x < "{{ $MINSCORE->content }}") {
                             return "<b class='text-danger'>" + x.toFixed(1) + "%</b>";
                         } else if (x >= "{{ $MINSCORE->content }}") {
