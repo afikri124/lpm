@@ -44,6 +44,10 @@
         <tr>
             <td colspan="2">
                 <br><b style="color: red">Alasan Menolak:</b>
+            </td>
+        </tr>
+        <tr style="border: 1px solid #999; text-align: justify;">
+            <td colspan="2" >
                 <p style="text-align: justify;">{{$data->validation_remark}}</p>
             </td>
         </tr>

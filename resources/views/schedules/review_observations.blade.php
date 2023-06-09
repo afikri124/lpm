@@ -333,7 +333,7 @@
                     <div class="mb-3">
                         <div class="col-md-12">
                             <div class="form-group mb-2">
-                                <label class="col-form-label">Select User<i class="text-danger">*</i></label>
+                                <label class="col-form-label">Select Follow-Up User<i class="text-danger">*</i></label>
                                 <select class="form-select digits select2 @error('dean_id') is-invalid @enderror"
                                     name="dean_id" id="dean_id" data-placeholder="Select" required>
                                     <option value="" selected disabled>Select</option>
@@ -344,6 +344,25 @@
                                     @endforeach
                                 </select>
                                 @error('dean_id')
+                                <span class="invalid-feedback d-block" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group mb-2">
+                                <label class="col-form-label">Invite HR &/ Auditor <i>(optional)</i></label>
+                                <select class="form-select digits select22 @error('invite') is-invalid @enderror"
+                                    name="invite[]" id="invite" data-placeholder="Select" multiple="multiple">
+                                    <option value="">Select</option>
+                                    @foreach($user as $p)
+                                    <option value="{{ $p->id }}" {{ ($p->id==old('invite') ? "selected": "") }}>
+                                        {{ $p->name }}
+                                    </option>
+                                    @endforeach
+                                </select>
+                                @error('invite')
                                 <span class="invalid-feedback d-block" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -430,6 +449,9 @@
 <script>
     $(document).ready(function () {
         $("#dean_id").select2({
+            dropdownParent: $("#modalFolowUp")
+        });
+        $(".select22").select2({
             dropdownParent: $("#modalFolowUp")
         });
     });

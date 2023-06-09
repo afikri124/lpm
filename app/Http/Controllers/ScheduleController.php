@@ -205,7 +205,7 @@ class ScheduleController extends Controller
                     $dean = User::find($request->dean_id);
                     if($dean->email != null || $dean->email != ""){
                         $d['email'] = $dean->email;
-                        $d['subject'] = "Tindak Lanjut Peer-Observation";
+                        $d['subject'] = "Undangan Tindak Lanjut Peer-Observation";
                         $d['name'] = $dean->name_with_title;
                         $d['messages'] = "Anda dijadwalkan untuk melakukan <b>tindak lanjut</b> <i><a href='".url('/dashboard')."'>Peer-Observation</a></i> kepada auditee berikut ini, dimohon agar segera menghubungi auditee dan memberikan laporan melalui sistem ini sesuai jadwal yang telah ditentukan.";
                         $d['study_program'] = $schedule->study_program;
@@ -217,7 +217,26 @@ class ScheduleController extends Controller
                         dispatch(new JobNotification($d)); //send Email using queue job
                     }
                     //--------------------end email--------------
-
+                    if(isset($request->invite)){ //kirim undangan email ke orang2 terkait
+                        foreach($request->invite as $key => $data){
+                            $inv = User::find($data);
+                            if($inv){
+                                if($inv->email != null || $inv->email != ""){
+                                    $d['email'] = $inv->email;
+                                    $d['subject'] = "Undangan Tindak Lanjut Hasil PO";
+                                    $d['name'] = $inv->name_with_title;
+                                    $d['messages'] = "Anda dijadwalkan untuk mengikuti <b>tindak lanjut</b> <i><a href='".url('/dashboard')."'>Peer-Observation</a></i> kepada auditee berikut ini, silahkan datang sesuai jadwal yang telah ditentukan karena ada keterlibatan Anda dalam tindaklanjut ini.";
+                                    $d['study_program'] = $schedule->study_program;
+                                    $d['auditee'] = $schedule->lecturer->name_with_title;
+                                    $d['auditee_hp'] = $schedule->lecturer->phone;
+                                    $d['auditee_email'] = $schedule->lecturer->email;
+                                    $d['start'] = Date::createFromDate($request->date_start)->format('l, j F Y (H:i)');
+                                    $d['end'] = Date::createFromDate($request->date_end)->format('l, j F Y (H:i)');
+                                    dispatch(new JobNotification($d)); //send Email using queue job
+                                }
+                            }
+                        }
+                    } //end email invitations
                     return redirect()->route('schedules.review_observations', $id);
                 }
 
@@ -241,7 +260,7 @@ class ScheduleController extends Controller
                         $d['email'] = $schedule->lecturer->email;
                         $d['subject'] = "Hasil Peer-Observation";
                         $d['name'] = $schedule->lecturer->name_with_title;
-                        $d['messages'] = "Menginformasikan bahwa, hasil audit <i>Peer-Observation</i> anda sudah dapat dilihat melalui tautan berikut ini <a href='".url('/pdf/report/'.Crypt::encrypt($s_id))."'>lpm.jgu.ac.id/observations/me</a>";
+                        $d['messages'] = "Menginformasikan bahwa, hasil audit <i>Peer-Observation</i> dan rekomendasi PO anda sudah dapat dilihat melalui tautan berikut ini <a href='".url('/pdf/report/'.Crypt::encrypt($s_id))."'>lpm.jgu.ac.id/observations/me</a>";
                         dispatch(new JobNotification($d)); //send Email using queue job
                     }
                     //--------------------end email--------------
@@ -260,9 +279,10 @@ class ScheduleController extends Controller
             $dean = User::select('id','email','name','department')->whereHas('roles', function($q){
                 $q->where('role_id', "DE");
             })->where('username','!=', 'admin')->where('id','!=', $data->lecturer_id)->get();
+            $user = User::select('id','email','name','department')->where('username','!=', 'admin')->where('id','!=', $data->lecturer_id)->get();
             $MINSCORE = Setting::findOrFail('MINSCORE');
             $hod = Setting::findOrFail('HODLPM');
-            return view('schedules.review_observations', compact('id','data', 'survey', 'dean', 'MINSCORE','hod'));
+            return view('schedules.review_observations', compact('id','data', 'survey', 'dean', 'MINSCORE','hod', 'user'));
         }
     }
 }
