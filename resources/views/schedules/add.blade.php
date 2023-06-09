@@ -39,6 +39,22 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="form-group mb-2">
+                                <label class="col-form-label">Maximum Point (Star Score)<i class="text-danger">*</i></label>
+                                <select
+                                    class="form-select digits select2 @error('max_score') is-invalid @enderror"
+                                    name="max_score" id="max_score" data-placeholder="Select">
+                                    <option value="4" >4 Star</option>
+                                    <option value="5" >5 Star</option>
+                                </select>
+                                @error('max_score')
+                                <span class="invalid-feedback d-block" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
                         <div class="col-lg-6 col-md-12">
                             <div class="form-group mb-2">
                                 <label class="col-form-label">Select the lecturer to be observed<i class="text-danger">*</i></label>

@@ -155,21 +155,26 @@
                                                     title="Question {{ $q->id }}.{{ $no + 1 }}" autocomplete="off"
                                                     required>
                                                     <option value="" selected>0</option>
-                                                    <option value="1"
+                                                    @for ($i =1; $i <= $data->schedule->max_score; $i++) 
+                                                    <option value="{{ $i }}"
+                                                        {{ (old('questions.'.$c->id.'.s')==$i? "selected": "")}}>1
+                                                        </option>
+                                                    @endfor
+                                                        {{-- <option value="1"
                                                         {{ (old('questions.'.$c->id.'.s')=='1'? "selected": "")}}>1
-                                                    </option>
-                                                    <option value="2"
+                                                        </option> --}}
+                                                        {{-- <option value="2"
                                                         {{ (old('questions.'.$c->id.'.s')=='2'? "selected": "")}}>2
-                                                    </option>
-                                                    <option value="3"
-                                                        {{ (old('questions.'.$c->id.'.s')=='3'? "selected": "")}}>3
-                                                    </option>
-                                                    <option value="4"
-                                                        {{ (old('questions.'.$c->id.'.s')=='4'? "selected": "")}}>4
-                                                    </option>
-                                                    {{-- <option value="5"
+                                                        </option>
+                                                        <option value="3"
+                                                            {{ (old('questions.'.$c->id.'.s')=='3'? "selected": "")}}>3
+                                                        </option>
+                                                        <option value="4"
+                                                            {{ (old('questions.'.$c->id.'.s')=='4'? "selected": "")}}>4
+                                                        </option> --}}
+                                                        {{-- <option value="5"
                                                         {{ (old('questions.'.$c->id.'.s')=='5'? "selected": "")}}>5
-                                                    </option> --}}
+                                                        </option> --}}
                                                 </select>
                                             </span>
                                         </td>
@@ -204,10 +209,13 @@
                                         required>
                                 </div>
                                 <div class="mb-3 col-lg-12 col-md-12">
-                                    <label>Overall Comment<i class="text-danger">*</i> <i id="count" class="text-danger">(0/350)</i></label>
-                                    <textarea class="form-control" id="remark" name="remark" title="Overall comment" minlength="350" required
+                                    <label>Overall Comment<i class="text-danger">*</i> <i id="count"
+                                            class="text-danger">(0/350)</i></label>
+                                    <textarea class="form-control" id="remark" name="remark" title="Overall comment"
+                                        minlength="350" required
                                         rows="5">{{ (old('remark')==null ? $data->remark : old('remark')) }}</textarea>
-                                    <i class="invalid-feedback d-block">Note: The remark must be at least 350 characters.</i>
+                                    <i class="invalid-feedback d-block">Note: The remark must be at least 350
+                                        characters.</i>
                                 </div>
                             </div>
                             <div class="f1-buttons">
@@ -236,14 +244,15 @@
             });
         })(jQuery);
     }, 350);
-    $("#remark").keyup(function(){
+    $("#remark").keyup(function () {
         $("#count").text("(" + $(this).val().length + "/350)");
-        if($(this).val().length >= 350){
+        if ($(this).val().length >= 350) {
             $("#count").removeClass('text-danger');
         } else {
             $("#count").addClass('text-danger');
         }
     });
+
 </script>
 <script src="{{asset('assets/js/form-wizard/jquery.backstretch.min.js')}}"></script>
 <script src="{{asset('assets/js/rating/jquery.barrating.js')}}"></script>

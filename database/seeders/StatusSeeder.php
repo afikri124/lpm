@@ -23,6 +23,8 @@ class StatusSeeder extends Seeder
             ["id" => "S04", "title" => "Follow-Up"],
             ["id" => "S05", "title" => "Result and Recommendation"],
             ["id" => "S06", "title" => "Finish"],
+            ["id" => "S07", "title" => "Validated"],
+            ["id" => "S08", "title" => "Rejected"],
         ];
 
         foreach ($data as $x) {

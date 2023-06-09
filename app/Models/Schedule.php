@@ -18,6 +18,8 @@ class Schedule extends Model
         'remark',
         'created_by',
         'study_program',
+        'max_score',
+        'validation_remark'
     ];
     public function status()
     {

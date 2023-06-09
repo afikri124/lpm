@@ -186,8 +186,7 @@
                             row.link + `') }}" target="_blank"><i class="fa fa-eye"></i></a>`;
                         } 
                         if(row.status_id == "S03"){
-                            html += ` <a class="btn btn-success btn-sm px-2" title="Validation" href="{{ url('pdf/report/` +
-                            row.link + `') }}" target="_blank"><i class="fa fa-edit"></i></a>`;
+                            html += ` <a class="btn btn-success btn-sm px-2" title="Review/Validation" onclick="alert('On Development :)')"><i class="fa fa-edit"></i></a>`;
                         }   
                         return html;
                     },

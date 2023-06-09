@@ -264,9 +264,9 @@
             <tr>
                 <th>Persentase</th>
                 @if($total != 0)
-                <th class="text-right @if(($total/($total_w*5)*100) < $MINSCORE->content) text-danger @endif">
-                    {{ number_format($total/($total_w*5)*100, 1); }}%
-                    @php $total_persentase += number_format($total/($total_w*5)*100, 1); @endphp
+                <th class="text-right @if(($total/($total_w*$data->max_score)*100) < $MINSCORE->content) text-danger @endif">
+                    {{ number_format($total/($total_w*$data->max_score)*100, 1); }}%
+                    @php $total_persentase += number_format($total/($total_w*$data->max_score)*100, 1); @endphp
                 </th>
                 @else
                 <th></th>

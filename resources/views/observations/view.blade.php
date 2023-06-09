@@ -179,7 +179,7 @@
                                         <tr>
                                             <th>Percentage</th>
                                             <th class="text-right">
-                                                {{ number_format($total/($total_w*5)*100, 1); }}%
+                                                {{ number_format($total/($total_w*$data->schedule->max_score)*100, 1); }}%
                                             </th>
                                         </tr>
                                         <tr>

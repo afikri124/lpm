@@ -58,6 +58,7 @@ class ScheduleController extends Controller
     public function add(Request $request) {
         if ($request->isMethod('post')) {
             $this->validate($request, [ 
+                'max_score'=> ['required'],
                 'lecturer_id'=> ['required'],
                 'study_program'=> ['required'],
                 'date_start' => ['required', 'date'],
@@ -65,6 +66,7 @@ class ScheduleController extends Controller
             ]);
            
             $schedule = Schedule::create([
+                'max_score' => $request->max_score,
                 'lecturer_id' => $request->lecturer_id,
                 'study_program' => $request->study_program,
                 'date_start' => date('Y-m-d H:i', strtotime($request->date_start)),
