@@ -167,9 +167,9 @@
                                                     <option value="4"
                                                         {{ (old('questions.'.$c->id.'.s')=='4'? "selected": "")}}>4
                                                     </option>
-                                                    <option value="5"
+                                                    {{-- <option value="5"
                                                         {{ (old('questions.'.$c->id.'.s')=='5'? "selected": "")}}>5
-                                                    </option>
+                                                    </option> --}}
                                                 </select>
                                             </span>
                                         </td>
