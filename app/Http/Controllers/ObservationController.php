@@ -197,6 +197,22 @@ class ObservationController extends Controller
                             ->update([
                             'status_id'=> 'S03'
                         ]);
+
+                        //TODO : SEND EMAIL TO LECTURER (result)
+                        $schedule = Schedule::with('lecturer')->find($o->schedule_id);
+                        if($schedule->lecturer->email != null || $schedule->lecturer->email != ""){
+                            $d['email'] = $schedule->lecturer->email;
+                            $d['subject'] = "Hasil Peer-Observation";
+                            $d['name'] = $schedule->lecturer->name_with_title;
+                            $d['messages'] = "Menginformasikan bahwa, hasil audit <i>Peer-Observation</i> anda sudah dapat dilihat melalui tautan <a href='".url('/pdf/report/'.Crypt::encrypt($o->schedule_id))."'>lpm.jgu.ac.id/observations/me</a>
+                            <br><br>Selanjutnya, silahkan lakukan Validasi PO dengan langkah berikut ini:<br>
+                            1. Akses <a href='".url('/observations/me')."'>Sistem Peer-Observation</a><br>
+                            2. Tekan Menu <b>My PO</b><br>
+                            3. Klik tombol <b>PO Validation</b><br>
+                            4. Lakukan validasi atau tolak hasil PO Anda.";
+                            dispatch(new JobNotification($d)); //send Email using queue job
+                        }
+                        //--------------------end email--------------
                     }
                 }
 
