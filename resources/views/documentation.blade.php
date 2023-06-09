@@ -24,11 +24,24 @@
             <div class="card-header">
                <h5>Flow System</h5>
             </div>
-            <div class="card-body text-center pt-0">
-                <a href="{{asset('assets/dg-po.png')}}" target="_blank">
-                    <img class="img-fluid" style="max-height: 450px;" src="{{asset('assets/dg-po.png')}}">
-                </a>
-            </div>
+            <div class="card-body">
+               <ul class="nav nav-tabs" id="icon-tab" role="tablist">
+                   <li class="nav-item"><a class="nav-link active" id="icon-home-tab" data-bs-toggle="tab" href="#icon-home" role="tab" aria-controls="icon-home" aria-selected="true" data-bs-original-title="" title="">New</a></li>
+                   <li class="nav-item"><a class="nav-link" id="profile-icon-tab" data-bs-toggle="tab" href="#profile-icon" role="tab" aria-controls="profile-icon" aria-selected="false" data-bs-original-title="" title="">Old</a></li>
+               </ul>
+               <div class="tab-content" id="icon-tabContent">
+                   <div class="tab-pane fade active show text-center pt-0" id="icon-home" role="tabpanel" aria-labelledby="icon-home-tab">
+                     <a href="{{asset('assets/dg-po2.png')}}" target="_blank">
+                        <img class="img-fluid" style="max-height: 450px;" src="{{asset('assets/dg-po2.png')}}">
+                    </a>
+                   </div>
+                   <div class="tab-pane fade text-center pt-0" id="profile-icon" role="tabpanel" aria-labelledby="profile-icon-tab">
+                     <a href="{{asset('assets/dg-po.png')}}" target="_blank">
+                        <img class="img-fluid" style="max-height: 450px;" src="{{asset('assets/dg-po.png')}}">
+                    </a>
+                   </div>
+               </div>
+           </div>
          </div>
       </div>
    </div>

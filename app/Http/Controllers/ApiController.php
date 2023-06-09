@@ -243,9 +243,12 @@ class ApiController extends Controller
     public function notifications(Request $request)
     {
         if(Auth::user()->hasRole('AD')){
-            $data['schedules'] = Schedule::where("status_id", "S03")
-                ->select('status_id',DB::raw('COUNT(status_id) as notif'))
-                ->groupBy('status_id')
+            $data['schedules'] = Schedule::where(function ($query) {
+                    $query->where('status_id', '=', 'S03')
+                        ->orWhere('status_id', '=', 'S07')
+                        ->orWhere('status_id', '=', 'S08');
+                })
+                ->select(DB::raw('COUNT(*) as notif'))
                 ->first();
         }
         if(Auth::user()->hasRole('AU')){

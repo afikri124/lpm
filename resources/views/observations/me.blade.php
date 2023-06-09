@@ -181,12 +181,13 @@
                     render: function (data, type, row, meta) {
                         var x = row.id;
                         var html = "";
-                        if(row.status_id == "S03" || row.status_id == "S04" || row.status_id == "S05" || row.status_id == "S06"){
+                        if(row.status_id != "S00" || row.status_id != "S01"){
                             html = `<a class="btn btn-info btn-sm px-2" title="View Report" href="{{ url('pdf/report/` +
                             row.link + `') }}" target="_blank"><i class="fa fa-eye"></i></a>`;
                         } 
                         if(row.status_id == "S03" || row.status_id == "S02"){
-                            html += ` <a class="btn btn-warning btn-sm px-2" title="PO Validation" onclick="alert('On Development :)')"><i class="fa fa-legal"></i></a>`;
+                            html += ` <a class="btn btn-warning btn-sm px-2" title="PO Validation" href="{{ url('observations/validation/` +
+                            row.link + `') }}"><i class="fa fa-legal"></i></a>`;
                         }   
                         return html;
                     },

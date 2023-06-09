@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Observation Review')
+@section('title', 'PO Validation')
 
 @section('css')
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/select2.css')}}">
@@ -13,8 +13,8 @@
 @endsection
 
 @section('breadcrumb-items')
-<li class="breadcrumb-item">Schedules</li>
-<li class="breadcrumb-item">Review</li>
+<li class="breadcrumb-item">Observations</li>
+<li class="breadcrumb-item">Validation</li>
 <li class="breadcrumb-item active">{{ $data->lecturer->name }} </li>
 @endsection
 
@@ -24,7 +24,7 @@
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-header">
-                    <h5>Observation Review</h5>
+                    <h5>PO Validation</h5>
                 </div>
                 <div class="card-body">
                     @foreach ($errors->all() as $error)
@@ -82,6 +82,14 @@
                                     </i>
                                 </div>
                             </div>
+                            @if ($data->status_id == "S08")
+                            <div class="mb-3 row">
+                                <label class="col-sm-4">Validation Remark</label>
+                                <div class="col-sm-8">
+                                        <i>{{ $data->validation_remark }}</i>
+                                </div>
+                            </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -300,17 +308,15 @@
             <div class="card project-list">
                 <div class="row">
                     <div class="col-md-12 d-flex justify-content-center">
-                        @if(($data->status_id == "S03" || $data->status_id == "S07" || $data->status_id == "S08" || (($data->status_id == "S00" || $data->status_id == "S01") && now() > $data->date_end)) || ($data->status_id == "S02" && Auth::user()->username == $hod->content))
-                        <a type="button" data-bs-toggle="modal" data-bs-target="#modalFolowUp">
-                            <span class="btn btn-primary">Follow-Up</span>
+                        @if($data->status_id == "S03" || ($data->status_id == "S02" && now() > $data->date_end))
+                        <a type="button" data-bs-toggle="modal" data-bs-target="#modalValidate">
+                            <span class="btn btn-success">Validate</span>
                         </a>
-                        @if(($data->status_id == "S03" && $total_w != 0) || $data->status_id == "S07" || ($data->status_id == "S02" && Auth::user()->username == $hod->content))
-                        <a type="button" data-bs-toggle="modal" data-bs-target="#modalSendResult">
-                            <span class="btn btn-success">Send Result</span>
+                        <a type="button" data-bs-toggle="modal" data-bs-target="#modalReject">
+                            <span class="btn btn-primary">Reject</span>
                         </a>
                         @endif
-                        @endif
-                        <a href="{{ route('schedules.edit', ['id'=> $id]) }}">
+                        <a href="{{ url()->previous() }}">
                             <span class="btn btn-secondary">Back</span>
                         </a>
                     </div>
@@ -319,12 +325,14 @@
         </div>
     </div>
 </div>
-@if(($data->status_id == "S03" || $data->status_id == "S07" || $data->status_id == "S08" || (($data->status_id == "S00" || $data->status_id == "S01") && now() > $data->date_end))|| ($data->status_id == "S02" && Auth::user()->username == $hod->content))
-<div class="modal fade" id="modalFolowUp" tabindex="-1" role="dialog" aria-labelledby="modalFolowUp" aria-hidden="true">
+@if($data->status_id == "S03" || ($data->status_id == "S02" && now() > $data->date_end))
+
+<div class="modal fade" id="modalValidate" tabindex="-1" role="dialog" aria-labelledby="modalValidate"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel1">Folow Up</h5>
+                <h5 class="modal-title" id="exampleModalLabel1">Validate PO Results</h5>
                 <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form method="POST" action="">
@@ -333,62 +341,27 @@
                     <div class="mb-3">
                         <div class="col-md-12">
                             <div class="form-group mb-2">
-                                <label class="col-form-label">Select User<i class="text-danger">*</i></label>
-                                <select class="form-select digits select2 @error('dean_id') is-invalid @enderror"
-                                    name="dean_id" id="dean_id" data-placeholder="Select" required>
-                                    <option value="" selected disabled>Select</option>
-                                    @foreach($dean as $p)
-                                    <option value="{{ $p->id }}" {{ ($p->id==old('dean_id') ? "selected": "") }}>
-                                        {{ $p->name }} ({{ $p->department }})
-                                    </option>
-                                    @endforeach
-                                </select>
-                                @error('dean_id')
-                                <span class="invalid-feedback d-block" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                                <label class="col-form-label">I am,</label>
+                                <input type="hidden" name="action" value="validate" required>
+                                <input class="form-control digits" autocomplete="off" type="text" name="lecturer"
+                                    value="{{ $data->lecturer->name }}" disabled>
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <div class="form-group mb-2">
-                                <label class="col-form-label">Start<i class="text-danger">*</i></label>
-                                <input class="form-control digits" autocomplete="off" type="datetime-local"
-                                    id="date_start" name="date_start" required>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group mb-2">
-                                <label class="col-form-label">End<i class="text-danger">*</i></label>
-                                <input class="form-control digits" autocomplete="off" type="datetime-local"
-                                    id="date_end" name="date_end" required>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group mb-2">
-                                <label class="col-form-label">Remark<i class="text-danger">*</i></label>
-                                <textarea class="form-control" rows="2" name="remark" required></textarea>
-                                <input type="hidden" name="action" value="followup" required>
-                            </div>
-                        </div>
-                        <span class="invalid-feedback d-block" role="alert">
-                            <i>Note: explain why it should be followed up.</i>
-                        </span>
+                        <blockquote>By pressing the validation button, I approve the PO results requested by the auditors.</blockquote>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary" type="submit">Submit</button>
+                    <button class="btn btn-success" type="submit">Validate</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-<div class="modal fade" id="modalSendResult" tabindex="-1" role="dialog" aria-labelledby="modalSendResult"
-    aria-hidden="true">
+<div class="modal fade" id="modalReject" tabindex="-1" role="dialog" aria-labelledby="modalReject" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel1">Send Result and Recommendation</h5>
+                <h5 class="modal-title" id="exampleModalLabel1">Reject PO Results</h5>
                 <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form method="POST" action="">
@@ -397,26 +370,25 @@
                     <div class="mb-3">
                         <div class="col-md-12">
                             <div class="form-group mb-2">
-                                <label class="col-form-label">Lecturer</label>
-                                <input type="hidden" name="action" value="result" required>
+                                <label class="col-form-label">I am,</label>
                                 <input class="form-control digits" autocomplete="off" type="text" name="lecturer"
                                     value="{{ $data->lecturer->name }}" disabled>
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group mb-2">
-                                <label class="col-form-label">Remark or Recommendation<i
-                                        class="text-danger">*</i></label>
-                                <textarea class="form-control" rows="2" name="remark" required></textarea>
+                                <label class="col-form-label">Reasons for Rejecting<i class="text-danger">*</i></label>
+                                <textarea class="form-control" rows="5" name="validation_remark" required></textarea>
+                                <input type="hidden" name="action" value="reject" required>
                             </div>
                         </div>
                         <span class="invalid-feedback d-block" role="alert">
-                            <i>Note: give a message of appreciation for the score result or score increase.</i>
+                            <i>Note: explain why the PO results were rejected.</i>
                         </span>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-success" type="submit">Submit</button>
+                    <button class="btn btn-primary" type="submit">Reject</button>
                 </div>
             </form>
         </div>

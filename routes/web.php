@@ -68,6 +68,7 @@ Route::group(['prefix' => 'observations', 'middleware' => ['auth']], function() 
     Route::delete('delete', [App\Http\Controllers\ObservationController::class, 'delete'])->name('observations.delete')->middleware('role:AD');
     Route::any('add', [App\Http\Controllers\ObservationController::class, 'add'])->name('observations.add')->middleware('role:AD');
     Route::any('/results/{id}', [App\Http\Controllers\ObservationController::class, 'results'])->name('observations.results');
+    Route::any('/validation/{id}', [App\Http\Controllers\ObservationController::class, 'validations'])->name('observations.validations');
 });
 //OBSERVATIONS ROLE AUDITOR
 Route::group(['prefix' => 'observations', 'middleware' => ['auth', 'role:AU']], function() {

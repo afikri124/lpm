@@ -207,8 +207,8 @@ class ObservationController extends Controller
                             $d['messages'] = "Menginformasikan bahwa, hasil audit <i>Peer-Observation</i> anda sudah dapat dilihat melalui tautan <a href='".url('/pdf/report/'.Crypt::encrypt($o->schedule_id))."'>lpm.jgu.ac.id/observations/me</a>
                             <br><br>Selanjutnya, silahkan lakukan Validasi PO dengan langkah berikut ini:<br>
                             1. Akses <a href='".url('/observations/me')."'>Sistem Peer-Observation</a><br>
-                            2. Tekan Menu <b>My PO</b><br>
-                            3. Klik tombol <b>PO Validation</b><br>
+                            2. Tekan menu <b>My PO</b><br>
+                            3. Klik tombol <b>PO Validation</b> (ikon palu berwarna kuning)<br>
                             4. Lakukan validasi atau tolak hasil PO Anda.";
                             dispatch(new JobNotification($d)); //send Email using queue job
                         }
@@ -297,6 +297,74 @@ class ObservationController extends Controller
                         ->where('observation_id', $o_id)
                         ->orderBy('criteria_category_id')->get();
             return view('observations.view', compact('data', 'lecturer', 'survey'));
+    }
+
+    public function validations($id, Request $request){
+        try {
+            $s_id = Crypt::decrypt($id);
+        } catch (DecryptException $e) {
+            return redirect()->route('schedules');
+        }
+        if ($request->isMethod('POST')) {
+            if($request->action == "reject"){
+                $data = Schedule::findOrFail($s_id)
+                ->update([ 
+                    'status_id'=> 'S08',
+                    'validation_remark'=> $request->validation_remark,
+                ]);
+                if($data){
+                    $x = Schedule_history::insert([
+                        'schedule_id' => $s_id,
+                        'description' => "<b>".Auth::user()->name."</b> <u>rejected the results</u> of peer observation.",
+                        'remark' => $request->validation_remark,
+                        'created_by' => Auth::user()->id,
+                        'created_at' => Carbon::now(),
+                    ]);
+                    //TODO : SEND EMAIL TO LECTURER (Reject Info)
+                    $schedule = Schedule::with('lecturer')->find($s_id);
+                    if($schedule->lecturer->email != null || $schedule->lecturer->email != ""){
+                        $d['email'] = $schedule->lecturer->email;
+                        $d['subject'] = "Hasil Peer-Observation Berhasil Ditolak!";
+                        $d['name'] = $schedule->lecturer->name_with_title;
+                        $d['messages'] = "Menginformasikan bahwa, Anda baru saja menolak hasil audit <i>Peer-Observation</i>, tindaklanjut akan segera dijadwalkan oleh Tim LPM untuk membahas hasil PO Anda.";
+                        dispatch(new JobNotification($d)); //send Email using queue job
+                    }
+                    //--------------------end email--------------
+
+                    return redirect()->route('observations.validations', $id);
+                }
+
+            } else if($request->action == "validate"){
+                $data = Schedule::findOrFail($s_id)
+                ->update([ 
+                    'status_id'=> 'S07'
+                ]);
+                if($data){
+                    $x = Schedule_history::insert([
+                        'schedule_id' => $s_id,
+                        'description' => "<b>".Auth::user()->name."</b> has <u>validated the observation</u>.",
+                        'created_by' => Auth::user()->id,
+                        'created_at' => Carbon::now(),
+                    ]);
+                    return redirect()->route('observations.validations', $id);
+                }
+            }
+        } else {
+            $data = Schedule::with('lecturer')->with('status')->with('observations')->with('observations.auditor')->findOrFail($s_id);
+            $oids = array();
+            foreach($data->observations as $idx)
+            {
+                array_push($oids, $idx->id);
+            }
+            $survey = Observation_category::with('criteria_category')->with('observation_criterias')->with('observation_criterias.criteria')
+            ->whereIn('observation_id',$oids)->orderBy('criteria_category_id')->get()->groupBy('criteria_category_id');
+            $dean = User::select('id','email','name','department')->whereHas('roles', function($q){
+                $q->where('role_id', "DE");
+            })->where('username','!=', 'admin')->where('id','!=', $data->lecturer_id)->get();
+            $MINSCORE = Setting::findOrFail('MINSCORE');
+            $hod = Setting::findOrFail('HODLPM');
+            return view('observations.validations', compact('id','data', 'survey', 'dean', 'MINSCORE','hod'));
+        }
     }
 
 }

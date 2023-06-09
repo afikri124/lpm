@@ -23,6 +23,48 @@
 </head>
 
 <body>
+    @if ($data->validation_remark)
+    <table width="100%">
+        <tr>
+            <td width="50%" valign="top">
+                <code style="color: black;font-size:9pt">FM/JGU/L.xxx</code><br>
+                <!-- <img src="data:image/png;base64, {!! $qr !!}" style="height: 85px;"> -->
+                <a href="{{$link}}"><img src="{!! $qr !!}" style="height: 85px;"></a>
+            </td>
+            <td width="50%" style="text-align: right;">
+                <img src="{{ public_path('assets/images/logo.png') }}" style="height: 60px;" alt="">
+            </td>
+        </tr>
+    </table>
+    <br>
+    <center>
+        <h5><u>SURAT PERNYATAAN PENOLAKAN HASIL PO</u></h5>
+    </center>
+    <table width="100%">
+        <tr>
+            <td colspan="2">
+                <br><b style="color: red">Alasan Menolak:</b>
+                <p style="text-align: justify;">{{$data->validation_remark}}</p>
+            </td>
+        </tr>
+    </table>
+    <table width="100%">
+        <tr>
+            <td width="50%"></td>
+            <td width="50%" style="text-align: center;">Depok,
+                @if(count($survey) != 0)
+                {{ Date::createFromDate($data->observations[0]->updated_at)->format('j F Y') }}
+                @else
+                {{ Date::now()->format('j F Y') }}
+                @endif
+                <br>Auditee<br><br><br><br>
+                <b>( {{ $data->lecturer->name_with_title }} )</b><br>
+                <small>NIK. {{ $data->lecturer->username }}</small>
+            </td>
+        </tr>
+    </table>
+    <div class="page-break"></div>
+    @endif
     <table width="100%">
         <tr>
             <td width="50%" valign="top">
