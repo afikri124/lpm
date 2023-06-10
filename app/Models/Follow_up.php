@@ -16,6 +16,7 @@ class Follow_up extends Model
         'remark',
         'image_path',
         'created_by',
+        'location',
     ];
 
     public function dean()

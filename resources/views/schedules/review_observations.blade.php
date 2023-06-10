@@ -82,6 +82,14 @@
                                     </i>
                                 </div>
                             </div>
+                            @if ($data->status_id == "S08")
+                            <div class="mb-3 row">
+                                <label class="col-sm-4">Validation Remark</label>
+                                <div class="col-sm-8">
+                                        <i>{{ $data->validation_remark }}</i>
+                                </div>
+                            </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -333,13 +341,13 @@
                     <div class="mb-3">
                         <div class="col-md-12">
                             <div class="form-group mb-2">
-                                <label class="col-form-label">Select Follow-Up User<i class="text-danger">*</i></label>
+                                <label class="col-form-label">Followed up by<i class="text-danger">*</i></label>
                                 <select class="form-select digits select2 @error('dean_id') is-invalid @enderror"
                                     name="dean_id" id="dean_id" data-placeholder="Select" required>
                                     <option value="" selected disabled>Select</option>
                                     @foreach($dean as $p)
                                     <option value="{{ $p->id }}" {{ ($p->id==old('dean_id') ? "selected": "") }}>
-                                        {{ $p->name }} ({{ $p->department }})
+                                        {{ $p->name }} ({{ $p->job }})
                                     </option>
                                     @endforeach
                                 </select>
@@ -352,7 +360,7 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group mb-2">
-                                <label class="col-form-label">Invite HR &/ Auditor <i>(optional)</i></label>
+                                <label class="col-form-label">Invite the people involved, ex: HR/Auditors <i>(optional)</i></label>
                                 <select class="form-select digits select22 @error('invite') is-invalid @enderror"
                                     name="invite[]" id="invite" data-placeholder="Select" multiple="multiple">
                                     <option value="">Select</option>
@@ -367,6 +375,12 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group mb-2">
+                                <label>Room/Location<i class="text-danger">*</i></label>
+                                <input class="form-control" type="text" name="location" title="Follow-Up Location" required>
                             </div>
                         </div>
                         <div class="col-md-12">

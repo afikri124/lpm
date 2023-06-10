@@ -82,9 +82,9 @@ class FollowUpController extends Controller
                     $schedule = Schedule::with('lecturer')->find($follow_up->schedule_id);
                     if($schedule->lecturer->email != null || $schedule->lecturer->email != ""){
                         $d['email'] = $schedule->lecturer->email;
-                        $d['subject'] = "Hasil Peer-Observation";
+                        $d['subject'] = "Hasil Tindaklanjut Peer-Observation";
                         $d['name'] = $schedule->lecturer->name_with_title;
-                        $d['messages'] = "Menginformasikan bahwa hasil audit & tindak lanjut <i>Peer-Observation</i> anda sudah dapat dilihat melalui tautan berikut ini <a href='".url('/pdf/report/'.Crypt::encrypt($follow_up->schedule_id))."'>lpm.jgu.ac.id/observations/me</a>";
+                        $d['messages'] = "Menginformasikan bahwa hasil audit & tindaklanjut <i>Peer-Observation</i> anda sudah dapat dilihat melalui tautan berikut ini <a href='".url('/pdf/report/'.Crypt::encrypt($follow_up->schedule_id))."'>lpm.jgu.ac.id/observations/me</a>";
                         dispatch(new JobNotification($d)); //send Email using queue job
                     }
                     //--------------------end email--------------

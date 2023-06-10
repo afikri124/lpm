@@ -52,6 +52,14 @@
             </td>
             <td align="right"><b>{{ $data['end'] }}</b></td>
         </tr>
+        @if (isset($data['location']))
+        <tr class="pad-left-right-space">
+            <td align="left">
+                <p>Lokasi</p>
+            </td>
+            <td align="right"><b>{{ $data['location'] }}</b></td>
+        </tr>
+        @endif
     </tbody>
 </table>
 @endif

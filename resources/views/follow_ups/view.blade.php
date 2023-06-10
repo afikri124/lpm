@@ -98,6 +98,14 @@
                                     </i>
                                 </div>
                             </div>
+                            @if (isset($data->validation_remark))
+                            <div class="mb-3 row">
+                                <label class="col-sm-4">Validation Remark</label>
+                                <div class="col-sm-8">
+                                        <i>{{ $data->validation_remark }}</i>
+                                </div>
+                            </div>
+                            @endif
                             <div class="mb-3 row">
                                 <label class="col-sm-4">Remark by LPM</label>
                                 <div class="col-sm-8 text-danger">
@@ -328,7 +336,7 @@
                                 <label class="col-form-label">Remark or Recommendation<i class="text-danger">*</i>
                                     <i id="count" class="text-danger">(0/500)</i>
                                 </label>
-                                <textarea class="form-control" rows="5" id="remark" name="remark" minlength="500"
+                                <textarea class="form-control" rows="7" id="remark" name="remark" minlength="500"
                                     required>{{ old('remark') }}</textarea>
                             </div>
                         </div>
