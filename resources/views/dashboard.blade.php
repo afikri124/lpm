@@ -38,7 +38,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel2">Ingin Mendapatkan Notifikasi Ke Aplikasi <br><i
-                            class="icofont icofont-brand-whatsapp"></i> WhatsApp ?</h5>
+                            class="icofont icofont-brand-whatsapp"></i> WhatsApp ? <small class="text-danger">*</small></h5>
                     <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -49,7 +49,7 @@
                     <u>Pilih salah satu cara berikut ini:</u>
                     <ol>
                         <li>
-                            Chat ke nomor <i class="icofont icofont-brand-whatsapp"></i> +1 415 523 8886 dangan mengirim<br>pesan
+                            Chat ke nomor <i class="icofont icofont-brand-whatsapp"></i> <b>+1 415 523 8886</b> dangan mengirim<br>pesan
                             <b>join wide-common</b>
                         </li>
                         <li>
