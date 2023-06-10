@@ -147,9 +147,14 @@ class ObservationController extends Controller
                             $wa_from= getenv("TWILIO_WHATSAPP_FROM");
                             $twilio = new Client($sid, $token);
                             
-                            $body = "Halo ".$auditor->name_with_title.", Anda ditugaskan untuk mengaudit ".$schedule->lecturer->name_with_title.", pada "
-                            .Date::createFromDate($schedule->date_start)->format('l, j F Y (H:i)')
-                            .". Informasi selengkapnya silahkan cek di sistem PO LPM JGU.";
+                            $body = 
+"Halo ".$auditor->name_with_title.", 
+
+Anda ditugaskan untuk mengaudit ".$schedule->lecturer->name_with_title.", pada 
+".Date::createFromDate($schedule->date_start)->format('l, j F Y (H:i)').". 
+
+Informasi selengkapnya silahkan cek di sistem PO LPM JGU.";
+
                             $twilio->messages->create("whatsapp:+$wa_to",["from" => "whatsapp:$wa_from", "body" => $body]);
                         } catch (DecryptException $e) {
                             Log::warning("Notif WA Auditor gagal dikirim ke +".$wa_to);
@@ -243,7 +248,12 @@ class ObservationController extends Controller
                                 $wa_from= getenv("TWILIO_WHATSAPP_FROM");
                                 $twilio = new Client($sid, $token);
                                 
-                                $body = "Halo ".$schedule->lecturer->name_with_title.", Menginformasikan bahwa hasil audit Peer-Observation anda sudah dapat dilihat, segera lakukan Validasi hasil PO anda melalui sistem.";
+                                $body = 
+"Halo ".$schedule->lecturer->name_with_title.", 
+
+Menginformasikan bahwa hasil audit Peer-Observation anda sudah dapat dilihat, 
+segera lakukan Validasi hasil PO anda melalui sistem.";
+
                                 $twilio->messages->create("whatsapp:+$wa_to",["from" => "whatsapp:$wa_from", "body" => $body]);
                             } catch (DecryptException $e) {
                                 Log::warning("Notif WA Jadwal gagal dikirim ke +".$wa_to);
@@ -394,7 +404,7 @@ class ObservationController extends Controller
                 array_push($oids, $idx->id);
             }
             $survey = Observation_category::with('criteria_category')->with('observation_criterias')->with('observation_criterias.criteria')
-            ->whereIn('observation_id',$oids)->orderBy('criteria_category_id')->get()->groupBy('criteria_category_id');
+            ->whereIn('observation_id',$oids)->orderBy('criteria_category_id')->orderBy('observation_id')->get()->groupBy('criteria_category_id');
             $dean = User::select('id','email','name','department')->whereHas('roles', function($q){
                 $q->where('role_id', "DE");
             })->where('username','!=', 'admin')->where('id','!=', $data->lecturer_id)->get();

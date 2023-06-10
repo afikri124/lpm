@@ -37,8 +37,8 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel2">Ingin Mendapatkan Notifikasi Ke Aplikasi <br><i
-                            class="icofont icofont-brand-whatsapp"></i> WhatsApp ? <small class="text-danger">*</small></h5>
+                    <h5 class="modal-title" id="exampleModalLabel2">Ingin Mendapatkan Notifikasi ke Aplikasi WhatsApp <i
+                        class="icofont icofont-brand-whatsapp"></i> ? <small class="text-danger">*</small></h5>
                     <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -49,15 +49,15 @@
                     <u>Pilih salah satu cara berikut ini:</u>
                     <ol>
                         <li>
-                            Chat ke nomor <i class="icofont icofont-brand-whatsapp"></i> <b>+1 415 523 8886</b> dangan mengirim<br>pesan
-                            <b>join wide-common</b>
+                            Chat <i class="icofont icofont-brand-whatsapp"></i> ke nomor <b>+1 415 523 8886</b> dangan mengirim pesan
+                            <blockquote><b>join wide-common</b></blockquote>
                         </li>
                         <li>
-                            Klik tautan berikut <a class="" target="_blank" href="http://wa.me/+14155238886?text=join%20wide-common" type="button"
+                            Klik tautan berikut, lalu kirim chat. <a class="" target="_blank" href="http://wa.me/+14155238886?text=join%20wide-common" type="button"
                                 >Buka WhatsApp <i class="fa fa-external-link"></i></a>
                         </li>
                         <li>
-                            Pindai KodeQR ini <br>
+                            Pindai KodeQR ini: <br>
                         </li>
                     </ol>
                     <div class="text-center">
@@ -67,7 +67,7 @@
                     </div>
                 </div>
                 <div class="modal-footer text-danger">
-                    <small>* This WhatsApp notification is only a free trial :)</small>
+                    <small>* This WhatsApp notification only use free trial :)</small>
                 </div>
             </div>
         </div>
