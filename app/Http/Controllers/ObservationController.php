@@ -21,6 +21,7 @@ use Illuminate\Contracts\Encryption\DecryptException;
 use phpDocumentor\Reflection\Location;
 use Jenssegers\Date\Date;
 use App\Jobs\JobNotification;
+use Twilio\Rest\Client;
 
 class ObservationController extends Controller
 {
@@ -136,6 +137,25 @@ class ObservationController extends Controller
                         dispatch(new JobNotification($d)); //send Email using queue job
                     }
                     //--------------------end email--------------
+                    //-----------------WA----------------------------------------------------------------------------
+                    $wa_to = $auditor->phone;
+                    if($wa_to != null){
+                        try {
+                            //TODO : SEND TO WhatsApp
+                            $sid    = getenv("TWILIO_AUTH_SID");
+                            $token  = getenv("TWILIO_AUTH_TOKEN");
+                            $wa_from= getenv("TWILIO_WHATSAPP_FROM");
+                            $twilio = new Client($sid, $token);
+                            
+                            $body = "Halo ".$auditor->name_with_title.", Anda ditugaskan untuk mengaudit ".$schedule->lecturer->name_with_title.", pada "
+                            .Date::createFromDate($schedule->date_start)->format('l, j F Y (H:i)')
+                            .". Informasi selengkapnya silahkan cek di sistem PO LPM JGU.";
+                            $twilio->messages->create("whatsapp:+$wa_to",["from" => "whatsapp:$wa_from", "body" => $body]);
+                        } catch (DecryptException $e) {
+                            Log::warning("Notif WA Auditor gagal dikirim ke +".$wa_to);
+                        }
+                    }
+                    //------------------------------------------------------------------------------------------------
     
                     return response()->json([
                         'success' => true,
@@ -213,6 +233,23 @@ class ObservationController extends Controller
                             dispatch(new JobNotification($d)); //send Email using queue job
                         }
                         //--------------------end email--------------
+                        //-----------------WA----------------------------------------------------------------------------
+                        $wa_to = $schedule->lecturer->phone;
+                        if($wa_to != null){
+                            try {
+                                //TODO : SEND TO WhatsApp
+                                $sid    = getenv("TWILIO_AUTH_SID");
+                                $token  = getenv("TWILIO_AUTH_TOKEN");
+                                $wa_from= getenv("TWILIO_WHATSAPP_FROM");
+                                $twilio = new Client($sid, $token);
+                                
+                                $body = "Halo ".$schedule->lecturer->name_with_title.", Menginformasikan bahwa hasil audit Peer-Observation anda sudah dapat dilihat, segera lakukan Validasi hasil PO anda melalui sistem.";
+                                $twilio->messages->create("whatsapp:+$wa_to",["from" => "whatsapp:$wa_from", "body" => $body]);
+                            } catch (DecryptException $e) {
+                                Log::warning("Notif WA Jadwal gagal dikirim ke +".$wa_to);
+                            }
+                        }
+                        //------------------------------------------------------------------------------------------------
                     }
                 }
 

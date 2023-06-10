@@ -35,4 +35,10 @@ return [
         'client_secret' => env('GOOGLE_APP_SECRET'),
         'redirect'      => env('GOOGLE_REDIRECT'),
     ],
+
+    'twilio' => [
+        'sid' => env('TWILIO_AUTH_SID'),
+        'token' => env('TWILIO_AUTH_TOKEN'),
+        'whatsapp_from' => env('TWILIO_WHATSAPP_FROM')
+    ],
 ];

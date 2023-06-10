@@ -214,7 +214,7 @@
                                         <th>Code</th>
                                         <th>Criteria Category</th>
                                         @foreach($data->observations as $no => $o)
-                                        <th class='text-center'>Auditor {{ $no + 1 }}</th>
+                                        <th class='text-center'>Result {{ $no + 1 }}</th>
                                         @php
                                         array_push($total, 0);
                                         @endphp
