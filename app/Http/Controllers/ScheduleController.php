@@ -190,6 +190,7 @@ class ScheduleController extends Controller
                     $followup = Follow_up::create([
                         'schedule_id' => $s_id,
                         'dean_id' => $request->dean_id,
+                        'location'=> $request->location,
                         'date_start' => date('Y-m-d H:i', strtotime($request->date_start)),
                         'date_end' => date('Y-m-d H:i', strtotime($request->date_end)),
                         'created_by' => Auth::user()->id

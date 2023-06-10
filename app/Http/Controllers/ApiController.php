@@ -244,8 +244,7 @@ class ApiController extends Controller
     {
         if(Auth::user()->hasRole('AD')){
             $data['schedules'] = Schedule::where(function ($query) {
-                    $query->where('status_id', '=', 'S03')
-                        ->orWhere('status_id', '=', 'S07')
+                    $query->where('status_id', '=', 'S07')
                         ->orWhere('status_id', '=', 'S08');
                 })
                 ->select(DB::raw('COUNT(*) as notif'))

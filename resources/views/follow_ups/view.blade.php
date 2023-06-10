@@ -52,6 +52,12 @@
                                 </div>
                             </div>
                             <div class="mb-3 row">
+                                <label class="col-sm-4">Location</label>
+                                <div class="col-sm-8">
+                                    <strong><i>{{ $follow_up->location }}</i></strong>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
                                 <label class="col-sm-4">Study Program</label>
                                 <div class="col-sm-8">
                                     <strong>{{ ($follow_up->schedule->study_program==null ? $data->lecturer->study_program : $follow_up->schedule->study_program) }}</strong>

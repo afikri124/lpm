@@ -360,7 +360,7 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group mb-2">
-                                <label class="col-form-label">Invite the people involved, ex: HR/Auditors <i>(optional)</i></label>
+                                <label class="col-form-label">Invite the people involved, ex: HR/Auditee/Auditors <i>(optional)</i></label>
                                 <select class="form-select digits select22 @error('invite') is-invalid @enderror"
                                     name="invite[]" id="invite" data-placeholder="Select" multiple="multiple">
                                     <option value="">Select</option>
