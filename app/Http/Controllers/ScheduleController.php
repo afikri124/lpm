@@ -218,8 +218,7 @@ Menginformasikan bahwa Jadwal Peer-Observation Anda telah diganti manjadi
                                 $body = 
 "Halo ".$o->auditor->name_with_title.", 
 
-Menginformasikan bahwa Jadwal Peer-Observation 
-".$schedule->lecturer->name_with_title." diganti manjadi 
+Menginformasikan bahwa Jadwal Peer-Observation ".$schedule->lecturer->name_with_title." diganti manjadi 
 ".Date::createFromDate($request->date_start)->format('l, j F Y (H:i)').".";
 
                                 $twilio->messages->create("whatsapp:+$wa_to",["from" => "whatsapp:$wa_from", "body" => $body]);
