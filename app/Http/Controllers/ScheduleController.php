@@ -181,7 +181,7 @@ Informasi selengkapnya silahkan cek di sistem PO LPM JGU.";
                             $body = 
 "Halo ".$schedule->lecturer->name_with_title.", 
 
-Menginformasikan bahwa Jadwal Peer-Observation Anda telah diganti manjadi 
+Menginformasikan bahwa Jadwal Peer-Observation Anda telah diganti menjadi 
 ".Date::createFromDate($request->date_start)->format('l, j F Y (H:i)').".";
 
                             $twilio->messages->create("whatsapp:+$wa_to",["from" => "whatsapp:$wa_from", "body" => $body]);
@@ -218,7 +218,7 @@ Menginformasikan bahwa Jadwal Peer-Observation Anda telah diganti manjadi
                                 $body = 
 "Halo ".$o->auditor->name_with_title.", 
 
-Menginformasikan bahwa Jadwal Peer-Observation ".$schedule->lecturer->name_with_title." diganti manjadi 
+Menginformasikan bahwa Jadwal Peer-Observation ".$schedule->lecturer->name_with_title." diganti menjadi 
 ".Date::createFromDate($request->date_start)->format('l, j F Y (H:i)').".";
 
                                 $twilio->messages->create("whatsapp:+$wa_to",["from" => "whatsapp:$wa_from", "body" => $body]);
@@ -302,7 +302,7 @@ Menginformasikan bahwa Jadwal Peer-Observation ".$schedule->lecturer->name_with_
                                 $body = 
 "Halo ".$schedule->lecturer->name_with_title.", 
 
-Hasil PO Anda perlu ditindaklanjuti, Anda harus datang ke lokasi tindaklanjut (".$request->location.") pada
+Hasil PO Anda perlu ditindaklanjuti, Tindaklanjut dilakukan di lokasi (".$request->location.") pada
 ".Date::createFromDate($request->date_start)->format('l, j F Y (H:i)');
 
                                 $twilio->messages->create("whatsapp:+$wa_to",["from" => "whatsapp:$wa_from", "body" => $body]);
