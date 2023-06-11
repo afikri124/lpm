@@ -37,11 +37,11 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel2">Ingin Mendapatkan Notifikasi ke Aplikasi WhatsApp <i
+                    <h5 class="modal-title" id="exampleModalLabel2">Ingin Mendapatkan Percobaan Notifikasi ke Aplikasi WhatsApp <i
                         class="icofont icofont-brand-whatsapp"></i> ? <small class="text-danger">*</small></h5>
                     <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body pb-0">
                     <i>Pastikan nomor Anda yang terdaftar di sistem ini <b>{{ Auth::user()->phone }}</b> sama dengan nomor
                         WhatsApp Anda, jika tidak sama silahkan perbarui melaui menu <a
                             href="{{ route('my_profile') }}"><b>My Profile</b></a></i><br><br>
@@ -49,11 +49,11 @@
                     <u>Pilih salah satu cara berikut ini:</u>
                     <ol>
                         <li>
-                            Chat <i class="icofont icofont-brand-whatsapp"></i> ke nomor <b>+1 415 523 8886</b> dangan mengirim pesan
+                            Chat <i class="icofont icofont-brand-whatsapp"></i> ke nomor <b>{{ getenv("TWILIO_WHATSAPP_FROM") }}</b> dengan mengirim pesan
                             <blockquote><b>join wide-common</b></blockquote>
                         </li>
                         <li>
-                            Klik tautan berikut, lalu kirim chat. <a class="" target="_blank" href="http://wa.me/+14155238886?text=join%20wide-common" type="button"
+                            Klik tautan berikut, lalu kirim chat. <a class="" target="_blank" href="http://wa.me/{{ getenv("TWILIO_WHATSAPP_FROM") }}?text=join%20wide-common" type="button"
                                 >Buka WhatsApp <i class="fa fa-external-link"></i></a>
                         </li>
                         <li>
@@ -61,13 +61,14 @@
                         </li>
                     </ol>
                     <div class="text-center">
-                        <a class="" target="_blank" href="http://wa.me/+14155238886?text=join%20wide-common" type="button" >
-                            <div data-paste-element="BOX" class="css-kbfmxe"><img alt="http://wa.me/+14155238886?text=join%20wide-common" src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2033%2033%22%20shape-rendering%3D%22crispEdges%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M0%200h33v33H0z%22%2F%3E%3Cpath%20stroke%3D%22%23000000%22%20d%3D%22M0%200.5h7m3%200h3m2%200h1m4%200h1m1%200h1m1%200h1m1%200h7M0%201.5h1m5%200h1m1%200h2m3%200h3m1%200h1m3%200h2m3%200h1m5%200h1M0%202.5h1m1%200h3m1%200h1m1%200h2m3%200h1m1%200h4m4%200h1m2%200h1m1%200h3m1%200h1M0%203.5h1m1%200h3m1%200h1m1%200h2m9%200h1m3%200h1m2%200h1m1%200h3m1%200h1M0%204.5h1m1%200h3m1%200h1m3%200h1m2%200h1m1%200h1m2%200h1m3%200h1m3%200h1m1%200h3m1%200h1M0%205.5h1m5%200h1m3%200h5m1%200h1m1%200h1m1%200h2m1%200h2m1%200h1m5%200h1M0%206.5h7m1%200h1m1%200h1m1%200h1m1%200h1m1%200h1m1%200h1m1%200h1m1%200h1m1%200h1m1%200h7M8%207.5h3m1%200h2m4%200h1m3%200h3M0%208.5h1m5%200h1m1%200h2m1%200h2m1%200h4m3%200h1m1%200h4m2%200h3M1%209.5h2m2%200h1m1%200h1m2%200h2m9%200h1m1%200h3m1%200h4M1%2010.5h1m1%200h2m1%200h2m1%200h1m2%200h1m5%200h2m1%200h2m3%200h1m1%200h1m1%200h2M1%2011.5h3m1%200h1m1%200h1m1%200h1m1%200h2m1%200h2m3%200h1m6%200h5m1%200h1M0%2012.5h2m1%200h1m1%200h5m1%200h4m1%200h3m1%200h4m2%200h3m2%200h1M0%2013.5h1m2%200h1m1%200h1m3%200h1m1%200h1m1%200h2m1%200h2m2%200h1m4%200h1m1%200h6M0%2014.5h2m2%200h1m1%200h1m1%200h1m2%200h3m3%200h1m1%200h1m1%200h1m1%200h3m1%200h1m2%200h2M0%2015.5h1m1%200h2m5%200h1m2%200h4m1%200h3m2%200h4m3%200h2m1%200h1M2%2016.5h1m1%200h1m1%200h2m2%200h1m2%200h2m1%200h2m1%200h1m3%200h3m1%200h2m3%200h1M0%2017.5h1m2%200h1m1%200h1m1%200h2m6%200h4m1%200h2m1%200h1m2%200h1m2%200h2M4%2018.5h3m1%200h2m1%200h2m2%200h2m2%200h2m2%200h1m1%200h1m3%200h2m1%200h1M0%2019.5h1m1%200h1m4%200h1m1%200h2m1%200h3m2%200h2m2%200h1m4%200h5M0%2020.5h2m1%200h4m3%200h4m2%200h1m2%200h5m1%200h3m1%200h1m1%200h2M0%2021.5h2m1%200h3m2%200h1m3%200h2m2%200h3m1%200h3m3%200h2m2%200h1M0%2022.5h1m1%200h3m1%200h1m2%200h1m3%200h4m1%200h1m1%200h5m2%200h2m1%200h2M0%2023.5h1m2%200h2m6%200h1m1%200h2m2%200h2m2%200h1m1%200h1m1%200h1m3%200h1m2%200h1M0%2024.5h2m4%200h2m4%200h6m1%200h1m1%200h2m1%200h6M8%2025.5h1m1%200h2m2%200h3m1%200h1m5%200h1m3%200h1m1%200h2M0%2026.5h7m2%200h1m4%200h1m3%200h1m2%200h1m1%200h2m1%200h1m1%200h1m1%200h3M0%2027.5h1m5%200h1m2%200h4m3%200h1m2%200h2m2%200h2m3%200h1m1%200h1M0%2028.5h1m1%200h3m1%200h1m2%200h1m1%200h5m2%200h2m1%200h1m2%200h6M0%2029.5h1m1%200h3m1%200h1m2%200h3m1%200h1m2%200h2m2%200h3m5%200h2M0%2030.5h1m1%200h3m1%200h1m5%200h3m1%200h1m1%200h1m1%200h2m3%200h1m1%200h3m1%200h2M0%2031.5h1m5%200h1m3%200h4m1%200h11m2%200h2M0%2032.5h7m1%200h1m1%200h2m4%200h2m1%200h1m1%200h1m1%200h1m2%200h6%22%2F%3E%3C%2Fsvg%3E" style="height: 200px; object-fit: contain;"></div>
+                        <a class="" target="_blank" href="http://wa.me/{{ getenv("TWILIO_WHATSAPP_FROM") }}?text=join%20wide-common" type="button" >
+                            <div data-paste-element="BOX" class="css-kbfmxe"><img alt="http://wa.me/{{ getenv("TWILIO_WHATSAPP_FROM") }}?text=join%20wide-common" src='https://s.jgu.ac.id/qrcode?data=http://wa.me/{{ urlencode(getenv("TWILIO_WHATSAPP_FROM")) }}?text=join%20wide-common' style="height: 200px; object-fit: contain;"></div>
                         </a>
                     </div>
+                    <small class="mt-5 mb-0 pb-0"><b>Catatan:</b> Syarat dan ketentuan berlaku.</small>
                 </div>
                 <div class="modal-footer text-danger">
-                    <small>* This WhatsApp notification only use free trial :)</small>
+                    <small>* This WhatsApp notification only uses a <b>free trial</b> for the tester only :)</small>
                 </div>
             </div>
         </div>
