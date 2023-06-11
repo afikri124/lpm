@@ -37,7 +37,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel2">Ingin Mendapatkan Percobaan Notifikasi ke Aplikasi WhatsApp <i
+                    <h5 class="modal-title" id="exampleModalLabel2">Ingin Mendapatkan Uji Coba Notifikasi ke Aplikasi WhatsApp <i
                         class="icofont icofont-brand-whatsapp"></i> ? <small class="text-danger">*</small></h5>
                     <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -82,6 +82,7 @@
                             <div class="greeting-user m-0">
                                 <h4 class="f-w-600 font-light m-0" id="greeting">Good Morning</h4>
                                 <h3>{{ Auth::user()->name }}</h3>
+                                <i><i class="fa fa-envelope"></i> {{ Auth::user()->email }}  <i class="fa fa-phone-square"></i> {{ Auth::user()->phone }}</i>
                                 @if(Auth::user()->roles->count() == 0)
                                 <p class="p-0 mb-0 text-danger">You don't have access rights, please contact the
                                     administrator!</p>
