@@ -68,9 +68,9 @@
                         </select>
                     </div>
                     <div class="col-md-6 d-flex justify-content-center justify-content-md-end">
-                        <button class="btn btn-light" title="Sync data with klas2" onclick="SyncKlas2()">
+                        {{-- <button class="btn btn-light" title="Sync data with klas2" onclick="SyncKlas2()">
                             <i data-feather="refresh-cw"></i>Sync
-                        </button>
+                        </button> --}}
                         <a class="btn btn-primary" title="Add new" href="{{ route('settings.user_add')}}">
                             <i data-feather="user-plus"></i>New
                         </a>
