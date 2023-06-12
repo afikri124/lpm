@@ -94,6 +94,12 @@
                     </li>
                     @endif
                     <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='rubric' ? 'active' : '' }} "
+                            href="{{route('rubric')}}">
+                            <i data-feather="sliders"> </i><span>Rubric Guidance</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='documentation' ? 'active' : '' }} "
                             href="{{route('documentation')}}">
                             <i data-feather="file-text"> </i><span>Documentation</span>

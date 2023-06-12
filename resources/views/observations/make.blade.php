@@ -135,6 +135,13 @@
                         </fieldset>
                         <fieldset>
                             <div class="mb-3 col-lg-12 col-md-12">
+                                <div class="alert alert-danger outline alert-dismissible fade show" role="alert">
+                                    <ul>
+                                        <a href="{{asset('assets/rubric.pdf')}}" target="_blank"><b>Click here</b></a> to view the grading rubric guide.
+                                    </ul>
+                                    <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"
+                                        data-bs-original-title="" title=""></button>
+                                </div>
                                 <table class="table table-hover" width="100%">
                                     @foreach($survey as $key => $q)
                                     <tr valign="top">
