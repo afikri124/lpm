@@ -22,6 +22,7 @@ use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Crypt;
 use File;
 use Jenssegers\Date\Date;
+use App\Jobs\JobNotificationWA;
 
 class ApiController extends Controller
 {
@@ -348,29 +349,32 @@ class ApiController extends Controller
 
     public function tes(Request $request)
     {
+        $d = array();
+        $d['wa_text'] = 'tess api haha';
+        $d['wa_to'] = '087750431397,+6285895457897';
+        dispatch(new JobNotificationWA($d));
+        // $data = Follow_up::with('dean')
+        // ->whereNull('remark')
+        // ->whereDate('date_start', '<=', Carbon::now()->endOfDay())
+        // ->whereDate('date_end', '>=', Carbon::today())
+        // ->groupBy("dean_id")
+        // ->select("dean_id")->get();
+        // // Observation::join('schedules as s', 's.id', '=', 'observations.schedule_id')->with('auditor')
+        // // ->where('attendance', false)
+        // // ->where(function ($query) {
+        // //     $query->where('s.status_id', '=', 'S00')
+        // //           ->orWhere('s.status_id', '=', 'S01')
+        // //           ->orWhere('s.status_id', '=', 'S02');
+        // // })
+        // // ->whereDate('s.date_start', '<=', Carbon::now()->endOfDay())
+        // // // ->whereDate('s.date_end', '>=', Carbon::today())
+        // // ->groupBy("auditor_id")
+        // // ->select("auditor_id")->get();
 
-        $data = Follow_up::with('dean')
-        ->whereNull('remark')
-        ->whereDate('date_start', '<=', Carbon::now()->endOfDay())
-        ->whereDate('date_end', '>=', Carbon::today())
-        ->groupBy("dean_id")
-        ->select("dean_id")->get();
-        // Observation::join('schedules as s', 's.id', '=', 'observations.schedule_id')->with('auditor')
-        // ->where('attendance', false)
-        // ->where(function ($query) {
-        //     $query->where('s.status_id', '=', 'S00')
-        //           ->orWhere('s.status_id', '=', 'S01')
-        //           ->orWhere('s.status_id', '=', 'S02');
-        // })
-        // ->whereDate('s.date_start', '<=', Carbon::now()->endOfDay())
-        // // ->whereDate('s.date_end', '>=', Carbon::today())
-        // ->groupBy("auditor_id")
-        // ->select("auditor_id")->get();
 
+        // return response()->json( $data );
 
-        return response()->json( $data );
-
-        // return Datatables::of($data)->make(true);
+        // // return Datatables::of($data)->make(true);
     }
 
 }

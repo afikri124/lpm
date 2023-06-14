@@ -33,7 +33,7 @@
     </div>
     @endif
     <!-- Modal-->
-    @if (env('TWILIO'))
+    {{-- @if (env('TWILIO'))
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -74,7 +74,7 @@
             </div>
         </div>
     </div>
-    @endif
+    @endif --}}
     <div class="row">
         <div class="col-xl-6 col-lg-12 xl-50 morning-sec box-col-12">
             <div class="card profile-greeting">

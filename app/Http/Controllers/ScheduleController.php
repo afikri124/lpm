@@ -18,8 +18,8 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Jenssegers\Date\Date;
 use App\Jobs\JobNotification;
+use App\Jobs\JobNotificationWA;
 use Illuminate\Support\Facades\Log;
-use Twilio\Rest\Client;
 
 class ScheduleController extends Controller
 {
@@ -94,28 +94,17 @@ class ScheduleController extends Controller
                 dispatch(new JobNotification($d)); //send Email using queue job
             }
             //--------------------end email--------------
-            if(env('TWILIO')){
-                //-----------------WA----------------------------------------------------------------------------
-                $wa_to = $auditee->phone;
-                if($wa_to != null){
-                    try {
-                        //TODO : SEND TO WhatsApp
-                        $sid    = getenv("TWILIO_AUTH_SID");
-                        $token  = getenv("TWILIO_AUTH_TOKEN");
-                        $wa_from= getenv("TWILIO_WHATSAPP_FROM");
-                        $twilio = new Client($sid, $token);
-                        $body = 
-"Halo ".$auditee->name_with_title.",
+            $wa_to = $auditee->phone;
+            if($wa_to != null){
+                $WA_DATA = array();
+                $WA_DATA['wa_to'] = $wa_to;
+                $WA_DATA['wa_text'] = "Bpk/Ibu ".$auditee->name_with_title.",
 Anda mendapatkan Jadwal Peer-Observation pada 
 ".Date::createFromDate($request->date_start)->format('l, j F Y (H:i)').".
-Informasi selengkapnya silahkan cek di sistem PO LPM JGU.";
-                        $twilio->messages->create("whatsapp:+$wa_to",["from" => "whatsapp:$wa_from", "body" => $body]);
-                    } catch (DecryptException $e) {
-                        Log::warning("Notif WA hasil PO gagal dikirim ke +".$wa_to);
-                    }
-                }
-                //------------------------------------------------------------------------------------------------
+Info selengkapnya silakan akses sistem PO LPM JGU.";;
+                dispatch(new JobNotificationWA($WA_DATA));
             }
+            // ------------------end send to WA-----------------
             return redirect()->route('schedules.edit', Crypt::encrypt($schedule->id));
         } else {
             $lecturer = User::select('id','email','name')->whereHas('roles', function($q){
@@ -166,28 +155,17 @@ Informasi selengkapnya silahkan cek di sistem PO LPM JGU.";
                         $d['end'] = Date::createFromDate($request->date_end)->format('l, j F Y (H:i)');
                         dispatch(new JobNotification($d)); //send Email using queue job
                     }
-                    if(env('TWILIO')){
-                        //-----------------WA----------------------------------------------------------------------------
-                        $wa_to = $schedule->lecturer->phone;
-                        if($wa_to != null){
-                            try {
-                                //TODO : SEND TO WhatsApp
-                                $sid    = getenv("TWILIO_AUTH_SID");
-                                $token  = getenv("TWILIO_AUTH_TOKEN");
-                                $wa_from= getenv("TWILIO_WHATSAPP_FROM");
-                                $twilio = new Client($sid, $token);
-                                
-                                $body = 
-"Halo ".$schedule->lecturer->name_with_title.", 
-Menginformasikan bahwa Jadwal Peer-Observation Anda telah diganti menjadi 
-".Date::createFromDate($request->date_start)->format('l, j F Y (H:i)').".";
-                                $twilio->messages->create("whatsapp:+$wa_to",["from" => "whatsapp:$wa_from", "body" => $body]);
-                            } catch (DecryptException $e) {
-                                Log::warning("Notif WA ganti Jadwal gagal dikirim ke +".$wa_to);
-                            }
-                        }
-                        //------------------------------------------------------------------------------------------------
+                    //----------------WA-------------------------------
+                    $wa_to = $schedule->lecturer->phone;
+                    if($wa_to != null){
+                        $WA_DATA = array();
+                        $WA_DATA['wa_to'] = $wa_to;
+                        $WA_DATA['wa_text'] = "Bpk/Ibu ".$schedule->lecturer->name_with_title.",
+Peer-Observation Anda telah jadwalkan ulang menjadi 
+".Date::createFromDate($request->date_start)->format('l, j F Y (H:i)');
+                        dispatch(new JobNotificationWA($WA_DATA));
                     }
+                    // ------------------end send to WA-----------------
                 if($schedule->observations != null){
                     foreach($schedule->observations as $o){
                         if(($o->auditor->email != null || $o->auditor->email != "") && $o->attendance != true){
@@ -203,27 +181,17 @@ Menginformasikan bahwa Jadwal Peer-Observation Anda telah diganti menjadi
                             $d['end'] = Date::createFromDate($request->date_end)->format('l, j F Y (H:i)');
                             dispatch(new JobNotification($d)); //send Email using queue job
                         }
-                        if(env('TWILIO')){
-                            //-----------------WA----------------------------------------------------------------------------
-                            $wa_to = $o->auditor->phone;
-                            if($wa_to != null && $o->attendance != true){
-                                try {
-                                    //TODO : SEND TO WhatsApp
-                                    $sid    = getenv("TWILIO_AUTH_SID");
-                                    $token  = getenv("TWILIO_AUTH_TOKEN");
-                                    $wa_from= getenv("TWILIO_WHATSAPP_FROM");
-                                    $twilio = new Client($sid, $token);
-                                $body = 
-"Halo ".$o->auditor->name_with_title.", 
-Menginformasikan bahwa Jadwal Peer-Observation ".$schedule->lecturer->name_with_title." diganti menjadi 
-".Date::createFromDate($request->date_start)->format('l, j F Y (H:i)').".";
-                                    $twilio->messages->create("whatsapp:+$wa_to",["from" => "whatsapp:$wa_from", "body" => $body]);
-                                } catch (DecryptException $e) {
-                                    Log::warning("Notif WA ganti Jadwal auditor gagal dikirim ke +".$wa_to);
-                                }
-                            }
-                            //------------------------------------------------------------------------------------------------
+                        //----------------WA-------------------------------
+                        $wa_to = $o->auditor->phone;
+                        if($wa_to != null){
+                            $WA_DATA = array();
+                            $WA_DATA['wa_to'] = $wa_to;
+                            $WA_DATA['wa_text'] = "Bpk/Ibu ".$o->auditor->name_with_title.",
+Menginformasikan bahwa Jadwal PO ".$schedule->lecturer->name_with_title." telah diganti menjadi 
+".Date::createFromDate($request->date_start)->format('l, j F Y (H:i)');
+                            dispatch(new JobNotificationWA($WA_DATA));
                         }
+                        // ------------------end send to WA-----------------
                     }
                 }
                 //--------------------end email--------------
@@ -286,27 +254,17 @@ Menginformasikan bahwa Jadwal Peer-Observation ".$schedule->lecturer->name_with_
                         dispatch(new JobNotification($d)); //send Email using queue job
                     }
                     //--------------------end email--------------
-                    if(env('TWILIO')){
-                        //-----------------WA----------------------------------------------------------------------------
-                            $wa_to = $schedule->lecturer->phone;
-                            if($wa_to != null){
-                                try {
-                                    //TODO : SEND TO WhatsApp
-                                    $sid    = getenv("TWILIO_AUTH_SID");
-                                    $token  = getenv("TWILIO_AUTH_TOKEN");
-                                    $wa_from= getenv("TWILIO_WHATSAPP_FROM");
-                                    $twilio = new Client($sid, $token);
-                                $body = 
-"Halo ".$schedule->lecturer->name_with_title.", 
-Hasil PO Anda perlu ditindaklanjuti, Tindaklanjut dilakukan di lokasi (".$request->location.") pada
-".Date::createFromDate($request->date_start)->format('l, j F Y (H:i)');
-                                $twilio->messages->create("whatsapp:+$wa_to",["from" => "whatsapp:$wa_from", "body" => $body]);
-                            } catch (DecryptException $e) {
-                                Log::warning("Notif WA tindaklanjut gagal dikirim ke +".$wa_to);
-                            }
-                        }
-                        //------------------------------------------------------------------------------------------------
+                    //----------------WA-------------------------------
+                    $wa_to = $dean->phone;
+                    if($wa_to != null){
+                        $WA_DATA = array();
+                        $WA_DATA['wa_to'] = $wa_to;
+                        $WA_DATA['wa_text'] = "Bpk/Ibu ".$dean->name_with_title.",
+Anda dijadwalkan untuk melakukan tindak lanjut hasil PO ".$schedule->lecturer->name_with_title." pada 
+".Date::createFromDate($request->date_start)->format('l, j F Y (H:i)')." di ".$request->location;
+                        dispatch(new JobNotificationWA($WA_DATA));
                     }
+                    // ------------------end send to WA-----------------
                     if(isset($request->invite)){ //kirim undangan email ke orang2 terkait
                         foreach($request->invite as $key => $data){
                             $inv = User::find($data);
@@ -355,27 +313,17 @@ Hasil PO Anda perlu ditindaklanjuti, Tindaklanjut dilakukan di lokasi (".$reques
                         dispatch(new JobNotification($d)); //send Email using queue job
                     }
                     //--------------------end email--------------
-                    if(env('TWILIO')){
-                        //-----------------WA----------------------------------------------------------------------------
-                        $wa_to = $schedule->lecturer->phone;
-                        if($wa_to != null){
-                            try {
-                                //TODO : SEND TO WhatsApp
-                                $sid    = getenv("TWILIO_AUTH_SID");
-                                $token  = getenv("TWILIO_AUTH_TOKEN");
-                                $wa_from= getenv("TWILIO_WHATSAPP_FROM");
-                                $twilio = new Client($sid, $token);
-                                $body = 
-"Halo ".$schedule->lecturer->name_with_title.", 
-Selamat! hasil audit Peer-Observation Anda sudah mendapatkan Rekomendasi dari LPM, 
+                    //----------------WA-------------------------------
+                    $wa_to = $schedule->lecturer->phone;
+                    if($wa_to != null){
+                        $WA_DATA = array();
+                        $WA_DATA['wa_to'] = $wa_to;
+                        $WA_DATA['wa_text'] = "Bpk/Ibu ".$schedule->lecturer->name_with_title.",
+Selamat! hasil audit Peer-Observation Anda sudah mendapatkan rekomendasi dari LPM, Silakan lihat hasilnya di sistem PO LPM JGU
 Terimakasih telah menggunakan sistem ini. :)";
-                                $twilio->messages->create("whatsapp:+$wa_to",["from" => "whatsapp:$wa_from", "body" => $body]);
-                            } catch (DecryptException $e) {
-                                Log::warning("Notif WA rekomendasi gagal dikirim ke +".$wa_to);
-                            }
-                        }
-                        //------------------------------------------------------------------------------------------------
+                        dispatch(new JobNotificationWA($WA_DATA));
                     }
+                    // ------------------end send to WA-----------------
                     return redirect()->route('schedules.edit', $id);
                 }
             }
