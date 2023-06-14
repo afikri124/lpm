@@ -245,6 +245,7 @@
                                         @endphp
                                         <td>{!! $title !!}</td>
                                         @php
+                                        // dd($point);
                                         foreach($point as $k => $p){
                                         echo "<td class='text-center'>$p</td>";
                                         $total[$k] += $p;

@@ -10,7 +10,7 @@ class Criteria extends Model
     use HasFactory;
     public $timestamps = false;
     protected $fillable = [
-        'id', 'title', 'weight', 'criteria_category_id',
+        'id', 'title', 'weight', 'criteria_category_id','status'
     ];
 
     public function category()

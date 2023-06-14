@@ -52,6 +52,15 @@
                         </div>
                         <div class="col-sm-6 col-md-6">
                             <div class="mb-3">
+                                <label class="form-label">Status<i class="text-danger">*</i></label>
+                                <select name="status" class="form-control input-sm select2 @error('status') is-invalid @enderror" data-placeholder="Status">
+                                    <option value='1' {{ (1==$data->status ? "selected": "") }}>ON</option>
+                                    <option value='0' {{ (0==$data->status ? "selected": "") }}>OFF</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="mb-3">
                                 <label class="form-label">Title<i class="text-danger">*</i></label>
                                 <input class="form-control" type="text" name="title" value="{{ $data->title }}">
                             </div>

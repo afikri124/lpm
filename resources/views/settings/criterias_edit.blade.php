@@ -45,7 +45,7 @@
                                     name="title"  placeholder="Note: Maximum 191 char.">{{ $data->title }}</textarea>
                             </div>
                         </div>
-                        <div class="col-sm-6 col-md-6">
+                        <div class="col-sm-12 col-md-4">
                             <div class="mb-3">
                                 <label class="form-label">Category<i class="text-danger">*</i></label>
                                 <!-- <input class="form-control" type="text" name="id" value="{{ $data->id }}"> -->
@@ -62,13 +62,21 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-sm-6 col-md-6">
+                        <div class="col-sm-12 col-md-4">
                             <div class="mb-3">
                                 <label class="form-label">Weight<i class="text-danger">*</i></label>
                                 <input class="form-control" type=number min=0 step=0.10 name="weight" value="{{ $data->weight }}">
                             </div>
                         </div>
-
+                        <div class="col-sm-12 col-md-4">
+                            <div class="mb-3">
+                                <label class="form-label">Status<i class="text-danger">*</i></label>
+                                <select name="status" class="form-control input-sm select2 @error('status') is-invalid @enderror" data-placeholder="Status">
+                                    <option value='1' {{ (1==$data->status ? "selected": "") }}>ON</option>
+                                    <option value='0' {{ (0==$data->status ? "selected": "") }}>OFF</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="card-footer text-end">

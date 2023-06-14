@@ -292,7 +292,11 @@ segera lakukan Validasi hasil PO Anda melalui sistem PO LPM JGU.";
                     ->withErrors(['msg' => 'Sorry, you have missed the specified schedule, please contact admin for rescheduling. '.$CONTACT->title.": ".$CONTACT->content]);
                 } else {
                     $locations = Locations::orderBy('title')->get();
-                    $survey = Criteria_category::with('criterias')->get();
+                    $survey = Criteria_category::
+                    with(["criterias" => function($q){
+                        $q->where('criterias.status', '=', true);
+                    }])
+                    ->where('status', true)->get();
                     return view('observations.make', compact('data', 'lecturer', 'survey', 'locations','auditor'));
                 }
             } else {

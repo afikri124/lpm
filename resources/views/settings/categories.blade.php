@@ -28,7 +28,14 @@
         <div class="col-md-12 project-list">
             <div class="card">
                 <div class="row">
-                    <div class="col-md-12 d-flex justify-content-center justify-content-md-end">
+                    <div class="col-md-3">
+                        <select id="Select_2" class="form-control input-sm select2" data-placeholder="Status">
+                            <option value="">Status</option>
+                            <option value='true'>ON</option>
+                            <option value='false'>OFF</option>
+                        </select>
+                    </div>
+                    <div class="col-md-9 d-flex justify-content-center justify-content-md-end">
                         <a class="btn btn-primary btn-block btn-mail" title="Add new" href="{{ route('settings.category_add')}}">
                             <i data-feather="plus"></i>New
                         </a>
@@ -46,6 +53,7 @@
                                     <th scope="col" width="60px" class="text-center">Code ID</th>
                                     <th scope="col">Title</th>
                                     <th scope="col">Description</th>
+                                    <th scope="col" width="50px">Status</th>
                                     <th scope="col" width="50px">Required</th>
                                     <th scope="col" width="65px">Action</th>
                                 </tr>
@@ -66,7 +74,18 @@
 <script src="{{asset('assets/js/datatable/datatable-extension/dataTables.responsive.min.js')}}"></script>
 <script src="{{asset('assets/js/select2/select2.full.min.js')}}"></script>
 <script src="{{asset('assets/js/sweet-alert/sweetalert.min.js')}}"></script>
-
+<script>
+    "use strict";
+    setTimeout(function () {
+        (function ($) {
+            "use strict";
+            $(".select2").select2({
+                allowClear: true,
+                minimumResultsForSearch: 7
+            });
+        })(jQuery);
+    }, 350);
+</script>
 <script type="text/javascript">
     $(document).ready(function () {
         var table = $('#datatable').DataTable({
@@ -82,6 +101,7 @@
             ajax: {
                 url: "{{ route('api.categories') }}",
                 data: function (d) {
+                    d.status = $('#Select_2').val(),
                     d.search = $('input[type="search"]').val()
                 },
             },
@@ -101,6 +121,17 @@
                     render: function (data, type, row, meta) {
                         return row.description;
                     },
+                },
+                {
+                    render: function (data, type, row, meta) {
+                        if(row.status == 1){
+                            var x = '<span class="badge rounded-pill badge-success">ON</span>';
+                        } else {
+                            var x = '<span class="badge rounded-pill badge-danger">OFF</span>';
+                        }
+                        return x;
+                    },
+                    className: "text-center"
                 },
                 {
                     render: function (data, type, row, meta) {
@@ -126,6 +157,9 @@
                     className: "text-end"
                 }
             ]
+        });
+        $('#Select_2').change(function () {
+            table.draw();
         });
     });
 

@@ -47,7 +47,7 @@
         <div class="col-md-12 project-list">
             <div class="card">
                 <div class="row">
-                    <div class="col-md-7">
+                    <div class="col-md-3">
                         <select id="Select_1" class="form-control input-sm select2" data-placeholder="Categories">
                             <option value="">Categories</option>
                             @foreach($categories as $d)
@@ -55,7 +55,14 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-md-5 d-flex justify-content-center justify-content-md-end">
+                    <div class="col-md-3">
+                        <select id="Select_2" class="form-control input-sm select2" data-placeholder="Status">
+                            <option value="">Status</option>
+                            <option value='true'>ON</option>
+                            <option value='false'>OFF</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 d-flex justify-content-center justify-content-md-end">
                         <a class="btn btn-primary btn-block btn-mail" title="Add new"
                             href="{{ route('settings.criteria_add')}}">
                             <i data-feather="plus"></i>New
@@ -74,6 +81,7 @@
                                     <th scope="col" width="20px">No</th>
                                     <th scope="col">Title</th>
                                     <th scope="col" width="50px">Weight</th>
+                                    <th scope="col" width="50px">Status</th>
                                     <th scope="col" width="50px">Category</th>
                                     <th scope="col" width="65px">Action</th>
                                 </tr>
@@ -122,6 +130,7 @@
                 url: "{{ route('api.criterias') }}",
                 data: function (d) {
                     d.category = $('#Select_1').val(),
+                    d.status = $('#Select_2').val(),
                         d.search = $('input[type="search"]').val()
                 },
             },
@@ -143,6 +152,17 @@
                 {
                     render: function (data, type, row, meta) {
                         var x = row.weight;
+                        return x;
+                    },
+                    className: "text-center"
+                },
+                {
+                    render: function (data, type, row, meta) {
+                        if(row.status == 1){
+                            var x = '<span class="badge rounded-pill badge-success">ON</span>';
+                        } else {
+                            var x = '<span class="badge rounded-pill badge-danger">OFF</span>';
+                        }
                         return x;
                     },
                     className: "text-center"
@@ -174,6 +194,9 @@
             ]
         });
         $('#Select_1').change(function () {
+            table.draw();
+        });
+        $('#Select_2').change(function () {
             table.draw();
         });
     });

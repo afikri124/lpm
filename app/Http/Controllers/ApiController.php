@@ -66,6 +66,10 @@ class ApiController extends Controller
         $data = Criteria_category::select('*');
             return Datatables::of($data)
                     ->filter(function ($instance) use ($request) {
+                        if (!empty($request->get('status'))) {
+                            $bools = $request->get('status') === 'true'? true: false;
+                            $instance->where('status', $bools);
+                        }
                         if (!empty($request->get('search'))) {
                              $instance->where(function($w) use($request){
                                 $search = $request->get('search');
@@ -85,6 +89,10 @@ class ApiController extends Controller
                     ->filter(function ($instance) use ($request) {
                         if (!empty($request->get('category'))) {
                             $instance->where('criteria_category_id', $request->get('category'));
+                        }
+                        if (!empty($request->get('status'))) {
+                            $bools = $request->get('status') === 'true'? true: false;
+                            $instance->where('status', $bools);
                         }
                         if (!empty($request->get('search'))) {
                              $instance->where(function($w) use($request){

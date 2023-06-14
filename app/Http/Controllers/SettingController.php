@@ -12,6 +12,8 @@ use App\Models\User;
 use App\Models\User_role;
 use App\Models\Criteria_category;
 use App\Models\Criteria;
+use App\Models\Observation_category;
+use App\Models\Observation_Criteria;
 use App\Models\Setting;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
@@ -269,6 +271,7 @@ class SettingController extends Controller
             $data = Criteria_category::find($id)->update([
                 'id' => $request->id,
                 'title' => $request->title,
+                'status' => $request->status,
                 'description' => $request->description,
                 'is_required' => ($request->is_required == null ? 0:$request->is_required ),
             ]);
@@ -283,6 +286,13 @@ class SettingController extends Controller
     }
 
     public function category_delete(Request $request) {
+        $check = Observation_Category::where('criteria_category_id',$request->id)->first();
+        if($check){
+            return response()->json([
+                'success' => false,
+                'message' => 'Not Allowed! Category Already used.'
+            ]);
+        }
         $data = Criteria_category::find($request->id);
         if($data){
             Log::warning(Auth::user()->username." deleted Category #".$data->id.", title : ".$data->title);
@@ -325,6 +335,7 @@ class SettingController extends Controller
                 'criteria_category_id'=> ['required'],
                 'title'=> ['required', 'string', 'max:191'],
                 'weight'=> ['required', 'numeric'],
+                'status'=> ['required'],
             ]);
             $data = Criteria::find($id)->update(request()->all());
             return redirect()->route('settings.criterias');
@@ -338,7 +349,14 @@ class SettingController extends Controller
     }
 
 
-    public function criteria_delete(Request $request) {
+    public function criteria_delete(Request $request) { 
+        $check = Observation_Criteria::where('criteria_id',$request->id)->first();
+        if($check){
+            return response()->json([
+                'success' => false,
+                'message' => 'Not Allowed! Criteria Already used.'
+            ]);
+        }
         $data = Criteria::find($request->id);
         if($data){
             Log::warning(Auth::user()->username." deleted Criteria #".$data->id.", title : ".$data->title);
