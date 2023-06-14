@@ -322,18 +322,18 @@
                     'Previous semester': [start_prev, end_prev],
                 }
             }, cb);
-            cb();
-            document.getElementById("select_range").value = null;
-            $('#select_range').on('apply.daterangepicker', function (ev, picker) {
-                if ($(this).val() == "Invalid date - Invalid date") {
-                    $(this).val(null);
-                }
-            });
-            $('#select_range').on('cancel.daterangepicker', function (ev, picker) {
-                if ($(this).val() == "Invalid date - Invalid date") {
-                    $(this).val(null);
-                }
-            });
+            // cb();
+            // document.getElementById("select_range").value = null;
+            // $('#select_range').on('apply.daterangepicker', function (ev, picker) {
+            //     if ($(this).val() == "Invalid date - Invalid date") {
+            //         $(this).val(null);
+            //     }
+            // });
+            // $('#select_range').on('cancel.daterangepicker', function (ev, picker) {
+            //     if ($(this).val() == "Invalid date - Invalid date") {
+            //         $(this).val(null);
+            //     }
+            // });
         });
 
         // alert($('#select_range').val());
