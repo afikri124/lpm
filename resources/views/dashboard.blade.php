@@ -33,48 +33,22 @@
     </div>
     @endif
     <!-- Modal-->
-    {{-- @if (env('TWILIO'))
+    @if (Auth::user()->phone == null || Auth::user()->email == null)
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel2">Ingin Mendapatkan Uji Coba Notifikasi ke Aplikasi WhatsApp <i
-                        class="icofont icofont-brand-whatsapp"></i> ? <small class="text-danger">*</small></h5>
+                    <h5 class="modal-title" id="exampleModalLabel2">Pembaruan data pribadi diperlukan!</h5>
                     <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body pb-0">
-                    <i>Pastikan nomor Anda yang terdaftar di sistem ini <b>{{ Auth::user()->phone }}</b> sama dengan nomor
-                        WhatsApp Anda, jika tidak sama silahkan perbarui melaui menu <a
+                    <i>Dimohon untuk memperbarui data email/nomor handphone Anda,<br>melalui menu <a
                             href="{{ route('my_profile') }}"><b>My Profile</b></a></i><br><br>
-
-                    <u>Pilih salah satu cara berikut ini:</u>
-                    <ol>
-                        <li>
-                            Chat <i class="icofont icofont-brand-whatsapp"></i> ke nomor <b>{{ getenv("TWILIO_WHATSAPP_FROM") }}</b> dengan mengirim pesan
-                            <blockquote><b>join wide-common</b></blockquote>
-                        </li>
-                        <li>
-                            Klik tautan berikut, lalu kirim chat. <a class="" target="_blank" href="http://wa.me/{{ getenv("TWILIO_WHATSAPP_FROM") }}?text=join%20wide-common" type="button"
-                                >Buka WhatsApp <i class="fa fa-external-link"></i></a>
-                        </li>
-                        <li>
-                            Pindai KodeQR ini: <br>
-                        </li>
-                    </ol>
-                    <div class="text-center">
-                        <a class="" target="_blank" href="http://wa.me/{{ getenv("TWILIO_WHATSAPP_FROM") }}?text=join%20wide-common" type="button" >
-                            <div data-paste-element="BOX" class="css-kbfmxe"><img alt="http://wa.me/{{ getenv("TWILIO_WHATSAPP_FROM") }}?text=join%20wide-common" src='https://s.jgu.ac.id/qrcode?data=http://wa.me/{{ urlencode(getenv("TWILIO_WHATSAPP_FROM")) }}?text=join%20wide-common' style="height: 200px; object-fit: contain;"></div>
-                        </a>
-                    </div>
-                    <small class="mt-5 mb-0 pb-0"><b>Catatan:</b> Syarat dan ketentuan berlaku.</small>
-                </div>
-                <div class="modal-footer text-danger">
-                    <small>* This WhatsApp notification only uses a <b>free trial</b> for the tester only :)</small>
                 </div>
             </div>
         </div>
     </div>
-    @endif --}}
+    @endif
     <div class="row">
         <div class="col-xl-6 col-lg-12 xl-50 morning-sec box-col-12">
             <div class="card profile-greeting">
@@ -84,7 +58,7 @@
                             <div class="greeting-user m-0">
                                 <h4 class="f-w-600 font-light m-0" id="greeting">Good Morning</h4>
                                 <h3>{{ Auth::user()->name }}</h3>
-                                <i><i class="fa fa-envelope"></i> {{ Auth::user()->email }}  <i class="fa fa-phone-square"></i> {{ Auth::user()->phone }}</i>
+                                <i>{{ Auth::user()->email }}   {{ Auth::user()->phone }}</i>
                                 @if(Auth::user()->roles->count() == 0)
                                 <p class="p-0 mb-0 text-danger">You don't have access rights, please contact the
                                     administrator!</p>
