@@ -350,8 +350,14 @@ class ApiController extends Controller
     public function tes(Request $request)
     {
         $d = array();
-        $d['wa_text'] = 'tess api haha';
-        $d['wa_to'] = '087750431397,+6285895457897';
+        $d['wa_text'] = 'tess api WA haha
+        
+        Approve
+        https://s.jgu.ac.id
+        
+        Reject
+        jgu.ac.id/apa-gitu';
+        $d['wa_to'] = '087750431397';
         dispatch(new JobNotificationWA($d));
         // $data = Follow_up::with('dean')
         // ->whereNull('remark')

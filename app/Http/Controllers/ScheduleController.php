@@ -101,7 +101,8 @@ class ScheduleController extends Controller
                 $WA_DATA['wa_text'] = "Bpk/Ibu ".$auditee->name_with_title.",
 Anda mendapatkan Jadwal Peer-Observation pada 
 ".Date::createFromDate($request->date_start)->format('l, j F Y (H:i)').".
-Info selengkapnya silakan akses sistem PO LPM JGU.";;
+Info selengkapnya silakan akses 
+sistem PO LPM JGU.";
                 dispatch(new JobNotificationWA($WA_DATA));
             }
             // ------------------end send to WA-----------------
@@ -161,7 +162,7 @@ Info selengkapnya silakan akses sistem PO LPM JGU.";;
                         $WA_DATA = array();
                         $WA_DATA['wa_to'] = $wa_to;
                         $WA_DATA['wa_text'] = "Bpk/Ibu ".$schedule->lecturer->name_with_title.",
-Peer-Observation Anda telah jadwalkan ulang menjadi 
+Peer-Observation Anda telah dijadwalkan ulang menjadi 
 ".Date::createFromDate($request->date_start)->format('l, j F Y (H:i)');
                         dispatch(new JobNotificationWA($WA_DATA));
                     }
@@ -260,8 +261,10 @@ Menginformasikan bahwa Jadwal PO ".$schedule->lecturer->name_with_title." telah 
                         $WA_DATA = array();
                         $WA_DATA['wa_to'] = $wa_to;
                         $WA_DATA['wa_text'] = "Bpk/Ibu ".$dean->name_with_title.",
-Anda dijadwalkan untuk melakukan tindak lanjut hasil PO ".$schedule->lecturer->name_with_title." pada 
-".Date::createFromDate($request->date_start)->format('l, j F Y (H:i)')." di ".$request->location;
+Anda dijadwalkan untuk melakukan tindak lanjut hasil PO 
+".$schedule->lecturer->name_with_title." pada 
+".Date::createFromDate($request->date_start)->format('l, j F Y (H:i)')." 
+di ".$request->location;
                         dispatch(new JobNotificationWA($WA_DATA));
                     }
                     // ------------------end send to WA-----------------
