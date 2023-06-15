@@ -47,7 +47,7 @@ class FollowUpController extends Controller
         if ($request->isMethod('POST')) {
             $this->validate($request, [ 
                 'image_path' => ['required','image'],
-                'remark'=> ['required', 'string', 'min:500'],
+                'remark'=> ['required', 'string', 'min:300'],
             ]);
             $imageName = Carbon::now()->format('Ym').'_'.md5($f_id).'.'.$request->image_path->extension(); 
             $folderName =  "storage/images/follow_up";

@@ -340,7 +340,7 @@
                         <div class="col-md-12">
                             <div class="form-group mb-2">
                                 <label class="col-form-label">Remark or Recommendation<i class="text-danger">*</i>
-                                    <i id="count" class="text-danger">(0/500)</i>
+                                    <i id="count" class="text-danger">(0/300)</i>
                                 </label>
                                 <textarea class="form-control" rows="7" id="remark" name="remark" minlength="500"
                                     required>{{ old('remark') }}</textarea>
@@ -368,8 +368,8 @@
 <script src="{{asset('assets/js/dropzone/dropzone-script.js')}}"></script>
 <script>
     $("#remark").keyup(function () {
-        $("#count").text("(" + $(this).val().length + "/500)");
-        if ($(this).val().length >= 500) {
+        $("#count").text("(" + $(this).val().length + "/300)");
+        if ($(this).val().length >= 300) {
             $("#count").removeClass('text-danger');
         } else {
             $("#count").addClass('text-danger');
