@@ -342,7 +342,7 @@
                                 <label class="col-form-label">Remark or Recommendation<i class="text-danger">*</i>
                                     <i id="count" class="text-danger">(0/300)</i>
                                 </label>
-                                <textarea class="form-control" rows="7" id="remark" name="remark" minlength="500"
+                                <textarea class="form-control" rows="7" id="remark" name="remark" minlength="300"
                                     required>{{ old('remark') }}</textarea>
                             </div>
                         </div>
