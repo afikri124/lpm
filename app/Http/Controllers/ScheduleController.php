@@ -184,7 +184,7 @@ Peer-Observation Anda telah dijadwalkan ulang menjadi
                         }
                         //----------------WA-------------------------------
                         $wa_to = $o->auditor->phone;
-                        if($wa_to != null){
+                        if($wa_to != null && $o->attendance != true){
                             $WA_DATA = array();
                             $WA_DATA['wa_to'] = $wa_to;
                             $WA_DATA['wa_text'] = "Bpk/Ibu ".$o->auditor->name_with_title.",
@@ -269,6 +269,7 @@ di ".$request->location;
                     }
                     // ------------------end send to WA-----------------
                     if(isset($request->invite)){ //kirim undangan email ke orang2 terkait
+                        $no_wa = array();
                         foreach($request->invite as $key => $data){
                             $inv = User::find($data);
                             if($inv){
@@ -286,8 +287,23 @@ di ".$request->location;
                                     $d['location'] = $request->location;
                                     dispatch(new JobNotification($d)); //send Email using queue job
                                 }
+                                if($inv->phone != null){
+                                    array_push($no_wa,$inv->phone);
+                                }
                             }
                         }
+                        //----------------WA-------------------------------
+                        if("" != implode(",",$no_wa)){
+                            $WA_DATA = array();
+                            $WA_DATA['wa_to'] = $wa_to;
+                            $WA_DATA['wa_text'] = "*TINDAKLANJUT PO-LPM*
+Anda diundang untuk mengikuti tindaklanjut hasil PO 
+".$schedule->lecturer->name_with_title." karena diperlukan keterlibatan Anda pada 
+".Date::createFromDate($request->date_start)->format('l, j F Y (H:i)')." 
+di ".$request->location;
+                            dispatch(new JobNotificationWA($WA_DATA));
+                        }
+                        // ------------------end send to WA-----------------
                     } //end email invitations
                     return redirect()->route('schedules.review_observations', $id);
                 }
