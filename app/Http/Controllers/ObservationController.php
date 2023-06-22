@@ -232,7 +232,8 @@ Info selengkapnya silakan akses sistem PO LPM JGU.";
                             $WA_DATA['wa_to'] = $wa_to;
                             $WA_DATA['wa_text'] = "Bpk/Ibu ".$schedule->lecturer->name_with_title.",
 Hasil sementara Peer-Observation Anda sudah dapat dilihat, 
-segera lakukan Validasi hasil PO Anda melalui sistem PO LPM JGU.";
+segera lakukan Validasi hasil PO Anda melalui sistem PO LPM JGU. 
+".url('/observations/me');
                             dispatch(new JobNotificationWA($WA_DATA));
                         }
                         // ------------------end send to WA-----------------

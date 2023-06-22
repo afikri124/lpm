@@ -163,7 +163,7 @@ sistem PO LPM JGU.";
                         $WA_DATA['wa_to'] = $wa_to;
                         $WA_DATA['wa_text'] = "Bpk/Ibu ".$schedule->lecturer->name_with_title.",
 Peer-Observation Anda telah dijadwalkan ulang menjadi 
-".Date::createFromDate($request->date_start)->format('l, j F Y (H:i)');
+".Date::createFromDate($request->date_start)->format('l, j F Y (H:i)')." - ".Date::createFromDate($request->date_end)->format('l, j F Y (H:i)');
                         dispatch(new JobNotificationWA($WA_DATA));
                     }
                     // ------------------end send to WA-----------------
@@ -189,7 +189,7 @@ Peer-Observation Anda telah dijadwalkan ulang menjadi
                             $WA_DATA['wa_to'] = $wa_to;
                             $WA_DATA['wa_text'] = "Bpk/Ibu ".$o->auditor->name_with_title.",
 Menginformasikan bahwa Jadwal PO ".$schedule->lecturer->name_with_title." telah diganti menjadi 
-".Date::createFromDate($request->date_start)->format('l, j F Y (H:i)');
+".Date::createFromDate($request->date_start)->format('l, j F Y (H:i)')." - ".Date::createFromDate($request->date_end)->format('l, j F Y (H:i)');
                             dispatch(new JobNotificationWA($WA_DATA));
                         }
                         // ------------------end send to WA-----------------
@@ -338,7 +338,7 @@ di ".$request->location;
                         $WA_DATA = array();
                         $WA_DATA['wa_to'] = $wa_to;
                         $WA_DATA['wa_text'] = "Bpk/Ibu ".$schedule->lecturer->name_with_title.",
-Selamat! hasil audit Peer-Observation Anda sudah mendapatkan rekomendasi dari LPM, Silakan lihat hasilnya di sistem PO LPM JGU
+Selamat! Hasil audit Peer-Observation Anda sudah mendapatkan rekomendasi dari LPM, Silakan lihat hasilnya di sistem PO LPM JGU
 Terimakasih telah menggunakan sistem ini. :)";
                         dispatch(new JobNotificationWA($WA_DATA));
                     }
