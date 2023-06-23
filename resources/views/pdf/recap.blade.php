@@ -90,7 +90,7 @@
         </thead>
         <tbody>
             @php $nokey = 0; @endphp
-            @foreach($data->sortBy('lecturer.name') as $key => $d)
+            @foreach($data as $key => $d)
             <tr>
                 <td class="text-center">{{ ++$nokey }}</td>
                 <td>{{ $d->lecturer->name_with_title }}</td>
@@ -114,31 +114,15 @@
                 <td class="text-center">
                     @php
                     $x = 0;
-                    $score = 0.0;
-                    $weight = 0.0;
+                    $x = (float) $d->final;
                     @endphp
-                    @if(count($d->observations) != 0)
-                    @foreach($d->observations as $o)
-                    @foreach($o->observation_criterias as $q)
-                    @php
-                    $score += $q->score * $q->weight;
-                    $weight += $q->weight;
-                    @endphp
-                    @endforeach
-                    @endforeach
-                    @php
-                    if($weight != 0){
-                    $x = ($score / ($weight * $d->max_score) * 100);
-                    }
-                    @endphp
-                    @endif
                     @if($x == 0)
                     <b class="text-danger">-</b>
                     @elseif($x < $MINSCORE->content)
-                        <b class="text-danger">{{ number_format($x,1) }}%</b>
+                        <b class="text-danger">{{ number_format($x,1) }} %</b>
                         @else
-                        <b>{{ number_format($x,1) }}%</b>
-                        @endif
+                        <b>{{ number_format($x,1) }}</b> %
+                    @endif
                 </td>
                 <td class="text-{{ $d->status->color }}">{{ $d->status->title }}</td>
             </tr>

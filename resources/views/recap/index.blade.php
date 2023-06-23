@@ -208,15 +208,16 @@
                 {
                     render: function (data, type, row, meta) {
                         var x = 0;
-                        var score = 0;
-                        var weight = 0;
-                        row.observations.forEach((e) => {
-                            e.observation_criterias.forEach((q) => {
-                                score += (q.score * parseFloat(q.weight));
-                                weight += parseFloat(q.weight);
-                            });
-                        });
-                        x = (score / (weight * row.max_score) * 100);
+                        // var score = 0;
+                        // var weight = 0;
+                        // row.observations.forEach((e) => {
+                        //     e.observation_criterias.forEach((q) => {
+                        //         score += (q.score * parseFloat(q.weight));
+                        //         weight += parseFloat(q.weight);
+                        //     });
+                        // });
+                        // x = (score / (weight * row.max_score) * 100);
+                        x = parseFloat(row.final);
                         if (x < "{{ $MINSCORE->content }}") {
                             return "<b class='text-danger'>" + x.toFixed(1) + "%</b>";
                         } else if (x >= "{{ $MINSCORE->content }}") {

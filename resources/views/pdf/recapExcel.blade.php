@@ -29,7 +29,7 @@
         </thead>
         <tbody>
             @php $nokey = 0; @endphp
-            @foreach($data->sortBy('lecturer.name') as $key => $d)
+            @foreach($data as $key => $d)
             <tr>
                 <td style="vertical-align: top;text-align:center">{{ ++$nokey }}</td>
                 <td style="vertical-align: top;">{{ $d->lecturer->name_with_title }}</td>
@@ -42,24 +42,8 @@
                 <td style="vertical-align: top;text-align:center">
                     @php
                     $x = 0;
-                    $score = 0.0;
-                    $weight = 0.0;
+                    $x = (float) $d->final;
                     @endphp
-                    @if(count($d->observations) != 0)
-                    @foreach($d->observations as $o)
-                    @foreach($o->observation_criterias as $q)
-                    @php
-                    $score += $q->score * $q->weight;
-                    $weight += $q->weight;
-                    @endphp
-                    @endforeach
-                    @endforeach
-                    @php
-                    if($weight != 0){
-                    $x = ($score / ($weight * $d->max_score) * 100);
-                    }
-                    @endphp
-                    @endif
                     @if($x == 0)
                     <b>0</b>
                     @elseif($x < $MINSCORE->content)

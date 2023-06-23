@@ -291,15 +291,41 @@ class ApiController extends Controller
 
     public function recap(Request $request)
     {
-        $data = Schedule::query()
+        $data = Schedule::
+                // ->query()
+                // leftJoin(
+                //     DB::raw("
+                //     (
+                //         select o.schedule_id, sum(tabel1.hasil) as hasil_final from observations o
+                //         LEFT JOIN (
+                //             select observation_id, sum(score * weight) as hasil from observation_criterias
+                //             GROUP BY observation_id
+                //         ) tabel1 on o.id = tabel1.observation_id
+                //         GROUP BY o.schedule_id
+                //     ) tabel2
+                //     "), 'id', '=', 'tabel2.schedule_id'
+                // )
+                leftJoin(
+                    DB::raw("
+                    (
+                        select o.schedule_id, sum(tabel1.hasil) as hasil_final, sum(max_weight) as max_weight from observations o
+                        LEFT JOIN (
+                            select observation_id, sum(score * weight) as hasil, sum(weight) as max_weight from observation_criterias
+                            GROUP BY observation_id
+                        ) tabel1 on o.id = tabel1.observation_id
+                        GROUP BY o.schedule_id
+                    ) tabel2
+                    "), 'id', '=', 'tabel2.schedule_id'
+                )
                 ->with('status')
                 ->with(['lecturer' => function ($query) {
                     $query->select('id','name');
                 }])
                 ->with('observations')
                 ->with('observations.auditor')
-                ->with('observations.observation_criterias')
-                ->select('*')->orderBy("status_id")->orderBy("date_start");
+                // ->with('observations.observation_criterias')
+                ->select(DB::raw('tabel2.hasil_final * 100 / (tabel2.max_weight * schedules.max_score) as final'),'schedules.*')
+                ->orderByDesc("final")->orderByDesc("status_id")->orderBy("date_start");
             return Datatables::of($data)
                     ->filter(function ($instance) use ($request) {
                         if (!empty($request->get('lecturer_id'))) {

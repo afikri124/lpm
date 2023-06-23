@@ -17,6 +17,7 @@ use Illuminate\Contracts\Encryption\DecryptException;
 use Jenssegers\Date\Date;
 use Auth;
 use Maatwebsite\Excel\Facades\Excel;
+use DB;
 
 class PdfController extends Controller
 {
@@ -67,15 +68,28 @@ class PdfController extends Controller
         $qr = "https://s.jgu.ac.id/qrcode?data=".$link;
         $MINSCORE = Setting::findOrFail('MINSCORE');
         $hod = Setting::findOrFail('HODLPM');
-        $data = Schedule::query()
+        $data = Schedule::
+                // query()
+                leftJoin(
+                    DB::raw("
+                    (
+                        select o.schedule_id, sum(tabel1.hasil) as hasil_final, sum(max_weight) as max_weight from observations o
+                        LEFT JOIN (
+                            select observation_id, sum(score * weight) as hasil, sum(weight) as max_weight from observation_criterias
+                            GROUP BY observation_id
+                        ) tabel1 on o.id = tabel1.observation_id
+                        GROUP BY o.schedule_id
+                    ) tabel2
+                    "), 'id', '=', 'tabel2.schedule_id'
+                )
                 ->with('status')
                 ->with(['lecturer' => function ($query) {
                     $query->select('id','name','front_title','back_title');
                 }])
                 ->with('observations')
                 ->with('observations.auditor')
-                ->with('observations.observation_criterias')
-                ->select('*')->orderBy("date_start");
+                ->select(DB::raw('tabel2.hasil_final * 100 / (tabel2.max_weight * schedules.max_score) as final'),'schedules.*')
+                ->orderByDesc("final")->orderByDesc("status_id")->orderBy("date_start");
 
         if (!empty($request->get('lecturer_id'))) {
             $data->where('lecturer_id', $request->get('lecturer_id'));
