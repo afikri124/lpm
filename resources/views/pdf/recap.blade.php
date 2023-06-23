@@ -97,9 +97,9 @@
                 <td>
                     {{ Date::createFromDate($d->date_start)->format('j/m/Y H:i') }}
                     @if(date('d F Y', strtotime($d->date_start)) == date('d F Y', strtotime($d->date_end)))
-                    <br>s.d. {{ Date::createFromDate($d->date_end)->format('H:i') }}
+                    - {{ Date::createFromDate($d->date_end)->format('H:i') }}
                     @else
-                    <br>s.d. {{ Date::createFromDate($d->date_end)->format('j/m/Y H:i') }}
+                    - {{ Date::createFromDate($d->date_end)->format('j/m/Y H:i') }}
                     @endif
                 </td>
                 <td>
