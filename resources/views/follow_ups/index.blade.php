@@ -6,6 +6,7 @@
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/date-picker.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/datatables.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/datatable-extension.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/daterange-picker.css')}}">
 @endsection
 
 @section('style')
@@ -46,6 +47,10 @@
         <div class="col-md-12 project-list">
             <div class="card">
                 <div class="row">
+                    <div class="col-md-2">
+                        <input class="form-control" name="range" id="select_range" type="text" placeholder="Select Date"
+                            autocomplete="off">
+                    </div>
                     <div class="col-md-3">
                         <select id="Select_1" class="form-control input-sm select2" data-placeholder="Lecturer">
                             <option value="">Lecturer</option>
@@ -95,6 +100,9 @@
 <script src="{{asset('assets/js/datatable/datatables/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('assets/js/datatable/datatable-extension/dataTables.responsive.min.js')}}"></script>
 <script src="{{asset('assets/js/select2/select2.full.min.js')}}"></script>
+<script src="{{asset('assets/js/sweet-alert/sweetalert.min.js')}}"></script>
+<script src="{{asset('assets/js/datepicker/daterange-picker/moment.min.js')}}"></script>
+<script src="{{asset('assets/js/datepicker/daterange-picker/daterangepicker.js')}}"></script>
 <script>
     "use strict";
     setTimeout(function () {
@@ -125,6 +133,7 @@
                 url: "{{ route('api.follow_up_by_dean_id') }}",
                 data: function (d) {
                     d.lecturer_id = $('#Select_1').val(),
+                        d.range = $('#select_range').val(),
                         d.attendance = $('#Select_2').val()
                 },
             },
@@ -198,7 +207,73 @@
         $('#Select_2').change(function () {
             table.draw();
         });
+        $('#select_range').change(function () {
+            table.draw();
+        });
     });
+
+</script>
+<script>
+    //DateRange Picker
+    (function ($) {
+        $(function () {
+            var start = null;
+            var end = null;
+            var start_prev = null;
+            var end_prev = null;
+            
+            if(moment().format('M') >= 3 && moment().format('M') <= 8){ //genap
+                start = moment().month(2).startOf('month'); //1 mar
+                end = moment().month(7).endOf('month'); //31 aug
+                start_prev = moment().month(8).subtract(1, 'year').startOf('month');
+                end_prev = moment().month(1).endOf('month');
+            } else { // ganjil
+                if(moment().format('M') > 8){
+                    start = moment().month(8).startOf('month'); //1 Sep
+                    end = moment().month(1).add(1, 'Y').endOf('month'); //28 feb
+                    start_prev = moment().month(2).startOf('month'); //1 mar
+                    end_prev = moment().month(7).endOf('month'); //31 aug
+                } else {
+                    start = moment().month(8).subtract(1, 'year').startOf('month'); //1 Sep
+                    end = moment().month(1).endOf('month'); //28 feb
+                    start_prev = moment().month(2).subtract(1, 'year').startOf('month'); //1 mar
+                    end_prev = moment().month(7).subtract(1, 'year').endOf('month'); //31 aug
+                }
+            };
+            // console.log(end);
+
+            function cb() {
+                document.getElementById("select_range").value = null;
+            }
+            $('#select_range').daterangepicker({
+                startDate: start,
+                endDate: end,
+                locale: {
+                    format: 'YYYY-MM-DD'
+                },
+                // showCustomRangeLabel: false,
+                ranges: {
+                    'Today': [moment(), moment()],
+                    'This Semester': [start, end],
+                    'Previous semester': [start_prev, end_prev],
+                }
+            }, cb);
+            // cb();
+            // document.getElementById("select_range").value = null;
+            // $('#select_range').on('apply.daterangepicker', function (ev, picker) {
+            //     if ($(this).val() == "Invalid date - Invalid date") {
+            //         $(this).val(null);
+            //     }
+            // });
+            // $('#select_range').on('cancel.daterangepicker', function (ev, picker) {
+            //     if ($(this).val() == "Invalid date - Invalid date") {
+            //         $(this).val(null);
+            //     }
+            // });
+        });
+
+        // alert($('#select_range').val());
+    })(jQuery);
 
 </script>
 @endsection

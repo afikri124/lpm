@@ -200,8 +200,8 @@
                                         @if($total_w != 0)
                                         @foreach($total as $k => $p )
                                         <td
-                                            class='text-center @if(($p/($total_w/$jumlah_auditor*5)*100) < $MINSCORE->content) text-danger @endif'>
-                                            {{ number_format($p/($total_w/$jumlah_auditor*5)*100,1); }}%
+                                            class='text-center @if(($p/($total_w/$jumlah_auditor*$data->max_score)*100) < $MINSCORE->content) text-danger @endif'>
+                                            {{ number_format($p/($total_w/$jumlah_auditor*$data->max_score)*100,1); }}%
                                         </td>
                                         @endforeach
 
@@ -215,7 +215,7 @@
                                         $total_point += $p;
                                         }
                                         if($total_w != 0){
-                                        $final = $total_point/($total_w*5)*100;
+                                        $final = $total_point/($total_w*$data->max_score)*100;
                                         }
                                         @endphp
                                         @if($total_w != 0)
