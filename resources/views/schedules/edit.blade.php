@@ -103,6 +103,14 @@
                                 </strong>
                             </div>
                         </div>
+                        <div class="col-lg-12 col-md-12">
+                            <div class="form-group mb-2">
+                                <label class="col-form-label">Follow Up By</label>
+                                <br><strong>
+                                    {{ $data->follow_ups[0]->dean->name_with_title }}
+                                </strong>
+                            </div>
+                        </div>
                         @if($data->status_id == "S04" && now() > $data->follow_ups[0]->date_end)
                         <div class="col-lg-12 col-md-12">
                             <div class="alert alert-light alert-dismissible fade show text-danger" role="alert">

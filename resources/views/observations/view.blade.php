@@ -100,6 +100,15 @@
                                 <br><strong>{{ $data->topic }}</strong>
                             </div>
                         </div>
+                        @if ($data->schedule->validation_remark != "" || $data->schedule->validation_remark != null )
+                            <div class="col-md-12">
+                                <div class="form-group mb-2">
+                                <label class="col-form-label">Validation Remark</label>
+                                <br>
+                                        <i class="text-danger">{{ $data->schedule->validation_remark }}</i>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

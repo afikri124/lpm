@@ -190,6 +190,7 @@ class ApiController extends Controller
     {
         $data = Observation::with('schedule')
                 ->with('schedule.lecturer')
+                ->with('schedule.status')
                 ->where('auditor_id', Auth::user()->id)
                 ->select('*')->orderBy('attendance');
             return Datatables::of($data)

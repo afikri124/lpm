@@ -22,6 +22,10 @@
     table.dataTable td:nth-child(3) {
         max-width: 170px;
     }
+    
+    table.dataTable td:nth-child(6) {
+        max-width: 100px;
+    }
 
     table.dataTable td:nth-child(7) {
         max-width: 50px;
@@ -84,6 +88,7 @@
                                     <th scope="col">Schedule</th>
                                     <th scope="col" data-priority="3">Attendance</th>
                                     <th scope="col">Doc.</th>
+                                    <th scope="col">Status</th>
                                     <th scope="col" data-priority="4" width="65px">Action</th>
                                 </tr>
                             </thead>
@@ -187,6 +192,12 @@
                                 '<span><img class="chat-user-img img-30" src="' + "{{ asset('') }}" +
                                 row.image_path + '"></span>';
                         }
+                        return x;
+                    },
+                },
+                {
+                    render: function (data, type, row, meta) {
+                        var x = '<span class="text-' + row.schedule.status['color'] + '">' + row.schedule.status['title'] + '</span>';
                         return x;
                     },
                 },

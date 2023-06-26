@@ -82,7 +82,7 @@
                                     </i>
                                 </div>
                             </div>
-                            @if ($data->status_id == "S08")
+                            @if ($data->validation_remark != "" || $data->validation_remark != null )
                             <div class="mb-3 row">
                                 <label class="col-sm-4">Validation Remark</label>
                                 <div class="col-sm-8">

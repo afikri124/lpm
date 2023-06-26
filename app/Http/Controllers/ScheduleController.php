@@ -199,7 +199,7 @@ Menginformasikan bahwa Jadwal PO ".$schedule->lecturer->name_with_title." telah 
             }
             return redirect()->route('schedules.edit', Crypt::encrypt($id));
         }
-        $data = Schedule::with('lecturer')->with('status')->with('follow_ups')
+        $data = Schedule::with('lecturer')->with('status')->with('follow_ups')->with('follow_ups.dean')
                         ->with('created_user')->with('histories')->findOrFail($id);
         $auditors = User::select('id','email','name')->whereHas('roles', function($q){
                         $q->where('role_id', "AU");
