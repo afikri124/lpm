@@ -347,7 +347,7 @@
                             </div>
                         </div>
                         <span class="invalid-feedback d-block" role="alert">
-                            <i>Note: <br>- Please review the report in its entirety before doing this.<br>- Give messages to increase the score.<br>- The remark must be at least 500
+                            <i>Note: <br>- Please review the report in its entirety before doing this.<br>- Give messages to increase the score.<br>- The remark must be at least 300
                                 characters.</i>
                         </span>
                     </div>
