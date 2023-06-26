@@ -47,7 +47,7 @@
         <div class="col-md-12 project-list">
             <div class="card">
                 <div class="row">
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <input class="form-control" name="range" id="select_range" type="text" placeholder="Select Date"
                             autocomplete="off">
                     </div>
@@ -256,6 +256,7 @@
                     'Today': [moment(), moment()],
                     'This Semester': [start, end],
                     'Previous semester': [start_prev, end_prev],
+                    'All': [moment("2020-01-01T00:00:00"), end],
                 }
             }, cb);
             // cb();
