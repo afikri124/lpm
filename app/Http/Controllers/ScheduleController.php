@@ -295,7 +295,7 @@ di ".$request->location;
                         //----------------WA-------------------------------
                         if("" != implode(",",$no_wa)){
                             $WA_DATA = array();
-                            $WA_DATA['wa_to'] = $wa_to;
+                            $WA_DATA['wa_to'] = implode(",",$no_wa);
                             $WA_DATA['wa_text'] = "*TINDAKLANJUT PO-LPM*
 Anda diundang untuk mengikuti tindaklanjut hasil PO 
 ".$schedule->lecturer->name_with_title." karena diperlukan keterlibatan Anda pada 
