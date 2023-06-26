@@ -358,7 +358,7 @@ Terimakasih telah menggunakan sistem ini. :)";
             $dean = User::select('id','email','name','department','job')->whereHas('roles', function($q){
                 $q->where('role_id', "DE");
             })->where('username','!=', 'admin')->where('id','!=', $data->lecturer_id)->get();
-            $user = User::select('id','email','name','department')->where('username','!=', 'admin')->where('id','!=', $data->lecturer_id)->get();
+            $user = User::select('id','email','name','department')->where('username','!=', 'admin')->get();
             $MINSCORE = Setting::findOrFail('MINSCORE');
             $hod = Setting::findOrFail('HODLPM');
             $locations = Locations::orderBy('title')->get();
