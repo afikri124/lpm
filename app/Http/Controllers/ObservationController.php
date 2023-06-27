@@ -222,7 +222,7 @@ Info selengkapnya silakan akses sistem PO LPM JGU.";
                             2. Tekan menu <b>My PO</b><br>
                             3. Klik tombol <b>PO Validation</b> (ikon palu berwarna kuning)<br>
                             4. Lakukan validasi atau tolak hasil PO Anda.";
-                            dispatch(new JobNotification($d)); //send Email using queue job
+                            dispatch(new JobNotification($d))->delay(now()->addMinutes(1)); //send Email using queue job
                         }
                         //--------------------end email--------------
                         //----------------WA-------------------------------
@@ -231,10 +231,14 @@ Info selengkapnya silakan akses sistem PO LPM JGU.";
                             $WA_DATA = array();
                             $WA_DATA['wa_to'] = $wa_to;
                             $WA_DATA['wa_text'] = "Bpk/Ibu ".$schedule->lecturer->name_with_title.",
-Hasil sementara Peer-Observation Anda sudah dapat dilihat, 
-segera lakukan Validasi hasil PO Anda melalui sistem PO LPM JGU. 
-".url('/observations/me');
-                            dispatch(new JobNotificationWA($WA_DATA));
+Hasil sementara Peer-Observation Anda sudah dapat dilihat melalui tautan  
+".url('/observations/me')."
+Selanjutnya, silahkan lakukan Validasi PO dengan langkah berikut ini:
+1. Akses Sistem PO, login dengan SSO/email
+2. Tekan menu *My PO*
+3. Klik tombol *PO Validation* (ikon palu)
+4. Lakukan *VALIDASI* atau *TOLAK* hasil PO Anda.";
+                            dispatch(new JobNotificationWA($WA_DATA))->delay(now()->addMinutes(1));
                         }
                         // ------------------end send to WA-----------------
                     }

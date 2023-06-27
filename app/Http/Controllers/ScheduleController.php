@@ -180,7 +180,7 @@ Peer-Observation Anda telah dijadwalkan ulang menjadi
                             $d['auditee_email'] = $schedule->lecturer->email;
                             $d['start'] = Date::createFromDate($request->date_start)->format('l, j F Y (H:i)');
                             $d['end'] = Date::createFromDate($request->date_end)->format('l, j F Y (H:i)');
-                            dispatch(new JobNotification($d)); //send Email using queue job
+                            dispatch(new JobNotification($d))->delay(now()->addMinutes(1)); //send Email using queue job
                         }
                         //----------------WA-------------------------------
                         $wa_to = $o->auditor->phone;
@@ -190,7 +190,7 @@ Peer-Observation Anda telah dijadwalkan ulang menjadi
                             $WA_DATA['wa_text'] = "Bpk/Ibu ".$o->auditor->name_with_title.",
 Menginformasikan bahwa Jadwal PO ".$schedule->lecturer->name_with_title." telah diganti menjadi 
 ".Date::createFromDate($request->date_start)->format('l, j F Y (H:i)')." - ".Date::createFromDate($request->date_end)->format('l, j F Y (H:i)');
-                            dispatch(new JobNotificationWA($WA_DATA));
+                            dispatch(new JobNotificationWA($WA_DATA))->delay(now()->addMinutes(1));
                         }
                         // ------------------end send to WA-----------------
                     }
@@ -252,7 +252,7 @@ Menginformasikan bahwa Jadwal PO ".$schedule->lecturer->name_with_title." telah 
                         $d['start'] = Date::createFromDate($request->date_start)->format('l, j F Y (H:i)');
                         $d['end'] = Date::createFromDate($request->date_end)->format('l, j F Y (H:i)');
                         $d['location'] = $request->location;
-                        dispatch(new JobNotification($d)); //send Email using queue job
+                        dispatch(new JobNotification($d))->delay(now()->addMinutes(1)); //send Email using queue job
                     }
                     //--------------------end email--------------
                     //----------------WA-------------------------------
@@ -265,7 +265,7 @@ Anda dijadwalkan untuk melakukan tindak lanjut hasil PO
 ".$schedule->lecturer->name_with_title." pada 
 ".Date::createFromDate($request->date_start)->format('l, j F Y (H:i)')." 
 di ".$request->location;
-                        dispatch(new JobNotificationWA($WA_DATA));
+                        dispatch(new JobNotificationWA($WA_DATA))->delay(now()->addMinutes(1));
                     }
                     // ------------------end send to WA-----------------
                     if(isset($request->invite)){ //kirim undangan email ke orang2 terkait
@@ -285,7 +285,7 @@ di ".$request->location;
                                     $d['start'] = Date::createFromDate($request->date_start)->format('l, j F Y (H:i)');
                                     $d['end'] = Date::createFromDate($request->date_end)->format('l, j F Y (H:i)');
                                     $d['location'] = $request->location;
-                                    dispatch(new JobNotification($d)); //send Email using queue job
+                                    dispatch(new JobNotification($d))->delay(now()->addMinutes(1)); //send Email using queue job
                                 }
                                 if($inv->phone != null){
                                     array_push($no_wa,$inv->phone);
@@ -301,7 +301,7 @@ Anda diundang untuk mengikuti tindaklanjut hasil PO
 ".$schedule->lecturer->name_with_title." karena diperlukan keterlibatan Anda pada 
 ".Date::createFromDate($request->date_start)->format('l, j F Y (H:i)')." 
 di ".$request->location;
-                            dispatch(new JobNotificationWA($WA_DATA));
+                            dispatch(new JobNotificationWA($WA_DATA))->delay(now()->addMinutes(1));
                         }
                         // ------------------end send to WA-----------------
                     } //end email invitations

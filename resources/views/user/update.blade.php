@@ -51,7 +51,7 @@
                                         <input id="phone" type="number"
                                             class="form-control @error('phone') is-invalid @enderror" name="phone"
                                             value="{{ (old('phone') == null ? Auth::user()->phone : old('phone')) }}"
-                                            placeholder="62xxxxxxxxxxx" autocomplete="off">
+                                            placeholder="62xxxxxxxxxxx" id="phone" autocomplete="off" onkeyup="remove_zero()">
                                         @error('phone')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -108,4 +108,15 @@
 </div>
 @endsection
 @section('script')
+<script>
+    function remove_zero(){
+        var x = document.getElementById("phone").value;
+        let number = Number(x);
+        if(number == 0){
+            document.getElementById("phone").value = null;
+        } else {
+            document.getElementById("phone").value = number;
+        }
+    }
+    </script>
 @endsection

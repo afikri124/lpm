@@ -168,7 +168,7 @@
                         <div class="col-sm-12">
                             <div class="mb-3">
                                 <label class="form-label">Phone <i>(ex. 62xxxxxxxxx)</i></label>
-                                <input class="form-control" type="number" name="phone" value="{{ $data->phone }}" placeholder="62xxxxxxxxxx">
+                                <input class="form-control" type="number" name="phone" id="phone" value="{{ $data->phone }}" onkeyup="remove_zero()" placeholder="62xxxxxxxxxx">
                             </div>
                         </div>
                         <div class="col-sm-12">
@@ -198,4 +198,15 @@
 @endsection
 
 @section('script')
+<script>
+function remove_zero(){
+    var x = document.getElementById("phone").value;
+    let number = Number(x);
+    if(number == 0){
+        document.getElementById("phone").value = null;
+    } else {
+        document.getElementById("phone").value = number;
+    }
+}
+</script>
 @endsection
