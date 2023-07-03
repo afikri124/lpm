@@ -15,8 +15,13 @@
     }
 
     table.dataTable td:nth-child(2) {
-        max-width: 120px;
+        max-width: 150px;
     }
+
+    table.dataTable td:nth-child(3) {
+        max-width: 150px;
+    }
+
 
     table.dataTable td {
         white-space: nowrap;
@@ -116,9 +121,9 @@
                         <table class="table table-hover table-sm" id="datatable" width="100%">
                             <thead>
                                 <tr>
-                                    <th scope="col" data-priority="1" width="20px">No</th>
-                                    <th scope="col" width="120px">Schedule</th>
-                                    <th scope="col" data-priority="2" >Activity Histories</th>
+                                    <th scope="col" data-priority="2" width="20px">No</th>
+                                    <th scope="col" data-priority="3" width="120px">Schedule</th>
+                                    <th scope="col" data-priority="1" >Activity Histories</th>
                                 </tr>
                             </thead>
                         </table>
@@ -226,7 +231,7 @@
                         var x = row.description;
                         var ys = moment(row.created_at).format("DD-MMM-YY HH:mm");
                         var htmlx = $('<textarea />').html(x).text();
-                        return "<span>["+ys+"] "+htmlx+"</span>";
+                        return "<div>["+ys+"] "+htmlx+"</div>";
                     },
                 }
             ]
