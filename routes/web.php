@@ -103,6 +103,7 @@ Route::group(['prefix' => 'web/api', 'middleware' => ['auth']], function() {
     Route::get('observations_by_auditor_id', [App\Http\Controllers\ApiController::class, 'observations_by_auditor_id'])->name('api.observations_by_auditor_id');
     Route::get('follow_up_by_dean_id', [App\Http\Controllers\ApiController::class, 'follow_up_by_dean_id'])->name('api.follow_up_by_dean_id');
     Route::get('recap', [App\Http\Controllers\ApiController::class, 'recap'])->name('api.recap');
+    Route::get('histories', [App\Http\Controllers\ApiController::class, 'histories'])->name('api.histories');
 });
 
 //tes email

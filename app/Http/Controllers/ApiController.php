@@ -14,6 +14,7 @@ use App\Models\Observation;
 use App\Models\Observation_category;
 use App\Models\Observation_criteria;
 use App\Models\Schedule;
+use App\Models\Schedule_history;
 use App\Models\Role;
 use App\Models\User_role;
 use App\Models\Setting;
@@ -385,6 +386,20 @@ class ApiController extends Controller
         }
     }
 
+    public function histories(Request $request)
+    {
+        $data = Schedule_history::with('schedule')->with('schedule.lecturer')->select('id','description','created_at', 'schedule_id')->orderByDesc("created_at");
+            return Datatables::of($data)
+                    ->filter(function ($instance) use ($request) {
+                        if (!empty($request->get('search'))) {
+                            $instance->where(function($w) use($request){
+                               $search = $request->get('search');
+                                   $w->orWhere('description', 'LIKE', "%$search%");
+                           });
+                       }
+                    })
+                    ->make(true);
+    }
 
 
 

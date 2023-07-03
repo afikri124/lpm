@@ -4,10 +4,25 @@
 @section('css')
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/animate.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/date-picker.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/datatables.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/datatable-extension.css')}}">
 @endsection
 
 @section('style')
 <style>
+    table.dataTable tbody td {
+        vertical-align: middle;
+    }
+
+    table.dataTable td:nth-child(2) {
+        max-width: 120px;
+    }
+
+    table.dataTable td {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
 
 </style>
 @endsection
@@ -92,6 +107,26 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="">
+                        <table class="table table-hover table-sm" id="datatable" width="100%">
+                            <thead>
+                                <tr>
+                                    <th scope="col" data-priority="1" width="20px">No</th>
+                                    <th scope="col" width="120px">Schedule</th>
+                                    <th scope="col" data-priority="2" >Activity Histories</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection
 @section('script')
@@ -146,4 +181,57 @@
 <script src="{{asset('assets/js/datepicker/date-picker/datepicker.js')}}"></script>
 <script src="{{asset('assets/js/datepicker/date-picker/datepicker.en.js')}}"></script>
 <script src="{{asset('assets/js/datepicker/date-picker/datepicker.custom.js')}}"></script>
+<script src="{{asset('assets/js/datatable/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('assets/js/datatable/datatable-extension/dataTables.responsive.min.js')}}"></script>
+<script src="{{asset('assets/js/datepicker/daterange-picker/moment.min.js')}}"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var table = $('#datatable').DataTable({
+            responsive: true,
+            processing: true,
+            serverSide: true,
+            ordering: false,
+            bFilter: false,
+            language: {
+                searchPlaceholder: 'Search by remark..',
+                sSearch: '_INPUT_ &nbsp;',
+                lengthMenu: '<span>Show:</span> _MENU_',
+            },
+            lengthMenu: [
+                [5, 10, 100],
+                [5, 10, 100],
+            ],
+            ajax: {
+                url: "{{ route('api.histories') }}",
+                data: function (d) {
+                        d.search = $('input[type="search"]').val()
+                },
+            },
+            columns: [
+                {
+                    render: function (data, type, row, meta) {
+                        var no = (meta.row + meta.settings._iDisplayStart + 1);
+                        return no;
+                    },
+                    orderable: false,
+                    className: "text-center"
+                },
+                {
+                    render: function (data, type, row, meta) {
+                        return row.schedule.lecturer.name;
+                    },
+                },
+                {
+                    render: function (data, type, row, meta) {
+                        var x = row.description;
+                        var ys = moment(row.created_at).format("DD-MMM-YY HH:mm");
+                        var htmlx = $('<textarea />').html(x).text();
+                        return "<span>["+ys+"] "+htmlx+"</span>";
+                    },
+                }
+            ]
+        });
+    });
+
+</script>
 @endsection

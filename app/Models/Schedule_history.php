@@ -14,4 +14,9 @@ class Schedule_history extends Model
         'remark',
         'created_by',
     ];
+
+    public function schedule()
+    {
+        return $this->belongsTo(Schedule::class, 'schedule_id');
+    }
 }
