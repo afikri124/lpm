@@ -152,7 +152,7 @@ class ApiController extends Controller
                 ->with('status')
                 ->with('observations.auditor')
                 ->where('lecturer_id', Auth::user()->id)
-                ->select('*')->orderBy("status_id");
+                ->select('*')->orderByDesc("id");
             return Datatables::of($data)
                     ->filter(function ($instance) use ($request) {
                         if (!empty($request->get('status_id'))) {

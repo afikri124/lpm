@@ -164,7 +164,7 @@
                                                     <option value="" selected>0</option>
                                                     @for ($i =1; $i <= $data->schedule->max_score; $i++) 
                                                     <option value="{{ $i }}"
-                                                        {{ (old('questions.'.$c->id.'.s')==$i? "selected": "")}}>1
+                                                        {{ (old('questions.'.$c->id.'.s')==$i? "selected": "")}}>{{ $i }}
                                                         </option>
                                                     @endfor
                                                         {{-- <option value="1"
