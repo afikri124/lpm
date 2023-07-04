@@ -193,7 +193,7 @@ class ApiController extends Controller
                 ->with('schedule.lecturer')
                 ->with('schedule.status')
                 ->where('auditor_id', Auth::user()->id)
-                ->select('*')->orderBy('attendance');
+                ->select('*')->orderBy('attendance')->orderByDesc('updated_at');
             return Datatables::of($data)
                     ->filter(function ($instance) use ($request) {
                         if (!empty($request->get('lecturer_id'))) {
