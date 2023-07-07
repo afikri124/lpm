@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <meta name="author" content="pixelstrap">
+    <meta name="description" content="Lembaga Penjaminan Mutu Universitas Global Jakarta">
+    <meta name="keywords" content="LPM JGU">
+    <meta name="author" content="itic">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
-    <title>{{ config('app.name') }} - Lembaga Penjamin Mutu</title>
+    <title>{{ config('app.name') }} - Lembaga Penjaminan Mutu Jakarta Global University</title>
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap"
         rel="stylesheet">
@@ -149,7 +149,7 @@
                         <div class="content ">
                             <div class="container">
                                 <h1 class="wow fadeIn">Lembaga </h1>
-                                <h1 class="wow fadeIn">Penjamin Mutu (LPM)</h1>
+                                <h1 class="wow fadeIn">Penjaminan Mutu (LPM)</h1>
                                 <h2 class="txt-secondary wow fadeIn">Quality Assurance & Control</h2>
                                 <p class="mt-3 wow fadeIn">Jakarta Global University
                                 </p>
