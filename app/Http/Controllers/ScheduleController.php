@@ -20,6 +20,7 @@ use Jenssegers\Date\Date;
 use App\Jobs\JobNotification;
 use App\Jobs\JobNotificationWA;
 use Illuminate\Support\Facades\Log;
+use DB;
 
 class ScheduleController extends Controller
 {
@@ -131,15 +132,17 @@ sistem PO LPM JGU.";
                 'date_end'=> $request->date_end
             ]);
             if($data){
-                $x = Schedule_history::insert([
-                    'schedule_id' => $id,
-                    'description' => "The observation schedule has been <u>rescheduled</u> by <b>".Auth::user()->name."</b>.",
-                    'remark' => $request->reschedule_reason,
-                    'created_by' => Auth::user()->id,
-                    'created_at' => Carbon::now(),
-                ]);
-                //TODO : SEND EMAIL RESCHEDULE TO AUDITEE & AUDITOR
-                $schedule = Schedule::with('lecturer')
+                DB::beginTransaction();
+                try {
+                    $x = Schedule_history::insert([
+                        'schedule_id' => $id,
+                        'description' => "The observation schedule has been <u>rescheduled</u> by <b>".Auth::user()->name."</b>.",
+                        'remark' => $request->reschedule_reason,
+                        'created_by' => Auth::user()->id,
+                        'created_at' => Carbon::now(),
+                    ]);
+                    //TODO : SEND EMAIL RESCHEDULE TO AUDITEE & AUDITOR
+                    $schedule = Schedule::with('lecturer')
                     ->with('observations')
                     ->with('observations.auditor')
                     ->find($id);
@@ -164,10 +167,10 @@ sistem PO LPM JGU.";
                         $WA_DATA['wa_text'] = "Bpk/Ibu ".$schedule->lecturer->name_with_title.",
 Peer-Observation Anda telah dijadwalkan ulang menjadi 
 ".Date::createFromDate($request->date_start)->format('l, j F Y (H:i)')." - ".Date::createFromDate($request->date_end)->format('l, j F Y (H:i)');
-                        dispatch(new JobNotificationWA($WA_DATA));
-                    }
-                    // ------------------end send to WA-----------------
-                if($schedule->observations != null){
+                            dispatch(new JobNotificationWA($WA_DATA));
+                        }
+                        // ------------------end send to WA-----------------
+                    if($schedule->observations != null){
                     foreach($schedule->observations as $o){
                         if(($o->auditor->email != null || $o->auditor->email != "") && $o->attendance != true){
                             $d['email'] = $o->auditor->email;
@@ -190,12 +193,19 @@ Peer-Observation Anda telah dijadwalkan ulang menjadi
                             $WA_DATA['wa_text'] = "Bpk/Ibu ".$o->auditor->name_with_title.",
 Menginformasikan bahwa Jadwal PO ".$schedule->lecturer->name_with_title." telah diganti menjadi 
 ".Date::createFromDate($request->date_start)->format('l, j F Y (H:i)')." - ".Date::createFromDate($request->date_end)->format('l, j F Y (H:i)');
-                            dispatch(new JobNotificationWA($WA_DATA))->delay(now()->addMinutes(1));
+                                dispatch(new JobNotificationWA($WA_DATA))->delay(now()->addMinutes(1));
+                            }
+                            // ------------------end send to WA-----------------
                         }
-                        // ------------------end send to WA-----------------
                     }
+                    //--------------------end email--------------
+
+                DB::commit();
+                // all good
+                } catch (\Exception $e) {
+                    DB::rollback();
+                    Log::warning($e);
                 }
-                //--------------------end email--------------
             }
             return redirect()->route('schedules.edit', Crypt::encrypt($id));
         }
@@ -222,90 +232,98 @@ Menginformasikan bahwa Jadwal PO ".$schedule->lecturer->name_with_title." telah 
                     'remark'=> $request->remark,
                 ]);
                 if($data){
-                    $followup = Follow_up::create([
-                        'schedule_id' => $s_id,
-                        'dean_id' => $request->dean_id,
-                        'location'=> $request->location,
-                        'date_start' => date('Y-m-d H:i', strtotime($request->date_start)),
-                        'date_end' => date('Y-m-d H:i', strtotime($request->date_end)),
-                        'created_by' => Auth::user()->id
-                    ]);
-                    $x = Schedule_history::insert([
-                        'schedule_id' => $s_id,
-                        'description' => "<b>".Auth::user()->name."</b> changed the observation status to <u>follow-up</u>.",
-                        'remark' => $request->remark,
-                        'created_by' => Auth::user()->id,
-                        'created_at' => Carbon::now(),
-                    ]);
-                    //TODO : SEND EMAIL TO DEAN folow up
-                    $schedule = Schedule::with('lecturer')->find($s_id);
-                    $dean = User::find($request->dean_id);
-                    if($dean->email != null || $dean->email != ""){
-                        $d['email'] = $dean->email;
-                        $d['subject'] = "Undangan Tindak Lanjut Peer-Observation";
-                        $d['name'] = $dean->name_with_title;
-                        $d['messages'] = "Anda dijadwalkan untuk melakukan <b>tindak lanjut</b> <i><a href='".url('/dashboard')."'>Peer-Observation</a></i> kepada auditee berikut ini, dimohon agar segera menghubungi auditee dan memberikan laporan melalui sistem ini sesuai jadwal yang telah ditentukan.";
-                        $d['study_program'] = $schedule->study_program;
-                        $d['auditee'] = $schedule->lecturer->name_with_title;
-                        $d['auditee_hp'] = $schedule->lecturer->phone;
-                        $d['auditee_email'] = $schedule->lecturer->email;
-                        $d['start'] = Date::createFromDate($request->date_start)->format('l, j F Y (H:i)');
-                        $d['end'] = Date::createFromDate($request->date_end)->format('l, j F Y (H:i)');
-                        $d['location'] = $request->location;
-                        dispatch(new JobNotification($d))->delay(now()->addMinutes(1)); //send Email using queue job
-                    }
-                    //--------------------end email--------------
-                    //----------------WA-------------------------------
-                    $wa_to = $dean->phone;
-                    if($wa_to != null){
-                        $WA_DATA = array();
-                        $WA_DATA['wa_to'] = $wa_to;
-                        $WA_DATA['wa_text'] = "Bpk/Ibu ".$dean->name_with_title.",
+                    DB::beginTransaction();
+                    try {
+                        $followup = Follow_up::create([
+                            'schedule_id' => $s_id,
+                            'dean_id' => $request->dean_id,
+                            'location'=> $request->location,
+                            'date_start' => date('Y-m-d H:i', strtotime($request->date_start)),
+                            'date_end' => date('Y-m-d H:i', strtotime($request->date_end)),
+                            'created_by' => Auth::user()->id
+                        ]);
+                        $x = Schedule_history::insert([
+                            'schedule_id' => $s_id,
+                            'description' => "<b>".Auth::user()->name."</b> changed the observation status to <u>follow-up</u>.",
+                            'remark' => $request->remark,
+                            'created_by' => Auth::user()->id,
+                            'created_at' => Carbon::now(),
+                        ]);
+                        //TODO : SEND EMAIL TO DEAN folow up
+                        $schedule = Schedule::with('lecturer')->find($s_id);
+                        $dean = User::find($request->dean_id);
+                        if($dean->email != null || $dean->email != ""){
+                            $d['email'] = $dean->email;
+                            $d['subject'] = "Undangan Tindak Lanjut Peer-Observation";
+                            $d['name'] = $dean->name_with_title;
+                            $d['messages'] = "Anda dijadwalkan untuk melakukan <b>tindak lanjut</b> <i><a href='".url('/dashboard')."'>Peer-Observation</a></i> kepada auditee berikut ini, dimohon agar segera menghubungi auditee dan memberikan laporan melalui sistem ini sesuai jadwal yang telah ditentukan.";
+                            $d['study_program'] = $schedule->study_program;
+                            $d['auditee'] = $schedule->lecturer->name_with_title;
+                            $d['auditee_hp'] = $schedule->lecturer->phone;
+                            $d['auditee_email'] = $schedule->lecturer->email;
+                            $d['start'] = Date::createFromDate($request->date_start)->format('l, j F Y (H:i)');
+                            $d['end'] = Date::createFromDate($request->date_end)->format('l, j F Y (H:i)');
+                            $d['location'] = $request->location;
+                            dispatch(new JobNotification($d))->delay(now()->addMinutes(1)); //send Email using queue job
+                        }
+                        //--------------------end email--------------
+                        //----------------WA-------------------------------
+                        $wa_to = $dean->phone;
+                        if($wa_to != null){
+                            $WA_DATA = array();
+                            $WA_DATA['wa_to'] = $wa_to;
+                            $WA_DATA['wa_text'] = "Bpk/Ibu ".$dean->name_with_title.",
 Anda dijadwalkan untuk melakukan tindak lanjut hasil PO 
 ".$schedule->lecturer->name_with_title." pada 
-".Date::createFromDate($request->date_start)->format('l, j F Y (H:i)')." 
-di ".$request->location;
-                        dispatch(new JobNotificationWA($WA_DATA))->delay(now()->addMinutes(1));
-                    }
-                    // ------------------end send to WA-----------------
-                    if(isset($request->invite)){ //kirim undangan email ke orang2 terkait
-                        $no_wa = array();
-                        foreach($request->invite as $key => $data){
-                            $inv = User::find($data);
-                            if($inv){
-                                if($inv->email != null || $inv->email != ""){
-                                    $d['email'] = $inv->email;
-                                    $d['subject'] = "Undangan Tindak Lanjut Hasil PO";
-                                    $d['name'] = $inv->name_with_title;
-                                    $d['messages'] = "Anda dijadwalkan untuk mengikuti <b>tindak lanjut</b> <i><a href='".url('/dashboard')."'>Peer-Observation</a></i> kepada auditee berikut ini, silahkan datang sesuai jadwal yang telah ditentukan karena diperlukan keterlibatan Anda dalam tindaklanjut ini.";
-                                    $d['study_program'] = $schedule->study_program;
-                                    $d['auditee'] = $schedule->lecturer->name_with_title;
-                                    $d['auditee_hp'] = $schedule->lecturer->phone;
-                                    $d['auditee_email'] = $schedule->lecturer->email;
-                                    $d['start'] = Date::createFromDate($request->date_start)->format('l, j F Y (H:i)');
-                                    $d['end'] = Date::createFromDate($request->date_end)->format('l, j F Y (H:i)');
-                                    $d['location'] = $request->location;
-                                    dispatch(new JobNotification($d))->delay(now()->addMinutes(1)); //send Email using queue job
-                                }
-                                if($inv->phone != null){
-                                    array_push($no_wa,$inv->phone);
-                                }
-                            }
-                        }
-                        //----------------WA-------------------------------
-                        if("" != implode(",",$no_wa)){
-                            $WA_DATA = array();
-                            $WA_DATA['wa_to'] = implode(",",$no_wa);
-                            $WA_DATA['wa_text'] = "*TINDAKLANJUT PO-LPM*
-Anda diundang untuk mengikuti tindaklanjut hasil PO 
-".$schedule->lecturer->name_with_title." karena diperlukan keterlibatan Anda pada 
 ".Date::createFromDate($request->date_start)->format('l, j F Y (H:i)')." 
 di ".$request->location;
                             dispatch(new JobNotificationWA($WA_DATA))->delay(now()->addMinutes(1));
                         }
                         // ------------------end send to WA-----------------
-                    } //end email invitations
-                    return redirect()->route('schedules.review_observations', $id);
+                        if(isset($request->invite)){ //kirim undangan email ke orang2 terkait
+                            $no_wa = array();
+                            foreach($request->invite as $key => $data){
+                                $inv = User::find($data);
+                                if($inv){
+                                    if($inv->email != null || $inv->email != ""){
+                                        $d['email'] = $inv->email;
+                                        $d['subject'] = "Undangan Tindak Lanjut Hasil PO";
+                                        $d['name'] = $inv->name_with_title;
+                                        $d['messages'] = "Anda dijadwalkan untuk mengikuti <b>tindak lanjut</b> <i><a href='".url('/dashboard')."'>Peer-Observation</a></i> kepada auditee berikut ini, silahkan datang sesuai jadwal yang telah ditentukan karena diperlukan keterlibatan Anda dalam tindaklanjut ini.";
+                                        $d['study_program'] = $schedule->study_program;
+                                        $d['auditee'] = $schedule->lecturer->name_with_title;
+                                        $d['auditee_hp'] = $schedule->lecturer->phone;
+                                        $d['auditee_email'] = $schedule->lecturer->email;
+                                        $d['start'] = Date::createFromDate($request->date_start)->format('l, j F Y (H:i)');
+                                        $d['end'] = Date::createFromDate($request->date_end)->format('l, j F Y (H:i)');
+                                        $d['location'] = $request->location;
+                                        dispatch(new JobNotification($d))->delay(now()->addMinutes(1)); //send Email using queue job
+                                    }
+                                    if($inv->phone != null){
+                                        array_push($no_wa,$inv->phone);
+                                    }
+                                }
+                            }
+                            //----------------WA-------------------------------
+                            if("" != implode(",",$no_wa)){
+                                $WA_DATA = array();
+                                $WA_DATA['wa_to'] = implode(",",$no_wa);
+                                $WA_DATA['wa_text'] = "*TINDAKLANJUT PO-LPM*
+Anda diundang untuk mengikuti tindaklanjut hasil PO 
+".$schedule->lecturer->name_with_title." karena diperlukan keterlibatan Anda pada 
+".Date::createFromDate($request->date_start)->format('l, j F Y (H:i)')." 
+di ".$request->location;
+                                dispatch(new JobNotificationWA($WA_DATA))->delay(now()->addMinutes(1));
+                            }
+                            // ------------------end send to WA-----------------
+                        } //end email invitations
+                        DB::commit();
+                        return redirect()->route('schedules.review_observations', $id);
+                        // all good
+                    } catch (\Exception $e) {
+                        DB::rollback();
+                        Log::warning($e);
+                    }
                 }
 
             } else if($request->action == "result"){
@@ -315,6 +333,8 @@ di ".$request->location;
                     'remark'=> $request->remark,
                 ]);
                 if($data){
+                    DB::beginTransaction();
+                    try {
                     $x = Schedule_history::insert([
                         'schedule_id' => $s_id,
                         'description' => "<b>".Auth::user()->name."</b> has updated observation status to <u>Result and Recommendation</u>.",
@@ -343,7 +363,13 @@ Terimakasih telah menggunakan sistem ini. :)";
                         dispatch(new JobNotificationWA($WA_DATA));
                     }
                     // ------------------end send to WA-----------------
+                    DB::commit();
                     return redirect()->route('schedules.edit', $id);
+                    // all good
+                    } catch (\Exception $e) {
+                        DB::rollback();
+                        Log::warning($e);
+                    }
                 }
             }
         } else {
