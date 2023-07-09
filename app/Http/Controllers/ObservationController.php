@@ -238,7 +238,7 @@ Selanjutnya, silahkan lakukan Validasi PO dengan langkah berikut ini:
 2. Tekan menu *My PO*
 3. Klik tombol *PO Validation* (ikon palu)
 4. Lakukan *VALIDASI* atau *TOLAK* hasil PO Anda.";
-                            dispatch(new JobNotificationWA($WA_DATA))->delay(now()->addMinutes(1));
+                            dispatch(new JobNotificationWA($WA_DATA));
                         }
                         // ------------------end send to WA-----------------
                     }
