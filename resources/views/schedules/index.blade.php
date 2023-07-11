@@ -215,7 +215,7 @@
                             `<a class="btn btn-success btn-sm px-2" title="Edit" href="{{ url('schedules/` +
                             row.link + `') }}"><i class="fa fa-pencil-square-o"></i></a> <a class="btn btn-danger btn-sm px-2" title="Delete" onclick="DeleteId(` + x + `)" ><i class="fa fa-trash"></i></a>`;
  
-                        if(row.status_id == "S06" || row.status_id == "S05"){
+                        if(row.status_id == "S06" || row.status_id == "S05" || row.status_id == "S07" || row.status_id == "S08" || row.status_id == "S04"){
                             html =
                             `<a class="btn btn-success btn-sm px-2" title="Edit" href="{{ url('schedules/` +
                             row.link + `') }}"><i class="fa fa-pencil-square-o"></i></a> <a class="btn btn-secondary disabled btn-sm px-2"><i class="fa fa-trash"></i></a>`;
