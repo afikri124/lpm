@@ -77,7 +77,7 @@ Route::group(['prefix' => 'observations', 'middleware' => ['auth', 'role:AU']], 
     Route::any('/{id}', [App\Http\Controllers\ObservationController::class, 'view'])->name('observations.view');
 });
 //FOLLOW_UP ROLE DEAN
-Route::group(['prefix' => 'follow_up', 'middleware' => ['auth', 'role:DE']], function() {
+Route::group(['prefix' => 'follow_up', 'middleware' => ['auth', 'role:DE,AD']], function() {
     Route::get('/', [App\Http\Controllers\FollowUpController::class, 'index'])->name('follow_up');
     Route::any('/{id}', [App\Http\Controllers\FollowUpController::class, 'view'])->name('follow_up.view');
 });

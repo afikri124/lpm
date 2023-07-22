@@ -225,10 +225,16 @@ class ApiController extends Controller
 
     public function follow_up_by_dean_id(Request $request)
     {
-        $data = Follow_up::with('schedule')
+        if(Auth::user()->hasRole('AD')){
+            $data = Follow_up::with('schedule')->with('dean')
                 ->with('schedule.lecturer')
-                ->where('dean_id', Auth::user()->id)
                 ->select('*')->orderBy('remark');
+        } else if(Auth::user()->hasRole('DE')){
+            $data = Follow_up::with('schedule')->with('dean')
+            ->with('schedule.lecturer')
+            ->where('dean_id', Auth::user()->id)
+            ->select('*')->orderBy('remark');
+        }
             return Datatables::of($data)
                     ->filter(function ($instance) use ($request) {
                         if (!empty($request->get('lecturer_id'))) {

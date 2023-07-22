@@ -57,7 +57,7 @@
                         </a>
                     </li>
                     @endif
-                    @if(Auth::user()->hasRole('DE'))
+                    @if(Auth::user()->hasRole('DE') || Auth::user()->hasRole('AD'))
                     <li class="sidebar-list">
                     <label class="badge rounded-pill badge-primary" id="notif_follow_ups"></label>
                         <a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='follow_up' ? 'active' : '' }} "

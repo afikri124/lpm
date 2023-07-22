@@ -81,6 +81,7 @@
                                     <th scope="col">Date Start</th>
                                     <th scope="col">Date End</th>
                                     <th scope="col" data-priority="4">Attendance</th>
+                                    <th scope="col">Follow-Up by</th>
                                     <th scope="col">Doc.</th>
                                     <th scope="col" data-priority="3" width="65px">Action</th>
                                 </tr>
@@ -179,6 +180,16 @@
                 {
                     render: function (data, type, row, meta) {
                         var x = "";
+                        if (row.dean != null) {
+                            x = row.dean.name;
+                        }
+                        return x;
+                    },
+                    orderable: false,
+                },
+                {
+                    render: function (data, type, row, meta) {
+                        var x = "";
                         if (row.image_path != null) {
                             x =
                                 '<span><img class="chat-user-img img-30" src="' +
@@ -191,10 +202,14 @@
                 {
                     render: function (data, type, row, meta) {
                         var x = row.id;
-                        var html =
-                            `<a class="btn btn-info btn-sm px-2" title="View" href="{{ url('follow_up/` +
-                            row.link + `') }}"><i class="fa fa-eye"></i></a>`;
-                        return html;
+                        if (row.dean_id == "{{ Auth::user()->id }}") {
+                            var html =
+                                `<a class="btn btn-info btn-sm px-2" title="View" href="{{ url('follow_up/` +
+                                row.link + `') }}"><i class="fa fa-eye"></i></a>`;
+                            return html;
+                        } else {
+                            return "";
+                        }
                     },
                     orderable: false,
                     className: "text-end"
