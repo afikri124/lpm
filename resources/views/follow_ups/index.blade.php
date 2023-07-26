@@ -174,6 +174,10 @@
                         } else {
                             x = '<span class="badge badge-' + row.color + '">not yet</span>';
                         }
+
+                        if (row.location != null) {
+                            x += '<br><i class="fa fa-map-marker"></i> ' + row.location;
+                        }
                         return x;
                     },
                 },
