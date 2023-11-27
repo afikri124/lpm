@@ -42,7 +42,10 @@
                         <div class="col-lg-6 col-md-12">
                             <div class="form-group mb-2">
                                 <label class="col-form-label">Lecturer</label>
-                                <br><strong>{{ $lecturer->name }}</strong>
+                                <br><strong>{{ $lecturer->name }}</strong> 
+                                @if ($data->practitioner != null || $data->practitioner != "")
+                                / {{ $data->practitioner }}
+                                @endif
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-12">

@@ -146,7 +146,12 @@
         @endforeach
         <tr>
             <td width="30%" valign="top">Auditee</td>
-            <td width="70%" valign="top">: {{ $data->lecturer->name_with_title }} </td>
+            <td width="70%" valign="top">: {{ $data->lecturer->name_with_title }} 
+                @if ($o->practitioner != null || $o->practitioner != "")
+                &nbsp;/ 
+                    {{ $o->practitioner }}
+                @endif
+            </td>
         </tr>
         <tr>
             <td colspan="2">
@@ -222,28 +227,32 @@
     <br>
     <table width="100%">
         <tr>
-            <th>Nama Dosen</th>
-            <td>{{ $data->lecturer->name_with_title }}</td>
-            <th>Hari/Tanggal</th>
-            <td>{{ Date::createFromDate($s->updated_at)->format('l, j F Y') }}</td>
+            <th valign="top">Nama Dosen</th>
+            <td valign="top">{{ $data->lecturer->name_with_title }}
+                @if ($o->practitioner != null || $o->practitioner != "")
+                <br>{{ $o->practitioner }}
+                @endif
+            </td>
+            <th valign="top">Hari/Tanggal</th>
+            <td valign="top">{{ Date::createFromDate($s->updated_at)->format('l, j F Y') }}</td>
         </tr>
         <tr>
-            <th>Mata Kuliah</th>
-            <td>{{ $s->subject_course }}</td>
-            <th>Topik</th>
-            <td>{{ $s->topic }}</td>
+            <th valign="top">Mata Kuliah</th>
+            <td valign="top">{{ $s->subject_course }}</td>
+            <th valign="top">Topik</th>
+            <td valign="top">{{ $s->topic }}</td>
         </tr>
         <tr>
-            <th>Tipe Perkuliahan</th>
-            <td>{{ $s->class_type }}</td>
-            <th>Lokasi</th>
-            <td>{{ $s->location }}</td>
+            <th valign="top">Tipe Perkuliahan</th>
+            <td valign="top">{{ $s->class_type }}</td>
+            <th valign="top">Lokasi</th>
+            <td valign="top">{{ $s->location }}</td>
         </tr>
         <tr>
-            <th>Auditor</th>
-            <td>{{ $s->auditor->name_with_title }}</td>
-            <th>Jumlah Mahasiswa</th>
-            <td>{{ $s->total_students }}</td>
+            <th valign="top">Auditor</th>
+            <td valign="top">{{ $s->auditor->name_with_title }}</td>
+            <th valign="top">Jumlah Mahasiswa</th>
+            <td valign="top">{{ $s->total_students }}</td>
         </tr>
     </table>
     <br>

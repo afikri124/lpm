@@ -20,6 +20,7 @@ class Observation extends Model
         'location',
         'study_program',
         'total_students',
+        'practitioner'
     ];
 
     public function auditor()

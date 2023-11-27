@@ -120,10 +120,15 @@
                                         value="{{ (old('subject_course')==null ? $data->subject_course : old('subject_course')) }}"
                                         required>
                                 </div>
-                                <div class="mb-3 mb-2 col-lg-12 col-md-12">
+                                <div class="mb-3 mb-2 col-lg-6 col-md-12">
                                     <label>Topic</label>
                                     <input class="form-control" type="text" name="topic" title="Topic"
                                         value="{{ (old('topic')==null ? $data->topic : old('topic')) }}">
+                                </div>
+                                <div class="mb-3 mb-2 col-lg-6 col-md-12">
+                                    <label>Name of Practitioner Lecturer (optional)</label>
+                                    <input class="form-control" type="text" name="practitioner" title="Dosen Praktisi Mengajar (jika ada)"
+                                        value="{{ (old('practitioner')==null ? $data->practitioner : old('practitioner')) }}">
                                 </div>
                             </div>
                             <div class="f1-buttons">

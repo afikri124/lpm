@@ -192,6 +192,7 @@ Info selengkapnya silakan akses sistem PO LPM JGU.";
                         'location'=> $request->location,
                         'subject_course'=> $request->subject_course,
                         'topic'=> $request->topic,
+                        'practitioner'=> $request->practitioner,
                         'remark'=> $request->remark,
                         'image_path'=> $folderName."/".$imageName,
                         'updated_at'=> Carbon::now(),
