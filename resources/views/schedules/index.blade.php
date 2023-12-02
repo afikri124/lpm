@@ -202,8 +202,10 @@
                         var x = "";
                         // x = row.observations;
                         row.observations.forEach((e) => {
-                            x += '<i class="badge rounded-pill badge-' + e.color +
+                            if(e.auditor != null){
+                                x += '<i class="badge rounded-pill badge-' + e.color +
                                 '">' + e.auditor['name'] + '</i><br>';
+                            }
                         });
                         return x;
                     },
