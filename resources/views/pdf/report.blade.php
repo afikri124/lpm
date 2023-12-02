@@ -137,9 +137,9 @@
             <td width="30%" valign="top">Auditor {{ $key+1 }}</td>
             <td width="70%" valign="top">: 
                 @if($o->attendance)
-                {{ $o->auditor->name_with_title }}
+                {{ ($o->auditor == null ? "": $o->auditor->name_with_title) }}
                 @else
-                <del>{{ $o->auditor->name_with_title }}</del>
+                <del>{{ ($o->auditor == null ? "": $o->auditor->name_with_title) }}</del>
                 @endif
             </td>
         </tr>
@@ -250,7 +250,7 @@
         </tr>
         <tr>
             <th valign="top">Auditor</th>
-            <td valign="top">{{ $s->auditor->name_with_title }}</td>
+            <td valign="top">{{ ($s->auditor == null ? "": $s->auditor->name_with_title) }}</td>
             <th valign="top">Jumlah Mahasiswa</th>
             <td valign="top">{{ $s->total_students }}</td>
         </tr>
@@ -345,8 +345,8 @@
                 <td width="50%" style="text-align: center;">
                     Depok, {{ Date::createFromDate($s->updated_at)->format('j F Y') }}
                     <br>Auditor<br><br><br><br>
-                    <b>( {{ $s->auditor->name_with_title }} )</b><br>
-                    <small>NIK. {{ $s->auditor->username }}</small>
+                    <b>( {{ ($s->auditor == null ? "": $s->auditor->name_with_title) }} )</b><br>
+                    <small>NIK. {{ ($s->auditor == null ? "": $s->auditor->username) }}</small>
                 </td>
             </tr>
         </thead>
