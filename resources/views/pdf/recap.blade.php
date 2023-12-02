@@ -105,9 +105,9 @@
                 <td>
                     @foreach($d->observations as $o)
                     @if($o->attendance)
-                    {{ $o->auditor->name_with_title }}<br>
+                    {{ ($o->auditor == null ? "": $o->auditor->name_with_title) }}<br>
                     @else
-                    <del>{{ $o->auditor->name_with_title }}</del><br>
+                    <del>{{ ($o->auditor == null ? "": $o->auditor->name_with_title) }}</del><br>
                     @endif
                     @endforeach
                 </td>
