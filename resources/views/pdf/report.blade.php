@@ -177,9 +177,9 @@
             <td width="50%" style="text-align: center;">
                 Auditor {{ $key+1 }}<br><br><br><br>
                 @if($o->attendance)
-                <b>( {{ $o->auditor->name_with_title }} )</b><br>
+                <b>( {{ ($o->auditor == null ? "": $o->auditor->name_with_title) }} )</b><br>
                 @else
-                <del><b>( {{ $o->auditor->name_with_title }} )</b></del><br>
+                <del><b>( {{ ($o->auditor == null ? "": $o->auditor->name_with_title) }} )</b></del><br>
                 @endif
                 <small>NIK. {{ $o->auditor->username }}</small>
             </td>
