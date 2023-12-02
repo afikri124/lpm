@@ -181,7 +181,7 @@
                 @else
                 <del><b>( {{ ($o->auditor == null ? "": $o->auditor->name_with_title) }} )</b></del><br>
                 @endif
-                <small>NIK. {{ $o->auditor->username }}</small>
+                <small>NIK. {{ ($o->auditor == null ? "": $o->auditor->username) }}</small>
             </td>
             @endforeach
             @endif
