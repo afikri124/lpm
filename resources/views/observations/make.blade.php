@@ -72,7 +72,11 @@
                                 </div>
                                 <div class="mb-3 mb-2 col-lg-6 col-md-12">
                                     <label>Auditor</label>
-                                    <input class="form-control" type="text" value="{{ $data->auditor->name }}" disabled>
+                                    <input class="form-control" type="text" value="@if(isset($auditor)) @foreach($auditor as $no => $o){{ $o->auditor->name }}, @endforeach
+                                        @else
+                                        {{ $data->auditor->name }}
+                                    @endif
+                                    " disabled>
                                 </div>
                                 <div class="mb-3 mb-2 col-lg-6 col-md-12">
                                     <label>Class Type<i class="text-danger">*</i></label>
@@ -140,9 +144,9 @@
                         </fieldset>
                         <fieldset>
                             <div class="mb-3 col-lg-12 col-md-12">
-                                <div class="alert alert-danger outline alert-dismissible fade show" role="alert">
+                                <div class="alert alert-info outline alert-dismissible fade show" role="alert">
                                     <ul>
-                                        <a href="{{asset('assets/rubric.pdf')}}" target="_blank"><b>Click here</b></a> to view the grading rubric guide.
+                                        <a href="{{route('rubric')}}" target="_blank"><b>Click here</b></a> to view the grading rubric guide.
                                     </ul>
                                     <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"
                                         data-bs-original-title="" title=""></button>
