@@ -239,6 +239,26 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group mb-2">
+                                    <label class="col-form-label">Status<i class="text-danger">*</i></label>
+                                    <select
+                                        class="form-select digits select2 @error('status') is-invalid @enderror"
+                                        name="status" id="status" data-placeholder="Select">
+                                        <option value="" selected disabled>Select</option>
+                                        @foreach($status as $p)
+                                        <option value="{{ $p->id }}" {{ $data->status_id == $p->id ? 'selected' : '' }}>
+                                            {{ $p->title }}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                    @error('status')
+                                    <span class="invalid-feedback d-block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group mb-2">
                                     <label class="col-form-label">Reason for rescheduling<i
                                             class="text-danger">*</i></label>
                                     <textarea class="form-control" rows="2" name="reschedule_reason"></textarea>

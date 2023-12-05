@@ -124,10 +124,11 @@ sistem PO LPM JGU.";
                 'date_start' => ['required', 'date'],
                 'date_end' => ['required', 'date'],
                 'reschedule_reason' => ['required'],
+                'status' => ['required'],
             ]);
             $data = Schedule::find($id);
             $data->update([ 
-                'status_id'=> ($data->status_id == 'S02' ? $data->status_id : 'S01'),
+                'status_id'=> $request->status,
                 'date_start'=> $request->date_start,
                 'date_end'=> $request->date_end
             ]);
@@ -146,6 +147,7 @@ sistem PO LPM JGU.";
                     ->with('observations')
                     ->with('observations.auditor')
                     ->find($id);
+                if($request->status == "S00" || $request->status == "S01" || $request->status == "S02"){
                     if($schedule->lecturer->email != null || $schedule->lecturer->email != ""){
                         $d['email'] = $schedule->lecturer->email;
                         $d['subject'] = "Perubahan Jadwal Peer-Observation";
@@ -199,6 +201,7 @@ Menginformasikan bahwa Jadwal PO ".$schedule->lecturer->name_with_title." telah 
                         }
                     }
                     //--------------------end email--------------
+                }
 
                 DB::commit();
                 // all good
@@ -215,7 +218,8 @@ Menginformasikan bahwa Jadwal PO ".$schedule->lecturer->name_with_title." telah 
                         $q->where('role_id', "AU");
                     })->where('username','!=', 'admin')->where('id','!=', $data->lecturer_id)->get();
         $hod = Setting::findOrFail('HODLPM');
-        return view('schedules.edit', compact('data','auditors','hod'));
+        $status = Status::get();
+        return view('schedules.edit', compact('data','auditors','hod','status'));
     }
 
     public function review_observations($id, Request $request){
