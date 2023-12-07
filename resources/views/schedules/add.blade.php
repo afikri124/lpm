@@ -45,8 +45,8 @@
                                 <select
                                     class="form-select digits select2 @error('max_score') is-invalid @enderror"
                                     name="max_score" id="max_score" data-placeholder="Select">
-                                    <option value="4" >4 Star</option>
-                                    <option value="5" >5 Star</option>
+                                    <option value="4" >4 Stars</option>
+                                    <option value="5" >5 Stars</option>
                                 </select>
                                 @error('max_score')
                                 <span class="invalid-feedback d-block" role="alert">
