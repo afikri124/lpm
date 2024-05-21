@@ -87,6 +87,7 @@
                                     <th scope="col" data-priority="2">Lecturer</th>
                                     <th scope="col">Schedule</th>
                                     <th scope="col" data-priority="3">Attendance</th>
+                                    <th scope="col">RPS</th>
                                     <th scope="col">Doc.</th>
                                     <th scope="col">Status</th>
                                     <th scope="col" data-priority="4" width="65px">Action</th>
@@ -182,6 +183,16 @@
                             x = '<span class="badge badge-' + row.color + '">not yet</span>';
                         }
                         return x;
+                    },
+                },
+                {
+                    render: function (data, type, row, meta) {
+                        if(row.schedule.rps_path != null){
+                            return `<a class="btn btn-light btn-sm px-2" target="_blank" title="Link RPS" href="{{ url('` +
+                            row.schedule.rps_path + `') }}"><i class="fa fa-paperclip"></i></a> `;
+                        } else {
+                            return "";
+                        }
                     },
                 },
                 {

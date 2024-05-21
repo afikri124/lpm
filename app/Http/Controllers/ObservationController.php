@@ -400,4 +400,47 @@ Selanjutnya, silahkan lakukan Validasi PO dengan langkah berikut ini:
         }
     }
 
+    public function submit_rps($id, Request $request){
+        try {
+            $s_id = Crypt::decrypt($id);
+        } catch (DecryptException $e) {
+            return redirect()->route('schedules');
+        }
+        if ($request->isMethod('POST')) {
+            $this->validate($request, [ 
+                'rps_path' => ['required','mimes:pdf','max:2048'],
+            ]);
+
+            $fileName = "";
+            if(isset($request->rps_path)){
+                $ext = $request->rps_path->extension();
+                $name = str_replace(' ', '_', $request->rps_path->getClientOriginalName());
+                $fileName = Auth::user()->id.'_'.$name; 
+                $folderName =  "storage/RPS/".Carbon::now()->format('Y');
+                $path = public_path()."/".$folderName;
+                if (!File::exists($path)) {
+                    File::makeDirectory($path, 0755, true); //create folder
+                }
+                $upload = $request->rps_path->move($path, $fileName); //upload image to folder
+                if($upload){
+                    $fileName=$folderName."/".$fileName;
+                } else {
+                    $fileName = "";
+                }
+            }
+            $data = Schedule::findOrFail($s_id);
+            $d = $data->update([ 
+                'rps_path' => $fileName,
+            ]);
+            if($d){
+                return redirect()->route('observations.me')
+                ->with('msg','RPS uploaded successfully!');
+            }else{
+                return redirect()->route('observations.me')
+                ->with('msg','RPS upload failed!');
+            }
+        }
+        $data = Schedule::with('lecturer')->with('status')->with('observations')->with('observations.auditor')->findOrFail($s_id);
+        return view('observations.submit_rps', compact('id','data'));
+    }
 }

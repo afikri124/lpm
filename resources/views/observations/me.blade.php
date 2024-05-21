@@ -22,6 +22,7 @@
     table.dataTable td:nth-child(4) {
         max-width: 100px;
     }
+
     table.dataTable td:nth-child(6) {
         max-width: 100px;
     }
@@ -46,6 +47,12 @@
 
 @section('content')
 <div class="container-fluid">
+    @if(session('msg'))
+    <div class="alert alert-success alert-dismissible" role="alert">
+        {{session('msg')}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
     <div class="row">
         <div class="col-md-12 project-list">
             <div class="card">
@@ -71,6 +78,7 @@
                                     <th scope="col" data-priority="1" width="20px">No</th>
                                     <th scope="col">Schedule</th>
                                     <th scope="col">Program</th>
+                                    <th scope="col">RPS</th>
                                     <th scope="col" data-priority="2">Auditor</th>
                                     <th scope="col">Contact</th>
                                     <th scope="col" data-priority="4">Status</th>
@@ -121,11 +129,10 @@
             ajax: {
                 url: "{{ route('api.schedules_by_lectrurer_id') }}",
                 data: function (d) {
-                        d.status_id = $('#Select_2').val()
+                    d.status_id = $('#Select_2').val()
                 },
             },
-            columns: [
-                {
+            columns: [{
                     render: function (data, type, row, meta) {
                         var no = (meta.row + meta.settings._iDisplayStart + 1);
                         return no;
@@ -154,11 +161,21 @@
                 },
                 {
                     render: function (data, type, row, meta) {
+                        if (row.rps_path != null) {
+                            return `<a class="btn btn-light btn-sm px-2" target="_blank" title="Link RPS" href="{{ url('` +
+                                row.rps_path + `') }}"><i class="fa fa-paperclip"></i></a> `;
+                        } else {
+                            return "-";
+                        }
+                    },
+                },
+                {
+                    render: function (data, type, row, meta) {
                         var x = "";
                         row.observations.forEach((e) => {
-                            if(e.auditor != null){
+                            if (e.auditor != null) {
                                 x += '<i class="badge rounded-pill badge-' + e.color +
-                                '">' + e.auditor['name'] + '</i><br>';
+                                    '">' + e.auditor['name'] + '</i><br>';
                             }
                         });
                         return x;
@@ -168,8 +185,10 @@
                     render: function (data, type, row, meta) {
                         var x = "";
                         row.observations.forEach((e) => {
-                            if(e.auditor != null){
-                                x += '<a target="_blank" href="https://wa.me/' + e.auditor['phone'] + '"><small>+' + e.auditor['phone'] + '</small></a><br>';
+                            if (e.auditor != null) {
+                                x += '<a target="_blank" href="https://wa.me/' + e
+                                    .auditor['phone'] + '"><small>+' + e.auditor[
+                                        'phone'] + '</small></a><br>';
                             }
                         });
                         return x;
@@ -177,7 +196,8 @@
                 },
                 {
                     render: function (data, type, row, meta) {
-                        var x = '<span title="' + row.remark + '" class="text-' + row.status['color'] + '">' + row.status['title'] + '</span>';
+                        var x = '<span title="' + row.remark + '" class="text-' + row.status[
+                            'color'] + '">' + row.status['title'] + '</span>';
                         return x;
                     },
                 },
@@ -185,14 +205,22 @@
                     render: function (data, type, row, meta) {
                         var x = row.id;
                         var html = "";
-                        if(row.status_id == "S03" || row.status_id == "S02"){
-                            html += `<a class="btn btn-warning btn-sm px-2" title="PO Validation" href="{{ url('observations/validation/` +
-                            row.link + `') }}"><i class="fa fa-legal"></i></a> `;
-                        }   
-                        if(row.status_id != "S00" && row.status_id != "S01"){
-                            html += `<a class="btn btn-info btn-sm px-2" title="View Report" href="{{ url('pdf/report/` +
-                            row.link + `') }}" target="_blank"><i class="fa fa-eye"></i></a>`;
-                        } 
+                        if (row.status_id != "S06" && row.status_id != "S07") {
+                        html +=
+                            `<a class="btn btn-success btn-sm px-2" title="Submit RPS" href="{{ url('observations/submit_rps/` +
+                            row.link + `') }}"><i class="fa fa-upload"></i></a> `;
+                        }
+                        if (row.status_id == "S03" || row.status_id == "S02") {
+                            html +=
+                                `<a class="btn btn-warning btn-sm px-2" title="PO Validation" href="{{ url('observations/validation/` +
+                                row.link + `') }}"><i class="fa fa-legal"></i></a> `;
+                        }
+                        if (row.status_id != "S00" && row.status_id != "S01") {
+                            html +=
+                                `<a class="btn btn-info btn-sm px-2" title="View Report" href="{{ url('pdf/report/` +
+                                row.link +
+                                `') }}" target="_blank"><i class="fa fa-eye"></i></a>`;
+                        }
                         return html;
                     },
                     orderable: false,

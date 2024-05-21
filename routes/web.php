@@ -70,6 +70,7 @@ Route::group(['prefix' => 'observations', 'middleware' => ['auth']], function() 
     Route::any('add', [App\Http\Controllers\ObservationController::class, 'add'])->name('observations.add')->middleware('role:AD');
     Route::any('/results/{id}', [App\Http\Controllers\ObservationController::class, 'results'])->name('observations.results');
     Route::any('/validation/{id}', [App\Http\Controllers\ObservationController::class, 'validations'])->name('observations.validations');
+    Route::any('/submit_rps/{id}', [App\Http\Controllers\ObservationController::class, 'submit_rps'])->name('observations.submit_rps');
 });
 //OBSERVATIONS ROLE AUDITOR
 Route::group(['prefix' => 'observations', 'middleware' => ['auth', 'role:AU']], function() {

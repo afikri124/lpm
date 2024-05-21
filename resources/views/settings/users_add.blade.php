@@ -142,7 +142,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-form-label">Gender<i class="text-danger">*</i></label>
-                                <select class="select2 col-sm-12" name="gender" id="gender" placeholder="Select Gender">
+                                <select class="select2-modal col-sm-12" name="gender" id="gender" placeholder="Select Gender">
                                     <option value="" selected disabled>Select Gender</option>
                                     <option value="M">Male</option>
                                     <option value="F">Female</option>

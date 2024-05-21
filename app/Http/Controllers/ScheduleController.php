@@ -84,7 +84,7 @@ class ScheduleController extends Controller
                 $d['email'] = $auditee->email;
                 $d['subject'] = "Pemberitahuan Peer-Observation";
                 $d['name'] = $auditee->name_with_title;
-                $d['messages'] = "Anda mendapatkan jadwal <i><a href='".url('/dashboard')."'>Peer-Observation</a> </i>yang dilaksanakan oleh LPM JGU sebagaimana yang tertera dalam tabel berikut:";
+                $d['messages'] = "Anda mendapatkan jadwal <i><a href='".url('/dashboard')."'>Peer-Observation</a> </i>yang dilaksanakan oleh LPM JGU sebagaimana yang tertera dalam tabel berikut, Silahkan unggah Rencana Pembelajaran Semester (RPS) Anda sebelum jadwal yang telah ditentukan melalui menu My PO.";
                 $d['study_program'] = $request->study_program;
                 $d['auditee'] = $auditee->name_with_title;
                 $d['auditee_hp'] = $auditee->phone;
@@ -102,6 +102,7 @@ class ScheduleController extends Controller
                 $WA_DATA['wa_text'] = "Bpk/Ibu ".$auditee->name_with_title.",
 Anda mendapatkan Jadwal Peer-Observation pada 
 ".Date::createFromDate($request->date_start)->format('l, j F Y (H:i)').".
+Silahkan unggah Rencana Pembelajaran Semester (RPS) Anda sebelum jadwal yang telah ditentukan melalui menu My PO
 Info selengkapnya silakan akses 
 sistem PO LPM JGU.";
                 dispatch(new JobNotificationWA($WA_DATA));

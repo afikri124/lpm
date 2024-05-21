@@ -103,6 +103,7 @@
                                     <th scope="col" data-priority="2" >Lecturer</th>
                                     <th scope="col">Date Start</th>
                                     <th scope="col">Date End</th>
+                                    <th scope="col">RPS</th>
                                     <th scope="col" data-priority="4" >Status</th>
                                     <th scope="col">Auditor</th>
                                     <th scope="col" data-priority="3" width="65px">Action</th>
@@ -189,6 +190,16 @@
                 {
                     render: function (data, type, row, meta) {
                         return moment(row.date_end).format("DD MMM YYYY HH:mm");
+                    },
+                },
+                {
+                    render: function (data, type, row, meta) {
+                        if (row.rps_path != null) {
+                            return `<a class="btn btn-light btn-sm px-2" target="_blank" title="Link RPS" href="{{ url('` +
+                                row.rps_path + `') }}"><i class="fa fa-paperclip"></i></a> `;
+                        } else {
+                            return "-";
+                        }
                     },
                 },
                 {

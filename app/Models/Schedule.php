@@ -19,7 +19,8 @@ class Schedule extends Model
         'created_by',
         'study_program',
         'max_score',
-        'validation_remark'
+        'validation_remark',
+        'rps_path'
     ];
     public function status()
     {
