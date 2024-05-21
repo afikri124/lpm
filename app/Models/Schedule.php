@@ -20,7 +20,8 @@ class Schedule extends Model
         'study_program',
         'max_score',
         'validation_remark',
-        'rps_path'
+        'rps_path',
+        'is_practitioner_class'
     ];
     public function status()
     {

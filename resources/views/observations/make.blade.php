@@ -129,11 +129,13 @@
                                     <input class="form-control" type="text" name="topic" title="Topic"
                                         value="{{ (old('topic')==null ? $data->topic : old('topic')) }}">
                                 </div>
+                                @if ($data->schedule->is_practitioner_class)
                                 <div class="mb-3 mb-2 col-lg-6 col-md-12">
-                                    <label>Name of Practitioner Lecturer (optional)</label>
-                                    <input class="form-control" type="text" name="practitioner" title="Dosen Praktisi Mengajar (jika ada)"
-                                        value="{{ (old('practitioner')==null ? $data->practitioner : old('practitioner')) }}">
+                                    <label>Name of Practitioner Lecturer<i class="text-danger">*</i></label>
+                                    <input class="form-control" type="text" name="practitioner" title="Dosen Praktisi Mengajar"
+                                        value="{{ (old('practitioner')==null ? $data->practitioner : old('practitioner')) }}" required>
                                 </div>
+                                @endif
                             </div>
                             <div class="f1-buttons">
                                 <a href="{{ route('observations') }}">
@@ -176,21 +178,6 @@
                                                         {{ (old('questions.'.$c->id.'.s')==$i? "selected": "")}}>{{ $i }}
                                                         </option>
                                                     @endfor
-                                                        {{-- <option value="1"
-                                                        {{ (old('questions.'.$c->id.'.s')=='1'? "selected": "")}}>1
-                                                        </option> --}}
-                                                        {{-- <option value="2"
-                                                        {{ (old('questions.'.$c->id.'.s')=='2'? "selected": "")}}>2
-                                                        </option>
-                                                        <option value="3"
-                                                            {{ (old('questions.'.$c->id.'.s')=='3'? "selected": "")}}>3
-                                                        </option>
-                                                        <option value="4"
-                                                            {{ (old('questions.'.$c->id.'.s')=='4'? "selected": "")}}>4
-                                                        </option> --}}
-                                                        {{-- <option value="5"
-                                                        {{ (old('questions.'.$c->id.'.s')=='5'? "selected": "")}}>5
-                                                        </option> --}}
                                                 </select>
                                             </span>
                                         </td>

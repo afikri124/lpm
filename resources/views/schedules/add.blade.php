@@ -39,7 +39,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-12 col-md-12">
+                        <div class="col-lg-6 col-md-12">
                             <div class="form-group mb-2">
                                 <label class="col-form-label">Maximum Point (Star Score)<i class="text-danger">*</i></label>
                                 <select
@@ -53,6 +53,17 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12">
+                            <div class="form-group mb-2">
+                                <label class="col-form-label">Is this a practitioner class?</label>
+                                <div class="form-check checkbox checkbox-default mb-0">
+                                    <input class="form-check-input" id="is_practitioner_class" type="checkbox" value="0"
+                                        name="is_practitioner_class">
+                                    <label class="form-check-label" for="is_practitioner_class">Checklist if this is a practitioner class</label>
+                                </div>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-12">
@@ -148,6 +159,14 @@
             });
         })(jQuery);
     }, 350);
-
+</script>
+<script>
+    $(document).ready(function () {
+        const selectElement = document.querySelector('#is_practitioner_class');
+        selectElement.addEventListener('change', (event) => {
+            selectElement.value = selectElement.checked ? 1 : 0;
+            // alert(selectElement.value);
+        });
+    });
 </script>
 @endsection

@@ -103,7 +103,8 @@
                                     <th scope="col" data-priority="2" >Lecturer</th>
                                     <th scope="col">Date Start</th>
                                     <th scope="col">Date End</th>
-                                    <th scope="col">RPS</th>
+                                    <th scope="col" width="50px">RPS</th>
+                                    <th scope="col" width="50px" title="Practitioner class">PC</th>
                                     <th scope="col" data-priority="4" >Status</th>
                                     <th scope="col">Auditor</th>
                                     <th scope="col" data-priority="3" width="65px">Action</th>
@@ -201,6 +202,17 @@
                             return "-";
                         }
                     },
+                    className: "text-center"
+                },
+                {
+                    render: function (data, type, row, meta) {
+                        if (row.is_practitioner_class == true) {
+                            return `<i class="fa fa-check" title="Practitioner Class"></i> `;
+                        } else {
+                            return "";
+                        }
+                    },
+                    className: "text-center"
                 },
                 {
                     render: function (data, type, row, meta) {

@@ -298,11 +298,23 @@ Selanjutnya, silahkan lakukan Validasi PO dengan langkah berikut ini:
                     ->withErrors(['msg' => 'Sorry, you have missed the specified schedule, please contact admin for rescheduling. '.$CONTACT->title.": ".$CONTACT->content]);
                 } else {
                     $locations = Locations::orderBy('title')->get();
-                    $survey = Criteria_category::
-                    with(["criterias" => function($q){
-                        $q->where('criterias.status', '=', true);
-                    }])
-                    ->where('status', true)->get();
+                    if ($data->schedule->is_practitioner_class){
+                        $survey = Criteria_category::
+                        with(["criterias" => function($q){
+                            $q->where('criterias.status', '=', true);
+                        }])
+                        ->where('id', "KP")
+                        ->where('status', true)
+                        ->get();
+                    } else {
+                        $survey = Criteria_category::
+                        with(["criterias" => function($q){
+                            $q->where('criterias.status', '=', true);
+                        }])
+                        ->where('id','!=', "KP")
+                        ->where('status', true)
+                        ->get();
+                    }
                     return view('observations.make', compact('data', 'lecturer', 'survey', 'locations','auditor'));
                 }
             } else {

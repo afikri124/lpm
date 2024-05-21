@@ -75,7 +75,8 @@ class ScheduleController extends Controller
                 'date_start' => date('Y-m-d H:i', strtotime($request->date_start)),
                 'date_end' => date('Y-m-d H:i', strtotime($request->date_end)),
                 'status_id' => "S00",
-                'created_by' => Auth::user()->id
+                'created_by' => Auth::user()->id,
+                'is_practitioner_class' => $request->is_practitioner_class
             ]);
             
             //TODO : SEND EMAIL TO LECTURER
@@ -131,7 +132,8 @@ sistem PO LPM JGU.";
             $data->update([ 
                 'status_id'=> $request->status,
                 'date_start'=> $request->date_start,
-                'date_end'=> $request->date_end
+                'date_end'=> $request->date_end,
+                'is_practitioner_class' => $request->is_practitioner_class
             ]);
             if($data){
                 DB::beginTransaction();
