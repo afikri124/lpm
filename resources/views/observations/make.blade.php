@@ -29,10 +29,71 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-xl-12">
+            @if ($data->schedule->rps_path == null)
             <div class="card">
-                <!-- <div class="card-header">
-                    <h5>Observation</h5>
-                </div> -->
+                <div class="card-body text-center">
+                    <h1 class="fa fa-lock text-danger" style="font-size: 70pt"></h1>
+                    <h5 class="text-center">Observations can't be continued because the RPS has not been uploaded by the
+                        lecturer!</h5>
+                    <p>Please tell the lecturer..</p>
+                </div>
+            </div>
+            <div class="card">
+
+                <div class="card-body row">
+                    <div class="col-lg-6 col-md-12">
+                        <div class="form-group mb-2">
+                            <label class="col-form-label">Name</label>
+                            <br><strong>{{ $lecturer->name }}</strong>
+                            @if ($data->practitioner != null || $data->practitioner != "")
+                            / {{ $data->practitioner }}
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <div class="form-group mb-2">
+                            <label class="col-form-label">Observation Date</label>
+                            <br><strong>
+                                @if($data->attendance)
+                                {{ date('l, d M Y H:i', strtotime($data->updated_at)) }}
+                                @else
+                                {{ date('d M Y H:i', strtotime($data->schedule->date_start)) }} -
+                                {{ date('d M Y H:i', strtotime($data->schedule->date_end)) }}
+                                @endif
+                            </strong>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <div class="form-group mb-2">
+                            <label class="col-form-label">Contact</label>
+                            <br><strong>{{ $lecturer->email }} <br>{{ $lecturer->phone }}</strong>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <div class="form-group mb-2">
+                            <label class="col-form-label">Auditor</label> <br>
+                            @if(isset($auditor))
+                            @foreach($auditor as $no => $o)
+                            ({{ $no + 1 }}) <strong>{{ $o->auditor->name }}</strong><br>
+                            @endforeach
+                            @else
+                            <strong>{{ $data->auditor->name }}</strong>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card project-list">
+                <div class="row">
+                    <div class="col-md-12 d-flex justify-content-center">
+                        <a href="{{ url()->previous() }}">
+                            <span class="btn btn-secondary">Back</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            @else
+            <div class="card">
                 <div class="card-body">
                     <form class="f1" method="POST" action="" enctype="multipart/form-data">
                         @csrf
@@ -132,8 +193,10 @@
                                 @if ($data->schedule->is_practitioner_class)
                                 <div class="mb-3 mb-2 col-lg-6 col-md-12">
                                     <label>Name of Practitioner Lecturer<i class="text-danger">*</i></label>
-                                    <input class="form-control" type="text" name="practitioner" title="Dosen Praktisi Mengajar"
-                                        value="{{ (old('practitioner')==null ? $data->practitioner : old('practitioner')) }}" required>
+                                    <input class="form-control" type="text" name="practitioner"
+                                        title="Dosen Praktisi Mengajar"
+                                        value="{{ (old('practitioner')==null ? $data->practitioner : old('practitioner')) }}"
+                                        required>
                                 </div>
                                 @endif
                             </div>
@@ -148,7 +211,8 @@
                             <div class="mb-3 col-lg-12 col-md-12">
                                 <div class="alert alert-info outline alert-dismissible fade show" role="alert">
                                     <ul>
-                                        <a href="{{route('rubric')}}" target="_blank"><b>Click here</b></a> to view the grading rubric guide.
+                                        <a href="{{route('rubric')}}" target="_blank"><b>Click here</b></a> to view the
+                                        grading rubric guide.
                                     </ul>
                                     <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"
                                         data-bs-original-title="" title=""></button>
@@ -173,11 +237,12 @@
                                                     title="Question {{ $q->id }}.{{ $no + 1 }}" autocomplete="off"
                                                     required>
                                                     <option value="" selected>0</option>
-                                                    @for ($i =1; $i <= $data->schedule->max_score; $i++) 
-                                                    <option value="{{ $i }}"
-                                                        {{ (old('questions.'.$c->id.'.s')==$i? "selected": "")}}>{{ $i }}
+                                                    @for ($i =1; $i <= $data->schedule->max_score; $i++)
+                                                        <option value="{{ $i }}"
+                                                            {{ (old('questions.'.$c->id.'.s')==$i? "selected": "")}}>
+                                                            {{ $i }}
                                                         </option>
-                                                    @endfor
+                                                        @endfor
                                                 </select>
                                             </span>
                                         </td>
@@ -229,6 +294,7 @@
                     </form>
                 </div>
             </div>
+            @endif
         </div>
     </div>
 </div>
