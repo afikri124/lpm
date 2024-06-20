@@ -51,7 +51,7 @@ class JobNotificationWA implements ShouldQueue
                 'target' => $this->data['wa_to'],
                 'message' => $this->data['wa_text']." 
 
-[_Pesan ini dikirimkan otomatis oleh sistem_]",
+[_Pesan ini otomatis via sistem_]",
             ),
             CURLOPT_HTTPHEADER => array(
                 'Authorization: '.env('WA_TOKEN')
