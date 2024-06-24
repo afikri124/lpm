@@ -37,12 +37,17 @@ class JobReminder implements ShouldQueue
     public function handle()
     {
         $date = Date::now()->format('l, j F Y');
+        $now = Carbon::now();
 
         //Kirim email reminder ke dekan yang belum mengisi remark
         $dea = Follow_up::with('dean')
         ->whereNull('remark')
         ->whereDate('date_start', '<=', Carbon::now()->endOfDay())
         ->whereDate('date_end', '>=', Carbon::today())
+        ->where(function ($query) use ($now) {
+            $query->whereYear('date_end', '=', $now->year)
+                ->whereMonth('date_end', '=', $now->month);
+        })
         ->groupBy("dean_id")
         ->select("dean_id")->get();
         if($dea != null){
@@ -65,6 +70,10 @@ class JobReminder implements ShouldQueue
         })
         ->whereDate('s.date_start', '<=', Carbon::now()->endOfDay())
         ->whereDate('s.date_end', '>=', Carbon::today())
+        ->where(function ($query) use ($now) {
+            $query->whereYear('s.date_end', '=', $now->year)
+                ->whereMonth('s.date_end', '=', $now->month);
+        })
         ->groupBy("auditor_id")
         ->select("auditor_id")->get();
         if($audi != null){
