@@ -132,24 +132,24 @@
                     <div class="col-md-12 d-flex justify-content-center justify-content-md-end">
                         @if($data->status_id == "S04")
                         <a type="button" data-bs-toggle="modal" data-bs-target="#modalRescheduleFollowUp">
-                            <span class="btn btn-info" title="Reschedule Follow-Up">Reschedule Follow-Up</span>
+                            <span class="btn btn-light" title="Reschedule Follow-Up">Reschedule Follow-Up</span>
                         </a>
+                        @endif
+                        @if($data->status_id != "S05" && $data->status_id != "S06")
+                            <a type="button" data-bs-toggle="modal" data-bs-target="#modalReschedule">
+                                <span class="btn btn-info" title="Reschedule Observations">Reschedule</span>
+                            </a>
                         @endif
                         @if($data->status_id == "S04" || $data->status_id == "S05" || $data->status_id == "S06")
                         <a href="{{ route('pdf.report', ['id' => Crypt::encrypt($data->id)]) }}" target="_blank">
                             <span class="btn btn-success btn-block" title="Print Pdf">Report</span>
                         </a>
                         @endif
-                        @if($data->status_id == "S00" || $data->status_id == "S01" || $data->status_id == "S02")
+                        @if($data->status_id == "S00" || $data->status_id == "S01" || $data->status_id == "S02" )
                         <a type="button" id="buttonAddObserver" data-bs-toggle="modal"
                             data-bs-target="#modalAddObserver">
                             <span class="btn btn-primary" title="Add Auditor">Add</span>
                         </a>
-                        @if($data->status_id != "S03")
-                        <a type="button" data-bs-toggle="modal" data-bs-target="#modalReschedule">
-                            <span class="btn btn-info" title="Reschedule Observations">Reschedule</span>
-                        </a>
-                        @endif
                         @else
                         <a href="{{ route('schedules.review_observations', ['id' => Crypt::encrypt($data->id)]) }}">
                             <span class="btn btn-warning" title="Review Results">Results</span>
@@ -208,7 +208,8 @@
             </div>
         </div>
     </div>
-    @if($data->status_id != "S03")
+    @endif
+    @if($data->status_id != "S05" && $data->status_id != "S06")
     <div class="modal fade" id="modalReschedule" tabindex="-1" role="dialog" aria-labelledby="modalReschedule"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -291,7 +292,6 @@
             </div>
         </div>
     </div>
-    @endif
     @endif
     @if(count($data->follow_ups) > 0)
     <div class="modal fade" id="modalRescheduleFollowUp" tabindex="-1" role="dialog"

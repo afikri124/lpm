@@ -117,6 +117,11 @@ Route::get('/email', function () {
     return new App\Mail\MailReminder($data);
 })->middleware(['auth', 'role:AD']);
 
+//view page
+Route::get("/target-renstra", function(){
+    return View::make("page.target-renstra");
+ });
+
 //update gelar dosen
 Route::get('update-dosen', [App\Http\Controllers\ApiController::class, 'update_dosen'])->middleware(['auth', 'role:AD']);
 //log-viewers
