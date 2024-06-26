@@ -32,6 +32,9 @@
             text-align: left;
             margin-left: 20px;
         }
+        .table-sm th, .table-sm td {
+            padding: 0px;
+        }
 
     </style>
     <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
@@ -759,9 +762,8 @@
 
                                                     </script>
                                                     <div class="p-4">
-                                                        <table class="table table-sm" cellspacing="0" width="100%"
+                                                        <table class="table table-sm p-1" cellspacing="0" width="100%"
                                                             cellpadding="7px" style="text-align: center;">
-
                                                             <tr>
                                                                 <td>Kegiatan</td>
                                                                 <td>BCV</td>
@@ -810,9 +812,9 @@
                                                                 <td>2</td>
                                                                 <td>2</td>
                                                                 <td>1</td>
-                                                                <td>0</td>
-                                                                <td>0</td>
-                                                                <td>0</td>
+                                                                <td>1</td>
+                                                                <td>1</td>
+                                                                <td>1</td>
                                                                 <td>1</td>
                                                                 <td>2</td>
                                                                 <td>2</td>
