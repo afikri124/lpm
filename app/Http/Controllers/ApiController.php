@@ -420,7 +420,7 @@ class ApiController extends Controller
         
         Reject
         jgu.ac.id/apa-gitu';
-        $d['wa_to'] = '087750431397';
+        $d['wa_to'] = '081233933313';
         dispatch(new JobNotificationWA($d));
         // $data = Follow_up::with('dean')
         // ->whereNull('remark')

@@ -120,7 +120,7 @@ Route::get('/email', function () {
 //view page
 Route::get("/target-renstra", function(){
     return View::make("page.target-renstra");
- });
+ })->name('target-renstra');
 
 //update gelar dosen
 Route::get('update-dosen', [App\Http\Controllers\ApiController::class, 'update_dosen'])->middleware(['auth', 'role:AD']);

@@ -265,7 +265,7 @@
                 document.getElementById("select_range").value = null;
             }
             $('#select_range').daterangepicker({
-                startDate: start,
+                startDate: moment("2020-01-01T00:00:00"),
                 endDate: end,
                 locale: {
                     format: 'YYYY-MM-DD'

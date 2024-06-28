@@ -31,8 +31,8 @@
                </ul>
                <div class="tab-content" id="icon-tabContent">
                    <div class="tab-pane fade active show text-center pt-0" id="icon-home" role="tabpanel" aria-labelledby="icon-home-tab">
-                     <a href="{{asset('assets/dg-po3.png')}}" target="_blank">
-                        <img class="img-fluid" style="max-height: 450px;" src="{{asset('assets/dg-po3.png')}}">
+                     <a href="{{asset('assets/dg-po2024.png')}}" target="_blank">
+                        <img class="img-fluid" style="max-height: 450px;" src="{{asset('assets/dg-po2024.png')}}">
                     </a>
                    </div>
                    <div class="tab-pane fade text-center pt-0" id="profile-icon" role="tabpanel" aria-labelledby="profile-icon-tab">
