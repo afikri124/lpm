@@ -310,7 +310,7 @@ class SettingController extends Controller
     }
 
     public function criterias(Request $request) {
-        $categories = Criteria_category::get();
+        $categories = Criteria_category::orderByDesc('status')->orderBy('id')->get();
         return view('settings.criterias', compact('categories'));
     }
 

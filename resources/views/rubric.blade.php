@@ -25,7 +25,8 @@
                <h5>Rubric Guidance</h5>
             </div>
             <div class="d-none d-md-block">
-                <iframe src="{{asset('assets/rubric_new.pdf')}}" style="width:100%; height:650px;" frameborder="0"></iframe>
+                {{-- <iframe src="{{asset('assets/rubric_new.pdf')}}" style="width:100%; height:650px;" frameborder="0"></iframe> --}}
+                <iframe width="100%" height="808px" src="https://docs.google.com/spreadsheets/d/1oNqW256n5WDTMedVQCOncv-Fv4qiQmJF/edit?gid=1114694363#gid=1114694363"></iframe>
             </div>
             <div class="text-center pb-4">
                 <a href="{{asset('assets/rubric_new.pdf')}}" class="btn btn-primary" target="_blank">Download</a>

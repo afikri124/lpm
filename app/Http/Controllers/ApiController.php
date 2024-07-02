@@ -64,7 +64,7 @@ class ApiController extends Controller
 
     public function categories(Request $request)
     {
-        $data = Criteria_category::select('*');
+        $data = Criteria_category::select('*')->orderByDesc('status')->orderBy('id');
             return Datatables::of($data)
                     ->filter(function ($instance) use ($request) {
                         if (!empty($request->get('status'))) {
@@ -85,7 +85,7 @@ class ApiController extends Controller
 
     public function criterias(Request $request)
     {
-        $data = Criteria::with('category')->select('*');
+        $data = Criteria::with('category')->select('*')->orderByDesc('status')->orderBy('id');
             return Datatables::of($data)
                     ->filter(function ($instance) use ($request) {
                         if (!empty($request->get('category'))) {
