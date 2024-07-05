@@ -242,7 +242,7 @@
                         var x = row.id;
                         var html = "";
                         if (row.status_id == "S04" || row.status_id == "S05" || row.status_id ==
-                            "S06" || row.status_id == "S07" || row.status_id == "S08") {
+                            "S06" || row.status_id == "S08") {
                             html =
                                 `<a class="btn btn-info btn-sm px-2" title="View Report" href="{{ url('pdf/report/` +
                                 row.link +
