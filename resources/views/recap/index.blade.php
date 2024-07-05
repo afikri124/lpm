@@ -241,8 +241,7 @@
                     render: function (data, type, row, meta) {
                         var x = row.id;
                         var html = "";
-                        if (row.status_id == "S04" || row.status_id == "S05" || row.status_id ==
-                            "S06" || row.status_id == "S08") {
+                        if (row.status_id == "S04" || row.status_id == "S05" || row.status_id == "S06") {
                             html =
                                 `<a class="btn btn-info btn-sm px-2" title="View Report" href="{{ url('pdf/report/` +
                                 row.link +
