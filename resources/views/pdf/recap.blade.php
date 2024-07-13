@@ -34,7 +34,7 @@
         }
 
         td:nth-child(4) {
-           max-width: 95px;
+           max-width: 100px;
         }
 
         td:nth-child(5) {
@@ -46,6 +46,12 @@
 
         td:nth-child(6) {
             max-width: 50px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+        td:nth-child(7) {
+            max-width: 80px;
             white-space: nowrap;
             text-overflow: ellipsis;
             overflow: hidden;
