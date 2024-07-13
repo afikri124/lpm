@@ -28,10 +28,16 @@
         }
 
         td:nth-child(3) {
-           max-width: 95px;
+            width: 180px;
+            word-wrap: break-word;
+            word-break: break-word;
         }
 
         td:nth-child(4) {
+           max-width: 95px;
+        }
+
+        td:nth-child(5) {
            max-width: 150px;
            white-space: nowrap;
             text-overflow: ellipsis;
@@ -82,6 +88,7 @@
             <tr>
                 <th scope="col" width="20px" class="text-center">No</th>
                 <th scope="col" class="text-center">Dosen</th>
+                <th scope="col" class="text-center">Praktisi</th>
                 <th scope="col" class="text-center">Jadwal</th>
                 <th scope="col" class="text-center">Auditor</th>
                 <th scope="col" class="text-center">Skor</th>
@@ -94,6 +101,11 @@
             <tr>
                 <td class="text-center">{{ ++$nokey }}</td>
                 <td>{{ $d->lecturer->name_with_title }}</td>
+                <td>
+                    @if ($d->is_practitioner_class)
+                        {{ $d->observations[0]->practitioner }}
+                    @endif
+                </td>
                 <td>
                     {{ Date::createFromDate($d->date_start)->format('j/m/Y H:i') }}
                     @if(date('d F Y', strtotime($d->date_start)) == date('d F Y', strtotime($d->date_end)))

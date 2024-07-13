@@ -12,14 +12,15 @@
                 <td style="text-align: right;vertical-align: top;">
                     <img src="{{ public_path('assets/images/logo_small.png') }}" style="height: 20px;" alt="Logo">
                 </td>
-                <td colspan="6" style="text-align: center;font-weight: bold;vertical-align: middle;">REKAP HASIL PEER OBSERVATION</td>
+                <td colspan="7" style="text-align: center;font-weight: bold;vertical-align: middle;">REKAP HASIL PEER OBSERVATION</td>
             </tr>
             <tr>
-                <td colspan="8"></td>
+                <td colspan="9"></td>
             </tr>
             <tr>
                 <th style="text-align: center;font-weight: bold;width:50px">No</th>
                 <th style="text-align: center;font-weight: bold;width:200px">Dosen</th>
+                <th style="text-align: center;font-weight: bold;width:200px">Praktisi</th>
                 <th style="text-align: center;font-weight: bold;" colspan="2">Jadwal</th>
                 <th style="text-align: center;font-weight: bold;">Skor (%)</th>
                 <th style="text-align: center;font-weight: bold;">Status</th>
@@ -33,6 +34,11 @@
             <tr>
                 <td style="vertical-align: top;text-align:center">{{ ++$nokey }}</td>
                 <td style="vertical-align: top;">{{ $d->lecturer->name_with_title }}</td>
+                <td>
+                    @if ($d->is_practitioner_class)
+                        {{ $d->observations[0]->practitioner }}
+                    @endif
+                </td>
                 <td style="vertical-align: top;width:110px">
                     {{ Date::createFromDate($d->date_start)->format('d/m/Y H:i') }}
                 </td>
@@ -61,40 +67,40 @@
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="8"></td>
+                <td colspan="9"></td>
             </tr>
             <tr>
-                <td colspan="3">
+                <td colspan="4">
                 </td>
                 <td colspan="5" style="text-align: center;">
                     Depok, {{ Date::now()->format('j F Y') }}
                 </td>
             </tr>
             <tr>
-                <td colspan="3">
+                <td colspan="4">
                 </td>
                 <td colspan="5" style="text-align: center;">
                     Mengetahui, Kepala LPM
                 </td>
             </tr>
             <tr>
-                <td colspan="8"></td>
+                <td colspan="9"></td>
             </tr>
             <tr>
-                <td colspan="8"></td>
+                <td colspan="9"></td>
             </tr>
             <tr>
-                <td colspan="8"></td>
+                <td colspan="9"></td>
             </tr>
             <tr>
-                <td colspan="3">
+                <td colspan="4">
                 </td>
                 <td colspan="5" style="text-align: center;font-weight: bold;">
                     ( {{ $hod->title }} )
                 </td>
             </tr>
             <tr>
-                <td colspan="3">
+                <td colspan="4">
                 </td>
                 <td colspan="5" style="text-align: center;">
                     <small>NIK. {{ $hod->content }} </small>

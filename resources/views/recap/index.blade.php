@@ -109,6 +109,7 @@
                                     <th scope="col">Schedule</th>
                                     <th scope="col">Auditor</th>
                                     <th scope="col" data-priority="3">Score</th>
+                                    <th scope="col" width="50px">PC</th>
                                     <th scope="col" data-priority="4">Status</th>
                                     <th scope="col" width="65px" class="text-end">Action</th>
                                 </tr>
@@ -226,6 +227,16 @@
                             return "<b>" + x.toFixed(1) + "</b>%";
                         } else {
                             return "<i class='text-light'>" + x.toFixed(1) + "</i>";
+                        }
+                    },
+                    className: "text-center"
+                },
+                {
+                    render: function (data, type, row, meta) {
+                        if (row.is_practitioner_class == true) {
+                            return `<i class="fa fa-check" title="Practitioner Class"></i> `;
+                        } else {
+                            return "";
                         }
                     },
                     className: "text-center"

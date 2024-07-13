@@ -112,7 +112,7 @@ class PdfController extends Controller
         if($request->get('export') == "Xlsx"){
             return Excel::download(new RecapExport($MINSCORE,$data,$hod), 'PO Recap - '.Date::now()->format('j F Y').'.xlsx');
         } else{
-            $pdf = PDF::loadview('pdf.recap', compact('qr','MINSCORE','data','hod','request'))->set_option("enable_php", true);
+            $pdf = PDF::loadview('pdf.recap', compact('qr','MINSCORE','data','hod','request'))->set_option("enable_php", true)->setPaper('a4', 'landscape');
             return $pdf->stream("PO Recap - ".Date::now()->format('j F Y').".pdf");
         }
     }
