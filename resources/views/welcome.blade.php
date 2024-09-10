@@ -130,9 +130,9 @@
                                                         Observation</a>
                                                     @endauth
                                                     @endif
-                                                    <a href="https://bkd.jgu.ac.id/">BKD</a>
-                                                    <a href="https://s.jgu.ac.id/">S.JGU</a>
-                                                    <a href="https://apps.jgu.ac.id/">JGU APPS</a>
+                                                    <a href="https://ami.jgu.ac.id/">Audit Mutu Internal</a>
+                                                    {{-- <a href="https://s.jgu.ac.id/">S.JGU</a> --}}
+                                                    <a href="https://apps.jgu.ac.id/" target="_blank">JGU APPS</a>
                                                     <!-- <a href="#">Coming soon..</a> -->
                                                 </div>
                                             </div>
@@ -336,7 +336,7 @@
                 </div>
             </div>
             <div class="container container-modify">
-                <div class="row component_responsive">
+                <div class="row component_responsive  justify-content-md-center">
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
                         <div class="component-hover-effect">
                             <i class="fa fa-spin fa-star h2 text-warning"></i>
@@ -369,7 +369,7 @@
                             <i class="fa fa-spin fa-star h2 text-warning"></i>
                             <i class="fa fa-spin fa-star h2 text-warning"></i>
                             <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
-                            <h6 class="m-0">B</h6>
+                            <h6 class="m-0">Baik Sekali</h6>
                             <p>S1 Manajemen</p>
                         </div>
                     </div>
@@ -378,7 +378,7 @@
                             <i class="fa fa-spin fa-star h2 text-warning"></i>
                             <i class="fa fa-spin fa-star h2 text-warning"></i>
                             <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
-                            <h6 class="m-0">B</h6>
+                            <h6 class="m-0">Baik Sekali</h6>
                             <p>S1 Teknik Elektro</p>
                         </div>
                     </div>
@@ -405,7 +405,7 @@
                             <i class="fa fa-spin fa-star h2 text-warning"></i>
                             <i class="fa fa-spin fa-star h2 text-warning"></i>
                             <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
-                            <h6 class="m-0">B</h6>
+                            <h6 class="m-0">Baik Sekali</h6>
                             <p>S1 Teknik Mesin</p>
                         </div>
                     </div>
@@ -414,7 +414,7 @@
                             <i class="fa fa-spin fa-star h2 text-warning"></i>
                             <i class="fa fa-spin fa-star h2 text-warning"></i>
                             <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
-                            <h6 class="m-0">B</h6>
+                            <h6 class="m-0">Baik Sekali</h6>
                             <p>S1 Teknik Sipil</p>
                         </div>
                     </div>
@@ -427,7 +427,7 @@
                             <p>S2 Teknik Elektro</p>
                         </div>
                     </div>
-                    <div class="col-xl-2 col-md-4 col-6 component-col-set">
+                    {{-- <div class="col-xl-2 col-md-4 col-6 component-col-set">
                         <div class="component-hover-effect">
                             <i class="fa fa-spin fa-star h2 text-warning"></i>
                             <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
@@ -444,10 +444,10 @@
                             <h6 class="m-0">-</h6>
                             <p>S1 Sistem Infomasi<i class="text-danger">*</i></p>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <a target="_blank" class="text-warning"
-                        href="https://pddikti.kemdikbud.go.id/data_pt/QUEzRUM1NjktQjI0NS00ODA3LTlGMkYtOERDRkNGMUI2MkNC">Klik
+                        href="https://pddikti.kemdikbud.go.id/detail-pt/rmH47ZZz3naFFC_pmQtUsNWpLmr-JDm672pSadjCG8eZJFhKVWVHtsf3ZE9EwsHSjWPBKA==">Klik
                         disini untuk informasi lebih lanjut</a>
                 </div>
             </div>
@@ -491,22 +491,23 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12 col-lg-6 wow pulse footer-inner" style="text-align: justify;">
-                        <i><b>Mengubah Hidup,</b><br>
-                            <b>Memperkaya Masa Depan!</b><br><br></i>
-                        <b>Kampus Utama</b>
+                        <h3><i><b>Mengubah Hidup,</b><br>
+                            <b>Memperkaya Masa Depan!</b><br><br></i></h3>
+                        <img class="img-fluid" src="{{ asset('assets/images/logo-white.png') }}" alt="JGU" width="230px"><br><br>
+                        <b>Kampus Jakarta Global University</b>
                         <br>
                         Grand Depok City, Jl. Boulevard Raya No.2 Kota Depok<br>
                         16412, Jawa Barat Indonesia
                         <br>
                         <br>
-                        <b>Kampus A</b>
-                        <br>
+                        {{-- <b>Kampus A</b> --}}
+                        {{-- <br>
                         Jl. Jatiwaringin Raya No. 278 Pondok Gede 17411, Jakarta
                         <br>
                         Telp: 021-846-1155 <br> Fax: 021-846-3692
                         <br>
-                        <br>
-                        <b>Kampus B</b>
+                        <br> --}}
+                        {{-- <b>Kampus B</b>
                         <br>
                         Jl. Inspeksi Kalimalang No.204-205, Cibuntu, Kec. Cibitung,
                         Bekasi,<br>Jawa Barat 17520
@@ -514,7 +515,7 @@
                         Telp : 021-8837-5585
                         <br>
                         Fax : 021-8837-5587
-                        <br>
+                        <br> --}}
                         <br>
                         <br>
                     </div>
