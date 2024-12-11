@@ -271,6 +271,7 @@ class ApiController extends Controller
                     $query->where('status_id', '=', 'S07')
                         ->orWhere('status_id', '=', 'S08');
                 })
+                ->whereDate('date_start', '>', Carbon::now()->startOfMonth()->subMonth(5))
                 ->select(DB::raw('COUNT(*) as notif'))
                 ->first();
         }
