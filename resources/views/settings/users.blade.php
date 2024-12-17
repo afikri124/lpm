@@ -209,7 +209,7 @@
                             x + `)" ><i class="fa fa-trash"></i></a>`;
                         if (x != 1) {
                             // var login_us = `<a class="btn btn-secondary btn-sm px-2" title="Login us `+ row.name_with_title +`" href="{{ url('settings/user/login_us/` + row.link + `') }}"><i class="fa fa-sign-in"></i></a> `;
-                            var login_us = `<a class="btn btn-secondary btn-sm px-2" title="Login" onclick="LoginUsId(` +
+                            var login_us = `<a class="btn btn-secondary btn-sm px-2" title="Login us `+ row.name_with_title +`" onclick="LoginUsId(` +
                             row.id + `)" ><i class="fa fa-sign-in"></i></a> `;
                             return login_us + html;
                         } else {
