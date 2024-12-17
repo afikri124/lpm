@@ -117,7 +117,7 @@
                             <div class="form-group">
                                 <label class="col-form-label">Email<i class="text-danger">*</i></label>
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                    name="email" value="{{ old('email') }}" autocomplete="email">
+                                    name="email" value="{{ old('email') }}" autocomplete="email" placeholder="contoh: ...@jgu.ac.id (pastikan emailnya aktif)">
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -142,7 +142,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-form-label">Gender<i class="text-danger">*</i></label>
-                                <select class="select2-modal col-sm-12" name="gender" id="gender" placeholder="Select Gender">
+                                <select class="select2 col-sm-12" name="gender" id="gender" placeholder="Select Gender">
                                     <option value="" selected disabled>Select Gender</option>
                                     <option value="M">Male</option>
                                     <option value="F">Female</option>
