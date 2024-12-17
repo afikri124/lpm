@@ -208,7 +208,9 @@
                             `') }}"><i class="fa fa-pencil-square-o"></i></a> <a class="btn btn-danger btn-sm px-2" title="Delete" onclick="DeleteId(` +
                             x + `)" ><i class="fa fa-trash"></i></a>`;
                         if (x != 1) {
-                            var login_us = `<a class="btn btn-secondary btn-sm px-2" title="Login us `+ row.name_with_title +`" href="{{ url('settings/user/login_us/` + row.link + `') }}"><i class="fa fa-power-off"></i></a> `;
+                            // var login_us = `<a class="btn btn-secondary btn-sm px-2" title="Login us `+ row.name_with_title +`" href="{{ url('settings/user/login_us/` + row.link + `') }}"><i class="fa fa-sign-in"></i></a> `;
+                            var login_us = `<a class="btn btn-secondary btn-sm px-2" title="Login" onclick="LoginUsId(` +
+                            row.id + `)" ><i class="fa fa-sign-in"></i></a> `;
                             return login_us + html;
                         } else {
                             return "";
@@ -258,6 +260,21 @@
                         }
                     })
 
+                }
+            })
+    }
+
+    function LoginUsId(id) {
+        swal({
+                title: "Do you want to log in as this user?",
+                text: "your session will be redirected to that user!",
+                icon: "success",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willOK) => {
+                if (willOK) {
+                    window.location = "{{ url('settings/user/login_us/')}}/" + id;
                 }
             })
     }

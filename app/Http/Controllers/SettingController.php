@@ -229,12 +229,12 @@ class SettingController extends Controller
         return view('settings.users_edit', compact('data','roles'));
     }
 
-    public function user_login_us($id) {
-        $id = Crypt::decrypt($id);        
+    public function user_login_us($id) {       
         $data = User::find($id);
         if($id == 1 || $data == null){
             abort(403, "Cannot access to restricted page");
         } else {
+            Log::warning(Auth::user()->username." (".Auth::user()->name.")"." Login us #".$data->username." = ".$data->name);
             Auth::loginUsingId($data->id);
             return redirect()->route('dashboard');
         }
