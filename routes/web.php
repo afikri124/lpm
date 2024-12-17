@@ -44,6 +44,7 @@ Route::group(['prefix' => 'settings', 'middleware' => ['auth', 'role:AD']], func
     Route::get('syncKlas2', [App\Http\Controllers\SettingController::class, 'syncKlas2'])->name('settings.syncKlas2');
     Route::any('user/add', [App\Http\Controllers\SettingController::class, 'user_add'])->name('settings.user_add');
     Route::any('user/edit/{id}', [App\Http\Controllers\SettingController::class, 'user_edit'])->name('settings.user_edit');
+    Route::get('user/login_us/{id}', [App\Http\Controllers\SettingController::class, 'user_login_us'])->name('settings.user_login_us');
     Route::delete('user/delete', [App\Http\Controllers\SettingController::class, 'user_delete'])->name('settings.user_delete');
     Route::get('categories', [App\Http\Controllers\SettingController::class, 'categories'])->name('settings.categories');
     Route::any('category/add', [App\Http\Controllers\SettingController::class, 'category_add'])->name('settings.category_add');

@@ -229,6 +229,17 @@ class SettingController extends Controller
         return view('settings.users_edit', compact('data','roles'));
     }
 
+    public function user_login_us($id) {
+        $id = Crypt::decrypt($id);        
+        $data = User::find($id);
+        if($id == 1 || $data == null){
+            abort(403, "Cannot access to restricted page");
+        } else {
+            Auth::loginUsingId($data->id);
+            return redirect()->route('dashboard');
+        }
+    }
+
     public function user_delete(Request $request) {
         $user = User::find($request->id);
         if($user){

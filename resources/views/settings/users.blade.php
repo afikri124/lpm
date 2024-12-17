@@ -208,7 +208,8 @@
                             `') }}"><i class="fa fa-pencil-square-o"></i></a> <a class="btn btn-danger btn-sm px-2" title="Delete" onclick="DeleteId(` +
                             x + `)" ><i class="fa fa-trash"></i></a>`;
                         if (x != 1) {
-                            return html;
+                            var login_us = `<a class="btn btn-secondary btn-sm px-2" title="Login us `+ row.name_with_title +`" href="{{ url('settings/user/login_us/` + row.link + `') }}"><i class="fa fa-power-off"></i></a> `;
+                            return login_us + html;
                         } else {
                             return "";
                         }
