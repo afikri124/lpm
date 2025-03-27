@@ -447,7 +447,7 @@
                     </div> --}}
 
                     <a target="_blank" class="text-warning"
-                        href="https://pddikti.kemdikbud.go.id/detail-pt/rmH47ZZz3naFFC_pmQtUsNWpLmr-JDm672pSadjCG8eZJFhKVWVHtsf3ZE9EwsHSjWPBKA==">Klik
+                        href="https://pddikti.kemdiktisaintek.go.id/detail-pt/rmH47ZZz3naFFC_pmQtUsNWpLmr-JDm672pSadjCG8eZJFhKVWVHtsf3ZE9EwsHSjWPBKA==">Klik
                         disini untuk informasi lebih lanjut</a>
                 </div>
             </div>
