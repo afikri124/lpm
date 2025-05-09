@@ -67,7 +67,7 @@
                         </form>
                         <h6 class="text-muted my-4 or">Or sign in with</h6>
                         <div class="row">
-                            <div class="col-6 mb-4">
+                            {{-- <div class="col-12 mb-4">
                                 <div class="btn-showcase">
                                     <button class="btn btn-light btn-block w-100" onclick="Klas2Login()">
                                         <img style="max-height: 20px;"
@@ -75,8 +75,8 @@
                                         <span>SSO JGU</span>
                                     </button>
                                 </div>
-                            </div>
-                            <div class="col-6 mb-4">
+                            </div> --}}
+                            <div class="col-12 mb-4">
                                 <div class="btn-showcase">
                                     <a class="btn btn-light btn-block w-100" href="{{ url('login/google') }}">
                                         <img style="max-height: 20px;"

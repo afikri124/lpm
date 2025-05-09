@@ -130,10 +130,10 @@
                                                         Observation</a>
                                                     @endauth
                                                     @endif
-                                                    <a href="https://ami.jgu.ac.id/">Audit Mutu Internal</a>
-                                                    {{-- <a href="https://s.jgu.ac.id/">S.JGU</a> --}}
+                                                    <a href="https://siap.jgu.ac.id/" target="_blank">Smart Integrated Academic Portal</a>
+                                                    <a href="https://edlink.id/login" target="_blank">Edlink</a>
+                                                    <a href="https://cbt.jgu.ac.id/" target="_blank">Computer Based Test</a>
                                                     <a href="https://apps.jgu.ac.id/" target="_blank">JGU APPS</a>
-                                                    <!-- <a href="#">Coming soon..</a> -->
                                                 </div>
                                             </div>
                                         </div>
