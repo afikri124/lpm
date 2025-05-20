@@ -59,6 +59,7 @@ class PdfController extends Controller
         $MINSCORE = Setting::findOrFail('MINSCORE');
         $pdf = PDF::loadview('pdf.report', compact('data','qr', 'survey', 'follow_up', 'hod', 'MINSCORE', 'link'))->set_option("enable_php", true);
 	    return $pdf->stream("PO Report - ".$data->lecturer->name." - ".date('d-m-Y', strtotime($data->date_start)).".pdf");
+        // return view('pdf.report', compact('data','qr', 'survey', 'follow_up', 'hod', 'MINSCORE', 'link'));
     }
 
     public function recap(Request $request)
