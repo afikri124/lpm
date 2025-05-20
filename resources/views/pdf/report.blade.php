@@ -7,11 +7,30 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
         html {
-            margin: 1cm 2cm
+            margin: 2cm;
         }
 
         .page-break {
             page-break-after: always;
+        }
+        .header,
+        .footer {
+            width: 100%;
+            text-align: center;
+            position: fixed;
+        }
+
+        .header {
+            top: -20px;
+            bottom: 300px;
+        }
+
+        .footer {
+            bottom: -2cm;
+        }
+
+        .pagenum:before {
+            content: counter(page);
         }
 
         body {
@@ -23,8 +42,24 @@
 </head>
 
 <body>
+    {{-- <div class="header">
+        <table width="100%" style="margin-top: -1cm">
+            <tr>
+                <td width="50%" valign="top">
+
+                </td>
+                <td width="50%" style="text-align: right;">
+                    <img src="{{ public_path('assets/images/logo.png') }}" style="height: 60px;" alt="">
+                </td>
+            </tr>
+        </table>
+    </div> --}}
+    <div class="footer">
+        {{-- Page <span class="pagenum"></span> --}}
+        <img src="{{ public_path('assets/images/footer_jgu_2025.png') }}" style="width:125%;" alt="">
+    </div>
     @if ($data->validation_remark)
-    <table width="100%">
+    <table width="100%" style="margin-top: -1cm">
         <tr>
             <td width="50%" valign="top">
                 <code style="color: black;font-size:9pt">FM/JGU/L.xxx</code><br>
@@ -69,7 +104,7 @@
     </table>
     <div class="page-break"></div>
     @endif
-    <table width="100%">
+    <table width="100%" style="margin-top: -1cm">
         <tr>
             <td width="50%" valign="top">
                 <code style="color: black;font-size:9pt">FM/JGU/L.122</code><br>
@@ -207,7 +242,7 @@
     @foreach($survey as $key => $s)
     @if(count($s->observation_categories) != 0)
     <div class="page-break"></div>
-    <table width="100%">
+    <table width="100%" style="margin-top: -1cm">
         <tr>
             <td width="50%" valign="top">
                 <code style="color: black;font-size:9pt">FM/JGU/L.079</code><br>
@@ -399,7 +434,7 @@
 
     @if($follow_up != null)
     <div class="page-break"></div>
-    <table width="100%">
+    <table width="100%" style="margin-top: -1cm">
         <tr>
             <td width="50%" valign="top">
                 <!-- <img src="data:image/png;base64, {!! $qr !!}" style="height: 85px;"> -->
@@ -451,11 +486,11 @@
     <script type="text/php">
         if (isset($pdf)) {
             $x = 480;
-            $y = 800;
+            $y = 780;
             $text = "Halaman {PAGE_NUM} dari {PAGE_COUNT}";
             $font = null;
             $size = 8;
-            $color = array(255,0,0);
+            $color = array(0,0,0);
             $word_space = 0.0;  //  default
             $char_space = 0.0;  //  default
             $angle = 0.0;   //  default
