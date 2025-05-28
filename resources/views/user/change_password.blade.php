@@ -39,7 +39,7 @@
                                     <p>{{ ucfirst(Auth::user()->level) }}</p>
                                     <p class="text-danger"><i>Disclaimer!</i><br>
                                         Password changes on this form only apply to this system, will not affect users
-                                        who log in using the Single Sign-On Klas2 system or Google.</p>
+                                        who log in using the Single Sign-On (SSO) or Google.</p>
                                 </div>
                             </div>
                         </div>

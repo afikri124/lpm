@@ -11,6 +11,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Http;
 
 class HomeController extends Controller
 {
@@ -43,6 +45,158 @@ class HomeController extends Controller
             $img = "<img style='max-width: 100px;border-radius: 50%;' src='https://img.freepik.com/premium-vector/alert-error-massage-notification-concept-error-digital-report-system-hacking-by-hacker_257312-129.jpg?w=2000'>";
             $msg = "$img<br><br>Sorry, You can't access to restricted page!<br>Please contact <b>afikri124@gmail.com</b>";
             return view('user.error', compact('msg'));
+        }
+    }
+
+     public function sso_siap(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            $this->validate($request, 
+                [ 
+                    'email'=> ['required', 'email'],
+                    'password' => ['required'],
+                ]
+            );
+            try {
+                $url = env('SevimaAPI_url').'/siakadcloud/v1/user/login';
+                $response = Http::withHeaders([
+                    'Content-Type' => 'application/json',
+                    'Accept' => 'application/json',
+                    'X-App-Key' => env('SevimaAPI_key'),
+                    'X-Secret-Key' => env('SevimaAPI_secret'),
+                ])->post($url, [
+                    'email' => $request->email,
+                    'password' => $request->password,
+                ]);
+
+                if ($response->successful()) {
+                    $data = json_decode(json_encode($response->json())); // atau redirect/simpan token
+                    if(is_object($data) && isset($data->attributes) && $data->attributes->status_aktif){ //mengecek akun apakah masih aktif
+                        // dd($data->attributes);//test
+                        $username = null;
+                        $jobName = null;
+
+                        foreach ($data->attributes->role as $role) {
+                            if (is_object($role) && isset($role->nama_role)) {
+                                $jobName = $role->nama_role;
+                            }
+
+                            if (is_object($role) && isset($role->nip)) {
+                                $username = $role->nip;
+                                break; // Ambil hanya nip yang pertama
+                            } else if (is_object($role) && isset($role->nim)) {
+                                $username = $role->nim;
+                                break; // Ambil hanya nim yang pertama
+                            }
+                        }
+                        $roles = collect($data->attributes->role); // Ambil bagian role saja
+                        $hasMhs = $roles->contains(function ($role) {
+                            return is_object($role) && $role->id_role === 'mhs';
+                        });
+                        $hasPeg = $roles->contains(function ($role) {
+                            return is_object($role) && $role->id_role === 'peg';
+                        });
+                        $hasDosen = $roles->contains(function ($role) {
+                            return is_object($role) && $role->id_role === 'dosen';
+                        });
+
+                        if ($username != null){ // nim/nip tidak null
+                            $user = User::where('username', $username)->first(); //cari user by username
+                            if ($user != null) { //login
+                                if($data->attributes->email != $user->email){
+                                    $email = explode("@",$data->attributes->email);
+                                    if($email[1] == "jgu.ac.id"){
+                                        $emailcheck = User::where('email',$data->attributes->email)->first();
+                                        if($emailcheck != null){ //update username base on email
+                                            User::where('id',$user->id)->update([
+                                                'username' => $username."x", //jika bentrok username diganti
+                                            ]);
+                                            User::where('email',$data->attributes->emai)->update([
+                                                'username' => $username,
+                                            ]);
+                                        } else { //update email
+                                            User::where('id',$user->id)->update([
+                                                'email' => $data->attributes->email,
+                                            ]);
+                                        }
+                                    }
+                                }
+                                Auth::loginUsingId($user->id);
+                            } else { //register jika username blm terdaftar
+                                $user = User::where('email',$data->attributes->email)->first(); //cari user by email
+                                if($user == null){ //jika user tdk ada
+                                    if($hasDosen || $hasPeg){
+                                        $new_user = User::insert([
+                                                'name' => $data->attributes->nama,
+                                                'email' => $data->attributes->email,
+                                                'username' => $username,
+                                                'password'=> Hash::make($username),
+                                                'job'=> $jobName,
+                                                'email_verified_at' => Carbon::now(),
+                                                'created_at' => Carbon::now()
+                                        ]);
+                                        
+                                        if($new_user){
+                                            $user = User::where('username', $username)->first();
+                                            if($hasPeg){
+                                                $user->roles()->attach(Role::where('id', 'ST')->first());
+                                            }
+                                            if($hasDosen){
+                                                $user->roles()->attach(Role::where('id', 'LE')->first());
+                                            }
+                                        } 
+                                    } else {
+                                        // echo "User bukan dosen/staf";
+                                        $msg = "Sorry, $data->attributes->nama<br>($data->attributes->email)<br>is don't have permission.<br>Please contact the administrator!";
+                                        return view('user.error', compact('msg'));
+                                    }
+                                } else { //jika user ada
+                                    $old_user = $user->update([
+                                        'name' => $data->attributes->nama,
+                                        'username' => $username,
+                                        'updated_at' => Carbon::now()
+                                    ]);
+                                    
+                                    if($old_user){
+                                        $user = User::where('username', $username)->first();
+                                        if(($hasPeg) && !$user->hasRole('ST')){
+                                            $user->roles()->attach(Role::where('id', 'ST')->first());
+                                        }
+                                        if(($hasDosen) && !$user->hasRole('LE')){
+                                            $user->roles()->attach(Role::where('id', 'LE')->first());
+                                        } 
+                                    }  
+                                }
+                                Auth::loginUsingId($user->id);
+                            }
+                            if(Auth::user()->password == null || Auth::user()->email == null){
+                                return redirect()->route('update_account');
+                            } else {
+                                return redirect()->route('dashboard');
+                            }
+                        } else {
+                            $msg = "Akun anda tidak memiliki NIP/NIM, tidak diizinkan!";
+                            return redirect()->route('sso_siap')->withErrors(['msg' => $msg]);
+                        }
+                    } else {
+                        $msg = "Akun anda sudah tidak aktif !";
+                        return redirect()->route('sso_siap')->withErrors(['msg' => $msg]);
+                    }
+                } else {
+                    $responseBody = $response->json();
+                    if($responseBody['errors']['code'] == 500){
+                        $msg = "<b>".$responseBody['errors']['detail']." (".$responseBody['errors']['code'].")</b><br>Koneksi API ke Sevima gagal, coba beberapa saat lagi..";
+                    } else {
+                        $msg = "<b>Login gagal (".$responseBody['errors']['code'].")</b><br>".$responseBody['errors']['detail'];
+                    }
+                    return redirect()->route('sso_siap')->withErrors(['msg' => $msg]);
+                }
+            } catch (\Exception $e) {
+                Log::warning($e);
+                return redirect()->route('sso_siap')->withErrors(['msg' => $e->getMessage()]);
+            }
+        } else {
+            return view('auth.login-siap');
         }
     }
 
