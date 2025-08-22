@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
             StatusSeeder::class,
             LocationSeeder::class,
             SettingSeeder::class,
+            AcreditationSeeder::class,
+            StudyProgramSeeder::class,
         ]);
     }
 }

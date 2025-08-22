@@ -336,119 +336,25 @@
                 </div>
             </div>
             <div class="container container-modify">
-                <div class="row component_responsive  justify-content-md-center">
+                <div class="row component_responsive justify-content-md-center" >
+                    @foreach($study_program as $index => $sp)
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
+                    <a href="{{$sp->certificate}}"  title="Klik untuk melihat sertifikat" target="_blank">
                         <div class="component-hover-effect">
-                            <i class="fa fa-spin fa-star h2 text-warning"></i>
-                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
-                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
-                            <h6 class="m-0">Baik</h6>
-                            <p>D3 Akuntansi</p>
+                            @for($i = 1; $i <= $sp->acreditation->star_point; $i++)
+                                <i class="fa fa-spin fa-star h2 text-warning"></i>
+                            @endfor
+                            @for($i = 1; $i <= (3-$sp->acreditation->star_point); $i++)
+                                <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
+                            @endfor
+                            <h6 class="m-0">{{$sp->acreditation->name}}</h6>
+                            <p>{{$sp->degree_level}} {{$sp->name}}</p>
                         </div>
+                    </a>
                     </div>
-                    <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect">
-                            <i class="fa fa-spin fa-star h2 text-warning"></i>
-                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
-                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
-                            <h6 class="m-0">Baik</h6>
-                            <p>S1 Bisnis Digital</p>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect">
-                            <i class="fa fa-spin fa-star h2 text-warning"></i>
-                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
-                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
-                            <h6 class="m-0">Baik</h6>
-                            <p>S1 Farmasi</p>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect">
-                            <i class="fa fa-spin fa-star h2 text-warning"></i>
-                            <i class="fa fa-spin fa-star h2 text-warning"></i>
-                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
-                            <h6 class="m-0">Baik Sekali</h6>
-                            <p>S1 Manajemen</p>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect">
-                            <i class="fa fa-spin fa-star h2 text-warning"></i>
-                            <i class="fa fa-spin fa-star h2 text-warning"></i>
-                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
-                            <h6 class="m-0">Baik Sekali</h6>
-                            <p>S1 Teknik Elektro</p>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect">
-                            <i class="fa fa-spin fa-star h2 text-warning"></i>
-                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
-                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
-                            <h6 class="m-0">Baik</h6>
-                            <p>S1 Teknik Industri</p>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect">
-                            <i class="fa fa-spin fa-star h2 text-warning"></i>
-                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
-                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
-                            <h6 class="m-0">Baik</h6>
-                            <p>S1 Teknik Informatika</p>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect">
-                            <i class="fa fa-spin fa-star h2 text-warning"></i>
-                            <i class="fa fa-spin fa-star h2 text-warning"></i>
-                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
-                            <h6 class="m-0">Baik Sekali</h6>
-                            <p>S1 Teknik Mesin</p>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect">
-                            <i class="fa fa-spin fa-star h2 text-warning"></i>
-                            <i class="fa fa-spin fa-star h2 text-warning"></i>
-                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
-                            <h6 class="m-0">Baik Sekali</h6>
-                            <p>S1 Teknik Sipil</p>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect">
-                            <i class="fa fa-spin fa-star h2 text-warning"></i>
-                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
-                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
-                            <h6 class="m-0">Baik</h6>
-                            <p>S2 Teknik Elektro</p>
-                        </div>
-                    </div>
-                    {{-- <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                        <div class="component-hover-effect">
-                            <i class="fa fa-spin fa-star h2 text-warning"></i>
-                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
-                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
-                            <h6 class="m-0">Baik</h6>
-                            <p>D3 Mnj. Pemasaran<i class="text-danger">*</i></p>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-4 col-6 component-col-set" title="Program ditupup sementara">
-                        <div class="component-hover-effect">
-                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
-                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
-                            <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
-                            <h6 class="m-0">-</h6>
-                            <p>S1 Sistem Infomasi<i class="text-danger">*</i></p>
-                        </div>
-                    </div> --}}
-
+                    @endforeach
                     <a target="_blank" class="text-warning"
-                        href="https://pddikti.kemdiktisaintek.go.id/detail-pt/rmH47ZZz3naFFC_pmQtUsNWpLmr-JDm672pSadjCG8eZJFhKVWVHtsf3ZE9EwsHSjWPBKA==">Klik
-                        disini untuk informasi lebih lanjut</a>
+                        href="{{ route('akreditasi') }}#results">Klik disini untuk download Sertifikat Akreditasi</a>
                 </div>
             </div>
         </section>
@@ -500,22 +406,6 @@
                         16412, Jawa Barat Indonesia
                         <br>
                         <br>
-                        {{-- <b>Kampus A</b> --}}
-                        {{-- <br>
-                        Jl. Jatiwaringin Raya No. 278 Pondok Gede 17411, Jakarta
-                        <br>
-                        Telp: 021-846-1155 <br> Fax: 021-846-3692
-                        <br>
-                        <br> --}}
-                        {{-- <b>Kampus B</b>
-                        <br>
-                        Jl. Inspeksi Kalimalang No.204-205, Cibuntu, Kec. Cibitung,
-                        Bekasi,<br>Jawa Barat 17520
-                        <br>
-                        Telp : 021-8837-5585
-                        <br>
-                        Fax : 021-8837-5587
-                        <br> --}}
                         <br>
                         <br>
                     </div>

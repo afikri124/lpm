@@ -7,6 +7,8 @@ use Auth;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Setting;
+use App\Models\StudyProgram;
+use App\Models\Acreditation;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
@@ -40,12 +42,26 @@ class HomeController extends Controller
             $LINKINSTRUMENT3 = Setting::findOrFail('LINKINSTRUMENT3');
             $LINKINSTRUMENT4 = Setting::findOrFail('LINKINSTRUMENT4');
             $LINKINSTRUMENT4 = Setting::findOrFail('LINKINSTRUMENT4');
-            return view('welcome', compact('CONTACT','LINKINSTRUMENT','LINKINSTRUMENT2','LINKINSTRUMENT3','LINKINSTRUMENT4'));
+            $study_program = StudyProgram::with('acreditation')
+                                ->orderBy(
+                                    Acreditation::select('star_point')
+                                        ->whereColumn('acreditations.id', 'study_programs.acreditation_id'),
+                                    'desc'
+                                )
+                                ->orderBy('name', 'asc')
+                                ->get();
+            return view('welcome', compact('CONTACT','LINKINSTRUMENT','LINKINSTRUMENT2','LINKINSTRUMENT3','LINKINSTRUMENT4','study_program'));
         } else {
             $img = "<img style='max-width: 100px;border-radius: 50%;' src='https://img.freepik.com/premium-vector/alert-error-massage-notification-concept-error-digital-report-system-hacking-by-hacker_257312-129.jpg?w=2000'>";
             $msg = "$img<br><br>Sorry, You can't access to restricted page!<br>Please contact <b>afikri124@gmail.com</b>";
             return view('user.error', compact('msg'));
         }
+    }
+
+    public function akreditasi()
+    {
+        $data = Acreditation::orderBy('id')->get();
+        return view('page.akreditasi-jgu', compact('data'));
     }
 
      public function sso_siap(Request $request)

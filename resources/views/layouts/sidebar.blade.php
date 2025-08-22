@@ -90,6 +90,8 @@
                                     href="{{route('settings.criterias')}}">Assessment Criteria</a></li>
                             <li><a class="lan-4 {{ Route::currentRouteName()=='settings.general' ? 'active' : '' }}"
                                     href="{{route('settings.general')}}">General Setting</a></li>
+                            <li><a class="lan-4 {{ Route::currentRouteName()=='settings.study_program' ? 'active' : '' }}"
+                                    href="{{route('settings.study_program')}}">Study Program</a></li>
                         </ul>
                     </li>
                     @endif

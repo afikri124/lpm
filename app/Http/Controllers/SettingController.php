@@ -12,6 +12,8 @@ use App\Models\User;
 use App\Models\User_role;
 use App\Models\Criteria_category;
 use App\Models\Criteria;
+use App\Models\Acreditation;
+use App\Models\StudyProgram;
 use App\Models\Observation_category;
 use App\Models\Observation_Criteria;
 use App\Models\Setting;
@@ -383,4 +385,62 @@ class SettingController extends Controller
             ]);
         }
     }
+
+    public function study_program(Request $request) {
+        $data = Acreditation::orderBy('id')->get();
+        return view('settings.study_program', compact('data'));
+    }
+
+    public function study_program_add(Request $request) {
+        if ($request->isMethod('post')) {
+            $this->validate($request, [ 
+                'name'=> ['required'],
+                'degree_level'=> ['required'],
+            ]);
+            StudyProgram::insert(request()->except(['_token']));
+            return redirect()->route('settings.study_program');
+        } 
+        $data = Acreditation::get();
+        return view('settings.study_program_add', compact('data'));
+    }
+
+    public function study_program_edit($id, Request $request) {
+        $id = Crypt::decrypt($id);
+        if ($request->isMethod('post')) {
+            $this->validate($request, [ 
+                'name'=> ['required'],
+                'degree_level'=> ['required'],
+                'certificate'=> ['required'],
+                'acreditation_id'=> ['required'],
+            ]);
+            $data = StudyProgram::find($id)->update(request()->all());
+            return redirect()->route('settings.study_program');
+        }
+        $data = StudyProgram::find($id);
+        if($data == null){
+            abort(403, "Cannot access to restricted page");
+        }
+        $acreditation = Acreditation::get();
+        return view('settings.study_program_edit', compact('data','acreditation'));
+    }
+
+
+    public function study_program_delete(Request $request) { 
+        $data = StudyProgram::find($request->id);
+        if($data){
+            Log::warning(Auth::user()->username." deleted Study Program #".$data->id.", name : ".$data->name);
+            $data->delete();
+            return response()->json([
+                'success' => true,
+                'message' => 'Record deleted successfully!'
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to delete!'
+            ]);
+        }
+    }
+
+
 }

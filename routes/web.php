@@ -23,6 +23,7 @@ Route::get('/home', function () {
     return redirect()->route('dashboard');
 })->name('home');
 Route::get('/',[App\Http\Controllers\HomeController::class, 'index'])->name('index');
+Route::get('/akreditasi-JGU',[App\Http\Controllers\HomeController::class, 'akreditasi'])->name('akreditasi');
 Route::get('/login/sso_klas2/', [App\Http\Controllers\HomeController::class, 'sso_klas2'])->name('sso_klas2');
 Route::any('/login/siap/', [App\Http\Controllers\HomeController::class, 'sso_siap'])->name('sso_siap');
 Route::get('/login/google', [App\Http\Controllers\GoogleController::class, 'redirectToGoogle']);
@@ -55,6 +56,11 @@ Route::group(['prefix' => 'settings', 'middleware' => ['auth', 'role:AD']], func
     Route::any('criteria/add', [App\Http\Controllers\SettingController::class, 'criteria_add'])->name('settings.criteria_add');
     Route::any('criteria/edit/{id}', [App\Http\Controllers\SettingController::class, 'criteria_edit'])->name('settings.criteria_edit');
     Route::delete('criteria/delete', [App\Http\Controllers\SettingController::class, 'criteria_delete'])->name('settings.criteria_delete');
+
+    Route::get('study_program', [App\Http\Controllers\SettingController::class, 'study_program'])->name('settings.study_program');
+    Route::any('study_program/add', [App\Http\Controllers\SettingController::class, 'study_program_add'])->name('settings.study_program_add');
+    Route::any('study_program/edit/{id}', [App\Http\Controllers\SettingController::class, 'study_program_edit'])->name('settings.study_program_edit');
+    Route::delete('study_program/delete', [App\Http\Controllers\SettingController::class, 'study_program_delete'])->name('settings.study_program_delete');
 });
 //SCHEDULES ROLE ADMIN
 Route::group(['prefix' => 'schedules', 'middleware' => ['auth', 'role:AD']], function() {
@@ -107,6 +113,10 @@ Route::group(['prefix' => 'web/api', 'middleware' => ['auth']], function() {
     Route::get('follow_up_by_dean_id', [App\Http\Controllers\ApiController::class, 'follow_up_by_dean_id'])->name('api.follow_up_by_dean_id');
     Route::get('recap', [App\Http\Controllers\ApiController::class, 'recap'])->name('api.recap');
     Route::get('histories', [App\Http\Controllers\ApiController::class, 'histories'])->name('api.histories');
+});
+//API
+Route::group(['prefix' => 'web/api'], function() {
+    Route::get('study_program', [App\Http\Controllers\ApiController::class, 'study_program'])->name('api.study_program');
 });
 
 //tes email
