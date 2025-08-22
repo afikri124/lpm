@@ -175,6 +175,12 @@
                         <div class="cuba-demo-content">
                             <div class="couting">
                                 <h2>Tentang</h2>
+                                <div class="media-body mt-3 mb-3"><i>
+                                LPM adalah singkatan dari Lembaga Penjaminan Mutu, sebuah unit kerja di JGU yang bertugas untuk memastikan dan meningkatkan kualitas pendidikan. 
+                                LPM bekerja dengan merencanakan, melaksanakan, memonitor, mengevaluasi, dan mengembangkan sistem penjaminan mutu internal (SPMI) dan eksternal (SPME) di kampus, 
+                                serta melakukan audit mutu untuk mencapai standar pendidikan tinggi yang ditetapkan.
+                                </i>
+                            </div>
                             </div>
                             <div class="media-body text-center">
                                 <p>Tujuan</p>
@@ -277,7 +283,7 @@
                                     <li>Kepala Lembaga</li>
                                     <li>Ketua Bidang Penjamin Mutu Internal</li>
                                     <li>Ketua Bidang Pengembangan Dan Dokumentasi Mutu</li>
-                                    <li>Ketua Bidang Penjamin Mutu Ekstrnal</li>
+                                    <li>Ketua Bidang Penjamin Mutu Eksternal</li>
                                 </ul>
                             </div>
                         </div>
@@ -404,6 +410,7 @@
                         <br>
                         Grand Depok City, Jl. Boulevard Raya No.2 Kota Depok<br>
                         16412, Jawa Barat Indonesia
+                        <br>Telp. (+62) 21-7781-7710
                         <br>
                         <br>
                         <br>
