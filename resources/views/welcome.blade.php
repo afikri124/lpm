@@ -18,6 +18,8 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap"
         rel="stylesheet">
     @include('layouts.css')
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/datatables.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/datatable-extension.css')}}">
     @yield('style')
     <style>
         .page-wrapper.compact-wrapper .nav-right .nav-menus {
@@ -110,6 +112,9 @@
                                             </div>
                                         </div>
                                     </li>
+                                    <li class="nav-item"><a class="nav-link px-3" href="#publication"
+                                            style="text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;">
+                                            <i class="icofont icofont-newspaper"></i> Publikasi</a></li>
                                     <li class="nav-item"><a class="nav-link px-3" href="#contact"
                                             style="text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;">
                                             <i class="icofont icofont-ui-head-phone"></i> Kontak</a></li>
@@ -130,9 +135,11 @@
                                                         Observation</a>
                                                     @endauth
                                                     @endif
-                                                    <a href="https://siap.jgu.ac.id/" target="_blank">Smart Integrated Academic Portal</a>
+                                                    <a href="https://siap.jgu.ac.id/" target="_blank">Smart Integrated
+                                                        Academic Portal</a>
                                                     <a href="https://edlink.id/login" target="_blank">Edlink</a>
-                                                    <a href="https://cbt.jgu.ac.id/" target="_blank">Computer Based Test</a>
+                                                    <a href="https://cbt.jgu.ac.id/" target="_blank">Computer Based
+                                                        Test</a>
                                                     <a href="https://apps.jgu.ac.id/" target="_blank">JGU APPS</a>
                                                 </div>
                                             </div>
@@ -145,7 +152,7 @@
                 </div>
 
                 <!-- EDIT HOME MULAI DARI SINI -->
-                
+
                 <div class="row">
                     <div class="col-xl-5 col-lg-6">
                         <div class="content ">
@@ -176,11 +183,15 @@
                             <div class="couting">
                                 <h2>Tentang</h2>
                                 <div class="media-body mt-3 mb-3"><i>
-                                LPM adalah singkatan dari Lembaga Penjaminan Mutu, sebuah unit kerja di JGU yang bertugas untuk memastikan dan meningkatkan kualitas pendidikan. 
-                                LPM bekerja dengan merencanakan, melaksanakan, memonitor, mengevaluasi, dan mengembangkan sistem penjaminan mutu internal (SPMI) dan eksternal (SPME) di kampus, 
-                                serta melakukan audit mutu untuk mencapai standar pendidikan tinggi yang ditetapkan.
-                                </i>
-                            </div>
+                                        LPM adalah singkatan dari Lembaga Penjaminan Mutu, sebuah unit kerja di JGU yang
+                                        bertugas untuk memastikan dan meningkatkan kualitas pendidikan.
+                                        LPM bekerja dengan merencanakan, melaksanakan, memonitor, mengevaluasi, dan
+                                        mengembangkan sistem penjaminan mutu internal (SPMI) dan eksternal (SPME) di
+                                        kampus,
+                                        serta melakukan audit mutu untuk mencapai standar pendidikan tinggi yang
+                                        ditetapkan.
+                                    </i>
+                                </div>
                             </div>
                             <div class="media-body text-center">
                                 <p>Tujuan</p>
@@ -305,7 +316,8 @@
                         <h3>(SPMI)</h3>
                     </div>
                     <div class="footer-content">
-                        <h6>Bagi Perguruan Tinggi/Ketua Program Studi yang ingin mengunduh<br>Sistem Penjaminan Mutu Internal (SPMI)<br>Jakarta Global University</h6>
+                        <h6>Bagi Perguruan Tinggi/Ketua Program Studi yang ingin mengunduh<br>Sistem Penjaminan Mutu
+                            Internal (SPMI)<br>Jakarta Global University</h6>
                         <h6>silahkan klik tautan berikut :</h6>
                         @if($LINKINSTRUMENT->content != null || $LINKINSTRUMENT->content != "")
                         <a class="btn mrl5 btn-lg btn-secondary default-view" target="_blank"
@@ -342,25 +354,57 @@
                 </div>
             </div>
             <div class="container container-modify">
-                <div class="row component_responsive justify-content-md-center" >
+                <div class="row component_responsive justify-content-md-center">
                     @foreach($study_program as $index => $sp)
                     <div class="col-xl-2 col-md-4 col-6 component-col-set">
-                    <a href="{{$sp->certificate}}"  title="Klik untuk melihat sertifikat" target="_blank">
-                        <div class="component-hover-effect">
-                            @for($i = 1; $i <= $sp->acreditation->star_point; $i++)
-                                <i class="fa fa-spin fa-star h2 text-warning"></i>
-                            @endfor
-                            @for($i = 1; $i <= (3-$sp->acreditation->star_point); $i++)
-                                <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
-                            @endfor
-                            <h6 class="m-0">{{$sp->acreditation->name}}</h6>
-                            <p>{{$sp->degree_level}} {{$sp->name}}</p>
-                        </div>
-                    </a>
+                        <a href="{{$sp->certificate}}" title="Klik untuk melihat sertifikat" target="_blank">
+                            <div class="component-hover-effect">
+                                @for($i = 1; $i <= $sp->acreditation->star_point; $i++)
+                                    <i class="fa fa-spin fa-star h2 text-warning"></i>
+                                    @endfor
+                                    @for($i = 1; $i <= (3-$sp->acreditation->star_point); $i++)
+                                        <i class="fa fa-spin fa-star-o  h2 text-warning"></i>
+                                        @endfor
+                                        <h6 class="m-0">{{$sp->acreditation->name}}</h6>
+                                        <p>{{$sp->degree_level}} {{$sp->name}}</p>
+                            </div>
+                        </a>
                     </div>
                     @endforeach
-                    <a target="_blank" class="text-warning"
-                        href="{{ route('akreditasi') }}#results">Klik disini untuk download Sertifikat Akreditasi</a>
+                    <a target="_blank" class="text-warning" href="{{ route('akreditasi') }}#results">Klik disini untuk
+                        download Sertifikat Akreditasi</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-space email_bg" id="publication">
+            <div class="container container-modify">
+                <div class="row">
+                    <div class="col-lg-6 wow pulse">
+                        <div class="cuba-demo-content email-txt text-start">
+                            <div class="couting">
+                                <h2>Dokumen Publikasi</h2>
+                                <i>Lembaga Penjaminan Mutu (LPM) Jakarta Global University berkomitmen menghadirkan
+                                    transparansi dan peningkatan mutu berkelanjutan. Melalui laman ini, kami menyediakan
+                                    hasil survei kepuasan, laporan Audit Mutu Internal (AMI), serta dokumen mutu dan
+                                    pedoman lainnya yang menjadi acuan seluruh unit kerja.<br><br>
+                                    Publikasi ini diharapkan dapat menjadi sumber informasi yang akurat bagi sivitas
+                                    akademika sekaligus mendorong terciptanya budaya mutu di lingkungan universitas.</i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                            <table class="table table-hover table-sm" id="datatablex" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" width="20px">No</th>
+                                        <th scope="col">Publikasi</th>
+                                        <th scope="col" width="150px">Tahun Terbit</th>
+                                        <th scope="col" width="150px">Dokumen</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                    </div>
                 </div>
             </div>
         </section>
@@ -374,7 +418,8 @@
                                 <h2>Kontak</h2>
                             </div>
                             <div class="footer_bottom-item footer_social-media penci-col-3">
-                                <div class="block-title mb-4"><br><span>Butuh bantuan? silahkan hubungi LPM<br>{{ $CONTACT->title }} : {{ $CONTACT->content }}</span></div>
+                                <div class="block-title mb-4"><br><span>Butuh bantuan? silahkan hubungi
+                                        LPM<br>{{ $CONTACT->title }} : {{ $CONTACT->content }}</span></div>
                                 <a class="social-media-item socail_media_facebook mx-3" target="_blank"
                                     href="https://www.facebook.com/jakartaglobaluniversity" title="Facebook"
                                     rel="noopener"><span class="socail-media-itemcontent"><i
@@ -404,8 +449,9 @@
                 <div class="row">
                     <div class="col-sm-12 col-lg-6 wow pulse footer-inner" style="text-align: justify;">
                         <h3><i><b>Mengubah Hidup,</b><br>
-                            <b>Memperkaya Masa Depan!</b><br><br></i></h3>
-                        <img class="img-fluid" src="{{ asset('assets/images/logo-white.png') }}" alt="JGU" width="230px"><br><br>
+                                <b>Memperkaya Masa Depan!</b><br><br></i></h3>
+                        <img class="img-fluid" src="{{ asset('assets/images/logo-white.png') }}" alt="JGU"
+                            width="230px"><br><br>
                         <b>Kampus Jakarta Global University</b>
                         <br>
                         Grand Depok City, Jl. Boulevard Raya No.2 Kota Depok<br>
@@ -426,9 +472,11 @@
             </div>
         </footer>
         <footer class="section-space bg-secondary py-1">
-        <hr>
-            Copyright © {{ (date('Y')=="2022"?date('Y'):"2022-".date('Y')) }} made with ❤️ by <a href="https://itic.jgu.ac.id">ITIC JGU</a>.<br><small class="ml-4 text-center text-sm text-light sm:text-right sm:ml-0">
-                    v{{ Illuminate\Foundation\Application::VERSION }}p{{ PHP_VERSION }} - All rights reserved.</small>
+            <hr>
+            Copyright © {{ (date('Y')=="2022"?date('Y'):"2022-".date('Y')) }} made with ❤️ by <a
+                href="https://itic.jgu.ac.id">ITIC JGU</a>.<br><small
+                class="ml-4 text-center text-sm text-light sm:text-right sm:ml-0">
+                v{{ Illuminate\Foundation\Application::VERSION }}p{{ PHP_VERSION }} - All rights reserved.</small>
         </footer>
     </div>
     <script src="{{ asset('assets/js/jquery-3.5.1.min.js') }}"></script>
@@ -451,6 +499,77 @@
     <!-- Theme js-->
     <script src="{{ asset('assets/js/chart/apex-chart/moment.min.js') }}"></script>
     <script src="{{ asset('assets/js/script2.js') }}"></script>
+
+    <script src="{{asset('assets/js/datatable/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('assets/js/datatable/datatable-extension/dataTables.responsive.min.js')}}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var table = $('#datatablex').DataTable({
+                responsive: true,
+                processing: true,
+                serverSide: true,
+                ordering: false,
+                language: {
+                    searchPlaceholder: 'Search...',
+                    sSearch: '_INPUT_ &nbsp;',
+                    lengthMenu: '<span>Show:</span> _MENU_',
+                },
+                lengthMenu: [
+                    [5, 10, 100],
+                    [5, 10, 100],
+                ],
+                ajax: {
+                    url: "{{ route('api.publication') }}",
+                    data: function (d) {
+                        d.search = $('input[type="search"]').val()
+                    },
+                },
+                columns: [{
+                        render: function (data, type, row, meta) {
+                            var no = (meta.row + meta.settings._iDisplayStart + 1);
+                            return no;
+                        },
+                        orderable: false,
+                        className: "text-center"
+                    },
+                    {
+                        render: function (data, type, row, meta) {
+                            var x = row.title;
+                            return x;
+                        },
+                        className: "text-left"
+                    },
+
+                    {
+                        render: function (data, type, row, meta) {
+                            if (row.year != null) {
+                                var x = '<code title="diterbitkan pada ' + row.year +
+                                    '">' + row.year + '</code>';
+                            } else {
+                                var x = "";
+                            }
+                            return x;
+                        },
+                        className: "text-center"
+                    },
+                    {
+                        render: function (data, type, row, meta) {
+                            if (row.doc_link != null) {
+                                var x = '<a href="' + row.doc_link +
+                                    '" target="_blank"><span class="badge rounded-pill badge-success">Lihat</span></a>';
+                            } else {
+                                var x =
+                                    '<span class="badge rounded-pill badge-light">not found</span>';
+                            }
+                            return x;
+                        },
+                        className: "text-center"
+                    }
+                ]
+            });
+        });
+
+    </script>
 </body>
 
 </html>

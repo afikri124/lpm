@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'New Study Program')
+@section('title', 'New Publication')
 
 @section('css')
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/select2.css')}}">
@@ -21,7 +21,7 @@
 
 @section('breadcrumb-items')
 <li class="breadcrumb-item">Settings</li>
-<li class="breadcrumb-item">Study Program</li>
+<li class="breadcrumb-item">Publication</li>
 <li class="breadcrumb-item active">New</li>
 @endsection
 
@@ -42,30 +42,10 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-12">
                             <div class="form-group">
-                                <label class="col-form-label">Acreditation<i class="text-danger">*</i></label>
-                                <select
-                                    class="form-select digits select2 @error('acreditation_id') is-invalid @enderror"
-                                    name="acreditation_id" id="acreditation_id" data-placeholder="Select">
-                                    <option value="" selected disabled>Select</option>
-                                    @foreach($data as $p)
-                                    <option value="{{ $p->id }}"
-                                        {{ ($p->id==old('acreditation_id') ? "selected": "") }}>
-                                        {{ $p->id }} - {{ $p->name }}</option>
-                                    @endforeach
-                                </select>
-                                @error('criteria_category_id')
-                                <span class="invalid-feedback d-block" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-12">
-                            <div class="form-group">
-                                <label class="col-form-label">Certificate Link</label>
-                                <input class="form-control @error('certificate') is-invalid @enderror" id="certificate"
-                                    name="certificate" value="{{ old('certificate') }}" type="url" >
-                                @error('certificate')
+                                <label class="col-form-label">Title<i class="text-danger">*</i></label>
+                                <input class="form-control @error('title') is-invalid @enderror" id="title"
+                                    name="title" value="{{ old('title') }}" type=text >
+                                @error('title')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -74,10 +54,22 @@
                         </div>
                         <div class="col-lg-6 col-md-12">
                             <div class="form-group">
-                                <label class="col-form-label">Study Program Name<i class="text-danger">*</i></label>
-                                <input class="form-control @error('name') is-invalid @enderror" id="name"
-                                    name="name" value="{{ old('name') }}" type=text >
-                                @error('name')
+                                <label class="col-form-label">Year</label>
+                                <input class="form-control @error('year') is-invalid @enderror" id="year"
+                                    name="year" value="{{ old('year') }}" type=text>
+                                @error('year')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12">
+                            <div class="form-group">
+                                <label class="col-form-label">Doc. Link<i class="text-danger">*</i></label>
+                                <input class="form-control @error('doc_link') is-invalid @enderror" id="doc_link"
+                                    name="doc_link" value="{{ old('doc_link') }}" type="url" >
+                                @error('doc_link')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -85,18 +77,6 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-6 col-md-12">
-                            <div class="form-group">
-                                <label class="col-form-label">Degree Level<i class="text-danger">*</i></label>
-                                <input class="form-control @error('degree_level') is-invalid @enderror" id="degree_level"
-                                    name="degree_level" value="{{ old('degree_level') }}" type=text>
-                                @error('degree_level')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
 
                     </div>
                 </div>

@@ -14,6 +14,7 @@ use App\Models\Criteria_category;
 use App\Models\Criteria;
 use App\Models\Acreditation;
 use App\Models\StudyProgram;
+use App\Models\Publication;
 use App\Models\Observation_category;
 use App\Models\Observation_Criteria;
 use App\Models\Setting;
@@ -424,7 +425,6 @@ class SettingController extends Controller
         return view('settings.study_program_edit', compact('data','acreditation'));
     }
 
-
     public function study_program_delete(Request $request) { 
         $data = StudyProgram::find($request->id);
         if($data){
@@ -443,4 +443,43 @@ class SettingController extends Controller
     }
 
 
+    public function publication(Request $request) {
+        return view('settings.publication');
+    }
+
+    public function publication_add(Request $request) {
+        if ($request->isMethod('post')) {
+            $this->validate($request, [ 
+                'title'=> ['required'],
+                'doc_link'=> ['required'],
+            ]);
+            Publication::insert(request()->except(['_token', 'user_id']) +
+                [
+                    'user_id'    => auth()->id(),
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]
+            );
+            return redirect()->route('settings.publication');
+        } 
+        $data = Publication::get();
+        return view('settings.publication_add', compact('data'));
+    }
+
+    public function publication_delete(Request $request) { 
+        $data = Publication::find($request->id);
+        if($data){
+            Log::warning(Auth::user()->username." deleted Publication #".$data->id.", title : ".$data->title);
+            $data->delete();
+            return response()->json([
+                'success' => true,
+                'message' => 'Record deleted successfully!'
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to delete!'
+            ]);
+        }
+    }
 }

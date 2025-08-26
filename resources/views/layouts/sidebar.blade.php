@@ -92,6 +92,8 @@
                                     href="{{route('settings.general')}}">General Setting</a></li>
                             <li><a class="lan-4 {{ Route::currentRouteName()=='settings.study_program' ? 'active' : '' }}"
                                     href="{{route('settings.study_program')}}">Study Program</a></li>
+                            <li><a class="lan-4 {{ Route::currentRouteName()=='settings.publication' ? 'active' : '' }}"
+                                    href="{{route('settings.publication')}}">Publications</a></li>
                         </ul>
                     </li>
                     @endif
