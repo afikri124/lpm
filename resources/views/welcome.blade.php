@@ -549,7 +549,7 @@
                             var x = row.title;
                             return x;
                         },
-                        className: "text-left"
+                        className: "dt-left"
                     },
 
                     {

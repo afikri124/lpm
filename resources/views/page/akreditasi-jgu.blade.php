@@ -260,6 +260,7 @@
                             var x = row.name;
                             return x;
                         },
+                        className: "dt-left"
                     },
 
                     {
