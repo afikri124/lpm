@@ -319,21 +319,33 @@
                         <h6>Bagi Perguruan Tinggi/Ketua Program Studi yang ingin mengunduh<br>Sistem Penjaminan Mutu
                             Internal (SPMI)<br>Jakarta Global University</h6>
                         <h6>silahkan klik tautan berikut :</h6>
-                        @if($LINKINSTRUMENT->content != null || $LINKINSTRUMENT->content != "")
+                        @if($LINKINSTRUMENT != null || $LINKINSTRUMENT != "")
                         <a class="btn mrl5 btn-lg btn-secondary default-view" target="_blank"
                             href="{{ $LINKINSTRUMENT->content }}">{{ $LINKINSTRUMENT->title }}</a>
                         @endif
-                        @if($LINKINSTRUMENT2->content != null || $LINKINSTRUMENT2->content != "")
+                        @if($LINKINSTRUMENT2 != null || $LINKINSTRUMENT2 != "")
                         <a class="btn mrl5 btn-lg btn-secondary default-view" target="_blank"
                             href="{{ $LINKINSTRUMENT2->content }}">{{ $LINKINSTRUMENT2->title }}</a>
                         @endif
-                        @if($LINKINSTRUMENT3->content != null || $LINKINSTRUMENT3->content != "")
+                        @if($LINKINSTRUMENT3 != null || $LINKINSTRUMENT3 != "")
                         <a class="btn mrl5 btn-lg btn-secondary default-view" target="_blank"
                             href="{{ $LINKINSTRUMENT3->content }}">{{ $LINKINSTRUMENT3->title }}</a>
                         @endif
-                        @if($LINKINSTRUMENT4->content != null || $LINKINSTRUMENT4->content != "")
+                        @if($LINKINSTRUMENT4 != null || $LINKINSTRUMENT4 != "")
                         <a class="btn mrl5 btn-lg btn-secondary default-view" target="_blank"
                             href="{{ $LINKINSTRUMENT4->content }}">{{ $LINKINSTRUMENT4->title }}</a>
+                        @endif
+                        @if($LINKINSTRUMENT5 != null || $LINKINSTRUMENT5 != "")
+                        <a class="btn mrl5 btn-lg btn-secondary default-view" target="_blank"
+                            href="{{ $LINKINSTRUMENT5->content }}">{{ $LINKINSTRUMENT5->title }}</a>
+                        @endif
+                        @if($LINKINSTRUMENT6 != null || $LINKINSTRUMENT6 != "")
+                        <a class="btn mrl5 btn-lg btn-secondary default-view" target="_blank"
+                            href="{{ $LINKINSTRUMENT6->content }}">{{ $LINKINSTRUMENT6->title }}</a>
+                        @endif
+                        @if($LINKINSTRUMENT7 != null || $LINKINSTRUMENT7 != "")
+                        <a class="btn mrl5 btn-lg btn-secondary default-view" target="_blank"
+                            href="{{ $LINKINSTRUMENT7->content }}">{{ $LINKINSTRUMENT7->title }}</a>
                         @endif
                     </div>
                 </div>

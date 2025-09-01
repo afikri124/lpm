@@ -24,6 +24,9 @@ class SettingSeeder extends Seeder
             ["id" => "LINKINSTRUMENT2", "title" => "Klik Disini", "content" => ""],
             ["id" => "LINKINSTRUMENT3", "title" => "Klik Disini", "content" => ""],
             ["id" => "LINKINSTRUMENT4", "title" => "Klik Disini", "content" => ""],
+            ["id" => "LINKINSTRUMENT5", "title" => "", "content" => ""],
+            ["id" => "LINKINSTRUMENT6", "title" => "", "content" => ""],
+            ["id" => "LINKINSTRUMENT7", "title" => "", "content" => ""],
             ["id" => "INFO", "title" => "Y", "content" => "This system is under development."],
         ];
 

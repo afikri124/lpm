@@ -251,14 +251,14 @@
                             <div class="col-md-3">
                                 <div class="mb-3">
                                     <label class="form-label">Button name 1</label>
-                                    <input class="form-control" type="text" name="title" value="{{ $title }}" required>
+                                    <input class="form-control" type="text" name="title" value="{{ $title }}" >
                                 </div>
                             </div>
                             <div class="col-md-7">
                                 <div class="mb-3">
                                     <label class="form-label">Link</label>
                                     <input class="form-control" type="text" name="content" value="{{ $content }}"
-                                        required>
+                                        >
                                 </div>
                             </div>
                             <div class="col-md-2">
@@ -290,14 +290,14 @@
                             <div class="col-md-3">
                                 <div class="mb-3">
                                     <label class="form-label">Button name 2</label>
-                                    <input class="form-control" type="text" name="title" value="{{ $title }}" required>
+                                    <input class="form-control" type="text" name="title" value="{{ $title }}" >
                                 </div>
                             </div>
                             <div class="col-md-7">
                                 <div class="mb-3">
                                     <label class="form-label">Link</label>
                                     <input class="form-control" type="text" name="content" value="{{ $content }}"
-                                        required>
+                                        >
                                 </div>
                             </div>
                             <div class="col-md-2">
@@ -329,14 +329,14 @@
                             <div class="col-md-3">
                                 <div class="mb-3">
                                     <label class="form-label">Button name 3</label>
-                                    <input class="form-control" type="text" name="title" value="{{ $title }}" required>
+                                    <input class="form-control" type="text" name="title" value="{{ $title }}" >
                                 </div>
                             </div>
                             <div class="col-md-7">
                                 <div class="mb-3">
                                     <label class="form-label">Link</label>
                                     <input class="form-control" type="text" name="content" value="{{ $content }}"
-                                        required>
+                                        >
                                 </div>
                             </div>
                             <div class="col-md-2">
@@ -368,14 +368,131 @@
                             <div class="col-md-3">
                                 <div class="mb-3">
                                     <label class="form-label">Button name 4</label>
-                                    <input class="form-control" type="text" name="title" value="{{ $title }}" required>
+                                    <input class="form-control" type="text" name="title" value="{{ $title }}" >
                                 </div>
                             </div>
                             <div class="col-md-7">
                                 <div class="mb-3">
                                     <label class="form-label">Link</label>
                                     <input class="form-control" type="text" name="content" value="{{ $content }}"
-                                        required>
+                                        >
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="mb-3 text-end">
+                                    <button class="btn btn-primary mt-lg-4" type="submit">Update</button>
+                                </div>
+                            </div>
+                            @foreach ($errors->all() as $error)
+                            <p class="text-danger m-0">{{ $error }}</p>
+                            @endforeach
+                        </div>
+                    </form>
+                    <form method="POST" action="">
+                        <div class="row">
+                            @csrf
+                            @php
+                            $id = null;
+                            $title = null;
+                            $content = null;
+                            foreach($data as $d){
+                            if($d->id == 'LINKINSTRUMENT5'){
+                            $id = $d->id;
+                            $title = $d->title;
+                            $content = $d->content;
+                            }
+                            }
+                            @endphp
+                            <input class="form-control" type="hidden" name="id" value="{{ $id }}" required>
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label class="form-label">Button name 5</label>
+                                    <input class="form-control" type="text" name="title" value="{{ $title }}" >
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="mb-3">
+                                    <label class="form-label">Link</label>
+                                    <input class="form-control" type="text" name="content" value="{{ $content }}"
+                                        >
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="mb-3 text-end">
+                                    <button class="btn btn-primary mt-lg-4" type="submit">Update</button>
+                                </div>
+                            </div>
+                            @foreach ($errors->all() as $error)
+                            <p class="text-danger m-0">{{ $error }}</p>
+                            @endforeach
+                        </div>
+                    </form>
+                    <form method="POST" action="">
+                        <div class="row">
+                            @csrf
+                            @php
+                            $id = null;
+                            $title = null;
+                            $content = null;
+                            foreach($data as $d){
+                            if($d->id == 'LINKINSTRUMENT6'){
+                            $id = $d->id;
+                            $title = $d->title;
+                            $content = $d->content;
+                            }
+                            }
+                            @endphp
+                            <input class="form-control" type="hidden" name="id" value="{{ $id }}" required>
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label class="form-label">Button name 6</label>
+                                    <input class="form-control" type="text" name="title" value="{{ $title }}" >
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="mb-3">
+                                    <label class="form-label">Link</label>
+                                    <input class="form-control" type="text" name="content" value="{{ $content }}"
+                                        >
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="mb-3 text-end">
+                                    <button class="btn btn-primary mt-lg-4" type="submit">Update</button>
+                                </div>
+                            </div>
+                            @foreach ($errors->all() as $error)
+                            <p class="text-danger m-0">{{ $error }}</p>
+                            @endforeach
+                        </div>
+                    </form>
+                    <form method="POST" action="">
+                        <div class="row">
+                            @csrf
+                            @php
+                            $id = null;
+                            $title = null;
+                            $content = null;
+                            foreach($data as $d){
+                            if($d->id == 'LINKINSTRUMENT7'){
+                            $id = $d->id;
+                            $title = $d->title;
+                            $content = $d->content;
+                            }
+                            }
+                            @endphp
+                            <input class="form-control" type="hidden" name="id" value="{{ $id }}" required>
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label class="form-label">Button name 7</label>
+                                    <input class="form-control" type="text" name="title" value="{{ $title }}" >
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="mb-3">
+                                    <label class="form-label">Link</label>
+                                    <input class="form-control" type="text" name="content" value="{{ $content }}"
+                                        >
                                 </div>
                             </div>
                             <div class="col-md-2">

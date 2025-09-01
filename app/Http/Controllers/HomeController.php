@@ -37,11 +37,13 @@ class HomeController extends Controller
     {
         if(env('ALIFIKRI')){
             $CONTACT = Setting::findOrFail('CONTACT');
-            $LINKINSTRUMENT = Setting::findOrFail('LINKINSTRUMENT');
-            $LINKINSTRUMENT2 = Setting::findOrFail('LINKINSTRUMENT2');
-            $LINKINSTRUMENT3 = Setting::findOrFail('LINKINSTRUMENT3');
-            $LINKINSTRUMENT4 = Setting::findOrFail('LINKINSTRUMENT4');
-            $LINKINSTRUMENT4 = Setting::findOrFail('LINKINSTRUMENT4');
+            $LINKINSTRUMENT = Setting::where('content', '!=', '')->find('LINKINSTRUMENT');
+            $LINKINSTRUMENT2 = Setting::where('content', '!=', '')->find('LINKINSTRUMENT2');
+            $LINKINSTRUMENT3 = Setting::where('content', '!=', '')->find('LINKINSTRUMENT3');
+            $LINKINSTRUMENT4 = Setting::where('content', '!=', '')->find('LINKINSTRUMENT4');
+            $LINKINSTRUMENT5 = Setting::where('content', '!=', '')->find('LINKINSTRUMENT5');
+            $LINKINSTRUMENT6 = Setting::where('content', '!=', '')->find('LINKINSTRUMENT6');
+            $LINKINSTRUMENT7 = Setting::where('content', '!=', '')->find('LINKINSTRUMENT7');
             $study_program = StudyProgram::with('acreditation')
                                 ->orderBy(
                                     Acreditation::select('star_point')
@@ -50,7 +52,9 @@ class HomeController extends Controller
                                 )
                                 ->orderBy('name', 'asc')
                                 ->get();
-            return view('welcome', compact('CONTACT','LINKINSTRUMENT','LINKINSTRUMENT2','LINKINSTRUMENT3','LINKINSTRUMENT4','study_program'));
+            return view('welcome', compact('CONTACT',
+            'LINKINSTRUMENT','LINKINSTRUMENT2','LINKINSTRUMENT3','LINKINSTRUMENT4','LINKINSTRUMENT5','LINKINSTRUMENT6','LINKINSTRUMENT7',
+            'study_program'));
         } else {
             $img = "<img style='max-width: 100px;border-radius: 50%;' src='https://img.freepik.com/premium-vector/alert-error-massage-notification-concept-error-digital-report-system-hacking-by-hacker_257312-129.jpg?w=2000'>";
             $msg = "$img<br><br>Sorry, You can't access to restricted page!<br>Please contact <b>afikri124@gmail.com</b>";

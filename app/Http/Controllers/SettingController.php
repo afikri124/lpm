@@ -44,8 +44,6 @@ class SettingController extends Controller
         if ($request->isMethod('post')) {
             $this->validate($request, [ 
                 'id'=> ['required'],
-                'title'=> ['required'],
-                'content'=> ['required'],
             ]);
             $up = Setting::find($request->id)->update(request()->all());
         }
