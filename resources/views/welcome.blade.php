@@ -392,7 +392,7 @@
         <section class="section-space email_bg" id="publication">
             <div class="container container-modify">
                 <div class="row">
-                    <div class="col-lg-6 wow pulse">
+                    <div class="col-lg-5 wow pulse">
                         <div class="cuba-demo-content email-txt text-start">
                             <div class="couting">
                                 <h2>Dokumen Publikasi</h2>
@@ -405,7 +405,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-7">
                             <table class="table table-hover table-sm" id="datatablex" width="100%">
                                 <thead>
                                     <tr>
@@ -522,7 +522,7 @@
                 serverSide: true,
                 ordering: false,
                 language: {
-                    searchPlaceholder: 'Search...',
+                    searchPlaceholder: 'Cari dokumen...',
                     sSearch: '_INPUT_ &nbsp;',
                     lengthMenu: '<span>Show:</span> _MENU_',
                 },
