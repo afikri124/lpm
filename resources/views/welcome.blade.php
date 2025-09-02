@@ -82,7 +82,7 @@
                                 <ul class="navbar-nav navbar_nav_modify" id="scroll-spy">
                                     <li class="nav-item"><a class="nav-link px-3" href="#"
                                             style="text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;">
-                                            <i class="icofont icofont-ui-home"></i> Home</a></li>
+                                            <i class="icofont icofont-ui-home"></i> Beranda</a></li>
                                     <li class="nav-item">
                                         <div class=" dropup dropdown-basic">
                                             <div class="dropup dropdown">
@@ -112,6 +112,9 @@
                                             </div>
                                         </div>
                                     </li>
+                                    <li class="nav-item"><a class="nav-link px-3" href="#survey"
+                                            style="text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;">
+                                            <i class="icofont icofont-paperclip"></i> Survei</a></li>
                                     <li class="nav-item"><a class="nav-link px-3" href="#publication"
                                             style="text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;">
                                             <i class="icofont icofont-newspaper"></i> Publikasi</a></li>
@@ -324,27 +327,27 @@
                             href="{{ $LINKINSTRUMENT->content }}">{{ $LINKINSTRUMENT->title }}</a>
                         @endif
                         @if($LINKINSTRUMENT2 != null || $LINKINSTRUMENT2 != "")
-                        <a class="btn mrl5 btn-lg btn-secondary default-view" target="_blank"
+                        <a class="btn mrl5 btn-lg btn-secondary default-view mt-2" target="_blank"
                             href="{{ $LINKINSTRUMENT2->content }}">{{ $LINKINSTRUMENT2->title }}</a>
                         @endif
                         @if($LINKINSTRUMENT3 != null || $LINKINSTRUMENT3 != "")
-                        <a class="btn mrl5 btn-lg btn-secondary default-view" target="_blank"
+                        <a class="btn mrl5 btn-lg btn-secondary default-view mt-2" target="_blank"
                             href="{{ $LINKINSTRUMENT3->content }}">{{ $LINKINSTRUMENT3->title }}</a>
                         @endif
                         @if($LINKINSTRUMENT4 != null || $LINKINSTRUMENT4 != "")
-                        <a class="btn mrl5 btn-lg btn-secondary default-view" target="_blank"
+                        <a class="btn mrl5 btn-lg btn-secondary default-view mt-2" target="_blank"
                             href="{{ $LINKINSTRUMENT4->content }}">{{ $LINKINSTRUMENT4->title }}</a>
                         @endif
                         @if($LINKINSTRUMENT5 != null || $LINKINSTRUMENT5 != "")
-                        <a class="btn mrl5 btn-lg btn-secondary default-view" target="_blank"
+                        <a class="btn mrl5 btn-lg btn-secondary default-view mt-2" target="_blank"
                             href="{{ $LINKINSTRUMENT5->content }}">{{ $LINKINSTRUMENT5->title }}</a>
                         @endif
                         @if($LINKINSTRUMENT6 != null || $LINKINSTRUMENT6 != "")
-                        <a class="btn mrl5 btn-lg btn-secondary default-view" target="_blank"
+                        <a class="btn mrl5 btn-lg btn-secondary default-view mt-2" target="_blank"
                             href="{{ $LINKINSTRUMENT6->content }}">{{ $LINKINSTRUMENT6->title }}</a>
                         @endif
                         @if($LINKINSTRUMENT7 != null || $LINKINSTRUMENT7 != "")
-                        <a class="btn mrl5 btn-lg btn-secondary default-view" target="_blank"
+                        <a class="btn mrl5 btn-lg btn-secondary default-view mt-2" target="_blank"
                             href="{{ $LINKINSTRUMENT7->content }}">{{ $LINKINSTRUMENT7->title }}</a>
                         @endif
                     </div>
@@ -389,6 +392,39 @@
             </div>
         </section>
 
+        <section class="section-space cuba-demo-section components-section bg-light" id="survey">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 wow pulse">
+                        <div class="cuba-demo-content">
+                            <div class="couting text-secondary">
+                                <h2>Survei Layanan</h2>
+                            </div>
+                        </div>
+                        <div class="card-body new-update pt-0">
+                            <div class="activity-timeline">
+                                <div class="media">
+                                    <div class="media-body text-dark">
+                                        <i>
+                                            Survei layanan merupakan metode pengumpulan data untuk mengevaluasi
+                                            pengalaman dan kepuasan pengguna terhadap suatu layanan,
+                                            sekaligus mengidentifikasi kekuatan dan area yang perlu diperbaiki.
+                                            LPM JGU melaksanakan survei ini secara rutin untuk menilai kepuasan civitas
+                                            akademika terhadap layanan akademik maupun non-akademik.
+                                        </i>
+                                    </div>
+                                </div>
+                            </div>
+                            @if($LINKSURVEY != null || $LINKSURVEY != "")
+                            <a class="btn mrl5 btn-lg btn-primary default-view mt-3" target="_blank"
+                                href="{{ $LINKSURVEY->content }}">{{ $LINKSURVEY->title }}</a>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section class="section-space email_bg" id="publication">
             <div class="container container-modify">
                 <div class="row">
@@ -406,16 +442,16 @@
                         </div>
                     </div>
                     <div class="col-lg-7">
-                            <table class="table table-hover table-sm" id="datatablex" width="100%">
-                                <thead>
-                                    <tr>
-                                        <th scope="col" width="20px">No</th>
-                                        <th scope="col">Publikasi</th>
-                                        <th scope="col" width="150px">Tahun Terbit</th>
-                                        <th scope="col" width="150px">Dokumen</th>
-                                    </tr>
-                                </thead>
-                            </table>
+                        <table class="table table-hover table-sm" id="datatablex" width="100%">
+                            <thead>
+                                <tr>
+                                    <th scope="col" width="20px">No</th>
+                                    <th scope="col">Publikasi</th>
+                                    <th scope="col" width="150px">Tahun Terbit</th>
+                                    <th scope="col" width="150px">Dokumen</th>
+                                </tr>
+                            </thead>
+                        </table>
                     </div>
                 </div>
             </div>

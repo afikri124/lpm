@@ -44,6 +44,7 @@ class HomeController extends Controller
             $LINKINSTRUMENT5 = Setting::where('content', '!=', '')->find('LINKINSTRUMENT5');
             $LINKINSTRUMENT6 = Setting::where('content', '!=', '')->find('LINKINSTRUMENT6');
             $LINKINSTRUMENT7 = Setting::where('content', '!=', '')->find('LINKINSTRUMENT7');
+            $LINKSURVEY = Setting::where('content', '!=', '')->find('LINKSURVEY');
             $study_program = StudyProgram::with('acreditation')
                                 ->orderBy(
                                     Acreditation::select('star_point')
@@ -54,6 +55,7 @@ class HomeController extends Controller
                                 ->get();
             return view('welcome', compact('CONTACT',
             'LINKINSTRUMENT','LINKINSTRUMENT2','LINKINSTRUMENT3','LINKINSTRUMENT4','LINKINSTRUMENT5','LINKINSTRUMENT6','LINKINSTRUMENT7',
+            'LINKSURVEY',
             'study_program'));
         } else {
             $img = "<img style='max-width: 100px;border-radius: 50%;' src='https://img.freepik.com/premium-vector/alert-error-massage-notification-concept-error-digital-report-system-hacking-by-hacker_257312-129.jpg?w=2000'>";

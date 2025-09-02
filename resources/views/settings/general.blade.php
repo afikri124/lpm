@@ -510,6 +510,61 @@
         </div>
     </div>
 
+        <div class="row">
+        <div class="col-xl-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title mb-0">Survey Link</h4>
+                    <div class="card-options"><a class="card-options-collapse" href="#"
+                            data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a
+                            class="card-options-remove" href="#" data-bs-toggle="card-remove"><i
+                                class="fe fe-x"></i></a></div>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="">
+                        <div class="row">
+                            @csrf
+                            @php
+                            $id = null;
+                            $title = null;
+                            $content = null;
+                            foreach($data as $d){
+                            if($d->id == 'LINKSURVEY'){
+                            $id = $d->id;
+                            $title = $d->title;
+                            $content = $d->content;
+                            }
+                            }
+                            @endphp
+                            <input class="form-control" type="hidden" name="id" value="{{ $id }}" required>
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label class="form-label">Survey Button</label>
+                                    <input class="form-control" type="text" name="title" value="{{ $title }}" >
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="mb-3">
+                                    <label class="form-label">Link</label>
+                                    <input class="form-control" type="text" name="content" value="{{ $content }}"
+                                        >
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="mb-3 text-end">
+                                    <button class="btn btn-primary mt-lg-4" type="submit">Update</button>
+                                </div>
+                            </div>
+                            @foreach ($errors->all() as $error)
+                            <p class="text-danger m-0">{{ $error }}</p>
+                            @endforeach
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-xl-12">
             <form class="card" method="POST" action="">

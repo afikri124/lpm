@@ -27,6 +27,7 @@ class SettingSeeder extends Seeder
             ["id" => "LINKINSTRUMENT5", "title" => "", "content" => ""],
             ["id" => "LINKINSTRUMENT6", "title" => "", "content" => ""],
             ["id" => "LINKINSTRUMENT7", "title" => "", "content" => ""],
+            ["id" => "LINKSURVEY", "title" => "ISI SURVEI LAYANAN", "content" => "https://lpm.jgu.ac.id"],
             ["id" => "INFO", "title" => "Y", "content" => "This system is under development."],
         ];
 
