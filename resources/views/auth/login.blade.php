@@ -11,7 +11,7 @@
 <div class="container-fluid p-0">
     <div class="row m-0">
         <div class="col-xl-7">
-            <img class="bg-img-cover bg-center" src="{{asset('assets/images/landing/gerbang.jpg')}}" alt="looginpage">
+            <img class="bg-img-cover bg-center" src="{{asset('assets/images/landing/jgu-salju.png')}}" alt="looginpage">
         </div>
         <div class="col-xl-5 p-0">
             <div class="login-card">
