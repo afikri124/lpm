@@ -51,6 +51,16 @@
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
+    .evidence-btn {
+        border-radius: 999px;
+        font-weight: 600;
+        letter-spacing: 0.2px;
+    }
+
+    .evidence-btn:hover {
+        transform: translateY(-1px);
+    }
+
     /* Responsive adjustments */
     @media (max-width: 1024px) {
         .chart-container {
@@ -251,7 +261,7 @@
                 { uraian: 'Kegiatan terkait SDG', rencana: 4, tercapai: 9 }
             ],
             'Reputasi dan Branding': [
-                { uraian: 'Jumlah video/poster terkait Profil JGU & Prodi pada platform social media', rencana: 60, tercapai: 9 }
+                { uraian: 'Jumlah video/poster terkait Profil JGU & Prodi pada platform social media', rencana: 60, tercapai: 9 }   
             ]
         },
         '2021/2022': {
@@ -414,6 +424,7 @@
     };
 
     let currentYear = '2020/2021';
+    let singleChartModeMap = {};
 
     // Load Google Charts
     google.charts.load('current', { 'packages': ['corechart'] });
@@ -454,10 +465,18 @@
         
         const yearData = developmentData[year];
         let priorityNumber = 1;
+        singleChartModeMap = {};
+        let pieModeToggle = true;
         
         for (const [priority, items] of Object.entries(yearData)) {
             const chartVariant = getChartVariant(priorityNumber, priority);
-            const card = createCard(priority, items, priorityNumber, year, chartVariant);
+            let singleChartMode = null;
+            if (items.length === 1) {
+                singleChartMode = pieModeToggle ? 'donut' : 'pie';
+                singleChartModeMap[priorityNumber] = singleChartMode;
+                pieModeToggle = !pieModeToggle;
+            }
+            const card = createCard(priority, items, priorityNumber, year, chartVariant, singleChartMode);
             container.appendChild(card);
             priorityNumber++;
         }
@@ -468,7 +487,8 @@
             for (const [priority, items] of Object.entries(yearData)) {
                 const chartVariant = getChartVariant(priorityNumber, priority);
                 if (items.length === 1) {
-                    drawPieChart(priority, items[0], priorityNumber);
+                    const pieMode = singleChartModeMap[priorityNumber] || 'donut';
+                    drawPieChart(priority, items[0], priorityNumber, pieMode);
                 } else {
                     drawComparisonChart(priority, items, priorityNumber, chartVariant);
                 }
@@ -494,13 +514,18 @@
     }
 
     // Create card element
-    function createCard(priority, items, priorityNumber, year, variant) {
+    function createCard(priority, items, priorityNumber, year, variant, singleChartMode) {
         const col = document.createElement('div');
         col.className = 'col-12 col-lg-6';
         col.id = `card-${priorityNumber}`;
         
         const chartId = `chart-${priorityNumber}`;
-        const variantBadge = items.length === 1 ? '<span class="badge bg-warning-subtle text-warning fw-semibold">Donut Chart</span>' : getVariantBadge(variant);
+        const variantBadge = items.length === 1
+            ? (singleChartMode === 'pie'
+                ? '<span class="badge bg-warning-subtle text-warning fw-semibold">Pie Chart</span>'
+                : '<span class="badge bg-warning-subtle text-warning fw-semibold">Donut Chart</span>')
+            : getVariantBadge(variant);
+        const evidenceButtons = renderEvidenceButtons(items, priority, year, priorityNumber);
         
         col.innerHTML = `
             <div class="card chart-card h-100">
@@ -514,6 +539,7 @@
                         ${variantBadge}
                     </div>
                     <div id="${chartId}" class="chart-container" style="height: ${items.length === 1 ? '340px' : '360px'};"></div>
+                    ${evidenceButtons}
                 </div>
             </div>
         `;
@@ -521,8 +547,22 @@
         return col;
     }
 
+    function renderEvidenceButtons(items, priority, year, priorityNumber) {
+        if (!items || !items.length) return '';
+        const buttons = items.map((item, index) => {
+            const label = item.uraian ? item.uraian.replace(/"/g, '&quot;') : `Indikator ${index + 1}`;
+            const link = item.link ? item.link : '#';
+            return `
+                <a href="${link}" class="btn btn-sm btn-outline-secondary evidence-btn" target="_blank" rel="noopener" aria-label="Unduh eviden untuk ${label}" title="Unduh eviden: ${label}">
+                    Unduh Eviden
+                </a>
+            `;
+        }).join('');
+        return `<div class="mt-4 d-flex flex-wrap gap-2">${buttons}</div>`;
+    }
+
     // Draw Pie Chart (for single uraian)
-    function drawPieChart(priority, item, priorityNumber) {
+    function drawPieChart(priority, item, priorityNumber, mode = 'donut') {
         const chartId = `chart-${priorityNumber}`;
         const chartDiv = document.getElementById(chartId);
         
@@ -559,7 +599,7 @@
                 fontSize: 14,
                 bold: true
             },
-            pieHole: 0.4,
+            pieHole: mode === 'donut' ? 0.45 : 0,
             colors: ['#3498db', '#2ecc71'],
             legend: {
                 position: 'bottom',
