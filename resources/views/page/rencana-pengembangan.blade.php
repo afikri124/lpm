@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lembaga Penjaminan Mutu Universitas Global Jakarta">
+    <meta name="keywords" content="LPM JGU">
+    <meta name="author" content="itic">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
+    <title>{{ config('app.name') }} - Lembaga Penjaminan Mutu Jakarta Global University</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap"
+        rel="stylesheet">
+    @include('layouts.css')
+    @yield('style')
+    <style>
+    .chart-container {
+        width: 100%;
+        margin: 10px 0 0;
+    }
+
+    .chart-card {
+        border: none;
+        border-radius: 18px;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        box-shadow: 0 15px 35px rgba(15, 23, 42, 0.08);
+    }
+
+    .chart-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 45px rgba(15, 23, 42, 0.15);
+    }
+
+    .year-filter-btn.active {
+        background-color: #2563eb !important;
+        color: white !important;
+        border-color: #2563eb !important;
+    }
+
+    .year-filter-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1024px) {
+        .chart-container {
+            height: 300px !important;
+        }
+    }
+
+    .page-wrapper.compact-wrapper .nav-right .nav-menus {
+        margin-right: 0px;
+    }
+
+    .dropdown-basic .dropdown .dropdown-content a {
+        padding: 16px 16px;
+    }
+
+    .landing-home .content {
+        text-align: left;
+        margin-left: 20px;
+    }
+    .table-sm th, .table-sm td {
+        padding: 0px;
+    }
+    </style>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.canvasjs.com/jquery.canvasjs.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body class="landing-page">
+    <div class="loader-wrapper">
+        <div class="loader-index">
+            <span></span>
+        </div>
+        <svg>
+            <defs></defs>
+            <filter id="goo">
+                <fegaussianblur in="SourceGraphic" stddeviation="11" result="blur"></fegaussianblur>
+                <fecolormatrix in="blur" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo"></fecolormatrix>
+            </filter>
+        </svg>
+    </div>
+    <div class="tap-top">
+        <i data-feather="chevrons-up"></i>
+    </div>
+    <div class="page-wrapper landing-page">
+        <div class="landing-home">
+            <ul class="decoration">
+                <li class="one">
+                    <img class="img-fluid" src="{{ asset('assets/images/landing/decore/1.png') }}" alt="">
+                </li>
+                <li class="two">
+                    <img class="img-fluid" src="{{ asset('assets/images/landing/decore/2.png') }}" alt="">
+                </li>
+                <li class="three">
+                    <img class="img-fluid" src="{{ asset('assets/images/landing/decore/4.png') }}" alt="">
+                </li>
+                <li class="four">
+                    <img class="img-fluid" src="{{ asset('assets/images/landing/decore/3.png') }}" alt="">
+                </li>
+                <li class="five">
+                    <img class="img-fluid" src="{{ asset('assets/images/landing/2.png') }}" alt="">
+                </li>
+                <li class="six">
+                    <img class="img-fluid" src="{{ asset('assets/images/landing/decore/cloud.png') }}" alt="">
+                </li>
+                <li class="seven">
+                    <img class="img-fluid" src="{{ asset('assets/images/landing/2.png') }}" alt="">
+                </li>
+            </ul>
+            <div class="container-fluid">
+                <div class="sticky-header">
+                    <header>
+                        <nav class="navbar navbar-b navbar-trans navbar-expand-xl fixed-top nav-padding" id="sidebar-menu">
+                            <a class="navbar-brand p-0" href="{{ route('index') }}">
+                                <img class="img-fluid" src="{{ asset('assets/images/logo-white.png') }}" alt="JGU">
+                            </a>
+                            <button class="navbar-toggler navabr_btn-set custom_nav" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDefault" aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </button>
+                            <div class="navbar-collapse justify-content-end collapse hidenav" id="navbarDefault"></div>
+                        </nav>
+                    </header>
+                </div>
+                <div class="row">
+                    <div class="col-xl-5 col-lg-6">
+                        <div class="content ">
+                            <div class="container">
+                                <h1 class="wow fadeIn h-50">Rencana Pengembangan</h1>
+                                <h2 class="txt-secondary wow fadeIn">Jakarta Global University</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-7 col-lg-6">
+                        <div class="wow fadeIn">
+                            <img class="screen2" style="margin-top: 10vh;" src="{{ asset('assets/images/landing/screen2.jpg') }}" alt="" draggable="false">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="section-space cuba-demo-section components-section" id="results">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 wow pulse">
+                        <div class="cuba-demo-content mt50">
+                            <div class="couting">
+                                <h2>Dashboard</h2>
+                            </div>
+                            <p>Rencana Pengembangan 5 Tahun Universitas Global Jakarta</p>
+                        </div>
+                        <p class="lead text-muted mb-0">Periode 2020 - 2025</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center py-5">
+                <div class="col-12 col-xl-10">
+
+                    <div class="card border-0 mb-4">
+                        <div class="card-body d-flex flex-column flex-lg-row align-items-lg-center justify-content-between gap-3">
+                            <div class="text-start">
+                                <h3 class="h5 fw-semibold text-secondary mb-1">Filter Tahun Akademik</h3>
+                                <p class="mb-0 text-muted">Pilih rentang tahun untuk melihat detail indikator.</p>
+                            </div>
+                            <div class="btn-group flex-wrap" role="group" aria-label="Filter Tahun Akademik">
+                                <button onclick="filterByYear('2020/2021')" class="year-filter-btn btn btn-primary active">
+                                    2020/2021
+                                </button>
+                                <button onclick="filterByYear('2021/2022')" class="year-filter-btn btn btn-outline-primary">
+                                    2021/2022
+                                </button>
+                                <button onclick="filterByYear('2022/2023')" class="year-filter-btn btn btn-outline-primary">
+                                    2022/2023
+                                </button>
+                                <button onclick="filterByYear('2023/2024')" class="year-filter-btn btn btn-outline-primary">
+                                    2023/2024
+                                </button>
+                                <button onclick="filterByYear('2024/2025')" class="year-filter-btn btn btn-outline-primary">
+                                    2024/2025
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="dashboard-container" class="row g-4">
+                        <!-- Cards generated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="section-space bg-secondary py-1">
+            <hr>
+            <span>
+                Copyright © {{ (date('Y')=="2022"?date('Y'):"2022-".date('Y')) }} made with ❤️ by <a href="https://itic.jgu.ac.id" target="_blank">ITIC JGU</a>.
+                <br>
+                <small class="ml-4 text-center text-sm text-light sm:text-right sm:ml-0">
+                    v{{ Illuminate\Foundation\Application::VERSION }}p{{ PHP_VERSION }} - All rights reserved.
+                </small>
+            </span>
+        </footer>
+    </div>
+    
+    <script>
+    // Data Rencana Pengembangan
+    const developmentData = {
+        '2020/2021': {
+            'Jumlah Mahasiswa': [
+                { uraian: 'Jumlah Mahasiswa di JGU', rencana: 1000, tercapai: 9 }
+            ],
+            'Kualitas Pendidikan': [
+                { uraian: 'Akreditasi Institusi', rencana: 'C/Baik', tercapai: 9 },
+                { uraian: 'Akreditasi Prodi B/Baik Sekali', rencana: 4, tercapai: 9 },
+                { uraian: 'Akreditasi Prodi A/Unggul', rencana: 0, tercapai: 9 }
+            ],
+            'Hubungan Industri': [
+                { uraian: 'Kegiatan Tri darma JGU bersama Industri', rencana: 10, tercapai: 9 }
+            ],
+            'Kewirausahaan': [
+                { uraian: 'Kegiatan terkait kewirausahaan bersama alumni dan Industri', rencana: 4, tercapai: 9 }
+            ],
+            'Internasionalisasi': [
+                { uraian: 'Kegiatan tridarma bertaraf internasional', rencana: 3, tercapai: 9 }
+            ],
+            'Riset': [
+                { uraian: 'Publikasi Ilmiah Internasional terindeks scopus', rencana: 20, tercapai: 9 },
+                { uraian: 'Publikasi Ilmiah Nasional terindeks Sinta', rencana: 25, tercapai: 9 }
+            ],
+            'Pengalaman belajar': [
+                { uraian: 'Kompetisi yang diikuti oleh mahasiswa', rencana: 4, tercapai: 9 },
+                { uraian: 'Kegiatan pengabdian masyarakat yang melibatkan mahasiswa', rencana: 3, tercapai: 9 }
+            ],
+            'Pengembangan teknologi dan informasi kampus': [
+                { uraian: 'Aplikasi penunjang terlaksananya tri darma perguruan tinggi', rencana: 6, tercapai: 9 }
+            ],
+            'Keberlanjutan': [
+                { uraian: 'Kegiatan terkait SDG', rencana: 4, tercapai: 9 }
+            ],
+            'Reputasi dan Branding': [
+                { uraian: 'Jumlah video/poster terkait Profil JGU & Prodi pada platform social media', rencana: 60, tercapai: 9 }
+            ]
+        },
+        '2021/2022': {
+            'Jumlah Mahasiswa': [
+                { uraian: 'Jumlah Mahasiswa di JGU', rencana: 1250, tercapai: 9 }
+            ],
+            'Kualitas Pendidikan': [
+                { uraian: 'Akreditasi Institusi', rencana: 'C/Baik', tercapai: 9 },
+                { uraian: 'Akreditasi Prodi B/Baik Sekali', rencana: 4, tercapai: 9 },
+                { uraian: 'Akreditasi Prodi A/Unggul', rencana: 0, tercapai: 9 }
+            ],
+            'Hubungan Industri': [
+                { uraian: 'Kegiatan Tri darma JGU bersama Industri', rencana: 12, tercapai: 9 }
+            ],
+            'Kewirausahaan': [
+                { uraian: 'Kegiatan terkait kewirausahaan bersama alumni dan Industri', rencana: 4, tercapai: 9 }
+            ],
+            'Internasionalisasi': [
+                { uraian: 'Kegiatan tridarma bertaraf internasional', rencana: 6, tercapai: 9 }
+            ],
+            'Riset': [
+                { uraian: 'Publikasi Ilmiah Internasional terindeks scopus', rencana: 30, tercapai: 9 },
+                { uraian: 'Publikasi Ilmiah Nasional terindeks Sinta', rencana: 30, tercapai: 9 }
+            ],
+            'Pengalaman belajar': [
+                { uraian: 'Kompetisi yang diikuti oleh mahasiswa', rencana: 10, tercapai: 9 },
+                { uraian: 'Kegiatan pengabdian masyarakat yang melibatkan mahasiswa', rencana: 8, tercapai: 9 }
+            ],
+            'Pengembangan teknologi dan informasi kampus': [
+                { uraian: 'Aplikasi penunjang terlaksananya tri darma perguruan tinggi', rencana: 10, tercapai: 9 }
+            ],
+            'Keberlanjutan': [
+                { uraian: 'Kegiatan terkait SDG', rencana: 6, tercapai: 9 }
+            ],
+            'Reputasi dan Branding': [
+                { uraian: 'Jumlah video/poster terkait Profil JGU & Prodi pada platform social media', rencana: 70, tercapai: 9 }
+            ]
+        },
+        '2022/2023': {
+            'Jumlah Mahasiswa': [
+                { uraian: 'Jumlah Mahasiswa di JGU', rencana: 1500, tercapai: 9 }
+            ],
+            'Kualitas Pendidikan': [
+                { uraian: 'Akreditasi Institusi', rencana: 'B/Baik Sekali', tercapai: 9 },
+                { uraian: 'Akreditasi Prodi B/Baik Sekali', rencana: 5, tercapai: 9 },
+                { uraian: 'Akreditasi Prodi A/Unggul', rencana: 0, tercapai: 9 }
+            ],
+            'Hubungan Industri': [
+                { uraian: 'Kegiatan Tri darma JGU bersama Industri', rencana: 18, tercapai: 9 }
+            ],
+            'Kewirausahaan': [
+                { uraian: 'Kegiatan terkait kewirausahaan bersama alumni dan Industri', rencana: 6, tercapai: 9 }
+            ],
+            'Internasionalisasi': [
+                { uraian: 'Kegiatan tridarma bertaraf internasional', rencana: 10, tercapai: 9 }
+            ],
+            'Riset': [
+                { uraian: 'Publikasi Ilmiah Internasional terindeks scopus', rencana: 40, tercapai: 9 },
+                { uraian: 'Publikasi Ilmiah Nasional terindeks Sinta', rencana: 80, tercapai: 9 }
+            ],
+            'Pengalaman belajar': [
+                { uraian: 'Kompetisi yang diikuti oleh mahasiswa', rencana: 15, tercapai: 9 },
+                { uraian: 'Kegiatan pengabdian masyarakat yang melibatkan mahasiswa', rencana: 16, tercapai: 9 }
+            ],
+            'Pengembangan teknologi dan informasi kampus': [
+                { uraian: 'Aplikasi penunjang terlaksananya tri darma perguruan tinggi', rencana: 15, tercapai: 9 }
+            ],
+            'Keberlanjutan': [
+                { uraian: 'Kegiatan terkait SDG', rencana: 8, tercapai: 9 }
+            ],
+            'Reputasi dan Branding': [
+                { uraian: 'Jumlah video/poster terkait Profil JGU & Prodi pada platform social media', rencana: 80, tercapai: 9 }
+            ]
+        },
+        '2023/2024': {
+            'Jumlah Mahasiswa': [
+                { uraian: 'Jumlah Mahasiswa di JGU', rencana: 1750, tercapai: 9 }
+            ],
+            'Kualitas Pendidikan': [
+                { uraian: 'Akreditasi Institusi', rencana: 'B/Baik Sekali', tercapai: 9 },
+                { uraian: 'Akreditasi Prodi B/Baik Sekali', rencana: 6, tercapai: 9 },
+                { uraian: 'Akreditasi Prodi A/Unggul', rencana: 1, tercapai: 9 }
+            ],
+            'Hubungan Industri': [
+                { uraian: 'Kegiatan Tri darma JGU bersama Industri', rencana: 20, tercapai: 9 }
+            ],
+            'Kewirausahaan': [
+                { uraian: 'Kegiatan terkait kewirausahaan bersama alumni dan Industri', rencana: 8, tercapai: 9 }
+            ],
+            'Internasionalisasi': [
+                { uraian: 'Kegiatan tridarma bertaraf internasional', rencana: 14, tercapai: 9 }
+            ],
+            'Riset': [
+                { uraian: 'Publikasi Ilmiah Internasional terindeks scopus', rencana: 50, tercapai: 9 },
+                { uraian: 'Publikasi Ilmiah Nasional terindeks Sinta', rencana: 100, tercapai: 9 }
+            ],
+            'Pengalaman belajar': [
+                { uraian: 'Kompetisi yang diikuti oleh mahasiswa', rencana: 20, tercapai: 9 },
+                { uraian: 'Kegiatan pengabdian masyarakat yang melibatkan mahasiswa', rencana: 20, tercapai: 9 }
+            ],
+            'Pengembangan teknologi dan informasi kampus': [
+                { uraian: 'Aplikasi penunjang terlaksananya tri darma perguruan tinggi', rencana: 20, tercapai: 9 }
+            ],
+            'Keberlanjutan': [
+                { uraian: 'Kegiatan terkait SDG', rencana: 10, tercapai: 9 }
+            ],
+            'Reputasi dan Branding': [
+                { uraian: 'Jumlah video/poster terkait Profil JGU & Prodi pada platform social media', rencana: 90, tercapai: 9 }
+            ]
+        },
+        '2024/2025': {
+            'Jumlah Mahasiswa': [
+                { uraian: 'Jumlah Mahasiswa di JGU', rencana: 2000, tercapai: 9 }
+            ],
+            'Kualitas Pendidikan': [
+                { uraian: 'Akreditasi Institusi', rencana: 'B/Baik Sekali', tercapai: 9 },
+                { uraian: 'Akreditasi Prodi B/Baik Sekali', rencana: 6, tercapai: 9 },
+                { uraian: 'Akreditasi Prodi A/Unggul', rencana: 2, tercapai: 9 }
+            ],
+            'Hubungan Industri': [
+                { uraian: 'Kegiatan Tri darma JGU bersama Industri', rencana: 24, tercapai: 9 }
+            ],
+            'Kewirausahaan': [
+                { uraian: 'Kegiatan terkait kewirausahaan bersama alumni dan Industri', rencana: 10, tercapai: 9 }
+            ],
+            'Internasionalisasi': [
+                { uraian: 'Kegiatan tridarma bertaraf internasional', rencana: 18, tercapai: 9 }
+            ],
+            'Riset': [
+                { uraian: 'Publikasi Ilmiah Internasional terindeks scopus', rencana: 60, tercapai: 9 },
+                { uraian: 'Publikasi Ilmiah Nasional terindeks Sinta', rencana: 150, tercapai: 9 }
+            ],
+            'Pengalaman belajar': [
+                { uraian: 'Kompetisi yang diikuti oleh mahasiswa', rencana: 24, tercapai: 9 },
+                { uraian: 'Kegiatan pengabdian masyarakat yang melibatkan mahasiswa', rencana: 26, tercapai: 9 }
+            ],
+            'Pengembangan teknologi dan informasi kampus': [
+                { uraian: 'Aplikasi penunjang terlaksananya tri darma perguruan tinggi', rencana: 25, tercapai: 9 }
+            ],
+            'Keberlanjutan': [
+                { uraian: 'Kegiatan terkait SDG', rencana: 12, tercapai: 9 }
+            ],
+            'Reputasi dan Branding': [
+                { uraian: 'Jumlah video/poster terkait Profil JGU & Prodi pada platform social media', rencana: 100, tercapai: 9 }
+            ]
+        }
+    };
+
+    const chartVariantMapping = {
+        'Jumlah Mahasiswa': 'column',
+        'Kualitas Pendidikan': 'combo',
+        'Hubungan Industri': 'bar',
+        'Kewirausahaan': 'column',
+        'Internasionalisasi': 'combo',
+        'Riset': 'bar',
+        'Pengalaman belajar': 'column',
+        'Pengembangan teknologi dan informasi kampus': 'combo',
+        'Keberlanjutan': 'bar',
+        'Reputasi dan Branding': 'column'
+    };
+
+    let currentYear = '2020/2021';
+
+    // Load Google Charts
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(() => {
+        renderDashboard(currentYear);
+    });
+
+    // Filter by year
+    function filterByYear(year) {
+        currentYear = year;
+        
+        // Update button styles
+        document.querySelectorAll('.year-filter-btn').forEach(btn => {
+            btn.classList.remove('active', 'btn-primary');
+            btn.classList.add('btn-outline-primary');
+            if (btn.textContent.trim() === year) {
+                btn.classList.remove('btn-outline-primary');
+                btn.classList.add('active', 'btn-primary');
+            }
+        });
+        
+        renderDashboard(year);
+    }
+
+    // Initialize first button as active
+    document.addEventListener('DOMContentLoaded', function() {
+        const firstButton = document.querySelector('.year-filter-btn');
+        if (firstButton) {
+            firstButton.classList.remove('btn-outline-primary');
+            firstButton.classList.add('active', 'btn-primary');
+        }
+    });
+
+    // Render dashboard
+    function renderDashboard(year) {
+        const container = document.getElementById('dashboard-container');
+        container.innerHTML = '';
+        
+        const yearData = developmentData[year];
+        let priorityNumber = 1;
+        
+        for (const [priority, items] of Object.entries(yearData)) {
+            const chartVariant = getChartVariant(priorityNumber, priority);
+            const card = createCard(priority, items, priorityNumber, year, chartVariant);
+            container.appendChild(card);
+            priorityNumber++;
+        }
+        
+        // Draw all charts after DOM is ready
+        setTimeout(() => {
+            priorityNumber = 1;
+            for (const [priority, items] of Object.entries(yearData)) {
+                const chartVariant = getChartVariant(priorityNumber, priority);
+                if (items.length === 1) {
+                    drawPieChart(priority, items[0], priorityNumber);
+                } else {
+                    drawComparisonChart(priority, items, priorityNumber, chartVariant);
+                }
+                priorityNumber++;
+            }
+        }, 100);
+    }
+
+    function getChartVariant(priorityNumber, priority) {
+        if (chartVariantMapping[priority]) {
+            return chartVariantMapping[priority];
+        }
+        if (priorityNumber % 3 === 0) return 'combo';
+        return priorityNumber % 2 === 0 ? 'column' : 'bar';
+    }
+
+    function getVariantBadge(variant) {
+        switch (variant) {
+            case 'combo': return '<span class="badge bg-info-subtle text-info fw-semibold">Combo Chart</span>';
+            case 'column': return '<span class="badge bg-primary-subtle text-primary fw-semibold">Column Chart</span>';
+            default: return '<span class="badge bg-success-subtle text-success fw-semibold">Bar Chart</span>';
+        }
+    }
+
+    // Create card element
+    function createCard(priority, items, priorityNumber, year, variant) {
+        const col = document.createElement('div');
+        col.className = 'col-12 col-lg-6';
+        col.id = `card-${priorityNumber}`;
+        
+        const chartId = `chart-${priorityNumber}`;
+        const variantBadge = items.length === 1 ? '<span class="badge bg-warning-subtle text-warning fw-semibold">Donut Chart</span>' : getVariantBadge(variant);
+        
+        col.innerHTML = `
+            <div class="card chart-card h-100">
+                <div class="card-body">
+                    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center mb-3 gap-2">
+                        <div class="text-start">
+                            <p class="text-muted small mb-1">Prioritas ${priorityNumber}</p>
+                            <h3 class="h5 fw-bold mb-0 text-dark">${priority}</h3>
+                            <small class="text-secondary">Tahun Akademik: ${year}</small>
+                        </div>
+                        ${variantBadge}
+                    </div>
+                    <div id="${chartId}" class="chart-container" style="height: ${items.length === 1 ? '340px' : '360px'};"></div>
+                </div>
+            </div>
+        `;
+        
+        return col;
+    }
+
+    // Draw Pie Chart (for single uraian)
+    function drawPieChart(priority, item, priorityNumber) {
+        const chartId = `chart-${priorityNumber}`;
+        const chartDiv = document.getElementById(chartId);
+        
+        if (!chartDiv) return;
+        
+        let rencana = 0;
+        let tercapai = 0;
+        
+        // Handle numeric values
+        if (typeof item.rencana === 'number') {
+            rencana = item.rencana;
+        } else if (typeof item.rencana === 'string' && !isNaN(parseFloat(item.rencana))) {
+            rencana = parseFloat(item.rencana);
+        }
+        
+        if (typeof item.tercapai === 'number') {
+            tercapai = item.tercapai;
+        }
+        
+        // If both are 0, set a small value to show the chart
+        if (rencana === 0 && tercapai === 0) {
+            rencana = 1;
+        }
+        
+        const data = google.visualization.arrayToDataTable([
+            ['Kategori', 'Nilai'],
+            ['Rencana', rencana],
+            ['Target Tercapai', tercapai]
+        ]);
+        
+        const options = {
+            title: item.uraian,
+            titleTextStyle: {
+                fontSize: 14,
+                bold: true
+            },
+            pieHole: 0.4,
+            colors: ['#3498db', '#2ecc71'],
+            legend: {
+                position: 'bottom',
+                textStyle: { fontSize: 12 }
+            },
+            pieSliceText: 'value',
+            pieSliceTextStyle: {
+                fontSize: 14,
+                bold: true
+            },
+            tooltip: {
+                textStyle: { fontSize: 12 }
+            }
+        };
+        
+        const chart = new google.visualization.PieChart(chartDiv);
+        chart.draw(data, options);
+        
+        // Add text info for non-numeric values
+        if (typeof item.rencana !== 'number' && isNaN(parseFloat(item.rencana))) {
+            const infoDiv = document.createElement('div');
+            infoDiv.className = 'mt-4 p-3 bg-gray-50 rounded text-sm text-center';
+            infoDiv.innerHTML = `<strong>Rencana:</strong> ${item.rencana}<br><strong>Target Tercapai:</strong> ${item.tercapai || 'Belum ada data'}`;
+            chartDiv.parentNode.appendChild(infoDiv);
+        }
+    }
+
+    // Draw Comparison Chart (for multiple uraian)
+    function drawComparisonChart(priority, items, priorityNumber, variant) {
+        const chartId = `chart-${priorityNumber}`;
+        const chartDiv = document.getElementById(chartId);
+        
+        if (!chartDiv) return;
+        
+        // Prepare data - filter out non-numeric values for chart
+        const dataArray = [['Uraian', 'Rencana', 'Target Tercapai']];
+        
+        items.forEach(item => {
+            // Handle numeric values
+            let rencana = 0;
+            let tercapai = 0;
+            
+            if (typeof item.rencana === 'number') {
+                rencana = item.rencana;
+            } else if (typeof item.rencana === 'string' && !isNaN(parseFloat(item.rencana))) {
+                rencana = parseFloat(item.rencana);
+            }
+            
+            if (typeof item.tercapai === 'number') {
+                tercapai = item.tercapai;
+            }
+            
+            // Shorten uraian if too long
+            let uraianLabel = item.uraian;
+            if (uraianLabel.length > 40) {
+                uraianLabel = uraianLabel.substring(0, 37) + '...';
+            }
+            
+            dataArray.push([uraianLabel, rencana, tercapai]);
+        });
+        
+        const data = google.visualization.arrayToDataTable(dataArray);
+        
+        // Calculate max value for better scaling
+        let maxValue = 0;
+        items.forEach(item => {
+            const rencana = typeof item.rencana === 'number' ? item.rencana : 0;
+            const tercapai = typeof item.tercapai === 'number' ? item.tercapai : 0;
+            maxValue = Math.max(maxValue, rencana, tercapai);
+        });
+        
+        const isBar = variant === 'bar';
+        const isCombo = variant === 'combo';
+        
+        const options = {
+            title: priority,
+            titleTextStyle: {
+                fontSize: 16,
+                bold: true
+            },
+            colors: ['#0d6efd', '#20c997'],
+            legend: {
+                position: 'top',
+                textStyle: { fontSize: 12 }
+            },
+            chartArea: {
+                left: isBar ? 160 : 60,
+                top: 70,
+                width: isBar ? '60%' : '80%',
+                height: '60%'
+            },
+            bar: {
+                groupWidth: '55%'
+            },
+            tooltip: {
+                textStyle: { fontSize: 12 }
+            }
+        };
+
+        if (isBar) {
+            options.hAxis = {
+                title: 'Nilai',
+                minValue: 0,
+                maxValue: maxValue > 0 ? maxValue * 1.2 : 100,
+                textStyle: { fontSize: 11 }
+            };
+            options.vAxis = {
+                title: 'Uraian',
+                textStyle: { fontSize: 10 }
+            };
+        } else {
+            options.vAxis = {
+                title: 'Nilai',
+                minValue: 0,
+                maxValue: maxValue > 0 ? maxValue * 1.2 : 100,
+                textStyle: { fontSize: 11 }
+            };
+            options.hAxis = {
+                title: 'Uraian',
+                slantedText: true,
+                slantedTextAngle: 20,
+                textStyle: { fontSize: 10 }
+            };
+        }
+        
+        if (isCombo) {
+            options.seriesType = 'bars';
+            options.series = {
+                1: { type: 'line', curveType: 'function', lineWidth: 3, pointSize: 6, color: '#6f42c1' }
+            };
+        }
+        
+        let chart;
+        if (isCombo) {
+            chart = new google.visualization.ComboChart(chartDiv);
+        } else if (isBar) {
+            chart = new google.visualization.BarChart(chartDiv);
+        } else {
+            chart = new google.visualization.ColumnChart(chartDiv);
+        }
+        chart.draw(data, options);
+        
+        // Add text info for non-numeric values below chart
+        const nonNumericItems = items.filter(item => typeof item.rencana !== 'number' && isNaN(parseFloat(item.rencana)));
+        if (nonNumericItems.length > 0) {
+            const infoDiv = document.createElement('div');
+            infoDiv.className = 'mt-4 p-3 bg-gray-50 rounded text-sm';
+            infoDiv.innerHTML = '<strong>Informasi Tambahan:</strong><br>' + 
+                nonNumericItems.map(item => `${item.uraian}: ${item.rencana}`).join('<br>');
+            chartDiv.parentNode.appendChild(infoDiv);
+        }
+    }
+    </script>
+
+    <script src="{{ asset('assets/js/jquery-3.5.1.min.js') }}"></script>
+    <!-- Bootstrap js-->
+    <script src="{{ asset('assets/js/bootstrap/bootstrap.bundle.min.js') }}"></script>
+    <!-- feather icon js-->
+    <script src="{{ asset('assets/js/icons/feather-icon/feather.min.js') }}"></script>
+    <script src="{{ asset('assets/js/icons/feather-icon/feather-icon.js') }}"></script>
+    <!-- scrollbar js-->
+    <!-- Sidebar jquery-->
+    <script src="{{ asset('assets/js/config.js') }}"></script>
+    <!-- Plugins JS start-->
+    @yield('script')
+
+    @if (Route::current()->getName() != 'popover')
+        <script src="{{ asset('assets/js/tooltip-init.js') }}"></script>
+    @endif
+    <!-- Plugins JS Ends-->
+    <!-- Theme js-->
+    <script src="{{ asset('assets/js/chart/apex-chart/moment.min.js') }}"></script>
+    <script src="{{ asset('assets/js/script2.js') }}"></script>
+</body>
+</html>

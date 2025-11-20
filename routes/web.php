@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Jenssegers\Date\Date;
 
@@ -134,8 +135,12 @@ Route::get('/email', function () {
 
 //view page
 Route::get("/target-renstra", function(){
-    return View::make("page.target-renstra");
+    return view("page.target-renstra");
  })->name('target-renstra');
+
+Route::get('/rencana-pengembangan', function () {
+    return view('page.rencana-pengembangan');
+})->name('rencana-pengembangan');
 
 //update gelar dosen
 Route::get('update-dosen', [App\Http\Controllers\ApiController::class, 'update_dosen'])->middleware(['auth', 'role:AD']);
