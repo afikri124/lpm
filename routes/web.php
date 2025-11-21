@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DevelopmentController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Jenssegers\Date\Date;
@@ -87,6 +88,9 @@ Route::group(['prefix' => 'development', 'middleware' => ['auth', 'role:AD']], f
     Route::get('/', [App\Http\Controllers\DevelopmentController::class, 'index'])->name('development');
     Route::post('/update', [App\Http\Controllers\DevelopmentController::class, 'update'])->name('development.update');
     Route::post('/bulk-update', [App\Http\Controllers\DevelopmentController::class, 'bulkUpdate'])->name('development.bulk-update');
+
+    Route::post('/year/store', [App\Http\Controllers\DevelopmentController::class, 'storeYear'])->name('development.year.store');
+    Route::delete('/year/delete', [App\Http\Controllers\DevelopmentController::class, 'deleteYear'])->name('development.year.delete');
 });
 //OBSERVATIONS ROLE AUDITOR
 Route::group(['prefix' => 'observations', 'middleware' => ['auth', 'role:AU']], function() {
@@ -143,9 +147,7 @@ Route::get("/target-renstra", function(){
     return view("page.target-renstra");
  })->name('target-renstra');
 
-Route::get('/rencana-pengembangan', function () {
-    return view('page.rencana-pengembangan');
-})->name('rencana-pengembangan');
+Route::get('/rencana-pengembangan', [DevelopmentController::class, 'dev'])->name('rencana-pengembangan');
 
 //update gelar dosen
 Route::get('update-dosen', [App\Http\Controllers\ApiController::class, 'update_dosen'])->middleware(['auth', 'role:AD']);

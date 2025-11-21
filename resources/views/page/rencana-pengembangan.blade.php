@@ -173,7 +173,7 @@
                             </div>
                             <p>Rencana Pengembangan 5 Tahun Universitas Global Jakarta</p>
                         </div>
-                        <p class="lead text-muted mb-0">Periode 2020 - 2025</p>
+                        <p class="lead text-muted mb-0">Periode <span id="year-range-display">2020 - 2025</span></p>
                     </div>
                 </div>
             </div>
@@ -186,22 +186,12 @@
                                 <h3 class="h5 fw-semibold text-secondary mb-1">Filter Tahun Akademik</h3>
                                 <p class="mb-0 text-muted">Pilih rentang tahun untuk melihat detail indikator.</p>
                             </div>
-                            <div class="btn-group flex-wrap" role="group" aria-label="Filter Tahun Akademik">
-                                <button onclick="filterByYear('2020/2021')" class="year-filter-btn btn btn-primary active">
-                                    2020/2021
-                                </button>
-                                <button onclick="filterByYear('2021/2022')" class="year-filter-btn btn btn-outline-primary">
-                                    2021/2022
-                                </button>
-                                <button onclick="filterByYear('2022/2023')" class="year-filter-btn btn btn-outline-primary">
-                                    2022/2023
-                                </button>
-                                <button onclick="filterByYear('2023/2024')" class="year-filter-btn btn btn-outline-primary">
-                                    2023/2024
-                                </button>
-                                <button onclick="filterByYear('2024/2025')" class="year-filter-btn btn btn-outline-primary">
-                                    2024/2025
-                                </button>
+                            <div class="btn-group flex-wrap" role="group" aria-label="Filter Tahun Akademik" id="year-filter-buttons">
+                                @foreach($years as $yearOption)
+                                    <button onclick="filterByYear('{{ $yearOption }}')" class="year-filter-btn btn btn-outline-primary {{ $yearOption == $selectedYear ? 'active btn-primary' : '' }}">
+                                        {{ $yearOption }}
+                                    </button>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -226,189 +216,10 @@
     </div>
     
     <script>
-    // Data Rencana Pengembangan
-    const developmentData = {
-        '2020/2021': {
-            'Jumlah Mahasiswa': [
-                { uraian: 'Jumlah Mahasiswa di JGU', rencana: 1000, tercapai: 9 }
-            ],
-            'Kualitas Pendidikan': [
-                { uraian: 'Akreditasi Institusi', rencana: 'C/Baik' },
-                { uraian: 'Akreditasi Prodi B/Baik Sekali', rencana: 4, tercapai: 9 },
-                { uraian: 'Akreditasi Prodi A/Unggul', rencana: 0, tercapai: 9 }
-            ],
-            'Hubungan Industri': [
-                { uraian: 'Kegiatan Tri darma JGU bersama Industri', rencana: 10, tercapai: 9 }
-            ],
-            'Kewirausahaan': [
-                { uraian: 'Kegiatan terkait kewirausahaan bersama alumni dan Industri', rencana: 4, tercapai: 9 }
-            ],
-            'Internasionalisasi': [
-                { uraian: 'Kegiatan tridarma bertaraf internasional', rencana: 3, tercapai: 9 }
-            ],
-            'Riset': [
-                { uraian: 'Publikasi Ilmiah Internasional terindeks scopus', rencana: 20, tercapai: 9 },
-                { uraian: 'Publikasi Ilmiah Nasional terindeks Sinta', rencana: 25, tercapai: 9 }
-            ],
-            'Pengalaman belajar': [
-                { uraian: 'Kompetisi yang diikuti oleh mahasiswa', rencana: 4, tercapai: 9 },
-                { uraian: 'Kegiatan pengabdian masyarakat yang melibatkan mahasiswa', rencana: 3, tercapai: 9 }
-            ],
-            'Pengembangan teknologi dan informasi kampus': [
-                { uraian: 'Aplikasi penunjang terlaksananya tri darma perguruan tinggi', rencana: 6, tercapai: 9 }
-            ],
-            'Keberlanjutan': [
-                { uraian: 'Kegiatan terkait SDG', rencana: 4, tercapai: 9 }
-            ],
-            'Reputasi dan Branding': [
-                { uraian: 'Jumlah video/poster terkait Profil JGU & Prodi pada platform social media', rencana: 60, tercapai: 9 }   
-            ]
-        },
-        '2021/2022': {
-            'Jumlah Mahasiswa': [
-                { uraian: 'Jumlah Mahasiswa di JGU', rencana: 1250, tercapai: 9 }
-            ],
-            'Kualitas Pendidikan': [
-                { uraian: 'Akreditasi Institusi', rencana: 'C/Baik' },
-                { uraian: 'Akreditasi Prodi B/Baik Sekali', rencana: 4, tercapai: 9 },
-                { uraian: 'Akreditasi Prodi A/Unggul', rencana: 0, tercapai: 9 }
-            ],
-            'Hubungan Industri': [
-                { uraian: 'Kegiatan Tri darma JGU bersama Industri', rencana: 12, tercapai: 9 }
-            ],
-            'Kewirausahaan': [
-                { uraian: 'Kegiatan terkait kewirausahaan bersama alumni dan Industri', rencana: 4, tercapai: 9 }
-            ],
-            'Internasionalisasi': [
-                { uraian: 'Kegiatan tridarma bertaraf internasional', rencana: 6, tercapai: 9 }
-            ],
-            'Riset': [
-                { uraian: 'Publikasi Ilmiah Internasional terindeks scopus', rencana: 30, tercapai: 9 },
-                { uraian: 'Publikasi Ilmiah Nasional terindeks Sinta', rencana: 30, tercapai: 9 }
-            ],
-            'Pengalaman belajar': [
-                { uraian: 'Kompetisi yang diikuti oleh mahasiswa', rencana: 10, tercapai: 9 },
-                { uraian: 'Kegiatan pengabdian masyarakat yang melibatkan mahasiswa', rencana: 8, tercapai: 9 }
-            ],
-            'Pengembangan teknologi dan informasi kampus': [
-                { uraian: 'Aplikasi penunjang terlaksananya tri darma perguruan tinggi', rencana: 10, tercapai: 9 }
-            ],
-            'Keberlanjutan': [
-                { uraian: 'Kegiatan terkait SDG', rencana: 6, tercapai: 9 }
-            ],
-            'Reputasi dan Branding': [
-                { uraian: 'Jumlah video/poster terkait Profil JGU & Prodi pada platform social media', rencana: 70, tercapai: 9 }
-            ]
-        },
-        '2022/2023': {
-            'Jumlah Mahasiswa': [
-                { uraian: 'Jumlah Mahasiswa di JGU', rencana: 1500, tercapai: 9 }
-            ],
-            'Kualitas Pendidikan': [
-                { uraian: 'Akreditasi Institusi', rencana: 'B/Baik Sekali' },
-                { uraian: 'Akreditasi Prodi B/Baik Sekali', rencana: 5, tercapai: 9 },
-                { uraian: 'Akreditasi Prodi A/Unggul', rencana: 0, tercapai: 9 }
-            ],
-            'Hubungan Industri': [
-                { uraian: 'Kegiatan Tri darma JGU bersama Industri', rencana: 18, tercapai: 9 }
-            ],
-            'Kewirausahaan': [
-                { uraian: 'Kegiatan terkait kewirausahaan bersama alumni dan Industri', rencana: 6, tercapai: 9 }
-            ],
-            'Internasionalisasi': [
-                { uraian: 'Kegiatan tridarma bertaraf internasional', rencana: 10, tercapai: 9 }
-            ],
-            'Riset': [
-                { uraian: 'Publikasi Ilmiah Internasional terindeks scopus', rencana: 40, tercapai: 9 },
-                { uraian: 'Publikasi Ilmiah Nasional terindeks Sinta', rencana: 80, tercapai: 9 }
-            ],
-            'Pengalaman belajar': [
-                { uraian: 'Kompetisi yang diikuti oleh mahasiswa', rencana: 15, tercapai: 9 },
-                { uraian: 'Kegiatan pengabdian masyarakat yang melibatkan mahasiswa', rencana: 16, tercapai: 9 }
-            ],
-            'Pengembangan teknologi dan informasi kampus': [
-                { uraian: 'Aplikasi penunjang terlaksananya tri darma perguruan tinggi', rencana: 15, tercapai: 9 }
-            ],
-            'Keberlanjutan': [
-                { uraian: 'Kegiatan terkait SDG', rencana: 8, tercapai: 9 }
-            ],
-            'Reputasi dan Branding': [
-                { uraian: 'Jumlah video/poster terkait Profil JGU & Prodi pada platform social media', rencana: 80, tercapai: 9 }
-            ]
-        },
-        '2023/2024': {
-            'Jumlah Mahasiswa': [
-                { uraian: 'Jumlah Mahasiswa di JGU', rencana: 1750, tercapai: 9 }
-            ],
-            'Kualitas Pendidikan': [
-                { uraian: 'Akreditasi Institusi', rencana: 'B/Baik Sekali' },
-                { uraian: 'Akreditasi Prodi B/Baik Sekali', rencana: 6, tercapai: 9 },
-                { uraian: 'Akreditasi Prodi A/Unggul', rencana: 1, tercapai: 9 }
-            ],
-            'Hubungan Industri': [
-                { uraian: 'Kegiatan Tri darma JGU bersama Industri', rencana: 20, tercapai: 9 }
-            ],
-            'Kewirausahaan': [
-                { uraian: 'Kegiatan terkait kewirausahaan bersama alumni dan Industri', rencana: 8, tercapai: 9 }
-            ],
-            'Internasionalisasi': [
-                { uraian: 'Kegiatan tridarma bertaraf internasional', rencana: 14, tercapai: 9 }
-            ],
-            'Riset': [
-                { uraian: 'Publikasi Ilmiah Internasional terindeks scopus', rencana: 50, tercapai: 9 },
-                { uraian: 'Publikasi Ilmiah Nasional terindeks Sinta', rencana: 100, tercapai: 9 }
-            ],
-            'Pengalaman belajar': [
-                { uraian: 'Kompetisi yang diikuti oleh mahasiswa', rencana: 20, tercapai: 9 },
-                { uraian: 'Kegiatan pengabdian masyarakat yang melibatkan mahasiswa', rencana: 20, tercapai: 9 }
-            ],
-            'Pengembangan teknologi dan informasi kampus': [
-                { uraian: 'Aplikasi penunjang terlaksananya tri darma perguruan tinggi', rencana: 20, tercapai: 9 }
-            ],
-            'Keberlanjutan': [
-                { uraian: 'Kegiatan terkait SDG', rencana: 10, tercapai: 9 }
-            ],
-            'Reputasi dan Branding': [
-                { uraian: 'Jumlah video/poster terkait Profil JGU & Prodi pada platform social media', rencana: 90, tercapai: 9 }
-            ]
-        },
-        '2024/2025': {
-            'Jumlah Mahasiswa': [
-                { uraian: 'Jumlah Mahasiswa di JGU', rencana: 2000, tercapai: 9 }
-            ],
-            'Kualitas Pendidikan': [
-                { uraian: 'Akreditasi Institusi', rencana: 'B/Baik Sekali' },
-                { uraian: 'Akreditasi Prodi B/Baik Sekali', rencana: 6, tercapai: 9 },
-                { uraian: 'Akreditasi Prodi A/Unggul', rencana: 2, tercapai: 9 }
-            ],
-            'Hubungan Industri': [
-                { uraian: 'Kegiatan Tri darma JGU bersama Industri', rencana: 24, tercapai: 9 }
-            ],
-            'Kewirausahaan': [
-                { uraian: 'Kegiatan terkait kewirausahaan bersama alumni dan Industri', rencana: 10, tercapai: 9 }
-            ],
-            'Internasionalisasi': [
-                { uraian: 'Kegiatan tridarma bertaraf internasional', rencana: 18, tercapai: 9 }
-            ],
-            'Riset': [
-                { uraian: 'Publikasi Ilmiah Internasional terindeks scopus', rencana: 60, tercapai: 9 },
-                { uraian: 'Publikasi Ilmiah Nasional terindeks Sinta', rencana: 150, tercapai: 9 }
-            ],
-            'Pengalaman belajar': [
-                { uraian: 'Kompetisi yang diikuti oleh mahasiswa', rencana: 24, tercapai: 9 },
-                { uraian: 'Kegiatan pengabdian masyarakat yang melibatkan mahasiswa', rencana: 26, tercapai: 9 }
-            ],
-            'Pengembangan teknologi dan informasi kampus': [
-                { uraian: 'Aplikasi penunjang terlaksananya tri darma perguruan tinggi', rencana: 25, tercapai: 9 }
-            ],
-            'Keberlanjutan': [
-                { uraian: 'Kegiatan terkait SDG', rencana: 12, tercapai: 9 }
-            ],
-            'Reputasi dan Branding': [
-                { uraian: 'Jumlah video/poster terkait Profil JGU & Prodi pada platform social media', rencana: 100, tercapai: 9 }
-            ]
-        }
-    };
+    // Data Rencana Pengembangan dari backend
+    const developmentData = @json($plans);
+    const availableYears = @json($years);
+    let currentYear = "{{ $selectedYear }}";
 
     const chartVariantMapping = {
         'Jumlah Mahasiswa': 'column',
@@ -423,12 +234,17 @@
         'Reputasi dan Branding': 'column'
     };
 
-    let currentYear = '2020/2021';
     let singleChartModeMap = {};
 
     // Load Google Charts
     google.charts.load('current', { 'packages': ['corechart'] });
     google.charts.setOnLoadCallback(() => {
+        // Set initial year range display
+        if (availableYears.length > 0) {
+            const minYear = availableYears[0].split('/')[0];
+            const maxYear = availableYears[availableYears.length - 1].split('/')[1];
+            document.getElementById('year-range-display').textContent = `${minYear} - ${maxYear}`;
+        }
         renderDashboard(currentYear);
     });
 
@@ -436,6 +252,11 @@
     function filterByYear(year) {
         currentYear = year;
         
+        // Update URL to reflect selected year
+        const url = new URL(window.location.href);
+        url.searchParams.set('year', year);
+        window.history.pushState({}, '', url);
+
         // Update button styles
         document.querySelectorAll('.year-filter-btn').forEach(btn => {
             btn.classList.remove('active', 'btn-primary');
@@ -449,14 +270,14 @@
         renderDashboard(year);
     }
 
-    // Initialize first button as active
-    document.addEventListener('DOMContentLoaded', function() {
-        const firstButton = document.querySelector('.year-filter-btn');
-        if (firstButton) {
-            firstButton.classList.remove('btn-outline-primary');
-            firstButton.classList.add('active', 'btn-primary');
-        }
-    });
+    // Initialize first button as active (no longer needed, handled by Blade)
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     const firstButton = document.querySelector('.year-filter-btn');
+    //     if (firstButton) {
+    //         firstButton.classList.remove('btn-outline-primary');
+    //         firstButton.classList.add('active', 'btn-primary');
+    //     }
+    // });
 
     // Render dashboard
     function renderDashboard(year) {
@@ -464,6 +285,11 @@
         container.innerHTML = '';
         
         const yearData = developmentData[year];
+        if (!yearData) {
+            container.innerHTML = '<div class="col-12"><p class="text-muted text-center">Tidak ada data untuk tahun akademik ini.</p></div>';
+            return;
+        }
+
         let priorityNumber = 1;
         singleChartModeMap = {};
         let pieModeToggle = true;
@@ -509,7 +335,8 @@
         switch (variant) {
             case 'combo': return '<span class="badge bg-info-subtle text-info fw-semibold">Combo Chart</span>';
             case 'column': return '<span class="badge bg-primary-subtle text-primary fw-semibold">Column Chart</span>';
-            default: return '<span class="badge bg-success-subtle text-success fw-semibold">Bar Chart</span>';
+            case 'bar': return '<span class="badge bg-success-subtle text-success fw-semibold">Bar Chart</span>';
+            default: return ''; // Should not happen with defined variants
         }
     }
 
@@ -540,6 +367,7 @@
                     </div>
                     <div id="${chartId}" class="chart-container" style="height: ${items.length === 1 ? '340px' : '360px'};"></div>
                     <div id="non-numeric-info-${priorityNumber}"></div>
+                    <div id="pie-chart-details-${priorityNumber}"></div> <!-- New div for details -->
                     ${evidenceButtons}
                 </div>
             </div>
@@ -559,39 +387,83 @@
                 </a>
             `;
         }).join('');
-        return `<div class="mt-4 d-flex flex-wrap gap-2">${buttons}</div>`;
+        return `<div class="mt-4 d-flex flex-wrap gap-2 justify-content-center">${buttons}</div>`;
     }
 
     // Draw Pie Chart (for single uraian)
     function drawPieChart(priority, item, priorityNumber, mode = 'donut') {
         const chartId = `chart-${priorityNumber}`;
         const chartDiv = document.getElementById(chartId);
-        
-        if (!chartDiv) return;
-        
-        let rencana = 0;
-        let tercapai = 0;
-        
-        // Handle numeric values
-        if (typeof item.rencana === 'number') {
-            rencana = item.rencana;
-        } else if (typeof item.rencana === 'string' && !isNaN(parseFloat(item.rencana))) {
-            rencana = parseFloat(item.rencana);
+        const detailsContainer = document.getElementById(`pie-chart-details-${priorityNumber}`);
+        const nonNumericInfoContainer = document.getElementById(`non-numeric-info-${priorityNumber}`);
+
+        if (!chartDiv || !detailsContainer || !nonNumericInfoContainer) return;
+
+        let rencanaVal = 0;
+        let tercapaiVal = 0;
+        let isNumeric = false;
+
+        const parsedRencana = parseFloat(item.rencana);
+        const parsedTercapai = parseFloat(item.tercapai);
+
+        if (!isNaN(parsedRencana) && !isNaN(parsedTercapai)) {
+            rencanaVal = parsedRencana;
+            tercapaiVal = parsedTercapai;
+            isNumeric = true;
+        }
+
+        // --- Display values below the chart ---
+        let displayPercentage = 0;
+        if (rencanaVal !== 0) {
+            displayPercentage = (tercapaiVal / rencanaVal) * 100;
+        } else if (tercapaiVal > 0) {
+            displayPercentage = 100;
+        }
+        const formattedDisplayPercentage = displayPercentage.toFixed(2);
+
+        detailsContainer.innerHTML = `
+            <div class="mt-4 pt-4 border-top">
+                <p class="mb-0 fw-semibold text-dark">Rencana: ${Math.round(rencanaVal)}</p>
+                <p class="mb-0 fw-bold text-primary fs-5">Target Tercapai: ${Math.round(tercapaiVal)} (${formattedDisplayPercentage}%)</p>
+            </div>
+        `;
+        // --- End display values below the chart ---
+
+        // --- Chart rendering logic ---
+        if (!isNumeric) {
+            chartDiv.style.display = 'none';
+            nonNumericInfoContainer.innerHTML = `
+                <div class="mt-4 mb-3 pb-3 border-bottom">
+                    <p class="mb-0 fw-semibold text-dark">${item.uraian}</p>
+                    <p class="mb-0 fw-bold text-primary fs-5">${item.rencana}</p>
+                </div>
+            `;
+            return;
+        }
+
+        chartDiv.style.display = 'block';
+
+        let chartTercapai = Math.round(Math.max(0, tercapaiVal));
+        let chartRencana = Math.round(Math.max(0, rencanaVal));
+
+        if (chartRencana === 0) {
+            if (chartTercapai === 0) {
+                chartTercapai = 0;
+                chartRencana = 1;
+            } else {
+                chartTercapai = 1;
+                chartRencana = 1;
+            }
         }
         
-        if (typeof item.tercapai === 'number') {
-            tercapai = item.tercapai;
-        }
-        
-        // If both are 0, set a small value to show the chart
-        if (rencana === 0 && tercapai === 0) {
-            rencana = 1;
-        }
-        
+        let displayInChartTercapai = Math.min(chartTercapai, chartRencana);
+        let displayInChartRemaining = Math.max(0, chartRencana - displayInChartTercapai);
+
+
         const data = google.visualization.arrayToDataTable([
             ['Kategori', 'Nilai'],
-            ['Rencana', rencana],
-            ['Target Tercapai', tercapai]
+            ['Target Tercapai', displayInChartTercapai],
+            ['Sisa Target', displayInChartRemaining]
         ]);
         
         const options = {
@@ -601,12 +473,12 @@
                 bold: true
             },
             pieHole: mode === 'donut' ? 0.45 : 0,
-            colors: ['#3498db', '#2ecc71'],
+            colors: ['#2ecc71', '#f0f0f0'],
             legend: {
                 position: 'bottom',
                 textStyle: { fontSize: 12 }
             },
-            pieSliceText: 'value',
+            pieSliceText: 'percentage',
             pieSliceTextStyle: {
                 fontSize: 14,
                 bold: true
@@ -618,19 +490,6 @@
         
         const chart = new google.visualization.PieChart(chartDiv);
         chart.draw(data, options);
-        
-        // Add text info for non-numeric values (should not happen for single item, but just in case)
-        if (typeof item.rencana !== 'number' && isNaN(parseFloat(item.rencana))) {
-            const infoContainer = document.getElementById(`non-numeric-info-${priorityNumber}`);
-            if (infoContainer) {
-                infoContainer.innerHTML = `
-                    <div class="mt-4 mb-3 pb-3 border-bottom">
-                        <p class="mb-0 fw-semibold text-dark">${item.uraian}</p>
-                        <p class="mb-0 fw-bold text-primary fs-5">${item.rencana}</p>
-                    </div>
-                `;
-            }
-        }
     }
 
     // Draw Comparison Chart (for multiple uraian)
@@ -642,12 +501,16 @@
         
         // Separate numeric and non-numeric items
         const numericItems = items.filter(item => {
-            return typeof item.rencana === 'number' || 
-                   (typeof item.rencana === 'string' && !isNaN(parseFloat(item.rencana)) && item.rencana.trim() !== '');
+            return (typeof item.rencana === 'number' || 
+                   (typeof item.rencana === 'string' && !isNaN(parseFloat(item.rencana)) && item.rencana.trim() !== '')) &&
+                   (typeof item.tercapai === 'number' || 
+                   (typeof item.tercapai === 'string' && !isNaN(parseFloat(item.tercapai)) && item.tercapai.trim() !== ''));
         });
         const nonNumericItems = items.filter(item => {
-            return typeof item.rencana !== 'number' && 
-                   (typeof item.rencana === 'string' && (isNaN(parseFloat(item.rencana)) || item.rencana.trim() === ''));
+            return !((typeof item.rencana === 'number' || 
+                    (typeof item.rencana === 'string' && !isNaN(parseFloat(item.rencana)) && item.rencana.trim() !== '')) &&
+                    (typeof item.tercapai === 'number' || 
+                    (typeof item.tercapai === 'string' && !isNaN(parseFloat(item.tercapai)) && item.tercapai.trim() !== '')));
         });
         
         // Prepare data - only include numeric values for chart
@@ -666,11 +529,13 @@
             
             if (typeof item.tercapai === 'number') {
                 tercapai = item.tercapai;
+            } else if (typeof item.tercapai === 'string' && !isNaN(parseFloat(item.tercapai))) {
+                tercapai = parseFloat(item.tercapai);
             }
             
             // Shorten uraian if too long
             let uraianLabel = item.uraian;
-            if (uraianLabel.length > 120) {
+            if (uraianLabel && uraianLabel.length > 37) {
                 uraianLabel = uraianLabel.substring(0, 37) + '...';
             }
             
@@ -680,6 +545,7 @@
         // Only draw chart if there are numeric items
         if (numericItems.length === 0) {
             chartDiv.innerHTML = '<p class="text-muted text-center p-4">Tidak ada data numerik untuk ditampilkan dalam chart.</p>';
+            chartDiv.style.minHeight = '150px'; // Ensure some height even with no chart
         } else {
             const data = google.visualization.arrayToDataTable(dataArray);
             
@@ -688,7 +554,8 @@
             numericItems.forEach(item => {
                 const rencana = typeof item.rencana === 'number' ? item.rencana : 
                                (typeof item.rencana === 'string' && !isNaN(parseFloat(item.rencana)) ? parseFloat(item.rencana) : 0);
-                const tercapai = typeof item.tercapai === 'number' ? item.tercapai : 0;
+                const tercapai = typeof item.tercapai === 'number' ? item.tercapai : 
+                               (typeof item.tercapai === 'string' && !isNaN(parseFloat(item.tercapai)) ? parseFloat(item.tercapai) : 0);
                 maxValue = Math.max(maxValue, rencana, tercapai);
             });
         
@@ -764,7 +631,7 @@
             chart.draw(data, options);
         }
         
-        // Add text info for non-numeric values below chart with better formatting: Akreditasi Institusi
+        // Add text info for non-numeric items below chart with better formatting: Akreditasi Institusi
         if (nonNumericItems.length > 0) {
             const infoContainer = document.getElementById(`non-numeric-info-${priorityNumber}`);
             if (infoContainer) {

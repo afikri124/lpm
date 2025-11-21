@@ -194,7 +194,43 @@ class DevelopmentPlanSeeder extends Seeder
                 'Reputasi dan Branding' => [
                     ['uraian' => 'Jumlah video/poster terkait Profil JGU & Prodi pada platform social media', 'rencana' => 100, 'tercapai' => 9, 'is_numeric' => true]
                 ]
-            ]
+            ],
+            '2025/2026' => [
+                'Jumlah Mahasiswa' => [
+                    ['uraian' => 'Jumlah Mahasiswa di JGU', 'rencana' => 2000, 'tercapai' => 9, 'is_numeric' => true]
+                ],
+                'Kualitas Pendidikan' => [
+                    ['uraian' => 'Akreditasi Institusi', 'rencana' => 'B/Baik Sekali', 'tercapai' => null, 'is_numeric' => false],
+                    ['uraian' => 'Akreditasi Prodi B/Baik Sekali', 'rencana' => 6, 'tercapai' => 9, 'is_numeric' => true],
+                    ['uraian' => 'Akreditasi Prodi A/Unggul', 'rencana' => 2, 'tercapai' => 9, 'is_numeric' => true]
+                ],
+                'Hubungan Industri' => [
+                    ['uraian' => 'Kegiatan Tri darma JGU bersama Industri', 'rencana' => 24, 'tercapai' => 9, 'is_numeric' => true]
+                ],
+                'Kewirausahaan' => [
+                    ['uraian' => 'Kegiatan terkait kewirausahaan bersama alumni dan Industri', 'rencana' => 10, 'tercapai' => 9, 'is_numeric' => true]
+                ],
+                'Internasionalisasi' => [
+                    ['uraian' => 'Kegiatan tridarma bertaraf internasional', 'rencana' => 18, 'tercapai' => 9, 'is_numeric' => true]
+                ],
+                'Riset' => [
+                    ['uraian' => 'Publikasi Ilmiah Internasional terindeks scopus', 'rencana' => 60, 'tercapai' => 9, 'is_numeric' => true],
+                    ['uraian' => 'Publikasi Ilmiah Nasional terindeks Sinta', 'rencana' => 150, 'tercapai' => 9, 'is_numeric' => true]
+                ],
+                'Pengalaman belajar' => [
+                    ['uraian' => 'Kompetisi yang diikuti oleh mahasiswa', 'rencana' => 24, 'tercapai' => 9, 'is_numeric' => true],
+                    ['uraian' => 'Kegiatan pengabdian masyarakat yang melibatkan mahasiswa', 'rencana' => 26, 'tercapai' => 9, 'is_numeric' => true]
+                ],
+                'Pengembangan teknologi dan informasi kampus' => [
+                    ['uraian' => 'Aplikasi penunjang terlaksananya tri darma perguruan tinggi', 'rencana' => 25, 'tercapai' => 9, 'is_numeric' => true]
+                ],
+                'Keberlanjutan' => [
+                    ['uraian' => 'Kegiatan terkait SDG', 'rencana' => 12, 'tercapai' => 9, 'is_numeric' => true]
+                ],
+                'Reputasi dan Branding' => [
+                    ['uraian' => 'Jumlah video/poster terkait Profil JGU & Prodi pada platform social media', 'rencana' => 100, 'tercapai' => 9, 'is_numeric' => true]
+                ]
+            ],
         ];
 
         $sortOrder = 0;

@@ -53,26 +53,79 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form method="GET" action="{{ route('development') }}">
-                        <div class="row">
-                            <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-6 border-end">
+                            <form method="GET" action="{{ route('development') }}">
                                 <div class="mb-3">
-                                    <label class="form-label">Tahun Akademik</label>
+                                    <label class="form-label">Pilih Tahun Akademik</label>
                                     <select name="year" class="form-control select2" onchange="this.form.submit()">
                                         @if($years->count() > 0)
                                             @foreach($years as $year)
-                                            <option value="{{ $year }}" {{ $selectedYear == $year ? 'selected' : '' }}>
-                                                {{ $year }}
-                                            </option>
+                                                <option value="{{ $year }}" {{ $selectedYear == $year ? 'selected' : '' }}>
+                                                    {{ $year }}
+                                                </option>
                                             @endforeach
                                         @else
                                             <option value="">Tidak ada data</option>
                                         @endif
                                     </select>
                                 </div>
-                            </div>
+                            </form>
+                            @if(session('success'))
+                                <div class="alert alert-success mt-2 mb-0">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+                            @if($errors->any())
+                                <div class="alert alert-danger mt-2 mb-0">
+                                    {{ $errors->first() }}
+                                </div>
+                            @endif
                         </div>
-                    </form>
+                        <div class="col-md-6">
+                            <form method="POST" action="{{ route('development.year.store') }}">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Tahun Akademik Baru</label>
+                                            <input type="text" name="year" class="form-control" placeholder="2025/2026" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Salin Struktur dari</label>
+                                            <select name="base_year" class="form-control select2" data-placeholder="Pilih Tahun Dasar">
+                                                <option value="">Tahun Terakhir</option>
+                                                @foreach($years as $year)
+                                                    <option value="{{ $year }}">{{ $year }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-end">
+                                    <button type="submit" class="btn btn-primary btn-sm">
+                                        <i class="fa fa-plus"></i> Tambah Tahun Akademik
+                                    </button>
+                                </div>
+                            </form>
+
+                            @if($selectedYear)
+                            <form method="POST" action="{{ route('development.year.delete') }}" class="mt-3" onsubmit="return confirm('Yakin ingin menghapus tahun akademik {{ $selectedYear }}? Seluruh data rencana pengembangan tahun ini akan hilang.');">
+                                @csrf
+                                @method('DELETE')
+                                <input type="hidden" name="year" value="{{ $selectedYear }}">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="text-muted">Hapus Tahun Akademik Saat Ini ({{ $selectedYear }})</span>
+                                    <button type="submit" class="btn btn-outline-danger btn-sm">
+                                        <i class="fa fa-trash"></i> Hapus
+                                    </button>
+                                </div>
+                            </form>
+                            @endif
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -109,8 +162,8 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
-                                        <label class="form-label">Rencana</label>
                                         @if(!$item->is_numeric)
+                                        <label class="form-label">Grade</label>
                                         <select name="updates[{{ $item->id }}][rencana]" 
                                                 class="form-control select2 non-numeric-field" 
                                                 data-placeholder="Pilih Akreditasi">
@@ -119,6 +172,7 @@
                                             <option value="A/Unggul" {{ $item->rencana == 'A/Unggul' ? 'selected' : '' }}>A/Unggul</option>
                                         </select>
                                         @else
+                                        <label class="form-label">Rencana</label>
                                         <input type="number" 
                                                name="updates[{{ $item->id }}][rencana]" 
                                                class="form-control" 
@@ -130,13 +184,16 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
+                                        @if(!$item->is_numeric)
+                                        @else
                                         <label class="form-label">Target Tercapai</label>
                                         <input type="number" 
                                                name="updates[{{ $item->id }}][tercapai]" 
                                                class="form-control" 
-                                               value="{{ $item->tercapai }}" 
-                                               step="0.01" 
+                                               value="{{ round($item->tercapai) }}" 
+                                               step="1" 
                                                min="0">
+                                               @endif
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -198,6 +255,7 @@
 <script src="{{asset('assets/js/select2/select2.full.min.js')}}"></script>
 <script src="{{asset('assets/js/select2/select2-custom.js')}}"></script>
 <script src="{{asset('assets/js/sweet-alert/sweetalert.min.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     $(document).ready(function() {
         $('.select2').select2({
@@ -224,15 +282,28 @@
                 }
             });
 
-            // Convert to array
             const updatesArray = Object.values(updates);
+
+            if (updatesArray.length === 0) {
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Tidak ada perubahan',
+                    text: 'Silakan ubah nilai sebelum menyimpan.'
+                });
+                return;
+            }
+
+            const csrfToken = $('meta[name="csrf-token"]').attr('content');
 
             $.ajax({
                 url: $(this).attr('action'),
                 method: 'POST',
-                data: {
-                    _token: $('input[name="_token"]').val(),
+                contentType: 'application/json',
+                data: JSON.stringify({
                     updates: updatesArray
+                }),
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken
                 },
                 beforeSend: function() {
                     $('#submitBtn').prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> Menyimpan...');
