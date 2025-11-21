@@ -83,6 +83,9 @@ Route::group(['prefix' => 'observations', 'middleware' => ['auth']], function() 
     Route::any('/validation/{id}', [App\Http\Controllers\ObservationController::class, 'validations'])->name('observations.validations');
     Route::any('/submit_rps/{id}', [App\Http\Controllers\ObservationController::class, 'submit_rps'])->name('observations.submit_rps');
 });
+Route::group(['prefix' => 'development', 'middleware' => ['auth']], function() {
+    Route::get('/', [App\Http\Controllers\DevelopmentController::class, 'index'])->name('development');
+});
 //OBSERVATIONS ROLE AUDITOR
 Route::group(['prefix' => 'observations', 'middleware' => ['auth', 'role:AU']], function() {
     Route::get('/', [App\Http\Controllers\ObservationController::class, 'index'])->name('observations');

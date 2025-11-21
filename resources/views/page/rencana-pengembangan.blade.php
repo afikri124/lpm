@@ -233,7 +233,7 @@
                 { uraian: 'Jumlah Mahasiswa di JGU', rencana: 1000, tercapai: 9 }
             ],
             'Kualitas Pendidikan': [
-                { uraian: 'Akreditasi Institusi', rencana: 'C/Baik', tercapai: 9 },
+                { uraian: 'Akreditasi Institusi', rencana: 'C/Baik' },
                 { uraian: 'Akreditasi Prodi B/Baik Sekali', rencana: 4, tercapai: 9 },
                 { uraian: 'Akreditasi Prodi A/Unggul', rencana: 0, tercapai: 9 }
             ],
@@ -269,7 +269,7 @@
                 { uraian: 'Jumlah Mahasiswa di JGU', rencana: 1250, tercapai: 9 }
             ],
             'Kualitas Pendidikan': [
-                { uraian: 'Akreditasi Institusi', rencana: 'C/Baik', tercapai: 9 },
+                { uraian: 'Akreditasi Institusi', rencana: 'C/Baik' },
                 { uraian: 'Akreditasi Prodi B/Baik Sekali', rencana: 4, tercapai: 9 },
                 { uraian: 'Akreditasi Prodi A/Unggul', rencana: 0, tercapai: 9 }
             ],
@@ -305,7 +305,7 @@
                 { uraian: 'Jumlah Mahasiswa di JGU', rencana: 1500, tercapai: 9 }
             ],
             'Kualitas Pendidikan': [
-                { uraian: 'Akreditasi Institusi', rencana: 'B/Baik Sekali', tercapai: 9 },
+                { uraian: 'Akreditasi Institusi', rencana: 'B/Baik Sekali' },
                 { uraian: 'Akreditasi Prodi B/Baik Sekali', rencana: 5, tercapai: 9 },
                 { uraian: 'Akreditasi Prodi A/Unggul', rencana: 0, tercapai: 9 }
             ],
@@ -341,7 +341,7 @@
                 { uraian: 'Jumlah Mahasiswa di JGU', rencana: 1750, tercapai: 9 }
             ],
             'Kualitas Pendidikan': [
-                { uraian: 'Akreditasi Institusi', rencana: 'B/Baik Sekali', tercapai: 9 },
+                { uraian: 'Akreditasi Institusi', rencana: 'B/Baik Sekali' },
                 { uraian: 'Akreditasi Prodi B/Baik Sekali', rencana: 6, tercapai: 9 },
                 { uraian: 'Akreditasi Prodi A/Unggul', rencana: 1, tercapai: 9 }
             ],
@@ -377,7 +377,7 @@
                 { uraian: 'Jumlah Mahasiswa di JGU', rencana: 2000, tercapai: 9 }
             ],
             'Kualitas Pendidikan': [
-                { uraian: 'Akreditasi Institusi', rencana: 'B/Baik Sekali', tercapai: 9 },
+                { uraian: 'Akreditasi Institusi', rencana: 'B/Baik Sekali' },
                 { uraian: 'Akreditasi Prodi B/Baik Sekali', rencana: 6, tercapai: 9 },
                 { uraian: 'Akreditasi Prodi A/Unggul', rencana: 2, tercapai: 9 }
             ],
@@ -539,6 +539,7 @@
                         ${variantBadge}
                     </div>
                     <div id="${chartId}" class="chart-container" style="height: ${items.length === 1 ? '340px' : '360px'};"></div>
+                    <div id="non-numeric-info-${priorityNumber}"></div>
                     ${evidenceButtons}
                 </div>
             </div>
@@ -618,12 +619,17 @@
         const chart = new google.visualization.PieChart(chartDiv);
         chart.draw(data, options);
         
-        // Add text info for non-numeric values
+        // Add text info for non-numeric values (should not happen for single item, but just in case)
         if (typeof item.rencana !== 'number' && isNaN(parseFloat(item.rencana))) {
-            const infoDiv = document.createElement('div');
-            infoDiv.className = 'mt-4 p-3 bg-gray-50 rounded text-sm text-center';
-            infoDiv.innerHTML = `<strong>Rencana:</strong> ${item.rencana}<br><strong>Target Tercapai:</strong> ${item.tercapai || 'Belum ada data'}`;
-            chartDiv.parentNode.appendChild(infoDiv);
+            const infoContainer = document.getElementById(`non-numeric-info-${priorityNumber}`);
+            if (infoContainer) {
+                infoContainer.innerHTML = `
+                    <div class="mt-4 mb-3 pb-3 border-bottom">
+                        <p class="mb-0 fw-semibold text-dark">${item.uraian}</p>
+                        <p class="mb-0 fw-bold text-primary fs-5">${item.rencana}</p>
+                    </div>
+                `;
+            }
         }
     }
 
@@ -634,10 +640,20 @@
         
         if (!chartDiv) return;
         
-        // Prepare data - filter out non-numeric values for chart
+        // Separate numeric and non-numeric items
+        const numericItems = items.filter(item => {
+            return typeof item.rencana === 'number' || 
+                   (typeof item.rencana === 'string' && !isNaN(parseFloat(item.rencana)) && item.rencana.trim() !== '');
+        });
+        const nonNumericItems = items.filter(item => {
+            return typeof item.rencana !== 'number' && 
+                   (typeof item.rencana === 'string' && (isNaN(parseFloat(item.rencana)) || item.rencana.trim() === ''));
+        });
+        
+        // Prepare data - only include numeric values for chart
         const dataArray = [['Uraian', 'Rencana', 'Target Tercapai']];
         
-        items.forEach(item => {
+        numericItems.forEach(item => {
             // Handle numeric values
             let rencana = 0;
             let tercapai = 0;
@@ -654,102 +670,115 @@
             
             // Shorten uraian if too long
             let uraianLabel = item.uraian;
-            if (uraianLabel.length > 40) {
+            if (uraianLabel.length > 120) {
                 uraianLabel = uraianLabel.substring(0, 37) + '...';
             }
             
             dataArray.push([uraianLabel, rencana, tercapai]);
         });
         
-        const data = google.visualization.arrayToDataTable(dataArray);
+        // Only draw chart if there are numeric items
+        if (numericItems.length === 0) {
+            chartDiv.innerHTML = '<p class="text-muted text-center p-4">Tidak ada data numerik untuk ditampilkan dalam chart.</p>';
+        } else {
+            const data = google.visualization.arrayToDataTable(dataArray);
+            
+            // Calculate max value for better scaling (only from numeric items)
+            let maxValue = 0;
+            numericItems.forEach(item => {
+                const rencana = typeof item.rencana === 'number' ? item.rencana : 
+                               (typeof item.rencana === 'string' && !isNaN(parseFloat(item.rencana)) ? parseFloat(item.rencana) : 0);
+                const tercapai = typeof item.tercapai === 'number' ? item.tercapai : 0;
+                maxValue = Math.max(maxValue, rencana, tercapai);
+            });
         
-        // Calculate max value for better scaling
-        let maxValue = 0;
-        items.forEach(item => {
-            const rencana = typeof item.rencana === 'number' ? item.rencana : 0;
-            const tercapai = typeof item.tercapai === 'number' ? item.tercapai : 0;
-            maxValue = Math.max(maxValue, rencana, tercapai);
-        });
-        
-        const isBar = variant === 'bar';
-        const isCombo = variant === 'combo';
-        
-        const options = {
-            title: priority,
-            titleTextStyle: {
-                fontSize: 16,
-                bold: true
-            },
-            colors: ['#0d6efd', '#20c997'],
-            legend: {
-                position: 'top',
-                textStyle: { fontSize: 12 }
-            },
-            chartArea: {
-                left: isBar ? 160 : 60,
-                top: 70,
-                width: isBar ? '60%' : '80%',
-                height: '60%'
-            },
-            bar: {
-                groupWidth: '55%'
-            },
-            tooltip: {
-                textStyle: { fontSize: 12 }
-            }
-        };
+            const isBar = variant === 'bar';
+            const isCombo = variant === 'combo';
+            
+            const options = {
+                title: priority,
+                titleTextStyle: {
+                    fontSize: 16,
+                    bold: true
+                },
+                colors: ['#0d6efd', '#20c997'],
+                legend: {
+                    position: 'top',
+                    textStyle: { fontSize: 12 }
+                },
+                chartArea: {
+                    left: isBar ? 160 : 60,
+                    top: 70,
+                    width: isBar ? '60%' : '80%',
+                    height: '60%'
+                },
+                bar: {
+                    groupWidth: '55%'
+                },
+                tooltip: {
+                    textStyle: { fontSize: 12 }
+                }
+            };
 
-        if (isBar) {
-            options.hAxis = {
-                title: 'Nilai',
-                minValue: 0,
-                maxValue: maxValue > 0 ? maxValue * 1.2 : 100,
-                textStyle: { fontSize: 11 }
-            };
-            options.vAxis = {
-                title: 'Uraian',
-                textStyle: { fontSize: 10 }
-            };
-        } else {
-            options.vAxis = {
-                title: 'Nilai',
-                minValue: 0,
-                maxValue: maxValue > 0 ? maxValue * 1.2 : 100,
-                textStyle: { fontSize: 11 }
-            };
-            options.hAxis = {
-                title: 'Uraian',
-                slantedText: true,
-                slantedTextAngle: 20,
-                textStyle: { fontSize: 10 }
-            };
+            if (isBar) {
+                options.hAxis = {
+                    title: 'Nilai',
+                    minValue: 0,
+                    maxValue: maxValue > 0 ? maxValue * 1.2 : 100,
+                    textStyle: { fontSize: 11 }
+                };
+                options.vAxis = {
+                    title: 'Uraian',
+                    textStyle: { fontSize: 10 }
+                };
+            } else {
+                options.vAxis = {
+                    title: 'Nilai',
+                    minValue: 0,
+                    maxValue: maxValue > 0 ? maxValue * 1.2 : 100,
+                    textStyle: { fontSize: 11 }
+                };
+                options.hAxis = {
+                    title: 'Uraian',
+                    slantedText: true,
+                    slantedTextAngle: 20,
+                    textStyle: { fontSize: 10 }
+                };
+            }
+            
+            if (isCombo) {
+                options.seriesType = 'bars';
+                options.series = {
+                    1: { type: 'line', curveType: 'function', lineWidth: 3, pointSize: 6, color: '#6f42c1' }
+                };
+            }
+            
+            let chart;
+            if (isCombo) {
+                chart = new google.visualization.ComboChart(chartDiv);
+            } else if (isBar) {
+                chart = new google.visualization.BarChart(chartDiv);
+            } else {
+                chart = new google.visualization.ColumnChart(chartDiv);
+            }
+            chart.draw(data, options);
         }
         
-        if (isCombo) {
-            options.seriesType = 'bars';
-            options.series = {
-                1: { type: 'line', curveType: 'function', lineWidth: 3, pointSize: 6, color: '#6f42c1' }
-            };
-        }
-        
-        let chart;
-        if (isCombo) {
-            chart = new google.visualization.ComboChart(chartDiv);
-        } else if (isBar) {
-            chart = new google.visualization.BarChart(chartDiv);
-        } else {
-            chart = new google.visualization.ColumnChart(chartDiv);
-        }
-        chart.draw(data, options);
-        
-        // Add text info for non-numeric values below chart
-        const nonNumericItems = items.filter(item => typeof item.rencana !== 'number' && isNaN(parseFloat(item.rencana)));
+        // Add text info for non-numeric values below chart with better formatting: Akreditasi Institusi
         if (nonNumericItems.length > 0) {
-            const infoDiv = document.createElement('div');
-            infoDiv.className = 'mt-4 p-3 bg-gray-50 rounded text-sm';
-            infoDiv.innerHTML = '<strong>Informasi Tambahan:</strong><br>' + 
-                nonNumericItems.map(item => `${item.uraian}: ${item.rencana}`).join('<br>');
-            chartDiv.parentNode.appendChild(infoDiv);
+            const infoContainer = document.getElementById(`non-numeric-info-${priorityNumber}`);
+            if (infoContainer) {
+                let infoHTML = '';
+                nonNumericItems.forEach(item => {
+                    infoHTML += `
+                        <div class="mt-4 pt-4 pb-2 border-top">
+                            <p class="mb-0 fw-semibold text-dark">${item.uraian}</p>
+                            <p class="mb-0 fw-bold text-primary fs-5">${item.rencana}</p>
+                        </div>
+                    `;
+                });
+                infoContainer.innerHTML = infoHTML;
+            }
         }
     }
     </script>

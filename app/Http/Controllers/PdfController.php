@@ -15,9 +15,9 @@ use App\Models\Setting;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Jenssegers\Date\Date;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class PdfController extends Controller
 {
