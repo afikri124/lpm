@@ -347,6 +347,7 @@
         col.id = `card-${priorityNumber}`;
         
         const chartId = `chart-${priorityNumber}`;
+        // --- Variant Badge disabled, add ${variantBadge} below </div> to add it ---
         const variantBadge = items.length === 1
             ? (singleChartMode === 'pie'
                 ? '<span class="badge bg-warning-subtle text-warning fw-semibold">Pie Chart</span>'
@@ -363,7 +364,7 @@
                             <h3 class="h5 fw-bold mb-0 text-dark">${priority}</h3>
                             <small class="text-secondary">Tahun Akademik: ${year}</small>
                         </div>
-                        ${variantBadge}
+                        
                     </div>
                     <div id="${chartId}" class="chart-container" style="height: ${items.length === 1 ? '340px' : '360px'};"></div>
                     <div id="non-numeric-info-${priorityNumber}"></div>
@@ -419,12 +420,12 @@
         } else if (tercapaiVal > 0) {
             displayPercentage = 100;
         }
-        const formattedDisplayPercentage = displayPercentage.toFixed(2);
+        const formattedDisplayPercentage = displayPercentage > 100 ? 100 : displayPercentage.toFixed(2);
 
         detailsContainer.innerHTML = `
             <div class="mt-4 pt-4 border-top">
                 <p class="mb-0 fw-semibold text-dark">Rencana: ${Math.round(rencanaVal)}</p>
-                <p class="mb-0 fw-bold text-primary fs-5">Target Tercapai: ${Math.round(tercapaiVal)} (${formattedDisplayPercentage}%)</p>
+                <p class="mb-0 fw-bold text-dark">Target Tercapai: ${Math.round(tercapaiVal)} (${formattedDisplayPercentage}%)</p>
             </div>
         `;
         // --- End display values below the chart ---
