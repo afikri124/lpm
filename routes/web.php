@@ -83,8 +83,10 @@ Route::group(['prefix' => 'observations', 'middleware' => ['auth']], function() 
     Route::any('/validation/{id}', [App\Http\Controllers\ObservationController::class, 'validations'])->name('observations.validations');
     Route::any('/submit_rps/{id}', [App\Http\Controllers\ObservationController::class, 'submit_rps'])->name('observations.submit_rps');
 });
-Route::group(['prefix' => 'development', 'middleware' => ['auth']], function() {
+Route::group(['prefix' => 'development', 'middleware' => ['auth', 'role:AD']], function() {
     Route::get('/', [App\Http\Controllers\DevelopmentController::class, 'index'])->name('development');
+    Route::post('/update', [App\Http\Controllers\DevelopmentController::class, 'update'])->name('development.update');
+    Route::post('/bulk-update', [App\Http\Controllers\DevelopmentController::class, 'bulkUpdate'])->name('development.bulk-update');
 });
 //OBSERVATIONS ROLE AUDITOR
 Route::group(['prefix' => 'observations', 'middleware' => ['auth', 'role:AU']], function() {
