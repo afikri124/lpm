@@ -97,6 +97,15 @@
                         </ul>
                     </li>
                     @endif
+                    @if(Auth::user()->hasRole('AD') || Auth::user()->hasRole('LE'))
+                    <li class="sidebar-list">
+                    <label class="badge rounded-pill badge-primary" id="notif_mypo" title="Observation Task"></label>
+                        <a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='development' ? 'active' : '' }} "
+                            href="{{route('development')}}">
+                            <i data-feather="codepen"> </i><span>Development Plan</span>
+                        </a>
+                    </li>
+                    @endif
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='rubric' ? 'active' : '' }} "
                             href="{{route('rubric')}}">

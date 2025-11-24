@@ -108,6 +108,7 @@
                                                     <a href="#instruments">SPMI</a>
                                                     <a href="#results">Hasil</a>
                                                     <a href="{{ route('target-renstra') }}#results">Target Renstra</a>
+                                                    <a href="{{ route('rencana-pengembangan') }}">Rencana Pengembangan</a>
                                                 </div>
                                             </div>
                                         </div>

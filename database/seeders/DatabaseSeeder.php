@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             SettingSeeder::class,
             AcreditationSeeder::class,
             StudyProgramSeeder::class,
+            DevelopmentPlanSeeder::class,
         ]);
     }
 }
