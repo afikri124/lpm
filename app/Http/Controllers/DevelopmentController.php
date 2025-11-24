@@ -11,7 +11,8 @@ class DevelopmentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        // Middleware auth TIDAK untuk method dev (khusus viewer client)
+        $this->middleware('auth')->except(['dev']);
     }
 
     public function index(Request $request)
