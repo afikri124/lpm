@@ -126,6 +126,7 @@ Route::group(['prefix' => 'web/api', 'middleware' => ['auth']], function() {
     Route::get('recap', [App\Http\Controllers\ApiController::class, 'recap'])->name('api.recap');
     Route::get('histories', [App\Http\Controllers\ApiController::class, 'histories'])->name('api.histories');
 });
+
 //API
 Route::group(['prefix' => 'web/api'], function() {
     Route::get('study_program', [App\Http\Controllers\ApiController::class, 'study_program'])->name('api.study_program');
